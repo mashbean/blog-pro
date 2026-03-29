@@ -1,0 +1,10 @@
+---
+import { MAIN_SITE_URL } from "../site.config";
+---
+
+<footer class="border-t border-[var(--color-border)] mt-24 py-8">
+  <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[var(--color-text-muted)]">
+    <p>AI-powered research by <a href={MAIN_SITE_URL} class="text-[var(--color-accent)] hover:underline" target="_blank" rel="noopener">Mashbean</a></p>
+    <p>&copy; {new Date().getFullYear()} All rights reserved.</p>
+  </div>
+</footer>

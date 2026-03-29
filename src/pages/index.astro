@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ReportCard from "../components/ReportCard.astro";
+import TagFilter from "../components/TagFilter.astro";
+import { getPublishedReports, getAllTags } from "../utils/reports";
+import { SITE_TITLE, SITE_SUBTITLE } from "../site.config";
+
+const reports = await getPublishedReports();
+const tags = getAllTags(reports);
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section class="text-center py-20 md:py-32 reveal">
+    <h1 class="text-5xl md:text-7xl font-black font-serif leading-tight mb-6 gradient-title">
+      {SITE_TITLE}
+    </h1>
+    <p class="text-lg md:text-xl text-[var(--color-text-muted)] tracking-wider text-reveal"
+       style="animation-delay: 0.3s;">
+      {SITE_SUBTITLE}
+    </p>
+    <div class="mt-8 flex items-center justify-center gap-3">
+      <span class="w-12 h-px bg-gradient-to-r from-transparent to-[var(--color-accent)] opacity-60"></span>
+      <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
+      <span class="w-12 h-px bg-gradient-to-l from-transparent to-[var(--color-accent)] opacity-60"></span>
+    </div>
+  </section>
+
+  <!-- Filter + Cards -->
+  <section>
+    {tags.length > 0 && <TagFilter tags={tags} />}
+
+    {reports.length === 0 ? (
+      <p class="text-center text-[var(--color-text-muted)] py-16">
+        尚無報告，敬請期待。
+      </p>
+    ) : (
+      <div class="grid gap-6 md:grid-cols-2 reveal-stagger">
+        {reports.map((report) => (
+          <div class="reveal">
+            <ReportCard
+              title={report.data.title}
+              description={report.data.description}
+              pubDate={report.data.pubDate}
+              tags={report.data.tags}
+              slug={report.id}
+              body={report.body ?? ""}
+              aiModel={report.data.aiModel}
+            />
+          </div>
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>
