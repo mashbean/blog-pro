@@ -2,8 +2,6 @@
   font-size: 1.125rem;
   line-height: 2;
   letter-spacing: 0.02em;
-  max-width: 72ch;
-  margin-inline: auto;
 }
 
 .report-prose > * + * {
