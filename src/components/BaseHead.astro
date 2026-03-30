@@ -32,7 +32,9 @@ const ogImageURL = new URL(withBase(ogImage), Astro.site).href;
 {noindex && <meta name="robots" content="noindex, nofollow" />}
 
 <!-- Favicons -->
-<link rel="icon" type="image/svg+xml" href={withBase("favicon.svg")} />
+<link rel="icon" type="image/png" sizes="32x32" href={withBase("images/favicon-32.png")} />
+<link rel="icon" type="image/png" sizes="16x16" href={withBase("images/favicon-16.png")} />
+<link rel="apple-touch-icon" sizes="180x180" href={withBase("images/apple-touch-icon.png")} />
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
