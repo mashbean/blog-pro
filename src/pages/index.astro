@@ -24,9 +24,11 @@ const tags = getAllTags(reports);
       <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
       <span class="w-12 h-px bg-gradient-to-l from-transparent to-[var(--color-accent)] opacity-60"></span>
     </div>
-    <p class="mt-5 text-sm text-[var(--color-text-muted)] tracking-wide max-w-md mx-auto text-reveal"
+    <p class="mt-5 text-sm text-[var(--color-text-muted)] tracking-wide max-w-md mx-auto text-reveal leading-relaxed"
        style="animation-delay: 0.5s;">
-      {SITE_TAGLINE}
+      {SITE_TAGLINE.split("\n").map((line, i) => (
+        <>{i > 0 && <br />}{line}</>
+      ))}
     </p>
   </section>
 

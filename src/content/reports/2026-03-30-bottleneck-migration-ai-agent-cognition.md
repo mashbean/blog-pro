@@ -50,3 +50,37 @@ humanReviewed: true
 ## 濃縮
 
 濃縮成一句話，這篇文章揭示的是：當 AI 讓執行成本急降，瓶頸會一路上移，先移到目標設定，再移到流程治理，最後移到自我治理。你感受到的「更了解自己」，其實就是瓶頸上移的主觀經驗。這個判斷相當扎實，也有普遍性。因為當外部系統開始替你記、替你找、替你寫、替你跑，留下來最清楚的，正是你真正想要什麼、你如何定義完成、以及你是否有能力維持一個乾淨可回收的工作系統。
+
+## 參考文獻
+
+### 延展心智與分散式認知
+
+- Clark, A., & Chalmers, D. J.（1998）. The extended mind. *Analysis, 58*（1）, 7–19. ──提出延展心智假說：若外部資源在此時此地直接參與推理並影響行為，即可視為認知過程的一部分。本文用以詮釋人與多 Agent 系統共同承擔記憶、搜尋與生成的現象。
+- Hutchins, E.（1995）. *Cognition in the Wild*. MIT Press. ──分散式認知的經典著作，以航海艙為案例，指出認知常分布於個體、群體與物質環境之間，環境本身即可成為計算媒介。本文引用其觀點說明跨 Agent 溝通如何逼出共享符號與共同語法。
+
+### 認知卸載與後設認知
+
+- Risko, E. F., & Gilbert, S. J.（2016）. Cognitive offloading. *Trends in Cognitive Sciences, 20*（9）, 676–688. ──系統性回顧認知卸載研究，定義為利用外部行動或資源來降低內部認知負荷。本文以此框架解讀第一個 Aha 中 Agent 代管搜尋、分類與整理任務的效果。
+- Hu, X., Luo, L., & Fleming, S. M.（2019）. A role for metamemory in cognitive offloading. *Cognition, 193*, 104012. ──研究顯示，人對自身記憶表現的後設評估會影響其卸載決策。本文引用以說明「把監督也制度化」如何從單純代勞進入閉環控制。
+
+### 自我決定理論
+
+- Ryan, R. M., & Deci, E. L.（2000）. Self-determination theory and the facilitation of intrinsic motivation, social development, and well-being. *American Psychologist, 55*（1）, 68–78. ──提出能力感（competence）、自主感（autonomy）與關係感（relatedness）三項基本心理需求。本文用以解釋為何早期 Agent 成果的高可見性會帶來能動性暴增與接近全能感的情緒峰值。
+
+### 監督式控制與人機協作
+
+- Sheridan, T. B.（1992）. *Telerobotics, Automation, and Human Supervisory Control*. MIT Press. ──將人對自動化系統的監督分解為規劃、程式化指派、監測、診斷、必要時介入與從經驗中學習六個階段。本文以此框架分析第二個 Aha 中人類角色從直接操作者轉為監督者的過程。
+- Sheridan, T. B., & Verplank, W. L.（1978）. *Human and Computer Control of Undersea Teleoperators*. MIT Man-Machine Systems Laboratory Report. ──提出自動化程度量表（Levels of Automation），為後續監督式控制研究奠定基礎。
+
+### 步行與創造力
+
+- Oppezzo, M., & Schwartz, D. L.（2014）. Give your ideas some legs: The positive effect of walking on creative thinking. *Journal of Experimental Psychology: Learning, Memory, and Cognition, 40*（4）, 1142–1152. ──實驗證明步行對發散性創意測驗有顯著正面效果，但對聚斂性問題的提升較為有限。本文引用以支持將走路工作配置於構思、口述指令與語言練習的合理性。
+
+### 協調理論
+
+- Malone, T. W., & Crowston, K.（1994）. The interdisciplinary study of coordination. *ACM Computing Surveys, 26*（1）, 87–119. ──將協調定義為管理活動之間的相依關係，並明確指出協調本身有成本。本文用以解釋多 Agent 協作為何在降低執行成本的同時，大幅提高命名、版本控制與流程一致性的必要性。
+
+### 速度與正確性權衡
+
+- Wickelgren, W. A.（1977）. Speed-accuracy tradeoff and information processing dynamics. *Acta Psychologica, 41*（1）, 67–85. ──建立速度與正確性之間穩定權衡的理論模型，指出時間壓力常直接傷害結果品質。本文以此邏輯說明第三個 Aha 中接受慢思考反而提升整體品質的現象。
+- Heitz, R. P.（2014）. The speed-accuracy tradeoff: History, physiology, methodology, and behavior. *Frontiers in Neuroscience, 8*, 150. ──綜合回顧速度—正確性權衡的跨學科研究，從行為實驗到神經生理機制。
