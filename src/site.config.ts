@@ -1,5 +1,7 @@
-export const SITE_TITLE = "豆泥關心的議題";
-export const SITE_SUBTITLE = "由 AI 顧問指點迷津";
+export const SITE_TITLE = "豆泥關心的難題";
+export const SITE_SUBTITLE = "真的沒有人能解答嗎？";
+export const SITE_TAGLINE =
+  "本部落格全數資料由 AI Agent 生成，與你分享複雜的世界與複雜的快樂";
 export const SITE_DESCRIPTION =
   "AI 驅動的深度研究報告，探討豆泥關心的各項議題。";
 export const SITE_LANG = "zh-TW";

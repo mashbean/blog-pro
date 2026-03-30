@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ReportCard from "../components/ReportCard.astro";
 import TagFilter from "../components/TagFilter.astro";
 import { getPublishedReports, getAllTags } from "../utils/reports";
-import { SITE_TITLE, SITE_SUBTITLE } from "../site.config";
+import { SITE_TITLE, SITE_SUBTITLE, SITE_TAGLINE } from "../site.config";
 
 const reports = await getPublishedReports();
 const tags = getAllTags(reports);
@@ -12,18 +12,22 @@ const tags = getAllTags(reports);
 <BaseLayout>
   <!-- Hero -->
   <section class="text-center py-20 md:py-32 reveal">
-    <h1 class="text-5xl md:text-7xl font-black font-serif leading-tight mb-6 gradient-title">
+    <h1 class="text-5xl md:text-7xl font-semibold font-serif leading-tight mb-4 gradient-title">
       {SITE_TITLE}
     </h1>
-    <p class="text-lg md:text-xl text-[var(--color-text-muted)] tracking-wider text-reveal"
+    <p class="text-xl md:text-2xl text-[var(--color-text)] tracking-wide text-reveal"
        style="animation-delay: 0.3s;">
       {SITE_SUBTITLE}
     </p>
-    <div class="mt-8 flex items-center justify-center gap-3">
+    <div class="mt-6 flex items-center justify-center gap-3">
       <span class="w-12 h-px bg-gradient-to-r from-transparent to-[var(--color-accent)] opacity-60"></span>
       <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
       <span class="w-12 h-px bg-gradient-to-l from-transparent to-[var(--color-accent)] opacity-60"></span>
     </div>
+    <p class="mt-5 text-sm text-[var(--color-text-muted)] tracking-wide max-w-md mx-auto text-reveal"
+       style="animation-delay: 0.5s;">
+      {SITE_TAGLINE}
+    </p>
   </section>
 
   <!-- Filter + Cards -->
