@@ -1,8 +1,15 @@
 ---
 title: "從網路骨幹商轉型到新興網路支持者，NLnet 基金會如何轉型"
-date: 2026-03-31
 description: "一個荷蘭小基金會如何從鋪光纖走到資助 Mastodon，以及這對台灣數位公共財的啟示。"
+pubDate: 2026-03-31
 tags: ["digital-commons", "NLnet", "open-source", "internet-governance", "EU-NGI"]
+category: "數位治理"
+aiModel: "Claude Opus 4"
+aiPrompt: "NLnet 如何從早期核心網路骨幹營運者轉型為新興網路的捐助基金？轉型過程中荷蘭政府和歐盟扮演什麼角色？這種制度演化對台灣有何借鑑？"
+aiPipelineStage: "final"
+aiPipelineId: "research-publishing-pipeline/2026-03-31-nlnet-transformation"
+aiGeneratedDate: 2026-03-31
+humanReviewed: false
 ---
 
 1982 年愚人節，荷蘭工程師 Teus Hagen 在巴黎的一場 Unix 研討會上，用幾條撥接線路串聯起丹麥、荷蘭、英國和瑞典四個節點，啟動了歐洲第一個公共廣域網路 EUnet。荷蘭節點叫「NLnet」，設在阿姆斯特丹 CWI 研究所裡一個安靜的角落。
