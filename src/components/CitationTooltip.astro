@@ -1,8 +1,9 @@
 <!--
   CitationTooltip.astro
   ---------------------
-  Client-side script that transforms inline citation markers like [1], [2]
-  into interactive superscript links with hover tooltips showing the
+  Client-side script that transforms inline citation markers (rendered as
+  <sup>N</sup> by Astro's markdown processor from [N] in source) into
+  interactive superscript links with hover tooltips showing the
   corresponding reference from the "參考來源 / 參考資料 / 引用資料" section.
 -->
 <script>
@@ -11,36 +12,33 @@
     if (!prose) return;
 
     /* ── 1. Locate the reference list ─────────────────────────── */
-    // Find the heading that starts the references section
     const refHeading = Array.from(prose.querySelectorAll("h2, h3")).find((h) =>
       /參考(來源|資料)|引用(資料|來源)|references/i.test(h.textContent ?? "")
     );
     if (!refHeading) return;
 
-    // Collect all <li> elements from <ol> / <ul> lists after the heading,
-    // or fall back to <p> tags that start with "N. "
+    // Collect references from <ol>/<ul> lists or <p> tags after the heading
     const refs: Map<number, { text: string; html: string }> = new Map();
 
     let el: Element | null = refHeading.nextElementSibling;
     while (el) {
-      // ordered / unordered list
       if (el.matches("ol, ul")) {
-        el.querySelectorAll("li").forEach((li, i) => {
+        el.querySelectorAll("li").forEach((li) => {
           const idx = refs.size + 1;
           refs.set(idx, {
             text: li.textContent?.trim() ?? "",
             html: li.innerHTML.trim(),
           });
         });
-      }
-      // paragraph style: "1. Author ..."
-      else if (el.matches("p")) {
+      } else if (el.matches("p")) {
         const m = el.textContent?.match(/^(\d+)\.\s+/);
         if (m) {
           const idx = parseInt(m[1], 10);
-          // Remove the leading number from html
           const html = el.innerHTML.replace(/^\d+\.\s*/, "").trim();
-          refs.set(idx, { text: el.textContent?.replace(/^\d+\.\s*/, "").trim() ?? "", html });
+          refs.set(idx, {
+            text: el.textContent?.replace(/^\d+\.\s*/, "").trim() ?? "",
+            html,
+          });
         }
       }
       el = el.nextElementSibling;
@@ -48,99 +46,55 @@
 
     if (refs.size === 0) return;
 
-    /* ── 2. Walk text nodes & wrap [N] markers ────────────────── */
-    const CITATION_RE = /\[(\d+)\]/g;
+    /* ── 2. Find <sup>N</sup> elements and enhance them ───────── */
+    // Astro's markdown renderer converts [N] into <sup>N</sup>
+    const allSups = prose.querySelectorAll("sup");
 
-    // Only process nodes BEFORE the references heading
-    const walker = document.createTreeWalker(prose, NodeFilter.SHOW_TEXT, {
-      acceptNode(node) {
-        // Skip if the node comes AFTER the reference heading
-        // DOCUMENT_POSITION_PRECEDING means refHeading precedes node → node is after heading
-        const pos = refHeading.compareDocumentPosition(node);
-        if (pos & Node.DOCUMENT_POSITION_FOLLOWING) {
-          // node follows refHeading → inside or after the references section
-          return NodeFilter.FILTER_REJECT;
-        }
-        // Skip if node is inside <a>, <code>, <pre>
-        const parent = node.parentElement;
-        if (parent?.closest("a, code, pre, .citation-ref")) {
-          return NodeFilter.FILTER_REJECT;
-        }
-        CITATION_RE.lastIndex = 0;
-        return CITATION_RE.test(node.textContent ?? "")
-          ? NodeFilter.FILTER_ACCEPT
-          : NodeFilter.FILTER_REJECT;
-      },
+    allSups.forEach((sup) => {
+      // Skip if already processed or inside the references section
+      if (sup.classList.contains("citation-ref")) return;
+      const pos = refHeading.compareDocumentPosition(sup);
+      if (pos & Node.DOCUMENT_POSITION_FOLLOWING) return;
+
+      // Check if content is a pure number
+      const text = sup.textContent?.trim() ?? "";
+      const num = parseInt(text, 10);
+      if (isNaN(num) || String(num) !== text) return;
+
+      const ref = refs.get(num);
+      if (!ref) return;
+
+      // Transform the <sup> into an interactive citation
+      sup.className = "citation-ref";
+
+      // Clear existing content
+      sup.textContent = "";
+
+      const anchor = document.createElement("a");
+      anchor.href = `#ref-${num}`;
+      anchor.className = "citation-number";
+      anchor.textContent = `${num}`;
+      anchor.setAttribute("aria-label", `參考資料 ${num}`);
+      anchor.setAttribute("data-citation", String(num));
+
+      const tooltip = document.createElement("span");
+      tooltip.className = "citation-tooltip";
+      tooltip.setAttribute("role", "tooltip");
+      tooltip.innerHTML = `<span class="citation-tooltip-num">[${num}]</span> ${ref.html}`;
+
+      sup.appendChild(anchor);
+      sup.appendChild(tooltip);
     });
-
-    const textNodes: Text[] = [];
-    while (walker.nextNode()) textNodes.push(walker.currentNode as Text);
-
-    for (const tNode of textNodes) {
-      const text = tNode.textContent ?? "";
-      const frag = document.createDocumentFragment();
-      let lastIndex = 0;
-
-      // Reset regex state
-      CITATION_RE.lastIndex = 0;
-      let match: RegExpExecArray | null;
-
-      while ((match = CITATION_RE.exec(text)) !== null) {
-        const num = parseInt(match[1], 10);
-        const ref = refs.get(num);
-
-        // Text before the match
-        if (match.index > lastIndex) {
-          frag.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
-        }
-
-        if (ref) {
-          // Create the superscript citation link
-          const sup = document.createElement("sup");
-          sup.className = "citation-ref";
-
-          const anchor = document.createElement("a");
-          anchor.href = `#ref-${num}`;
-          anchor.className = "citation-number";
-          anchor.textContent = `[${num}]`;
-          anchor.setAttribute("aria-label", `參考資料 ${num}`);
-          anchor.setAttribute("data-citation", String(num));
-
-          // Tooltip element
-          const tooltip = document.createElement("span");
-          tooltip.className = "citation-tooltip";
-          tooltip.setAttribute("role", "tooltip");
-          tooltip.innerHTML = `<span class="citation-tooltip-num">[${num}]</span> ${ref.html}`;
-
-          sup.appendChild(anchor);
-          sup.appendChild(tooltip);
-          frag.appendChild(sup);
-        } else {
-          // No matching reference, keep as-is
-          frag.appendChild(document.createTextNode(match[0]));
-        }
-
-        lastIndex = match.index + match[0].length;
-      }
-
-      // Remaining text
-      if (lastIndex < text.length) {
-        frag.appendChild(document.createTextNode(text.slice(lastIndex)));
-      }
-
-      tNode.parentNode?.replaceChild(frag, tNode);
-    }
 
     /* ── 3. Add id anchors to reference items ─────────────────── */
     refs.forEach((_, num) => {
-      // Find the reference item and add an id for scroll-to
       let el: Element | null = refHeading.nextElementSibling;
       let counter = 0;
       while (el) {
         if (el.matches("ol, ul")) {
           el.querySelectorAll("li").forEach((li) => {
             counter++;
-            if (counter === num) li.id = `ref-${num}`;
+            if (counter === num && !li.id) li.id = `ref-${num}`;
           });
         } else if (el.matches("p")) {
           const m = el.textContent?.match(/^(\d+)\.\s+/);
@@ -159,7 +113,6 @@
       const tooltip = target.querySelector(".citation-tooltip") as HTMLElement;
       if (!tooltip) return;
 
-      // Reset position
       tooltip.style.left = "";
       tooltip.style.right = "";
       tooltip.style.transform = "";
@@ -168,13 +121,11 @@
         const rect = tooltip.getBoundingClientRect();
         const viewportWidth = window.innerWidth;
 
-        // If tooltip overflows right edge
         if (rect.right > viewportWidth - 16) {
           tooltip.style.left = "auto";
           tooltip.style.right = "0";
           tooltip.style.transform = "none";
         }
-        // If tooltip overflows left edge
         if (rect.left < 16) {
           tooltip.style.left = "0";
           tooltip.style.right = "auto";
