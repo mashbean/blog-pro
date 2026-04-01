@@ -7,6 +7,7 @@ import ReadingProgress from "../components/ReadingProgress.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 import AiMetaBadge from "../components/AiMetaBadge.astro";
 import ScrollReveal from "../components/ScrollReveal.astro";
+import CitationTooltip from "../components/CitationTooltip.astro";
 import { formatDate } from "../utils/date";
 import { readingTime } from "../utils/reading-time";
 import { withBase } from "../utils/paths";
@@ -122,5 +123,6 @@ const {
 
     <Footer />
     <ScrollReveal />
+    <CitationTooltip />
   </body>
 </html>
