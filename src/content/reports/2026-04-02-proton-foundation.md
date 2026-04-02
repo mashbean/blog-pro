@@ -1,14 +1,15 @@
 ---
 title: "Proton Foundation -- 從 CERN 走出的隱私帝國，還是基金會外衣下的商業機器？"
-date: 2026-04-02
 description: "三位 CERN 物理學家建立的加密郵件服務，十二年後膨脹為估值上億的隱私產品帝國。2024 年成立的 Proton Foundation 究竟是使命鎖定機制，還是一層精心維護的敘事？從瑞士法律、基金會治理到五種組織模式的比較，一次完整拆解。"
-tags:
-  - privacy
-  - proton
-  - foundation
-  - governance
-  - switzerland
-  - cern
+pubDate: 2026-04-02
+tags: ["privacy", "proton", "foundation", "governance", "switzerland", "cern"]
+category: "數位治理"
+aiModel: "Claude Opus 4"
+aiPrompt: "Proton Foundation 如何在商業獲利與隱私理念之間取得平衡？其基金會模式相比 Signal、Ethereum 等有何異同？"
+aiPipelineStage: "final"
+aiPipelineId: "research-publishing-pipeline/2026-04-02-proton-foundation"
+aiGeneratedDate: 2026-04-02
+humanReviewed: true
 ---
 
 # Proton Foundation -- 從 CERN 走出的隱私帝國，還是基金會外衣下的商業機器？
