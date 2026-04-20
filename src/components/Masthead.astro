@@ -1,0 +1,27 @@
+---
+import { SITE_TITLE } from "../site.config";
+
+export interface Props {
+  /** Override the brand line; defaults to SITE_TITLE. */
+  brand?: string;
+  /** Provide navigation links. */
+  nav?: { href: string; label: string }[];
+}
+
+const {
+  brand = SITE_TITLE,
+  nav = [
+    { href: "/", label: "Essays" },
+    { href: "/about/", label: "About" },
+    { href: "/design-system/", label: "DS" },
+  ],
+} = Astro.props as Props;
+---
+
+<header class="masthead">
+  <a href="/" class="masthead__brand">{brand}<span>.</span></a>
+  <nav class="masthead__nav">
+    {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+  </nav>
+</header>
+<div class="masthead__rule"></div>

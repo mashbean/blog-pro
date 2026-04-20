@@ -17,6 +17,7 @@ const { Content, headings } = await render(report);
 ---
 
 <ReportLayout
+  id={report.id}
   title={report.data.title}
   description={report.data.description}
   pubDate={report.data.pubDate}

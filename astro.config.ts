@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
+import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 
 const site = process.env.SITE_URL ?? "https://pro.mashbean.net";
@@ -13,7 +14,7 @@ export default defineConfig({
   trailingSlash: "always",
   output: "static",
   build: { format: "directory" },
-  integrations: [sitemap()],
+  integrations: [react(), sitemap()],
   vite: { plugins: [tailwindcss()] },
   markdown: {
     shikiConfig: {

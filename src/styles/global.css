@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @import "./tokens.css";
+@import "./ds-tokens.css";
+@import "./ds-app.css";
+@import "./ds-card.css";
 @import "./prose.css";
 @import "./animations.css";
 

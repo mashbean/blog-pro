@@ -54,15 +54,15 @@ const ogImageURL = new URL(withBase(ogImage), Astro.site).href;
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;700;900&display=swap"
+  href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;700;900&display=swap"
   rel="stylesheet"
 />
 
-<!-- Dark mode init (before paint) -->
+<!-- Theme init (before paint). Design system is light-first; honour explicit saved preference. -->
 <script is:inline>
   (function () {
     var saved = localStorage.getItem("theme");
-    var isDark = saved ? saved === "dark" : true;
+    var isDark = saved === "dark";
     document.documentElement.classList.toggle("dark", isDark);
   })();
 </script>

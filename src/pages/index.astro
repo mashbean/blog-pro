@@ -1,61 +1,44 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ReportCard from "../components/ReportCard.astro";
-import TagFilter from "../components/TagFilter.astro";
-import { getPublishedReports, getAllTags } from "../utils/reports";
-import { SITE_TITLE, SITE_SUBTITLE, SITE_TAGLINE } from "../site.config";
+import HomeApp from "../components/islands/HomeApp.tsx";
+import { getPublishedReports } from "../utils/reports";
+import { reportToPost } from "../lib/reports-to-posts";
+import { SITE_TITLE } from "../site.config";
 
 const reports = await getPublishedReports();
-const tags = getAllTags(reports);
+const posts = reports.map(reportToPost);
+
+const essayCount = posts.length;
+const authors = new Set(posts.map((p) => p.author));
+const kicker = `Essays · Notes · Field reports — ${new Date().toLocaleDateString("en-US", { month: "short", year: "numeric" })}`;
 ---
 
-<BaseLayout>
-  <!-- Hero -->
-  <section class="text-center py-20 md:py-32 reveal">
-    <h1 class="text-5xl md:text-7xl font-semibold font-serif leading-tight mb-4 gradient-title">
-      {SITE_TITLE}
-    </h1>
-    <p class="text-xl md:text-2xl text-[var(--color-text)] tracking-wide text-reveal"
-       style="animation-delay: 0.3s;">
-      {SITE_SUBTITLE}
-    </p>
-    <div class="mt-6 flex items-center justify-center gap-3">
-      <span class="w-12 h-px bg-gradient-to-r from-transparent to-[var(--color-accent)] opacity-60"></span>
-      <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] animate-pulse"></span>
-      <span class="w-12 h-px bg-gradient-to-l from-transparent to-[var(--color-accent)] opacity-60"></span>
+<BaseLayout title={SITE_TITLE}>
+  <section class="hero">
+    <div>
+      <p class="hero__kicker">{kicker}</p>
+      <h1 class="hero__title">難題</h1>
+      <p class="hero__sub">難道這題真的無人能答嗎？</p>
     </div>
-    <p class="mt-5 text-sm text-[var(--color-text-muted)] tracking-wide max-w-md mx-auto text-reveal leading-relaxed"
-       style="animation-delay: 0.5s;">
-      {SITE_TAGLINE.split("\n").map((line, i) => (
-        <>{i > 0 && <br />}{line}</>
-      ))}
-    </p>
+    <div class="hero__meta">
+      <span><strong>{essayCount}</strong> essays</span>
+      <span>{authors.size} {authors.size === 1 ? "author" : "authors"}</span>
+      <span>Updated weekly</span>
+    </div>
   </section>
 
-  <!-- Filter + Cards -->
-  <section>
-    {tags.length > 0 && <TagFilter tags={tags} />}
-
-    {reports.length === 0 ? (
-      <p class="text-center text-[var(--color-text-muted)] py-16">
-        尚無報告，敬請期待。
-      </p>
-    ) : (
-      <div class="grid gap-6 md:grid-cols-2 reveal-stagger">
-        {reports.map((report) => (
-          <div class="reveal">
-            <ReportCard
-              title={report.data.title}
-              description={report.data.description}
-              pubDate={report.data.pubDate}
-              tags={report.data.tags}
-              slug={report.id}
-              body={report.body ?? ""}
-              aiModel={report.data.aiModel}
-            />
-          </div>
-        ))}
-      </div>
-    )}
-  </section>
+  <HomeApp client:only="react" posts={posts} />
 </BaseLayout>
+
+<style>
+  .hero__sub {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+    line-height: var(--leading-snug);
+    color: var(--color-ink-muted);
+    margin: var(--space-3) 0 0;
+    text-wrap: balance;
+  }
+</style>

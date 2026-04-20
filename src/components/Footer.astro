@@ -2,9 +2,28 @@
 import { MAIN_SITE_URL } from "../site.config";
 ---
 
-<footer class="border-t border-[var(--color-border)] mt-24 py-8">
-  <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-[var(--color-text-muted)]">
-    <p>AI-powered research by <a href={MAIN_SITE_URL} class="text-[var(--color-accent)] hover:underline" target="_blank" rel="noopener">Mashbean</a></p>
-    <p>&copy; {new Date().getFullYear()} All rights reserved.</p>
-  </div>
+<footer class="site-footer">
+  <span>AI-powered research — <a href={MAIN_SITE_URL} target="_blank" rel="noopener">mashbean.net</a></span>
+  <span>&copy; {new Date().getFullYear()}</span>
 </footer>
+
+<style>
+  .site-footer {
+    width: 80%;
+    margin: var(--space-8) auto var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-rule);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    position: relative;
+    z-index: 2;
+  }
+  .site-footer a { text-decoration: none; color: var(--color-ink); }
+  .site-footer a:hover { text-decoration: underline; }
+  @media (max-width: 768px) { .site-footer { width: 90%; } }
+</style>
