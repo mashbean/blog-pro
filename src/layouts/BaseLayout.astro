@@ -10,6 +10,7 @@ import "../styles/global.css";
 
 interface Props {
   title?: string;
+  fullTitle?: string;
   description?: string;
   ogImage?: string;
   noindex?: boolean;
@@ -19,13 +20,13 @@ interface Props {
   noMesh?: boolean;
 }
 
-const { title, description, ogImage, noindex, bareChrome = false, noMesh = false } = Astro.props;
+const { title, fullTitle, description, ogImage, noindex, bareChrome = false, noMesh = false } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="zh-TW">
   <head>
-    <BaseHead title={title} description={description} ogImage={ogImage} noindex={noindex} />
+    <BaseHead title={title} fullTitle={fullTitle} description={description} ogImage={ogImage} noindex={noindex} />
   </head>
   <body>
     {!noMesh && <Mesh />}
