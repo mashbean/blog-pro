@@ -20,6 +20,7 @@ const {
 
 const pageTitle = title ? `${title} | ${SITE_TITLE}` : SITE_TITLE;
 const ogImageURL = new URL(withBase(ogImage), Astro.site).href;
+const ogImageType = ogImage.endsWith(".svg") ? "image/svg+xml" : "image/png";
 ---
 
 <meta charset="utf-8" />
@@ -42,6 +43,9 @@ const ogImageURL = new URL(withBase(ogImage), Astro.site).href;
 <meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImageURL} />
+<meta property="og:image:type" content={ogImageType} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 <meta property="og:locale" content={SITE_LANG} />
 
 <!-- Twitter -->

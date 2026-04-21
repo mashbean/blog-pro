@@ -371,12 +371,16 @@ export default function HomeApp({
       });
     } else if (mode === "date") {
       arr.sort((a, b) => sortDir.date === "desc" ? b.date.localeCompare(a.date) : a.date.localeCompare(b.date));
-    } else {
+    } else if (shuffleKey > 0) {
+      // Explicit shuffle (user clicked the Shuffle pill at least once).
       const r = mulberry(shuffleKey + 1);
       for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(r() * (i + 1));
         [arr[i], arr[j]] = [arr[j], arr[i]];
       }
+    } else {
+      // Default for piles / list: newest first.
+      arr.sort((a, b) => b.date.localeCompare(a.date));
     }
     return arr;
   }, [posts, mode, sortDir, shuffleKey]);

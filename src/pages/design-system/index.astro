@@ -1,8 +1,0 @@
----
-// Thin wrapper: we ship the real design-system reference as a static HTML
-// prototype under public/design-system/index.html so that we don't have to
-// escape its inline styles / template literals for Astro's parser. This
-// Astro route exists so that `/design-system/` (with Astro's trailing slash
-// policy) resolves and forwards to the static build.
-return Astro.redirect("/design-system/index.html");
----

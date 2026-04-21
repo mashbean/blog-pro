@@ -49,6 +49,7 @@ const {
 
 const kicker = tags[0] ?? "Essay";
 const readTime = readingTime(body);
+const ogImage = `og/${id}.svg`;
 
 // Related pool — everything except this report
 const allReports = await getPublishedReports();
@@ -60,7 +61,7 @@ const otherPosts = allReports
 <!doctype html>
 <html lang="zh-TW">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description} ogImage={ogImage} />
   </head>
   <body>
     <Mesh />
