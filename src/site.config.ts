@@ -7,4 +7,4 @@ export const SITE_LANG = "zh-TW";
 export const SITE_TIMEZONE = "Asia/Taipei";
 export const MAIN_SITE_URL = "https://mashbean.net";
 export const DEFAULT_AUTHOR = "AI Research Pipeline";
-export const DEFAULT_OG_IMAGE = "og/home.svg";
+export const DEFAULT_OG_IMAGE = "og/home.png";
