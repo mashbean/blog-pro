@@ -1,6 +1,6 @@
 ---
 title: "公共鏈被身分基建請出去了嗎？一條 SSI 的去鏈化路徑"
-description: "DID/VC 早期確實有公共鏈基因，但十年下來規格、法規、撤銷時效、營運責任四道力量把信任根擠回 PKI 與聯盟鏈。這篇盤點這條去鏈化路徑、QuarkID 與不丹 NDI 等邊角實證，並收束在公共鏈在身分基建仍能站的五個位置。"
+description: "DID/VC 早期確實有公共鏈基因，後來規格、法規、撤銷時效、營運責任四道力量把主流信任根擠回 PKI 與聯盟鏈。但 2024–2026 年陸續浮出三條反例：阿根廷 QuarkID 上 ZKsync、不丹 NDI 把全國身分搬上 Ethereum 主網、台灣數位憑證皮夾把信任清單錨在公共鏈。這篇盤點這條混雜的演化路徑，並收束在公共鏈在身分基建仍能站的五個位置。"
 pubDate: 2026-05-02
 date: 2026-05-02
 tags: ["did", "vc", "ssi", "digital-identity", "blockchain", "eidas", "digital-wallet", "w3c", "trust-list"]
