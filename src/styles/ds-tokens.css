@@ -17,7 +17,7 @@
 
   /* ---------- Typography ---------- */
   --font-display: 'IBM Plex Serif', 'Noto Serif TC', 'Source Han Serif TC', 'Iowan Old Style', Georgia, serif;
-  --font-sans:    'IBM Plex Sans', 'Noto Sans TC', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  --font-sans:    system-ui, -apple-system, 'PingFang TC', 'Microsoft JhengHei', Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   --font-mono:    'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* modular scale — major second, rooted at 16px */
