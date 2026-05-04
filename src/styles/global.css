@@ -1,4 +1,13 @@
 @import "tailwindcss";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/700.css";
+@import "@fontsource/ibm-plex-serif/400.css";
+@import "@fontsource/ibm-plex-serif/600.css";
+@import "@fontsource/ibm-plex-serif/700.css";
+@import "@fontsource/noto-serif-tc/400.css";
+@import "@fontsource/noto-serif-tc/700.css";
+@import "@fontsource/noto-serif-tc/900.css";
 @import "./tokens.css";
 @import "./ds-tokens.css";
 @import "./ds-app.css";
@@ -7,9 +16,9 @@
 @import "./animations.css";
 
 @theme {
-  --font-sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-sans: system-ui, -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
   --font-serif: "Noto Serif TC", "PingFang TC", "Microsoft JhengHei", serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 @layer base {

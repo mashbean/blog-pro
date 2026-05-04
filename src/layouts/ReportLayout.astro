@@ -10,11 +10,11 @@ import TableOfContents from "../components/TableOfContents.astro";
 import AiMetaBadge from "../components/AiMetaBadge.astro";
 import ScrollReveal from "../components/ScrollReveal.astro";
 import CitationTooltip from "../components/CitationTooltip.astro";
-import PostPage from "../components/islands/PostPage.tsx";
 import { formatDate } from "../utils/date";
 import { readingTime } from "../utils/reading-time";
 import { getPublishedReports } from "../utils/reports";
 import { reportToPost } from "../lib/reports-to-posts";
+import { hashSeed, mulberry, themeFor } from "../lib/theme-generator";
 import "../styles/global.css";
 
 interface Props {
@@ -56,6 +56,14 @@ const allReports = await getPublishedReports();
 const otherPosts = allReports
   .filter((r) => r.id !== id)
   .map(reportToPost);
+const relatedRandom = mulberry(hashSeed(`${id}:related`));
+const relatedPosts = [...otherPosts]
+  .sort(() => relatedRandom() - 0.5)
+  .slice(0, 3)
+  .map((post) => ({
+    post,
+    theme: themeFor(post.id),
+  }));
 ---
 
 <!doctype html>
@@ -110,7 +118,25 @@ const otherPosts = allReports
       </aside>
     </article>
 
-    <PostPage client:only="react" currentId={id} others={otherPosts} />
+    {relatedPosts.length > 0 && (
+      <section class="related">
+        <div class="related__head">
+          <span class="related__label">Continue reading</span>
+        </div>
+        <div class="related__grid">
+          {relatedPosts.map(({ post, theme }) => (
+            <a
+              href={post.href}
+              class="related__item"
+              style={`background: ${theme.bg}; color: ${theme.text};`}
+            >
+              <p class="related__author">{post.author}</p>
+              <h3 class="related__title">{post.title}</h3>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
 
     <Footer />
     <Iris />

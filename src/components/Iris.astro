@@ -2,3 +2,22 @@
 // Full-viewport iris transition overlay; driven by src/lib/iris.ts
 ---
 <div class="iris" id="iris" data-state="idle" aria-hidden="true"></div>
+
+<script>
+  function resetIris() {
+    const iris = document.getElementById("iris");
+    if (iris) iris.setAttribute("data-state", "idle");
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") resetIris();
+  });
+  window.addEventListener("pageshow", resetIris);
+
+  try {
+    sessionStorage.removeItem("iris_color");
+  } catch {
+    /* noop */
+  }
+  resetIris();
+</script>
