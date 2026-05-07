@@ -1,0 +1,98 @@
+slug: 2026-05-02-accountability-without-identification
+title: 可問責不以實名為前提
+subtitle: Accountability Without Identification — Argument Map
+
+coreThesis:
+  text: 民主問責性是「結果性條件」而非「前置性條件」。當啟封權力分散於多方、條件預先明定、過程可被審計，密碼學假名足以同時滿足匿名性與問責性。
+  summary: Democratic accountability is a consequential condition, not a precondition.
+
+distinction:
+  rejected:
+    label: ❌ 被拒絕
+    title: 實名識別
+    body: 在參與前綁定法定姓名。把問責當作「前置條件」處理，要求識別才能換取參與資格。
+  accepted:
+    label: ✓ 被辯護
+    title: 假名識別（pseudonymous identification）
+    body: 一個可追蹤的代號，能透過正當程序事後啟封。把問責當作「結果性條件」——只在違規發生時才動用識別權。
+
+pillars:
+  - section: §2 — 政治哲學
+    title: 問責結構上是事後的
+    body: Schedler 與 Bovens 的當代問責理論皆要求「事件之後」的可回答性與可執行性。美國判例（NAACP v. Alabama、McIntyre v. Ohio）反覆推翻參與前實名要求。
+    finding: 法律早已區分假名可追蹤性與實名綁定。
+
+  - section: §3 — 密碼學工程
+    title: 數學早就齊備了
+    body: 群簽名、anonymous credentials、threshold cryptography（BBS+、TAPS）已能提供「預設隱私、條件啟封」的假名。L1–L4 分級：理論完備、標準部分到位、部署不均、治理才是瓶頸。
+    finding: 密碼學是必要條件而非充分條件——能不能兌現承諾，最後決定於治理。
+
+  - section: §4 — 制度範式
+    title: 民主早就在做這件事
+    body: 搜索票、密封起訴書、證人保護、John Doe 訴訟——全都是「預設假名 + 條件啟封」的成熟制度。四個共同特徵：多方持鑰、明定 trigger、可審計程序、清晰證據鏈。
+    finding: 三個不對稱限制直接移植：主權範圍、利害關係人結構、執行基礎。
+
+  - section: §5 — 反向證據
+    title: 集中啟封權必然退化
+    body: 印度 Aadhaar：從單方持鑰設計 → 範圍蠕變 → 1.35 億筆資料外洩 → 寒蟬效應的七步因果鏈。南韓實名法：被憲法法庭推翻，壓制言論卻未減少濫用。5 個獨立案例方向一致。
+    finding: T0–T2 是機制必然；T2–T5 是概率性但持續被觀察到。
+
+chain:
+  title: Aadhaar 七步因果鏈：集中啟封權 → 系統性退化
+  steps:
+    - tag: T0
+      kind: deterministic
+      text: 2009 — UIDAI 設計：啟封權從一開始就集中於單一行政機關
+    - tag: T1
+      kind: deterministic
+      text: 2012–16 — Aadhaar Act §33 緊急啟封範圍持續擴張
+    - tag: T2
+      kind: deterministic
+      text: 2017 — 1.35 億筆紀錄外洩。The Tribune：500 盧比 + 10 分鐘可取得任何 Aadhaar 紀錄
+    - tag: T3
+      kind: probabilistic
+      text: 2017 — Puttaswamy v. Union of India：最高法院確認隱私為基本權
+    - tag: T4
+      kind: probabilistic
+      text: 2018–19 — §33(2) 修正，但實務執行未隨之改變
+    - tag: T5
+      kind: probabilistic
+      text: 2023+ — Pegasus 用於監控記者；§33 執行紀錄持續累積
+  legend:
+    - kind: deterministic
+      label: 機制必然（結構性）
+    - kind: probabilistic
+      label: 概率性（需要外部 trigger）
+
+borders:
+  - label: 反論 1
+    title: AML / KYC 反洗錢
+    flip: 攔截到的犯罪資金 < 0.1%。合規成本超過追回金額 100 倍。負擔落在無銀行帳戶人口。屬性證明 + 條件啟封可達同等效果。
+  - label: 反論 2
+    title: 選舉舞弊
+    flip: 美國冒名投票率約 0.0003%。Voter ID 法可量測地壓制少數族裔投票率。事前實名解決一個近乎不存在的問題，卻造成真實傷害。
+  - label: 反論 3
+    title: 武器 / WMD
+    flip: 真正的例外——但只對特定角色（操作員、處理員）。即使在這個場域，普世實名登記也無法被辯護。例外是窄的，不能擴大成通則。
+
+conditions:
+  title: 任何例外於假名性的合法性，必須先通過六道程序防火牆
+  items:
+    - title: 具體的攻擊向量
+      body: 威脅必須是具體可識別的，不能是一般性或推測性的。
+    - title: 對稱的成本-效益測試
+      body: 隱私損失必須與識別效益並列量化評估。
+    - title: 密碼學替代測試
+      body: ZK proof 或屬性證明能否達成同樣的監管目標？
+    - title: 強制日落條款
+      body: 明示複審 trigger；緊急權力必須有期限。
+    - title: 多方持鑰
+      body: 沒有任何單一機構獨自持有啟封權。
+    - title: 事後公開審計
+      body: 啟封紀錄與理由必須可被公開審查。
+
+conclusion:
+  paragraphs:
+    - <strong>「可問責的假名性」不是密碼學成就，而是政治經濟成就。</strong>密碼學是必要條件，不是充分條件。
+    - 辯論應從「實名 vs 匿名」轉向<em>「啟封權的治理品質」</em>。真正的瓶頸是 Layer 4 治理：誰持鑰、在什麼條件下、有什麼監督。
+    - 一條不對稱貫穿全文：<strong>公民可以假名，制度權力持有者不可以。</strong>權力越大，被允許的匿名空間越小。

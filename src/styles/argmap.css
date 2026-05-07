@@ -1,0 +1,504 @@
+/* ============================================================
+   Argument Map (argmap) — shared styles
+   Aligned to blog-pro design tokens (tokens.css + ds-tokens.css).
+   每篇文章都有對應一張論證地圖；本檔提供 7 個區塊的視覺骨架。
+   ============================================================ */
+
+.argmap {
+  --argmap-max-width: 720px;
+  --argmap-accent: var(--color-accent); /* gold */
+  --argmap-accent-hover: var(--color-accent-hover);
+  --argmap-accent-soft: var(--color-accent-soft);
+  --argmap-secondary: var(--color-secondary); /* purple */
+  --argmap-secondary-soft: var(--color-secondary-soft);
+  --argmap-rejected: var(--color-destructive); /* red */
+  --argmap-accepted: oklch(0.62 0.13 165); /* desaturated green, fits dark+light */
+  --argmap-probabilistic: var(--color-secondary);
+
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  padding-top: var(--space-6, 2rem);
+  padding-bottom: var(--space-9, 6rem);
+}
+
+/* ── Page header ──────────────────────────────────────────── */
+.argmap__header {
+  max-width: var(--argmap-max-width);
+  margin: 0 auto var(--space-7);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.argmap__back {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.argmap__back:hover {
+  color: var(--argmap-accent);
+}
+
+.argmap__kicker {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--argmap-accent);
+  margin-bottom: var(--space-2);
+}
+
+.argmap__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  margin: 0 0 var(--space-3);
+}
+
+.argmap__subtitle {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+}
+
+.argmap__source-link {
+  display: inline-block;
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-pill, 999px);
+  transition: all 0.2s ease;
+}
+.argmap__source-link:hover {
+  color: var(--color-text);
+  border-color: var(--argmap-accent);
+}
+
+/* ── Section label (rule with text) ───────────────────────── */
+.argmap__label {
+  max-width: var(--argmap-max-width);
+  margin: 0 auto var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.argmap__label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* ── Core thesis ──────────────────────────────────────────── */
+.argmap__thesis {
+  max-width: var(--argmap-max-width);
+  margin: 0 auto var(--space-7);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--argmap-accent);
+  border-radius: var(--radius-md, 8px);
+  padding: 1.5rem 2rem;
+  position: relative;
+}
+.argmap__thesis::before {
+  content: 'CENTRAL THESIS';
+  position: absolute;
+  top: -0.6rem;
+  left: 1.5rem;
+  background: var(--color-bg);
+  padding: 0 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: var(--argmap-accent);
+}
+.argmap__thesis p {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--color-text);
+  margin: 0;
+}
+.argmap__thesis-summary {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-top: var(--space-3) !important;
+  font-family: var(--font-sans) !important;
+  font-style: italic;
+}
+
+/* ── Distinction (rejected vs accepted) ───────────────────── */
+.argmap__distinction {
+  max-width: var(--argmap-max-width);
+  margin: 0 auto var(--space-7);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  align-items: stretch;
+}
+
+.argmap__dist-box {
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 4px);
+  background: var(--color-bg-muted);
+}
+
+.argmap__dist-box--rejected {
+  border-color: var(--argmap-rejected);
+  opacity: 0.85;
+}
+.argmap__dist-box--accepted {
+  border-color: var(--argmap-accepted);
+}
+
+.argmap__dist-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+.argmap__dist-box--rejected .argmap__dist-label {
+  color: var(--argmap-rejected);
+}
+.argmap__dist-box--accepted .argmap__dist-label {
+  color: var(--argmap-accepted);
+}
+
+.argmap__dist-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  margin: 0 0 var(--space-2);
+  color: var(--color-text);
+}
+
+.argmap__dist-body {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.argmap__dist-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-4);
+  font-size: 1.4rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+}
+
+/* ── Pillars ──────────────────────────────────────────────── */
+.argmap__pillars {
+  max-width: var(--argmap-max-width);
+  margin: 0 auto var(--space-7);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.argmap__pillar {
+  background: var(--color-bg-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 4px);
+  padding: 1.25rem;
+  transition: border-color 0.2s ease;
+}
+.argmap__pillar:hover {
+  border-color: var(--argmap-accent);
+}
+
+.argmap__pillar-section {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-2);
+}
+
+.argmap__pillar-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.3;
+  color: var(--argmap-accent);
+  margin: 0 0 var(--space-2);
+}
+
+.argmap__pillar-body {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.argmap__pillar-finding {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+  font-size: 0.74rem;
+  color: var(--argmap-accepted);
+  line-height: 1.5;
+}
+.argmap__pillar-finding::before {
+  content: '→ ';
+  color: var(--color-text-muted);
+}
+
+/* ── Causal chain ─────────────────────────────────────────── */
+.argmap__chain {
+  max-width: var(--argmap-max-width);
+  margin: 0 auto var(--space-7);
+  background: var(--color-bg-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 4px);
+  padding: 1.5rem;
+}
+
+.argmap__chain-title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-4);
+}
+
+.argmap__chain-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.argmap__chain-step {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.argmap__chain-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  padding-top: 0.2rem;
+  text-align: right;
+}
+.argmap__chain-tag--deterministic { color: var(--argmap-rejected); }
+.argmap__chain-tag--probabilistic { color: var(--argmap-probabilistic); }
+
+.argmap__chain-content {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-left-width: 2px;
+  border-radius: var(--radius-sm, 4px);
+  padding: 0.65rem 0.9rem;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--color-text);
+}
+.argmap__chain-content--deterministic { border-left-color: var(--argmap-rejected); }
+.argmap__chain-content--probabilistic { border-left-color: var(--argmap-probabilistic); }
+
+.argmap__chain-connector {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: var(--space-4);
+}
+.argmap__chain-connector-line {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-1) 0;
+}
+.argmap__chain-connector-line::before {
+  content: '';
+  width: 1px;
+  height: 1.2rem;
+  background: var(--color-border);
+}
+
+.argmap__chain-legend {
+  display: flex;
+  gap: var(--space-5);
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.argmap__legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--color-text-muted);
+}
+
+.argmap__legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+}
+.argmap__legend-dot--deterministic { background: var(--argmap-rejected); }
+.argmap__legend-dot--probabilistic { background: var(--argmap-probabilistic); }
+
+/* ── Border cases ─────────────────────────────────────────── */
+.argmap__borders {
+  max-width: var(--argmap-max-width);
+  margin: 0 auto var(--space-7);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+
+.argmap__border {
+  background: var(--color-bg-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 4px);
+  padding: 1rem;
+}
+
+.argmap__border-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-2);
+}
+
+.argmap__border-title {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--argmap-rejected);
+  margin: 0 0 var(--space-2);
+}
+
+.argmap__border-flip {
+  font-size: 0.74rem;
+  line-height: 1.55;
+  color: var(--argmap-accepted);
+}
+.argmap__border-flip::before {
+  display: block;
+  content: 'FLIPS TO SUPPORT:';
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}
+
+/* ── Conditions ───────────────────────────────────────────── */
+.argmap__conditions {
+  max-width: var(--argmap-max-width);
+  margin: 0 auto var(--space-7);
+  background: var(--color-bg-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 4px);
+  padding: 1.5rem;
+}
+
+.argmap__conditions-title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-4);
+}
+
+.argmap__conditions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.argmap__condition {
+  display: flex;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+.argmap__condition-num {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: var(--color-border);
+  line-height: 1;
+  min-width: 1.6rem;
+}
+
+.argmap__condition-text {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+.argmap__condition-text strong {
+  display: block;
+  color: var(--argmap-accent);
+  font-weight: 500;
+  margin-bottom: var(--space-1);
+}
+
+/* ── Conclusion ───────────────────────────────────────────── */
+.argmap__conclusion {
+  max-width: var(--argmap-max-width);
+  margin: var(--space-7) auto 0;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--argmap-accepted);
+  border-radius: var(--radius-md, 8px);
+  padding: 1.5rem 2rem;
+  position: relative;
+}
+
+.argmap__conclusion::before {
+  content: 'CONCLUSION';
+  position: absolute;
+  top: -0.6rem;
+  left: 1.5rem;
+  background: var(--color-bg);
+  padding: 0 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: var(--argmap-accepted);
+}
+
+.argmap__conclusion p {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  margin: 0;
+}
+.argmap__conclusion p + p {
+  margin-top: var(--space-3);
+}
+.argmap__conclusion strong {
+  color: var(--argmap-accent);
+}
+
+/* ── Mobile responsive ────────────────────────────────────── */
+@media (max-width: 720px) {
+  .argmap__pillars { grid-template-columns: 1fr; }
+  .argmap__borders { grid-template-columns: 1fr; }
+  .argmap__conditions-grid { grid-template-columns: 1fr; }
+  .argmap__distinction { grid-template-columns: 1fr; }
+  .argmap__dist-arrow { transform: rotate(90deg); padding: var(--space-2) 0; }
+}

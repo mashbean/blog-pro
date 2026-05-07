@@ -1,0 +1,160 @@
+---
+// 整張論證地圖（單一元件，從 argmap collection 資料一次渲染所有區塊）
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  argmap: CollectionEntry<"argmaps">;
+  reportHref?: string;
+}
+
+const { argmap, reportHref } = Astro.props;
+const data = argmap.data;
+---
+
+<section class="argmap">
+  <header class="argmap__header">
+    {reportHref && (
+      <a href={reportHref} class="argmap__back">← 回到原文</a>
+    )}
+    <p class="argmap__kicker">Argument Map</p>
+    <h1 class="argmap__title">{data.title}</h1>
+    {data.subtitle && <p class="argmap__subtitle">{data.subtitle}</p>}
+  </header>
+
+  {/* Core Thesis */}
+  <div class="argmap__thesis">
+    <p>{data.coreThesis.text}</p>
+    {data.coreThesis.summary && (
+      <p class="argmap__thesis-summary">{data.coreThesis.summary}</p>
+    )}
+  </div>
+
+  {/* Foundational Distinction */}
+  {data.distinction && (
+    <>
+      <div class="argmap__label">foundational distinction</div>
+      <div class="argmap__distinction">
+        <div class="argmap__dist-box argmap__dist-box--rejected">
+          <div class="argmap__dist-label">{data.distinction.rejected.label}</div>
+          <h3 class="argmap__dist-title">{data.distinction.rejected.title}</h3>
+          <p class="argmap__dist-body">{data.distinction.rejected.body}</p>
+        </div>
+        <div class="argmap__dist-arrow">→</div>
+        <div class="argmap__dist-box argmap__dist-box--accepted">
+          <div class="argmap__dist-label">{data.distinction.accepted.label}</div>
+          <h3 class="argmap__dist-title">{data.distinction.accepted.title}</h3>
+          <p class="argmap__dist-body">{data.distinction.accepted.body}</p>
+        </div>
+      </div>
+    </>
+  )}
+
+  {/* Pillars */}
+  {data.pillars.length > 0 && (
+    <>
+      <div class="argmap__label">supporting arguments</div>
+      <div class="argmap__pillars">
+        {data.pillars.map((p) => (
+          <div class="argmap__pillar">
+            <p class="argmap__pillar-section">{p.section}</p>
+            <h3 class="argmap__pillar-title">{p.title}</h3>
+            <p class="argmap__pillar-body">{p.body}</p>
+            {p.finding && <div class="argmap__pillar-finding">{p.finding}</div>}
+          </div>
+        ))}
+      </div>
+    </>
+  )}
+
+  {/* Causal Chain */}
+  {data.chain && (
+    <>
+      <div class="argmap__label">causal chain</div>
+      <div class="argmap__chain">
+        <p class="argmap__chain-title">{data.chain.title}</p>
+        <div class="argmap__chain-list">
+          {data.chain.steps.map((step, idx) => (
+            <>
+              <div class="argmap__chain-step">
+                <div class={`argmap__chain-tag argmap__chain-tag--${step.kind}`}>
+                  {step.tag}
+                </div>
+                <div class={`argmap__chain-content argmap__chain-content--${step.kind}`}>
+                  {step.text}
+                </div>
+              </div>
+              {idx < data.chain!.steps.length - 1 && (
+                <div class="argmap__chain-connector">
+                  <div class="argmap__chain-connector-line"></div>
+                  <div></div>
+                </div>
+              )}
+            </>
+          ))}
+        </div>
+        {data.chain.legend.length > 0 && (
+          <div class="argmap__chain-legend">
+            {data.chain.legend.map((l) => (
+              <div class="argmap__legend-item">
+                <span class={`argmap__legend-dot argmap__legend-dot--${l.kind}`}></span>
+                {l.label}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
+  )}
+
+  {/* Border Cases */}
+  {data.borders.length > 0 && (
+    <>
+      <div class="argmap__label">border cases</div>
+      <div class="argmap__borders">
+        {data.borders.map((b) => (
+          <div class="argmap__border">
+            <p class="argmap__border-label">{b.label}</p>
+            <h4 class="argmap__border-title">{b.title}</h4>
+            <p class="argmap__border-flip">{b.flip}</p>
+          </div>
+        ))}
+      </div>
+    </>
+  )}
+
+  {/* Conditions */}
+  {data.conditions && (
+    <>
+      <div class="argmap__label">procedural conditions</div>
+      <div class="argmap__conditions">
+        {data.conditions.title && (
+          <p class="argmap__conditions-title">{data.conditions.title}</p>
+        )}
+        <div class="argmap__conditions-grid">
+          {data.conditions.items.map((c, idx) => (
+            <div class="argmap__condition">
+              <div class="argmap__condition-num">{idx + 1}</div>
+              <div class="argmap__condition-text">
+                <strong>{c.title}</strong>
+                {c.body}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  )}
+
+  {/* Conclusion */}
+  {data.conclusion && (
+    <div class="argmap__conclusion">
+      {data.conclusion.paragraphs.map((p) => (
+        <p set:html={p}></p>
+      ))}
+    </div>
+  )}
+</section>
+
+<style>
+  @import "../../styles/argmap.css";
+</style>
