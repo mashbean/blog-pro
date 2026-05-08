@@ -15,6 +15,7 @@ import { readingTime } from "../utils/reading-time";
 import { getPublishedReports } from "../utils/reports";
 import { reportToPost } from "../lib/reports-to-posts";
 import { hashSeed, mulberry, themeFor } from "../lib/theme-generator";
+import { getCollection } from "astro:content";
 import "../styles/global.css";
 
 interface Props {
@@ -50,6 +51,11 @@ const {
 const kicker = tags[0] ?? "Essay";
 const readTime = readingTime(body);
 const ogImage = `og/${id}.png`;
+
+// 此篇文章是否有對應的論證地圖（argmap）？
+const argmaps = await getCollection("argmaps");
+const matchedArgmap = argmaps.find((a) => a.data.slug === id);
+const argmapHref = matchedArgmap ? `/argmaps/${matchedArgmap.id}/` : undefined;
 
 // Related pool — everything except this report
 const allReports = await getPublishedReports();
@@ -109,6 +115,17 @@ const relatedPosts = [...otherPosts]
         humanReviewed={humanReviewed}
       />
 
+      {argmapHref && (
+        <a class="article__argmap-link" href={argmapHref}>
+          <span class="article__argmap-icon">◇</span>
+          <span class="article__argmap-text">
+            <strong>論證地圖</strong>
+            <em>核心命題、支撐論點、因果鏈、邊界條件視覺化</em>
+          </span>
+          <span class="article__argmap-arrow">→</span>
+        </a>
+      )}
+
       <div class="article__body report-prose">
         <slot />
       </div>
@@ -163,6 +180,60 @@ const relatedPosts = [...otherPosts]
       .article__tag:hover {
         color: var(--color-ink);
         border-color: var(--color-ink);
+      }
+      .article__argmap-link {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        margin: var(--space-4) 0 var(--space-6);
+        padding: var(--space-3) var(--space-4);
+        background: var(--color-bg-muted);
+        border: 1px solid var(--color-border);
+        border-left: 3px solid var(--color-accent);
+        border-radius: var(--radius-sm, 4px);
+        text-decoration: none;
+        color: var(--color-text);
+        transition:
+          border-color 0.2s ease,
+          background 0.2s ease,
+          transform 0.2s ease;
+      }
+      .article__argmap-link:hover {
+        border-color: var(--color-accent);
+        background: var(--color-accent-soft);
+        transform: translateX(2px);
+      }
+      .article__argmap-icon {
+        font-size: 1.4rem;
+        color: var(--color-accent);
+        line-height: 1;
+      }
+      .article__argmap-text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+      .article__argmap-text strong {
+        font-family: var(--font-serif);
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
+      .article__argmap-text em {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        font-style: normal;
+        color: var(--color-text-muted);
+        letter-spacing: 0.04em;
+      }
+      .article__argmap-arrow {
+        font-family: var(--font-mono);
+        color: var(--color-text-muted);
+        font-size: 1.1rem;
+      }
+      .article__argmap-link:hover .article__argmap-arrow {
+        color: var(--color-accent);
       }
       .article__sidebar {
         display: none;

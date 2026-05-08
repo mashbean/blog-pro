@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+import ArgmapLayout from "../../layouts/ArgmapLayout.astro";
+import Argmap from "../../components/argmap/Argmap.astro";
+
+export async function getStaticPaths() {
+  const argmaps = await getCollection("argmaps");
+  return argmaps.map((argmap) => ({
+    params: { slug: argmap.id },
+    props: { argmap },
+  }));
+}
+
+const { argmap } = Astro.props;
+
+// 對應原文路徑（依 slug 反查 reports collection）
+const reports = await getCollection("reports");
+const matchedReport = reports.find((r) => r.id === argmap.data.slug);
+const reportHref = matchedReport ? `/reports/${matchedReport.id}/` : undefined;
+---
+
+<ArgmapLayout
+  title={argmap.data.title}
+  description={`${argmap.data.title} 的論證結構視覺化：核心命題、支撐論點、因果鏈、邊界條件、程序條件與結論。`}
+>
+  <Argmap argmap={argmap} reportHref={reportHref} />
+</ArgmapLayout>
