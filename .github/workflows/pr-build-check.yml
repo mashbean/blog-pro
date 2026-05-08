@@ -1,0 +1,42 @@
+name: PR Build Check
+
+# 只跑 build 不 deploy — 用來驗證 PR 不會把 main build 弄壞。
+# main 的正式 deploy 仍由 deploy.yml 處理。
+
+on:
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: "https://pro.mashbean.net"
+      BASE_PATH: "/"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build Astro
+        run: npm run build
+
+      - name: Upload build output
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-on-failure
+          path: dist
+          retention-days: 3
