@@ -1,0 +1,154 @@
+slug: 2026-05-03-digital-association-empirical-test
+title: 為什麼有了 Tor 與 Signal，數位結社仍然失敗
+subtitle: Digital Association Empirical Test — 身分隱私假說的實證檢驗
+
+# ─────────────────────────────────────────────────────────────
+# Central Thesis + Formal block
+# ─────────────────────────────────────────────────────────────
+coreThesis:
+  text: 數位結社失敗不是「身分隱私不足」的單因下游後果（H0），而是三道牆同時未被解的結構性問題（H1'）。三道牆指可驗證群體界線、群體內部問責、跨案例規模化，缺一即失敗；Tor / Signal / Briar 等工具只解了上游的身分隱私瓶頸，但下游三牆仍在。
+  summary: H0（單因身分隱私）改寫為 H1'（合取三道牆）；civic proof 4 條件對應三道牆。
+  formal:
+    expression: |
+      H1' ⇔ ¬F ⇔ W₁ ∧ W₂ ∧ W₃
+
+      ∀ case ∈ {突尼西亞, 香港, 加泰隆尼亞, 伊朗, 白俄}:
+        ¬F(case) ⇒ ∃i ∈ {1,2,3}: ¬Wᵢ(case)
+
+      civic_proof.4_conditions ↪ {W₁, W₂, W₃}
+    caption: 數位結社 *未失敗* F 的成立，當且僅當三道牆同時被解。N=5 案例樣本不足以證實為定理；視為 empirical regularity。
+    legend:
+      - symbol: F
+        meaning: 數位結社成功（formation of sustained association）
+      - symbol: W₁
+        meaning: 可驗證群體界線（who is in / out, cryptographically attestable）
+      - symbol: W₂
+        meaning: 群體內部問責（intra-group accountability without external state）
+      - symbol: W₃
+        meaning: 跨案例規模化（scaling beyond single mobilization event）
+      - symbol: H0
+        meaning: mashbean 原始假說「身分隱私不足 → 失敗」（已被檢驗為單因不足）
+      - symbol: H1'
+        meaning: 修訂後合取假說「三道牆同時未解 ⇔ 失敗」
+      - symbol: ⇔
+        meaning: 當且僅當（必要充分）
+      - symbol: ∧
+        meaning: 合取（同時滿足）
+
+transitions:
+  beforeDistinction: 假說檢驗的第一步是把原始命題寫成「最強讀法」H0（單因充分）；只有最強讀法被推翻，才能證明修訂版 H1'（合取必要）的必要性。
+  beforePillars: H1' 不是先驗定理，需要五條獨立支撐——強集會弱結社的歷史普遍性、三道牆的概念演繹、N=5 案例的 process tracing、cypherpunks 工具樂觀主義反例、civic proof 4 條件對應映射。
+  beforeChain: 三道牆的因果結構不是線性而是合取——任一牆失效即整體失敗。三種失敗 pattern α/β/γ 對應到不同牆的失效。
+  beforeBorders: 反論集中在「但有些案例似乎有結社」（突尼西亞早期、香港 Telegram 群、Linux 社群）——這些反例正好示範三牆中的一兩道被解，但仍非三道齊備的案例，反向支持 H1'。
+  beforeConditions: 從 H1' 反推「成功條件」——civic proof 4 條件（accountability without identification + 4 工程子條件）正好對應三道牆所需的規範必要條件。
+  beforeConclusion: 假說在 N=5 樣本下成立，但不主張為定理；civic proof 是規範性提案，不是已驗證的工程實作；目前尚無案例同時解了三道牆。
+
+distinction:
+  rejected:
+    label: ❌ H0 最強讀法被推翻
+    title: 身分隱私不足是失敗的單因充分條件
+    body: 「只要把身分隱私推到足夠強度，數位結社就會出現。」這個讀法把所有結社失敗化約為上游隱私瓶頸的下游表現，與 cypherpunks 自 1990s 起的工具樂觀主義系譜對齊。但 N=5 案例的 process tracing 顯示，即使 Tor / Signal / Briar 部署多年，下游三牆未動，結社仍失敗。
+    formal: "H0:  ¬privacy(t) ⇒ ¬F(t)   ❌ 反向不成立"
+  accepted:
+    label: ✓ H1' 修訂為合取三牆
+    title: 三道牆同時未被解
+    body: 數位結社未失敗，當且僅當三道牆同時被解。身分隱私是 W₁ 可驗證群體界線的*必要瓶頸*（解了它仍會在 W₂、W₃ 失敗），但不是充分條件。三道牆是規範必要條件束，缺一即敗。
+    formal: "H1':  ¬F ⇔ W₁ ∧ W₂ ∧ W₃"
+
+pillars:
+  - section: §2 — 強集會 / 弱結社的歷史普遍性
+    title: Tocqueville-Putnam-Skocpol-Rosenblum 系譜
+    role: 提供規範性參照——民主社會的結社是承擔規範義務的政治實踐，不是「結社天然 good」的浪漫化命題。
+    body: 從 Tocqueville 1840 美國民主一書記錄結社作為自由的學校，到 Putnam social capital、Skocpol 政治結社、Rosenblum 民主之側——四百年系譜把結社界定為承擔了規範義務的政治實踐。「強集會」（一次性動員）與「弱結社」（持續成員身分）是不同的政治形態，混為一談會掩蓋三牆問題。
+    finding: 結社的規範義務正是三牆要承擔的內容；W₁ 對應成員身分、W₂ 對應內部問責、W₃ 對應規模化規範義務。
+    formal: "association(g) ⇒ normative_obligations(g) ∧ persistent(g) ∧ scaled(g)"
+
+  - section: §3 — 三道牆的概念演繹
+    title: 形式化合取結構
+    role: 提供形式化骨架——若三牆不是合取必要結構，本研究只是案例堆砌；只有形式化才能讓「缺一即敗」成為可被檢驗的命題。
+    body: W₁ 可驗證群體界線（誰是成員、誰可以投票、誰可以分配資源）；W₂ 群體內部問責（沒有國家強制力下，內部如何處理違規、利益分配、權力濫用）；W₃ 跨案例規模化（從一次性動員擴展到跨地域、跨議題的持續組織）。三牆獨立但合取——任一牆失效即整體失敗。
+    finding: H1' 與 article 04 T 三件式 / 05 IT' / 06 CB-Justice / 07 SRP 同樣是合取結構，但用於不同層級——H1' 是工程結構（缺一即敗），IT' 是工程張力（無法同時拉滿），CB-Justice 是規範前提，SRP 是主權前提。
+    formal: "F ⇔ W₁ ∧ W₂ ∧ W₃"
+
+  - section: §4 — N=5 process tracing
+    title: 三種失敗 pattern α/β/γ
+    role: 提供經驗檢驗——若 H1' 在 5 個跨地域案例中觀察到一致的失敗模式，就足以建立 empirical regularity（不主張定理）。
+    body: "突尼西亞茉莉花（α: W₁ 解 + W₂ 失敗）、香港反送中（α: 強集會但 W₂、W₃ 失敗）、加泰隆尼亞獨立公投（β: W₁ + W₃ 部分解但 W₂ 失敗）、伊朗綠色運動（γ: 三牆全失敗）、白俄羅斯抗議（α: W₁ 部分解但 W₂、W₃ 失敗）。N=5 樣本不足以證實為定理；視為 empirical regularity。"
+    finding: 沒有任何案例同時解了三道牆——H1' 無正面驗證案例，只有否證式檢驗（all observed cases fail at least one wall）。
+    formal: "∀ case observed : ∃ i : ¬Wᵢ(case)"
+
+  - section: §6 — Cypherpunks 工具樂觀主義
+    title: Linux substitute path 的邊界推論
+    role: 處理反例——Linux 社群是工程社群在無中央問責下持續組織的案例，可能挑戰 H1'。但 Linux 是 substitute path（強 W₂ 弱 W₁）而非完整三牆並解。
+    body: Linux 透過代碼貢獻 + maintainer 制度承擔 W₂（內部問責），但 W₁（群體界線）相對寬鬆——任何人可貢獻，「成員」是 emergent 而非 declared。Linux 顯示 W₂ 可在沒有完整 W₁ 的情況下運作，但這條 substitute path 在政治結社場景無法直接複製。
+    finding: Linux 是 W₂ 強解但 W₁ 弱定義的 substitute path 案例；推論非已驗證；政治結社不能直接複製這個結構。
+    formal: "Linux ⊨ W₂ ∧ partial(W₁) ⇒ ¬general_substitute(political_association)"
+
+  - section: §7 — Civic proof 4 條件對應映射
+    title: 規範必要條件束
+    role: 接合 article 04 / 05 / 06 / 07——civic proof 4 條件正好對應 H1' 三道牆所需的規範必要條件，提供工程解的可能性。
+    body: civic proof 4 條件包含（i）accountability without identification（對應 W₂ 內部問責）；（ii）group boundary verifiability（對應 W₁ 群體界線）；（iii）revocable membership（對應 W₃ 規模化）；（iv）conditional unmasking（對應 article 04 T 三件式 + article 01 V₁..V₆）。但這只是規範性提案，不是已驗證的工程實作。
+    finding: civic proof 是 H1' 的規範性回應，不保證工程能實際解三牆；目前尚無案例同時解了三道牆。
+    formal: "civic_proof.{c₁, c₂, c₃, c₄} ↪ {W₁, W₂, W₃} ∧ T₃件式"
+
+chain:
+  title: 三種失敗 pattern α/β/γ — 三道牆的合取失效模式
+  steps:
+    - tag: α
+      kind: deterministic
+      text: W₁ 部分解（Telegram 群 / 加密通訊有效）+ W₂ 失敗（內部問責缺位）→ 強集會但無持續結社（突尼西亞、香港、白俄羅斯）
+    - tag: β
+      kind: deterministic
+      text: W₁ + W₃ 部分解（社群 + 規模）但 W₂ 失敗（外部國家壓制取代了內部問責的位置）→ 一次性動員後解散（加泰隆尼亞）
+    - tag: γ
+      kind: probabilistic
+      text: 三牆全失敗 → 即使有強身分隱私工具也無結社（伊朗綠色運動）
+    - tag: ⊥
+      kind: probabilistic
+      text: 沒有觀察到三牆同時被解的案例 → H1' 無正面驗證，只有否證式檢驗
+  legend:
+    - kind: deterministic
+      label: 結構性必然
+    - kind: probabilistic
+      label: 概率性（依政治脈絡）
+
+borders:
+  - label: 反論 1
+    title: 突尼西亞茉莉花成功了
+    pivot: 反論訴求是「茉莉花推翻了 Ben Ali，所以數位結社成功」。但「推翻」是強集會（W₁ 部分解 + 大量動員），不是「持續結社」（W₂ + W₃）。突尼西亞後續政治轉型十年的反覆證明，動員後的結社崩潰正是 H1' 預測的失敗。
+    flip: 茉莉花反向支持 H1'——強集會 ≠ 強結社；W₁ 解了仍然會在 W₂、W₃ 失敗。
+  - label: 反論 2
+    title: DAO 治理是數位結社
+    pivot: 反論訴求是「DAO 已經在區塊鏈上實現持續成員身分 + 鏈上問責」。但 DAO 治理失敗的原因不是身分隱私不足；plutocracy + VC capture + core-team exit 是 W₂ 內部問責的多重表現之一。DAO 解了 W₁（鏈上憑證）但 W₂ 嚴重失敗。
+    flip: DAO 是「W₁ 解 + W₂ 大失敗」的最清楚案例；它的失敗不在工具，在治理品質。
+  - label: 反論 3
+    title: SecureDrop 已是運作中的數位結社
+    pivot: 反論訴求是「SecureDrop 在 70+ 新聞機構運作多年，是數位結社的成功案例」。但 SecureDrop 是吹哨者 → 記者單向通訊，不是「結社」（成員間互動 + 持續身分 + 內部問責）；屬於 article 04 T 三件式的場景，不在 H1' 範疇內。
+    flip: SecureDrop 範疇錯誤——它是 secure communication tool，不是 association formation tool；反向釐清 H1' 適用範圍。
+
+conditions:
+  title: civic proof 4 條件對應三道牆所需的規範必要條件
+  formalPrelude: civic_proof ⇔ c₁ ∧ c₂ ∧ c₃ ∧ c₄  ↪  W₁ ∧ W₂ ∧ W₃
+  items:
+    - title: Accountability without identification
+      body: 不需要實名也能問責（對應 article 01 P[U] 公式）。這是 W₂ 內部問責的工程基礎。
+      formal: "c₁: A ⇐ P[U]  (article 01 同公式)"
+    - title: Group boundary verifiability
+      body: 群體成員身分可被密碼學驗證（誰是、誰不是），同時不揭露具體 individual identity。對應 W₁。
+      formal: "c₂: ∃ proof : member(x, G) ∧ ¬reveal(x)"
+    - title: Revocable membership
+      body: 成員可加入、退出、被移除；治理規則明示且可被執行。對應 W₃ 規模化（持續成員管理）。
+      formal: "c₃: ∃ governance : add(x, G) ∨ remove(x, G) ∨ leave(x, G)"
+    - title: Conditional unmasking with multi-party keys
+      body: 例外情境的啟封必須通過 V₁..V₆ 防火牆（與 article 01 + article 04 T 三件式整合）。對應 W₂ 救濟路徑。
+      formal: "c₄: U valid ⇔ V₁ ∧ ... ∧ V₆  (article 01)  ∧  T_Trigger ∧ T_Authority ∧ T_Remedy  (article 04)"
+
+conclusion:
+  paragraphs:
+    - 數位結社的失敗，<strong>根本問題並不只是工具不足。三道牆同時未被解才是核心。</strong>身分隱私只是上游的第一道牆，它是必要的瓶頸；解了它，仍會在第二道（群體界線可驗證）與第三道（內部問責）失敗。
+    - Civic proof 的規範條件束恰好對應這三道牆所需的規範必要條件，提供一個系統性解法的<em>規範性提案</em>。然而 civic proof 是規範性提案，並非已驗證的工程實作；目前尚無案例同時解了三道牆。
+    - <strong>H1' 在 N=5 樣本下成立，但不主張為定理。</strong>強集會 ≠ 強結社；cypherpunks 的工具樂觀主義在三牆框架下會持續落空。下一篇要問的是：什麼樣的法律 + 工程聯合配置，能真的把三牆同時解開？
+  formalCoda: |
+    H1' ⇔ ¬F ⇔ W₁ ∧ W₂ ∧ W₃
+    civic_proof.{c₁, c₂, c₃, c₄}  ↪  {W₁, W₂, W₃}
+    ∀ observed case : ∃ i : ¬Wᵢ(case)   ⊨   empirical regularity (N=5)

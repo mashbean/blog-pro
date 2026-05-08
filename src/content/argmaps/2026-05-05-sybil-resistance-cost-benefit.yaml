@@ -1,0 +1,172 @@
+slug: 2026-05-05-sybil-resistance-cost-benefit
+title: 一人一帳號的代價
+subtitle: 從 Worldcoin 到 zkPassport 的唯一性證明矩陣
+
+# ─────────────────────────────────────────────────────────────
+# Central Thesis + Formal block
+# ─────────────────────────────────────────────────────────────
+coreThesis:
+  text: Sybil resistance 不是單一目標，而是依場景而定的光譜。U（uniqueness）↔ D（disclosure）↔ I（inclusion）構成不可能三角 IT'，任何方案無法同時最大化三項。類比 CAP theorem：IT' 是設計選擇的形式化提示，把工作者從「找 universal personhood proof」轉到「依場景分層」。
+  summary: IT' = U ↔ D ↔ I，三項無法同時最大化；類比 CAP 但類比強度為「中強」，不享有定理權威。
+  formal:
+    expression: |
+      IT' ≡  ¬∃ S [ U(S) = max  ∧  D(S) = min  ∧  I(S) = max ]
+
+      under premises P = {
+        現實根分布不均,
+        訊息理論下界非零,
+        工程資源有限,
+        fallback 路徑必須存在
+      }
+
+      analogy(IT', CAP) = medium-strong (structural ∧ pedagogical, NOT formal)
+    caption: 不存在任何 Sybil resistance 方案 S 同時把 U / D / I 三軸都拉到最大。IT' 是經驗 + 規範性合成命題，類比但不等同 CAP 定理。
+    legend:
+      - symbol: U(S)
+        meaning: Uniqueness — 一人一帳號強度（攻擊者建立 N 個假帳號的邊際成本）
+      - symbol: D(S)
+        meaning: Disclosure — 揭露給 issuer / verifier / observer 的個人資訊量（min 為佳）
+      - symbol: I(S)
+        meaning: Inclusion — 方案能涵蓋的人口比例（特別是 unbanked / undocumented / disability / language minorities）
+      - symbol: IT'
+        meaning: Impossibility Triangle (revised) — 修訂版不可能三角
+      - symbol: ¬∃
+        meaning: 不存在
+      - symbol: P
+        meaning: 規範前提集（4 條）
+      - symbol: CAP
+        meaning: Brewer 2000 / Gilbert-Lynch 2002 分散式系統三角
+      - symbol: ≅_analogy
+        meaning: 類比同構（非形式定理同構）
+
+transitions:
+  beforeDistinction: 公式給出張力結構。但要說服讀者「Worldcoin 不是模板」，第一步得區分兩條被混用的設計取向——universal personhood proof（一招走天下）vs 場景分層（依需求選工具）。
+  beforePillars: 區分本身只是宣告。要證明 IT' 成立，需要五條獨立支撐——5 個方案矩陣的歸納、IT' 形式化演繹、CAP 類比的方法論定位、Worldcoin 過度通用化的因果分析、邊界條件與包容性。
+  beforeChain: 五條 pillar 建立後，最具體的因果鏈是 Worldcoin 過度通用化的六步序列。從 universal 設計目標到 iris hash 物理層不可逆性到採集優先順序 → 把不可逆生物特徵集中化的政治代價外推到不需要的場景。
+  beforeBorders: 反論集中在「Worldcoin 是詐騙」、「zkPassport 是完美方案」、「Sybil resistance = KYC」三條——檢視每條反論後，它們都示範了「過度通用化」的不同形式，反向支持「禁止外推」立場。
+  beforeConditions: 反論吸收後，留下的是場景分層的設計含意——L0 passkey / L1 社交根 / L2 多源 stamps / L3 強護照根的分層治理 + 5 條邊界條件。
+  beforeConclusion: IT' + CAP 類比 + 5 邊界條件 + 場景分層收束於：別找 universal personhood proof；明示三軸權衡，依場景選工具。
+
+distinction:
+  rejected:
+    label: ❌ 被拒絕
+    title: Universal personhood proof（Worldcoin orb 模式）
+    body: 「找一個全球唯一性方案，所有 Sybil resistance 場景都用它。」這個取向把不可逆生物特徵集中化的政治代價，強加給沒有需要它的場景（論壇登入 / 政治連署 / 補貼分配 / 跨國 UBI 等）。問題不是 Worldcoin 選了強 U corner，是它聲稱不必選。
+    formal: "∃ S* : ∀ scenario : use(S*, scenario)   ❌ 違反 IT'"
+  accepted:
+    label: ✓ 被辯護
+    title: 場景分層 + IT' 三軸權衡
+    body: Sybil resistance 是依場景而定的光譜。L0 登入用 passkey / L1 論壇用社交根 / L2 連署用 multi-stamp / L3 投票用強護照根。每個場景在 U / D / I 三軸上有不同的最佳 corner——universal 設計是工程烏托邦。
+    formal: "∀ scenario : ∃ S(scenario) : optimize(S, U, D, I | scenario)"
+
+pillars:
+  - section: §2 — 五方案對照矩陣
+    title: Worldcoin / BrightID / Gitcoin Passport / zkPassport / PoH
+    role: 提供經驗錨點——若 IT' 是抽象張力，需要先看具體方案如何在三軸上分配。五方案的 corner 落點不同，正好示範 IT'。
+    body: Worldcoin (U:5, D:1, I:2) — iris 不可逆。BrightID (U:2, D:4, I:3) — 社交圖暴露。Gitcoin Passport (U:3, D:3, I:3) — 多 signal 折衷。zkPassport (U:4, D:4, I:2) — 護照根排除無 ID 人口。PoH (U:3, D:1, I:3) — 公開臉永久。沒有方案達到 (5,5,5)。
+    finding: 五方案的三軸總和落在 7-11 區間，Pareto frontier 在三維單純形上呈凹陷曲面，頂角 (5,5,5) 不可達。
+    formal: "∀ S ∈ {Worldcoin, BrightID, Gitcoin, zkPassport, PoH} : U(S) + D(S) + I(S) ≤ 11"
+
+  - section: §3 — IT' 形式化演繹
+    title: 合取最大化不可達結構
+    role: 提供形式化骨架——若 IT' 不被形式化，會被當作「設計取捨」常識；只有形式化才能讓「無法同時拉滿」成為可被檢驗的命題。
+    body: 在規範前提集 P = { 現實根分布不均、訊息理論下界非零、工程資源有限、fallback 路徑必須存在 } 下，¬∃ S [ U(S)=max ∧ D(S)=min ∧ I(S)=max ]。三項變量帶 9 條子維度（U：per-identity cost / detection latency / collusion resistance；D：enrollment / verification / observer-side / future leakage；I：document / biometric / technology / language gap）。
+    finding: IT' 與 article 03 H1' / 04 T / 06 CB-Justice / 07 SRP 同樣是合取結構，但用於不同層級——IT' 是工程張力「無法同時拉滿」，其他四個是「合取必要、缺一即敗」。
+    formal: "IT' ≡ ¬∃ S [ U(S)=max ∧ D(S)=min ∧ I(S)=max ]   under P"
+
+  - section: §5 — CAP 類比 + PACELC 引申
+    title: 中強類比（A 強 / B 弱紅線 / C 中強 / D 強）
+    role: 提供方法論定位——CAP 在分散式系統的角色是「設計選擇的形式化」，IT' 在 Sybil resistance 的對應功能類似。但 IT' 是經驗 + 規範性歸納，不享有 CAP 的定理權威。
+    body: 4 層強度評估：A 對抗性目標同構（強）、B 形式化結構（弱，紅線——CAP 是定理、IT' 是經驗 + 規範性）、C 失敗模式同構（中強——拒絕承認權衡 → 設計或政治崩盤）、D 設計選擇教育意涵同構（強）。整體中強，足以做規範指引但不足以做形式推論。
+    finding: PACELC 引申 IS-AUEL-D（surveillance 攻擊發生時 vs 未發生時的雙重 trade-off）作為弱級別方法論提示。
+    formal: "analogy(IT', CAP) = ⟨A:strong, B:weak, C:medium-strong, D:strong⟩ ⊨ medium-strong"
+
+  - section: §6 — Worldcoin 過度通用化六步因果鏈
+    title: 不可逆生物特徵 + 跨場景外推
+    role: 提供具體案例——若 IT' 是抽象警示，需要一條可被機制追溯的因果鏈頂住「過度通用化會出錯」的主張。
+    body: M1 universal 設計目標 → M2 iris hash 物理層不可逆 → M3 同一 iris hash 涵蓋多場景（identity creep）→ M4 跨平台連結性（zk 隔離 vs 側通道）→ M5 集中於單一公司（Tools for Humanity / Worldcoin Foundation）→ M6 採集優先順序（經濟誘因驅動發展中國家）。3 反事實顯示 M3 / M4 / M5 / M6 任一環節被切斷代價即顯著下降。
+    finding: 不可逆性精準切分軟體層 / 制度層 / 物理層三層；iris 落在物理層不可逆。Worldcoin 在西班牙 AEPD 2024-03 / 肯亞 ODPC 2023-08 / 阿根廷 AAIP 2024-05 / 巴西 ANPD 2025-01 監管反彈是後果。
+    formal: "M1 ∧ M2 ⇒ M3 ⇒ M4 (with side channels) ⇒ M5 ⇒ M6   |   論證強度：中強"
+
+  - section: §7 — 場景分層 + 5 邊界條件
+    title: L0 / L1 / L2 / L3 + B1-B5
+    role: 提供工程設計回應——若 IT' 只是 critique，沒給出設計含意；場景分層是「依需求選 corner」的具體模板。
+    body: L0 登入（passkey）/ L1 論壇藍勾勾（社交根）/ L2 政治連署（multi-stamp）/ L3 一人一票（強護照根）。配 5 條邊界條件：B1 弱身分證國家如何替代 L3 / B2 Aadhaar 教訓 / B3 共用裝置反測試 / B4 multi-rooted 條件成立 / B5 跨法域承認光譜。
+    finding: multi-rooted 不是「同時解三角」——它在 disclosure 邊有條件改善、在 uniqueness 邊條件改善、在 inclusion 邊沒有顯著改善。緩和單一根的政治代價是它的真實作用。
+    formal: "∀ scenario : ∃ L_i ∈ {L0, L1, L2, L3} : appropriate(L_i, scenario)   ∧   ∀ deployment : valid ⇔ ⋀ⱼ Bⱼ"
+
+chain:
+  title: Worldcoin 過度通用化六步因果鏈
+  steps:
+    - tag: M1
+      kind: deterministic
+      text: Universal proof of personhood 設計目標明示（涵蓋所有 sybil 場景）
+    - tag: M2
+      kind: deterministic
+      text: iris hash 物理層不可逆（同一個自然人的眼睛 → 同一個 hash 值）
+    - tag: M3
+      kind: deterministic
+      text: M1 + M2 → 同一 iris hash 涵蓋多場景（identity creep + WLD token 經濟綁定）
+    - tag: M4
+      kind: probabilistic
+      text: 跨平台連結性（zk 隔離 vs 三層側通道：裝置 / 服務 / Token）
+    - tag: M5
+      kind: deterministic
+      text: 集中於單一公司（TFH + Worldcoin Foundation）→ 資訊不對稱 + 退場成本極高
+    - tag: M6
+      kind: probabilistic
+      text: 採集優先順序（經濟誘因驅動發展中國家優先；中強相關性，非單向因果）
+    - tag: ⊥
+      kind: deterministic
+      text: 把不可逆生物特徵集中化的政治代價外推到沒有需要的場景與沒能力 opt-out 的人口
+  legend:
+    - kind: deterministic
+      label: 機制必然（M1 / M2 / M3 / M5）
+    - kind: probabilistic
+      label: 概率性（M4 / M6 — 依使用者實踐 + 經濟誘因）
+
+borders:
+  - label: 反論 1
+    title: Worldcoin 是詐騙
+    pivot: 反論訴求是「Worldcoin 不誠實 / 應全面禁止」。但 TFH 5 項工程努力（Semaphore zk circuit / iris template orb 端銷毀 / 開源 orb 規格 / self-custody / Privacy Documentation）有實質價值。問題不在 Worldcoin 整體，在 universal 設計目標 + iris 物理不可逆 + 採集優先順序的組合外推。
+    flip: 反論誤把「禁止外推」推為「禁止 Worldcoin」；釐清後，主張是禁止 universal 取向，不是禁止個別工程努力。
+  - label: 反論 2
+    title: zkPassport 是完美方案
+    pivot: 反論訴求是「zkPassport 用 ZK 包裝政府文件，比 Worldcoin 好」。但 zkPassport 三層脆弱：state-level Sybil（敵意政權可簽發大量真實假護照）/ CSCA 維護碎片化 / 全球 8.5 億無法律身分人口完全排除。把 zkPassport 視為 Worldcoin 的完美替代品，會把不可逆性問題換成包容性問題，並未解決 IT'。
+    flip: 反論揭露任何單一根方案都會在 IT' 三軸某一邊崩潰；正向支持場景分層 + multi-rooted 思路。
+  - label: 反論 3
+    title: Sybil resistance = KYC
+    pivot: 反論訴求是「Sybil resistance 等同於 KYC，所以實名 + 監控是必要的」。但 KYC 是金融機關的法律合規程序（識別實名身分 + 持續監控），Sybil resistance 是「在系統內保證一人一帳號或一人一票」，與識別實名無必然關聯。BrightID / PoH / Gitcoin Passport 多數配置皆非 KYC。
+    flip: 反論把兩個不同範疇強行合併；釐清後，「Sybil resistance ≠ KYC」反向支持「假名式 civic proof」的可能性。
+
+conditions:
+  title: 場景分層 4 層 + 5 條邊界條件
+  formalPrelude: "∀ scenario : ∃ L_i : appropriate(L_i, scenario)   ∧   valid(deployment) ⇔ ⋀ⱼ Bⱼ"
+  items:
+    - title: L0 — 登入（passkey）
+      body: 本機認證即可，無需 personhood proof。場景：論壇登入、app 開戶、設備綁定。對應 U 弱、D 強、I 中。
+      formal: "L0: scenario = login ⇒ optimal(passkey)"
+    - title: L1 — 論壇藍勾勾（社交根）
+      body: BrightID 等社交圖根。場景：reputation system、Gitcoin Passport stamps 的子元件。對應 U 中、D 中、I 中。
+      formal: "L1: scenario = social_attestation ⇒ optimal(social_root)"
+    - title: L2 — 政治連署（多源 stamps）
+      body: Gitcoin Passport / Holonym multi-stamp。場景：grants funding、quadratic voting、補貼分配。對應 U 中強、D 中、I 中。
+      formal: "L2: scenario = community_voting ⇒ optimal(multi_stamp)"
+    - title: L3 — 一人一票（強護照根）
+      body: zkPassport / mDL。場景：跨境投票、銀行 KYC、政治選舉。對應 U 強、D 中、I 弱（排除無護照人口）。
+      formal: "L3: scenario = legal_voting ⇒ optimal(passport_root)   |   B1-B5 邊界必須處理"
+    - title: B1-B5 邊界條件
+      body: B1 弱身分證國家如何替代 L3 / B2 Aadhaar 教訓 / B3 共用裝置反測試 / B4 multi-rooted 條件成立 / B5 跨法域承認光譜。任意部署 valid ⇔ ⋀ⱼ Bⱼ。
+      formal: "∀ deployment : valid ⇔ B₁ ∧ B₂ ∧ B₃ ∧ B₄ ∧ B₅"
+
+conclusion:
+  paragraphs:
+    - 從 Worldcoin 到 zkPassport，每一個 personhood proof 方案在不可能三角 IT' 的 U / D / I 三邊都做了取捨。這個三角與 article 03 H1' 三道牆、article 04 T 三件式、article 06 CB-Justice D₁*∧D₂* 同樣是合取結構，但用於不同層級——前三者是合取必要條件「缺一即敗」，<strong>IT' 是合取最大化不可達「無法同時拉滿」</strong>。
+    - CAP 教會工程師明示權衡，IT' 教會公民科技工作者場景分層；<strong>Worldcoin orb 模式的問題在於它聲稱不必選；它選了強 U 的 corner 並無錯，錯在隱蔽該選擇。</strong>
+    - 場景分層仍受 5 條邊界條件約束（弱身分證國家可動員性 / Aadhaar 強根代價 / 家庭內共用裝置 / multi-rooted 三邊不對稱 / 跨法域承認光譜），缺一就會落入 Aadhaar 排除、Worldcoin 監管挫敗、Gitcoin GG18 sybil、印尼 e-KTP 弊案的失敗模式。
+  formalCoda: |
+    Final form:
+      IT' ≡ ¬∃ S [ U(S)=max ∧ D(S)=min ∧ I(S)=max ]   under P
+      ∀ scenario : ∃ L_i ∈ {L0, L1, L2, L3} : appropriate(L_i, scenario)
+      analogy(IT', CAP) = medium-strong  (NOT formal theorem transfer)
+      ∀ deployment : valid ⇔ B₁ ∧ B₂ ∧ B₃ ∧ B₄ ∧ B₅
