@@ -5,11 +5,18 @@ import type { CollectionEntry } from "astro:content";
 interface Props {
   argmap: CollectionEntry<"argmaps">;
   reportHref?: string;
+  argdown?: {
+    source?: string;
+    htmlHref?: string;
+    svgHref?: string;
+    sourceHref?: string;
+  };
 }
 
-const { argmap, reportHref } = Astro.props;
+const { argmap, reportHref, argdown } = Astro.props;
 const data = argmap.data;
 const transitions = data.transitions ?? {};
+const hasArgdownRender = Boolean(argdown?.source || argdown?.htmlHref || argdown?.svgHref);
 ---
 
 <section class="argmap">
@@ -225,6 +232,39 @@ const transitions = data.transitions ?? {};
         )}
       </div>
     </>
+  )}
+
+  {hasArgdownRender && (
+    <section class="argmap__argdown" aria-labelledby="argdown-render-title">
+      <div class="argmap__argdown-head">
+        <div>
+          <p class="argmap__argdown-kicker">Argdown</p>
+          <h2 id="argdown-render-title" class="argmap__argdown-title">Formal Render</h2>
+        </div>
+        <div class="argmap__argdown-actions">
+          {argdown?.htmlHref && <a href={argdown.htmlHref}>HTML</a>}
+          {argdown?.sourceHref && <a href={argdown.sourceHref}>Source</a>}
+        </div>
+      </div>
+
+      {argdown?.svgHref && (
+        <a class="argmap__argdown-chart-link" href={argdown.svgHref}>
+          <img
+            class="argmap__argdown-chart"
+            src={argdown.svgHref}
+            alt={`${data.title} Argdown graph`}
+            loading="lazy"
+          />
+        </a>
+      )}
+
+      {argdown?.source && (
+        <details class="argmap__argdown-details">
+          <summary>Source</summary>
+          <pre class="argmap__argdown-source"><code>{argdown.source}</code></pre>
+        </details>
+      )}
+    </section>
   )}
 </section>
 

@@ -1,0 +1,88 @@
+===
+title: DNS 的不可複製：身分治理為什麼不能照搬域名模式
+subTitle: Historical Mismatch — Argument Map (v2)
+slug: 2026-05-06-dns-vs-identity-trust-roots
+author: research-article-pipeline argdown export
+model:
+  removeTagsFromText: true
+===
+
+# Central Thesis
+
+[Core Thesis]
+  + <Formal Core>
+  + [Accepted]
+  + <P1>
+  + <P2>
+  + <P3>
+  + <P4>
+  + <P5>
+  + <Causal Chain>
+  + [Deployment Conditions]
+  + <Conclusion>
+  - [Rejected]
+    - [Accepted]
+  + [Accepted]
+  - [Objection 1]
+    - <Reply 1>
+  + <Reply 1>
+  - [Objection 2]
+    - <Reply 2>
+  + <Reply 2>
+  - [Objection 3]
+    - <Reply 3>
+  + <Reply 3>
+
+[Core Thesis]: 把 DNS 當作數位身分治理的範本，犯了「歷史前提錯置」的錯誤。DNS 治理史的四個前提（早期社群文化 國家策略性放手 技術中立論述 IANA 過渡多重否決點）在身分領域全部失效——P DNS 與 P ID 不交集。FTLA 四層治理框架是替代設計，但不能照搬，必須對應每層的主權密度。 #thesis
+
+<Formal Core>: Formula HM Pᵢ P DNS, Pᵢ P ID transferable(governance model(DNS), identity) FTLA identity governance ℓ 1..4 L ℓ sovereignty density match(L ℓ) Caption HM 是「合取最大化不可達」結構 DNS 治理的四個前提 P1-P4 在身分領域都不成立，因此整個合取不滿足。FTLA 四層（L1-L4）按主權密度分層，每層治理機制必須與該層主權密度匹配。 #formal
+
+[Accepted]: FTLA 四層治理 主權密度匹配. 把身分治理拆成四個層級 L1 協議根（高主權密度，必須與國家治理匹配）、L2 標準（中主權密度，可跨國協調）、L3 實作（低主權密度，市場 開源）、L4 應用（依場景變動）。每層治理機制必須與該層的主權密度匹配——把 L1 治理放到 L4 機制下會崩壞，反之亦然。 #accepted
+
+[Rejected]: DNS 治理模式可遷移到身分. 把 1969-2016 的 DNS 治理史當作「去中心化身分治理」的可複製範本。這個結構假設兩個領域的歷史前提相似 但 DNS 的「早期社群文化 國家策略性放手 技術中立論述 IANA 過渡」四個前提在身分領域全部失敗——身分領域從未有早期社群（各國政府主導）、國家從未放手（高度警覺）、身分天然涉及主權（無法技術中立）、缺乏 IANA-equivalent 的過渡機制。 #rejected
+
+<P1>: Title P1 P2 P3 P4 的成立條件 Section 2 — DNS 治理史四階段 Role 提供歷史根據——若 DNS 治理史本來就無前提可言（純技術自然演化），HM 就無從談起。但四階段時間線（1969-2016）顯示每階段都有特定政治經濟前提 前提改變則治理模式不可複製。 P1 — Postel jar 早期學術社群文化（1969-1980s，數百人規模、信任強、商業利益弱）。P2 — 1980-90s 美國國家權力的策略性放手（不是放棄主權，是判斷「商業互聯網成長 控制成本」後的選擇）。P3 — 技術中立論述被工程社群有意建構（IETF 文化把「rough consensus and running code」抬升為治理規範）。P4 — IANA Stewardship Transition 是多重否決點下勉強通過的政治產物（2014-2016，需 NTIA IANA ICANN 政府諮詢委員會多方同意）。四階段的核心特徵是「國家策略性放手 工程社群文化建構」雙重支撐。 Finding P DNS P1, P2 , P3 , P4 是 DNS 治理成立的合取必要條件 任何一條不成立，DNS 治理就會走向不同的歷史路徑。 Formal DNS governance(model) P1 P2 P3 P4 #pillar
+
+<P2>: Title 身分領域 P1 -P4 全部失敗 Section 3 — HM 合取主張 Role 提供反向證據——若 DNS 的四個前提在身分領域都成立，HM 就崩塌 但四個對應位置全部失敗，使 HM 成為「合取最大化不可達」的明確案例。 HM 形式化 Pᵢ P DNS, Pᵢ P ID。P1 — 身分早期社群被各國政府主導（不存在 P1 的學術社群文化先期積累 身分系統從一開始就是政府基建）。P2 — 國家權力高度警覺（不是策略性放手 身分直接連結稅務、社福、邊境，國家不可能放手）。P3 — 身分天然涉及主權（無法技術中立 任何身分系統的根都會涉及「誰是公民」這個主權問題）。P4 — 缺乏 IANA-equivalent 過渡機制（身分系統沒有「中立中介」可以承擔過渡角色，UN UNHCR 都帶有政治色彩）。五個反事實情境支撐 (a) 若身分領域有早期社群會如何 (b) 若國家放手會如何 (c) 若技術中立論述存在會如何 (d) 若有 IANA 過渡會如何 (e) 若四者都缺如何（即現實）。 Finding P DNS P ID 是強合取主張 若 P DNS 中任一前提在身分領域成立，論證就需要降級。但目前四個對應位置都顯示失敗，HM 強形式成立。 Formal i 1, 2 , 3 , 4 Pᵢ P ID transferable(DNS model, identity) #pillar
+
+<P3>: Title ITU IETF W3C ICANN 適用性矩陣 Section 4 — 四個跨國治理模式類比 Role 提供類比強度的精確邊界——若不檢驗其他治理模式，HM 仍可被指控為「只反 DNS 不反所有跨國治理」。檢驗 ITU IETF W3C ICANN 四模式 五項判準，把類比強度精確標出。 四模式深描 ITU（國家中心、條約驅動、慢、可救濟） IETF（工程師中心、共識驅動、快、無正式救濟） W3C（廠商中心、會員驅動、中速、有對話機制） ICANN（多利害關係人、合約驅動、中速、有問責機制）。五項適用性判準 J1 主權密度、J2 利害關係人結構、J3 技術可逆性、J4 標準速度、J5 救濟機制。四模式適用性矩陣顯示沒有單一模式覆蓋身分領域全部需求 ITU 在 L1 部分可借，IETF 在 L3 可借，W3C 在 L2 L3 可借，ICANN 結構部分可借但「主權密度」這項判準上身分領域更高。 Finding 沒有單一現成治理模式可被照搬 FTLA 是「混合借用」設計，每層挑最適合的模式但不照搬整套機制。 Formal M ITU, IETF, W3C, ICANN ℓ applicable(M, L ℓ) ℓ applicable(M, L ℓ ) #pillar
+
+<P4>: Title L₁..L₄ 主權密度分層 Section 5 — FTLA 四層治理框架 Role 提供替代設計可行性——若沒有具體可實作的替代，HM 只是批判。FTLA 四層 主權密度匹配把「混合治理」從口號降到工程規範。 L1 協議根（高主權密度 誰是公民、誰能撤銷、跨境效力 必須由國家或多邊組織治理，借用 ITU 模式 國家行政層）。L2 標準（中主權密度 互通格式、ZK 規範、撤銷機制 可由 W3C IETF 模式治理，但需要「主權預留接口」）。L3 實作（低主權密度 開源 SDK、廠商實作、性能優化 市場 開源即可）。L4 應用（依場景變動 金融身分高主權、社交身分低主權 按場景配置）。三大治理風險 R1 層間越界（把 L1 議題交給 L3 機制處理或反向）、R2 主權密度錯配（L1 套用 L4 機制）、R3 過渡機制缺失（沒有 IANA-equivalent 時硬推全球統一）。 Finding FTLA 不是「DNS 的身分版本」，是「把身分治理問題按主權密度切碎，每塊用對應機制處理」的設計。每層必須有獨立的成功指標 救濟機制。 Formal FTLA(identity) ℓ 1..4 (L ℓ sovereignty density match(L ℓ) R₁ R₂ R₃) #pillar
+
+<P5>: Title 4 個案例 4 個邊界條件 Section 6 — 子領域複製可能性 Role 提供誠實性——若不檢驗 FTLA 在子領域的複製可能性，HM 會被指控為「只反 DNS 不給可行替代」。四個案例（學術憑證 醫療紀錄 旅行文件 駕照） 四個邊界條件把 FTLA 的適用範圍精確標出。 四個子領域案例 (a) 學術憑證（W3C VC 已部分成功，主權密度中） (b) 醫療紀錄（HL7 FHIR 標準已成熟，主權密度中、L3 開源充足） (c) 旅行文件（ICAO eMRTD 已存在，主權密度高、與 article 07 SRP 直接接合） (d) 駕照（mDL 標準推進中，主權密度高但跨州 mutual recognition 已有先例）。四個邊界條件 B1 主權密度可分層（不能扁平化） B2 工程社群文化存在（沒有等效 IETF 文化的領域 FTLA 不可部署） B3 過渡機制可建構（從現有體系遷移的路徑必須清楚） B4 救濟機制嵌入（每層必須有 article 04 T Remedy 對應的救濟設計）。 Finding FTLA 在「主權密度可分層 工程社群存在」的子領域可部署 對「主權密度全高」（如國家公民身分根）或「無工程社群」的領域，FTLA 不適用，需要其他設計（如 article 07 MR-CivicProof）。 Formal applicable(FTLA, subdomain) B₁ B₂ B₃ B₄ #pillar
+
+<Causal Chain>: Title HM 五階段反事實鏈 DNS 前提移除 身分情境推導 T0 (deterministic) 1969-1980s — DNS P1 早期社群成立（信任強、商業弱、國家不關心） T1 (deterministic) 1980-90s — DNS P2 美國策略性放手（判斷商業成長 控制成本） T2 (deterministic) 1990s-2000s — DNS P3 技術中立論述被 IETF 文化建構（rough consensus） T3 (probabilistic) 2014-2016 — DNS P4 IANA Stewardship Transition 多重否決點通過（NTIA ICANN 政府諮詢委員會） T4 (deterministic) 身分領域對應位置 P1 政府主導（非社群）、P2 高度警覺（非放手）、P3 涉及主權（非中立）、P4 無過渡機制 T5 (probabilistic) 反事實 (a)-(e) 若 P DNS 在身分領域成立，會走向不同治理路徑 現實是四個前提全部失敗 T6 (probabilistic) 結論 P DNS P ID DNS 經驗不可遷移 FTLA 是混合借用而非照搬 #chain
+
+[Deployment Conditions]: FTLA 四層治理的合法部署，必須先通過四條邊界條件. deploy(FTLA, subdomain) valid B₁ B₂ B₃ B₄ #conditions
+
+<C1>: Title B₁ 主權密度可分層 子領域必須允許「主權密度按層分配」的可能性。若整個子領域都是高主權密度（如國家公民身分根），FTLA 退化為單層治理，等於沒有 FTLA。學術憑證、醫療紀錄、駕照可分層 公民身分根不可分層。 Formal B₁ partition L₁..L₄ sovereignty density(L ℓ) sovereignty density(L ℓ ₁) #condition
+
+<C2>: Title B₂ 工程社群文化存在 該子領域必須有等效 IETF 的工程社群文化（rough consensus running code 公開治理）。沒有此文化的領域，FTLA 的 L3 實作層無法運作，整個框架坍塌到 L1 L2 的政府治理。 Formal B₂ engineering community(subdomain) has culture(rough consensus, running code) #condition
+
+<C3>: Title B₃ 過渡機制可建構 從現有體系遷移到 FTLA 的路徑必須可被工程社群 政府聯合建構。沒有 IANA-equivalent 的子領域必須有替代過渡機制（如 W3C 工作組的階段性產出） 無過渡機制硬推全球統一會引發治理風險 R3。 Formal B₃ transition mechanism(current FTLA) co-constructed(engineering, government) #condition
+
+<C4>: Title B₄ 救濟機制嵌入 每層 L ℓ 必須有對應 article 04 T Remedy 的救濟設計——違規檢出 救濟啟動 多方制衡。沒有救濟的層級會退化為「廠商鎖定」（L3）或「主權壟斷」（L1）。 Formal B₄ ℓ 1..4 remedy(L ℓ) T Remedy #condition
+
+<Conclusion>: HM 是「歷史前提匹配」這個方法論的應用，超越「DNS 治理的批判」這個窄讀法。 把 DNS 模式照搬到身分領域是分類錯誤 該做的是檢視前提集合 P DNS 與 P ID 的差異，然後用 FTLA 混合借用設計。 辯論應從「DNS 模式 vs 國家模式」轉向 「按主權密度分層的混合治理」 。FTLA 的價值落在按主權密度為每層挑選最適合的工具，對應到 article 07 的 MR-CivicProof（在 L1 主權密度全高時的特殊處理） 現有各模式在 FTLA 中各據其層而未被取代。 一條主權密度原則貫穿全文 治理機制必須與主權密度匹配，不能跨層套用。 L1 高主權密度需要國家 多邊機制 L4 低主權密度需要市場 開源——這個分層本身就是 FTLA 公式的必然延伸。 Formal Coda Final form HM Pᵢ P DNS, Pᵢ P ID transferable(governance model(DNS), identity) FTLA identity governance ℓ 1..4 L ℓ sovereignty density match(L ℓ) deploy valid ⱼ Bⱼ (j 1..4) #conclusion
+
+# Deployment Conditions
+
+[Deployment Conditions]
+  + <C1>
+  + <C2>
+  + <C3>
+  + <C4>
+
+# Objections And Replies
+
+[Objection 1]: ITU 模式可借（國家中心多邊治理）. 反論訴求是「ITU 是國家中心的多邊治理範本，可直接借到身分領域」。但檢驗五項判準 J1 主權密度（ITU 中、身分高）、J4 標準速度（ITU 慢、身分需快）、J5 救濟機制（ITU 條約救濟、身分需個體救濟）——三項不匹配。ITU 在 L1 協議根的「跨境效力」議題部分可借，但不能整套照搬。 #objection
+
+<Reply 1>: Title ITU 模式可借（國家中心多邊治理） ITU 不是「身分治理的範本」，是 FTLA 中 L1 主權密度高層級可部分借用的工具。這個結果反向支持「FTLA 混合借用」設計，而非「ITU 全套移植」。 #reply
+
+[Objection 2]: IETF 模式可借（工程師共識驅動）. 反論訴求是「IETF 的 rough consensus and running code 文化適合所有去中心治理」。但 IETF 文化建立在「商業利益弱 國家不關心」的特定歷史條件下 身分領域兩個條件都不成立。J1 主權密度（IETF 低、身分高）、J5 救濟機制（IETF 無、身分必要）——兩項不匹配。IETF 在 L3 實作層可借（開源 SDK 標準制定），但不能用於 L1。 #objection
+
+<Reply 2>: Title IETF 模式可借（工程師共識驅動） IETF 不是「身分治理的萬能解」，是 FTLA 中 L3 實作層可借用的文化。這個結果反向支持「FTLA 按層匹配機制」設計。 #reply
+
+[Objection 3]: W3C ICANN 模式可借. 真正的部分例外——W3C VC（Verifiable Credentials）已在學術憑證等子領域部分成功，ICANN 多利害關係人結構也提供借鏡。但檢驗 J1 主權密度（W3C 中、ICANN 中、身分根高），兩模式都在 L2 標準層可部分借用，不能擴展到 L1 協議根。 #objection
+
+<Reply 3>: Title W3C ICANN 模式可借 即使 W3C ICANN 模式可在 L2 借用，普世化「W3C ICANN 是身分治理範本」也無法被辯護。FTLA 邊界條件 B1（主權密度可分層）正好示範這種精確的層級匹配。 #reply

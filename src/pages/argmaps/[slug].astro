@@ -1,5 +1,7 @@
 ---
 import { getCollection } from "astro:content";
+import { existsSync, readFileSync } from "node:fs";
+import path from "node:path";
 import ArgmapLayout from "../../layouts/ArgmapLayout.astro";
 import Argmap from "../../components/argmap/Argmap.astro";
 
@@ -17,11 +19,20 @@ const { argmap } = Astro.props;
 const reports = await getCollection("reports");
 const matchedReport = reports.find((r) => r.id === argmap.data.slug);
 const reportHref = matchedReport ? `/reports/${matchedReport.id}/` : undefined;
+
+const argdownSourcePath = path.join(process.cwd(), "src/content/argdowns", `${argmap.id}.argdown`);
+const argdownPublicDir = path.join(process.cwd(), "public/argdown", argmap.id);
+const argdown = {
+  source: existsSync(argdownSourcePath) ? readFileSync(argdownSourcePath, "utf8") : undefined,
+  htmlHref: existsSync(path.join(argdownPublicDir, "index.html")) ? `/argdown/${argmap.id}/` : undefined,
+  svgHref: existsSync(path.join(argdownPublicDir, "map.svg")) ? `/argdown/${argmap.id}/map.svg` : undefined,
+  sourceHref: existsSync(path.join(argdownPublicDir, "argument.argdown")) ? `/argdown/${argmap.id}/argument.argdown` : undefined,
+};
 ---
 
 <ArgmapLayout
   title={argmap.data.title}
   description={`${argmap.data.title} 的論證結構視覺化：核心命題、支撐論點、因果鏈、邊界條件、程序條件與結論。`}
 >
-  <Argmap argmap={argmap} reportHref={reportHref} />
+  <Argmap argmap={argmap} reportHref={reportHref} argdown={argdown} />
 </ArgmapLayout>
