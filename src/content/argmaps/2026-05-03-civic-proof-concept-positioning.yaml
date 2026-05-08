@@ -3,7 +3,7 @@ title: 公民證明的概念定位
 subtitle: Civic Proof — Concept Positioning Argument Map (v2)
 
 coreThesis:
-  text: 「公民證明」既不是 KYC 等同物，也不是現成系統的重命名；它是介於存在性 ID（誰是公民）與資格性 ID（這個人能做什麼）之間的第三類——一個由規範差異矩陣 + 形式定義 + 邊界條件三件式定義的概念工程提案。它的辯護不依賴新事物的發明，而依賴對既有概念地景的層級錯置作出修正。
+  text: 「公民證明」是介於存在性 ID（誰是公民）與資格性 ID（這個人能做什麼）之間的第三類——一個由規範差異矩陣 + 形式定義 + 邊界條件三件式定義的概念工程提案，KYC 等同物與現成系統重命名都未能完整覆蓋這個位置。它的辯護不依賴新事物的發明，而依賴對既有概念地景的層級錯置作出修正。
   summary: Civic Proof is a third category between existential ID and entitlement ID — defined by a matrix of normative differences plus formal scope plus boundary conditions.
   formal:
     expression: |
@@ -43,7 +43,7 @@ transitions:
 
   beforeConditions: 反論被吸收後，留下的是設計含意：在什麼條件下，「公民證明」這個概念可以被合法部署而不被誤用？四個邊界條件（規範矩陣完整性 / 啟發式類比的誠實降級 / 形式定義精確性 / 與 article 01 整合）把抽象的「概念工程」翻譯成可被檢驗的學術義務。
 
-  beforeConclusion: 把哲學、類比、規範矩陣、形式、邊界五層收束起來，地圖最終要說的不是某個系統的勝利，而是「概念工程」這個方法論本身——以及這個系列其他 17 篇文章將在這個三件式定義之下展開的學術路徑。
+  beforeConclusion: 把哲學、類比、規範矩陣、形式、邊界五層收束起來，地圖最終要說的是「概念工程」這個方法論本身（沒有任何單一系統的勝利可以替代它），以及這個系列其他 17 篇文章將在三件式定義之下展開的學術路徑。
 
 distinction:
   rejected:
@@ -61,7 +61,7 @@ pillars:
   - section: §3 — 隱私哲學基礎
     title: CI / Cohen / Hildebrandt 三段式論證
     role: 提供規範性根據——若沒有哲學基礎，「公民證明」會被指控為任意定義。CI 多元性 + Cohen 自我構成 + Hildebrandt agonistic legality 三段式提供從「為什麼需要規範差異」到「為什麼需要 agonistic 設計」的論證鏈。
-    body: CI 多元性主張作為前提（Nissenbaum）：不同社會領域有各自的資訊規範，跨領域擴散侵犯脈絡完整性。Non-derivability 的形式論證：M₁..M₄ 四需求型態無法相互推導；身分驗證的場景差異不可被「統一身分」吸收。Cohen 與 Nissenbaum 的概念差異：Cohen 強調自我構成的政治經濟條件（不只是「資訊流動規範」），這個差異對應到公民證明的「能動性」需求。Hildebrandt 的 agonistic legality 延伸：法律不應是「執行已有規則」而是「保留爭議空間」——對應到公民證明的 §7 救濟設計。
+    body: CI 多元性主張作為前提（Nissenbaum）：不同社會領域有各自的資訊規範，跨領域擴散侵犯脈絡完整性。Non-derivability 的形式論證：M₁..M₄ 四需求型態無法相互推導；身分驗證的場景差異不可被「統一身分」吸收。Cohen 與 Nissenbaum 的概念差異：Cohen 強調自我構成的政治經濟條件（範圍超出「資訊流動規範」），這個差異對應到公民證明的「能動性」需求。Hildebrandt 的 agonistic legality 延伸：法律的功能應落在「保留爭議空間」，超越「執行已有規則」的純技術角色——對應到公民證明的 §7 救濟設計。
     finding: 哲學基礎 ℬ 不是「裝飾性引用」，是論證 𝒩 矩陣為什麼需要四個獨立維度（而非一個或兩個）的根據；缺哲學基礎則 𝒩 的維度劃分是任意的。
     formal: "ℬ ≜ CI(plurality) ∧ Cohen(self-constitution) ∧ Hildebrandt(agonistic) ⇒ justifies(𝒩.dimensions = 4)"
 
@@ -75,7 +75,7 @@ pillars:
   - section: §5 — 四需求型態溯因論證
     title: M₁..M₄ 規範差異矩陣
     role: 提供論證骨架——若沒有規範矩陣，「公民證明」與既有系統的差異仍是含混的。M₁..M₄ 把差異精確標出：M₁ 存在性、M₂ 資格性、M₃ 累積性、M₄ 隱私衡量。形式化結構顯示沒有現成系統覆蓋全部四個維度。
-    body: 規範差異矩陣的四個維度：M₁ 存在性需求（誰是公民——對應 ExistentialID）、M₂ 資格性需求（這個人能做什麼——對應 EntitlementID）、M₃ 累積性需求（公民身分隨時間變動，包含義務與權利的累積——既有系統覆蓋率低）、M₄ 隱私衡量需求（每場景的揭露邊界——對應 article 01 的 V₁..V₆）。M₁-M₄ 形式化結構：每個 Mᵢ 有獨立的成功指標 + 失敗模式，且不可相互衍生（non-derivability）。Concept-engineering proposal 的誠實降級：論證不主張「公民證明是新發現」，主張「公民證明是對 M₃/M₄ 缺口的有意提案」。
+    body: 規範差異矩陣的四個維度：M₁ 存在性需求（誰是公民，對應 ExistentialID）、M₂ 資格性需求（這個人能做什麼，對應 EntitlementID）、M₃ 累積性需求（公民身分隨時間變動，包含義務與權利的累積，既有系統覆蓋率低）、M₄ 隱私衡量需求（每場景的揭露邊界，對應 article 01 的 V₁..V₆）。M₁-M₄ 形式化結構：每個 Mᵢ 有獨立的成功指標 + 失敗模式，且不可相互衍生（non-derivability）。Concept-engineering proposal 的誠實降級——論證不主張「公民證明是新發現」，主張「公民證明是對 M₃/M₄ 缺口的有意提案」。
     finding: 矩陣 𝒩 = (M₁, M₂, M₃, M₄) 是論證的核心；既有系統的覆蓋缺口（特別是 M₃ 累積性與 M₄ 隱私衡量）是「不可從現成系統衍生」的實證根據。
     formal: "𝒩 ≜ (M₁, M₂, M₃, M₄)  ∧  ∀ system ∈ {KYC, ExistentialID, EntitlementID, SBT} : ∃ Mᵢ : ¬covers(system, Mᵢ)"
 
@@ -159,8 +159,8 @@ conditions:
 conclusion:
   paragraphs:
     - <strong>公民證明不是新事物的發明，是對既有概念地景的層級錯置作有意修正的概念工程提案。</strong>它的學術定位是「條件性結論」——在 ℬ + 𝒩 + ℱ 三件式成立的前提下，公民證明是介於存在性與資格性之間的第三類。
-    - 辯論應從「公民證明 vs KYC / SBT / VC」轉向<em>「在規範矩陣 𝒩 下，現成系統覆蓋哪些維度、缺哪些維度」</em>。公民證明的真正價值不是取代現成系統，而是顯示現成系統的覆蓋缺口——特別是 M₃ 累積性與 M₄ 隱私衡量。
-    - 一條學術誠實原則貫穿全文：<strong>啟發式類比承擔啟發式工作，形式定義承擔形式工作，哲學基礎承擔規範性工作；不可越界。</strong>Marshall 是 γ 啟發式不是結構同構，VC 是 ℱ 元件不是整體，KYC 是 M₂/M₄ 子集不是公民證明——這不是反例，而是 CivicProof 三件式公式的精確性邊界。
+    - 辯論應從「公民證明 vs KYC / SBT / VC」轉向<em>「在規範矩陣 𝒩 下，現成系統覆蓋哪些維度、缺哪些維度」</em>。公民證明的工作是把現成系統的位置精確標出，特別是顯示 M₃ 累積性與 M₄ 隱私衡量這兩個常被忽略的維度的覆蓋缺口。
+    - 一條學術誠實原則貫穿全文：<strong>啟發式類比承擔啟發式工作，形式定義承擔形式工作，哲學基礎承擔規範性工作；不可越界。</strong>Marshall 落在 γ 啟發式那一格，VC 屬於 ℱ 元件，KYC 屬於 M₂/M₄ 子集——這些位置的精確標示就是 CivicProof 三件式公式的邊界所在。
   formalCoda: |
     Final form:
       CivicProof  ≜  ⟨ 𝒩, ℱ, ℬ ⟩

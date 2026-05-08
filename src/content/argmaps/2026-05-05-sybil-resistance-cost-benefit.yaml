@@ -6,7 +6,7 @@ subtitle: 從 Worldcoin 到 zkPassport 的唯一性證明矩陣
 # Central Thesis + Formal block
 # ─────────────────────────────────────────────────────────────
 coreThesis:
-  text: Sybil resistance 不是單一目標，而是依場景而定的光譜。U（uniqueness）↔ D（disclosure）↔ I（inclusion）構成不可能三角 IT'，任何方案無法同時最大化三項。類比 CAP theorem：IT' 是設計選擇的形式化提示，把工作者從「找 universal personhood proof」轉到「依場景分層」。
+  text: Sybil resistance 是依場景而定的光譜，並無單一通用目標。U（uniqueness）↔ D（disclosure）↔ I（inclusion）構成不可能三角 IT'，任何方案無法同時最大化三項。類比 CAP theorem：IT' 是設計選擇的形式化提示，把工作者從「找 universal personhood proof」轉到「依場景分層」。
   summary: IT' = U ↔ D ↔ I，三項無法同時最大化；類比 CAP 但類比強度為「中強」，不享有定理權威。
   formal:
     expression: |
@@ -77,7 +77,7 @@ pillars:
   - section: §5 — CAP 類比 + PACELC 引申
     title: 中強類比（A 強 / B 弱紅線 / C 中強 / D 強）
     role: 提供方法論定位——CAP 在分散式系統的角色是「設計選擇的形式化」，IT' 在 Sybil resistance 的對應功能類似。但 IT' 是經驗 + 規範性歸納，不享有 CAP 的定理權威。
-    body: 4 層強度評估：A 對抗性目標同構（強）、B 形式化結構（弱，紅線——CAP 是定理、IT' 是經驗 + 規範性）、C 失敗模式同構（中強——拒絕承認權衡 → 設計或政治崩盤）、D 設計選擇教育意涵同構（強）。整體中強，足以做規範指引但不足以做形式推論。
+    body: 4 層強度評估：A 對抗性目標同構（強）、B 形式化結構（弱，紅線；CAP 是定理、IT' 是經驗 + 規範性）、C 失敗模式同構（中強；拒絕承認權衡 → 設計或政治崩盤）、D 設計選擇教育意涵同構（強）。整體中強，足以做規範指引但不足以做形式推論。
     finding: PACELC 引申 IS-AUEL-D（surveillance 攻擊發生時 vs 未發生時的雙重 trade-off）作為弱級別方法論提示。
     formal: "analogy(IT', CAP) = ⟨A:strong, B:weak, C:medium-strong, D:strong⟩ ⊨ medium-strong"
 

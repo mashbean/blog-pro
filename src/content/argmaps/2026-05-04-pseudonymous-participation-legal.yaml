@@ -43,7 +43,7 @@ distinction:
   rejected:
     label: ❌ 被拒絕
     title: 假名 = 絕對匿名 / 實名才能問責
-    body: 「假名加事後問責」常被誤讀為「絕對匿名」，這是把假名等同於 anonymity 的概念混淆。五個歷史制度都不是絕對匿名——而是「對特定相對方保留假名 + 對至少一個有權主體保留事後可識別性」。
+    body: 「假名加事後問責」常被誤讀為「絕對匿名」，這是把假名等同於 anonymity 的概念混淆。五個歷史制度的實際結構是「對特定相對方保留假名 + 對至少一個有權主體保留事後可識別性」，從未走向絕對匿名。
     formal: anonymity_absolute(g) ⊋ pseudonymity_with_unmask(g)
   accepted:
     label: ✓ 被辯護
@@ -54,7 +54,7 @@ distinction:
 pillars:
   - section: §2 — 五制度盤點
     title: 五個獨立法律場域的歷史沉澱
-    role: 提供歷史先例——若三件式不是民主憲政既有制度的一般化，需要從零辯護；若它是五個獨立場域的共同骨架，辯護負擔大幅降低。
+    role: 提供歷史先例——把三件式視為民主憲政既有制度的一般化（亦即五個獨立場域的共同骨架），辯護負擔比從零定義大幅降低。
     body: 吹哨者保護法（5 U.S.C. § 2302 / SOX §806 / Dodd-Frank §922 / EU 2019/1937）；John Doe 訴訟（Cahill 五要件 / Dendrite 四要件）；Sealed Indictment（Federal Rule 6(e)）；匿名捐款上限（Buckley / BCRA / Citizens United / Doe v. Reed）；證人保護程序（WITSEC, 18 U.S.C. § 3521-3528）。五制度跨刑事 / 民事 / 行政 / 選舉 / 行政管理五個場域。
     finding: 五制度共享「假名為制度常態 + 啟封需明確 trigger + 第三方主持 + 啟封決定可申訴 + 錯誤啟封有救濟」五點骨架。
     formal: "∀ 𝓘 ∈ {WPA, JohnDoe, SealedIndictment, CampaignFinance, WITSEC}: valid(𝓘) ⇔ T(𝓘)"
@@ -90,12 +90,12 @@ pillars:
 borders:
   - label: 反論 1
     title: 假名 = 絕對匿名（紅線）
-    pivot: 五個歷史制度都不是絕對匿名——而是「對特定相對方保留假名 + 對至少一個有權主體保留事後可識別性」。把吹哨者保護法寫成「匿名舉報」的同義詞，會直接違反 5 U.S.C. § 2302 與 EU Directive 2019/1937 對舉報人身分管理的明文設計。
-    flip: 反論誤讀概念——一旦概念釐清，五個歷史制度反而是「假名 ≠ 絕對匿名」的最清楚範例。
+    pivot: 五個歷史制度的實際結構是「對特定相對方保留假名 + 對至少一個有權主體保留事後可識別性」——絕對匿名從未是設計目標。把吹哨者保護法寫成「匿名舉報」的同義詞，會直接違反 5 U.S.C. § 2302 與 EU Directive 2019/1937 對舉報人身分管理的明文設計。
+    flip: 反論誤讀概念——一旦概念釐清，五個歷史制度恰好成為「假名 ≠ 絕對匿名」的最清楚範例。
   - label: 反論 2
     title: 制度設計 = 實證部署（紅線）
-    pivot: 紙面承認不等於制度有效。OSC 勝訴率 < 5%、台灣大林蒲 4 年救濟拖延、EU 9 國 transposition 未完成 infringement 程序——這些落差不是證明三件式失敗，而是證明三件式只是必要條件，部署有效性需 case-specific 條款補強。
-    flip: 反論加強三件式作為「必要而非充分」的定位；是補強，不是反駁。
+    pivot: 紙面承認不等於制度有效。OSC 勝訴率 < 5%、台灣大林蒲 4 年救濟拖延、EU 9 國 transposition 未完成 infringement 程序——這些落差證明三件式只是必要條件，部署有效性需 case-specific 條款補強。
+    flip: 反論加強三件式作為「必要但不充分」的定位，屬於補強。
   - label: 反論 3
     title: 啟封權力 = 純技術問題
     pivot: 啟封權力是政治經濟問題而非純技術問題。FEC 黨派僵局、sealed indictment 法院實質倚賴檢察官、WITSEC USMS-DOJ 同屬行政部門——「形式第三方」可被癱瘓。誰持鑰、k-of-n threshold、跨機關制衡都是政治經濟設計。
