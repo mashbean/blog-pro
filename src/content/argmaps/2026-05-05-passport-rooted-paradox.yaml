@@ -6,7 +6,7 @@ subtitle: Sovereignty-Root Paradox — Argument Map (v2)
 # Central Thesis + Formal block
 # ─────────────────────────────────────────────────────────────
 coreThesis:
-  text: 把護照當作公民身分的最終根，等於把信任根放在隨時可成為敵手的主權容器內。當 Issuer 同時屬於該容器的 Adversary 集合，根的 Trust 屬性無法被滿足——SRP 不是密碼學失誤，是主權層級的合取結構失敗。解方不是廢除護照根，而是用 Multi-Rooted Civic Proof 把單一主權根降級為「四選一可退路」。
+  text: 把護照當作公民身分的最終根，等於把信任根放在隨時可成為敵手的主權容器內。當 Issuer 同時屬於該容器的 Adversary 集合，根的 Trust 屬性無法被滿足——SRP 是主權層級的合取結構失敗，並非密碼學失誤。解方落在 Multi-Rooted Civic Proof：把單一主權根降級為「四選一可退路」（廢除護照根並非選項）。
   summary: When the issuer of a sovereign root is also in its adversary set, the root cannot satisfy its trust property.
   formal:
     expression: |
@@ -46,7 +46,7 @@ transitions:
 
   beforeConditions: 反論被吸收後，留下的是設計含意：在什麼條件下，護照根可以被「降級為四選一其中之一」而不喪失功能？五條邊界條件 B1-B5 把抽象的「Multi-Rooted」翻譯成可被檢驗的工程義務 + UNHCR Iris in Jordan 的真實場景測試。
 
-  beforeConclusion: 把工程、案例、形式化、設計、邊界五層收束起來，地圖最終要說的不是 ICAO 的失敗，而是「主權容器」這個類別在公民身分層級的誤用——以及一條跨越所有層級的退路原則。
+  beforeConclusion: 把工程、案例、形式化、設計、邊界五層收束起來，地圖最終要說的是「主權容器」這個類別在公民身分層級的誤用（ICAO 的工程失誤只是症狀），以及一條跨越所有層級的退路原則。
 
 # ─────────────────────────────────────────────────────────────
 # Foundational Distinction
@@ -84,8 +84,8 @@ pillars:
   - section: §4 — SRP 形式化
     title: 主權容器的合取必要結構
     role: 提供論證骨架——若沒有形式化，SRP 仍可被當作「特定政權的失敗」而非「主權容器類別本身的悖論」。形式化把論證從個案推到類別。
-    body: SRP 修訂版陳述：∀R ∈ ℛ_sov [I_R ∈ Adv(T_R)] ⇒ ¬(R ⊨ T_R)。主權容器的三段重構：(1) Issuer 即 Adversary 不是偏差而是主權的內建可能性；(2) Trust 屬性是合取必要條件 T_R = T_R₁ ∧ T_R₂ ∧ T_R₃，任一支柱失效全體失效；(3) 跨容器同構性——同樣的合取結構在 article 01 (V₁..V₆)、article 04 (T_Trigger ∧ T_Authority ∧ T_Remedy)、article 05 (IT' 不可能三角) 反覆出現。
-    finding: SRP 不是「ICAO PKI 設計失誤」，是「以單一主權容器作為公民根」的類別失敗。修補 ICAO 不能解決 SRP，只能換出主權根。
+    body: SRP 修訂版陳述：∀R ∈ ℛ_sov [I_R ∈ Adv(T_R)] ⇒ ¬(R ⊨ T_R)。主權容器的三段重構：(1) Issuer 即 Adversary 屬於主權容器的內建可能性，並非偏差個案；(2) Trust 屬性是合取必要條件 T_R = T_R₁ ∧ T_R₂ ∧ T_R₃，任一支柱失效全體失效；(3) 跨容器同構性——同樣的合取結構在 article 01 (V₁..V₆)、article 04 (T_Trigger ∧ T_Authority ∧ T_Remedy)、article 05 (IT' 不可能三角) 反覆出現。
+    finding: SRP 屬於「以單一主權容器作為公民根」的類別失敗，工程層級（如 ICAO PKI 設計）的修補無法解除這個結構性問題；要走出 SRP 必須換出主權根。
     formal: "T_R ≡ T_R₁ ∧ T_R₂ ∧ T_R₃   ∧   ∃ i : compromised(T_Rᵢ) ⇒ ¬T_R"
 
   - section: §5 — Multi-Rooted Civic Proof
@@ -151,7 +151,7 @@ borders:
 
   - label: 反論 3
     title: 跨國治理體系不可能被取代
-    pivot: 真正的例外——但反論訴求過度延伸。「ICAO 不可能被取代」只在「全球公民身分驗證」這個窄場域成立，對「特定群體（無國籍 / 難民 / 政治受迫）的可信任根」並不必然成立。R₂/R₃/R₄ 不是要取代 ICAO，是在 R₁ 失效時提供退路。
+    pivot: 反論的部分例外——但訴求過度延伸。「ICAO 不可能被取代」只在「全球公民身分驗證」這個窄場域成立，對「特定群體（無國籍 / 難民 / 政治受迫）的可信任根」並不必然成立。R₂/R₃/R₄ 的角色是在 R₁ 失效時提供退路，並未要求取代 ICAO。
     flip: 即使 ICAO 不可能被取代，普世化「ICAO 是唯一根」也無法被辯護。MR-CivicProof 的適用範圍是「主權根失效的群體」，與「ICAO 對一般公民有效」並無矛盾——這恰好示範 B1-B5 邊界條件如何約束過度通用化。
 
 # ─────────────────────────────────────────────────────────────
@@ -182,9 +182,9 @@ conditions:
 # ─────────────────────────────────────────────────────────────
 conclusion:
   paragraphs:
-    - <strong>SRP 不是 ICAO PKI 的工程失誤，是「主權容器作為公民身分根」這一類別的內建悖論。</strong>修補 ICAO 不能解決 SRP——只有把單一主權根降級為「四選一可退路」才能維持 Trust 屬性。
-    - 辯論應從「護照根 vs 自我主權」轉向<em>「在什麼條件下哪一根適用」</em>。MR-CivicProof 的真正價值不是取代 R₁，而是讓 R₁ 失效時公民不會無根可用——這對應到 article 04 的 T_Remedy 與 article 06 的 D₂* 公平條件。
-    - 一條退路原則貫穿全文：<strong>覆蓋率與韌性不可同時最大化，必須有可降級的多根。</strong>越主權友好的根覆蓋越廣、越脆弱；越自托管的根越韌性、越窄門檻——這不是反例，而是 MR-CivicProof 公式在覆蓋-韌性梯度上的必然延伸。
+    - <strong>SRP 是「主權容器作為公民身分根」這一類別的內建悖論，工程層級（如 ICAO PKI 設計）的修補無法解除它。</strong>解套要求把單一主權根降級為「四選一可退路」才能維持 Trust 屬性。
+    - 辯論應從「護照根 vs 自我主權」轉向<em>「在什麼條件下哪一根適用」</em>。MR-CivicProof 的價值落在 R₁ 失效時讓公民仍有根可用，對應到 article 04 的 T_Remedy 與 article 06 的 D₂* 公平條件；R₁ 在 multi-rooted 設計中仍保留其原本的高效用位置。
+    - 一條退路原則貫穿全文：<strong>覆蓋率與韌性不可同時最大化，必須有可降級的多根。</strong>越主權友好的根覆蓋越廣、越脆弱；越自托管的根越韌性、越窄門檻——這個梯度本身就是 MR-CivicProof 公式的必然延伸。
   formalCoda: |
     Final form:
       SRP:  ∀R ∈ ℛ_sov  [ I_R ∈ Adv(T_R) ]  ⇒  ¬(R ⊨ T_R)
