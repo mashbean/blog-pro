@@ -1,0 +1,236 @@
+slug: 2026-05-09-structural-slippage-prevention
+title: "身分基礎設施為什麼一定會擴張——以及如何預防"
+subtitle: "Structural Slippage Prevention — Argument Map (v2)"
+
+coreThesis:
+  text: |
+    身分基礎設施一旦建成，**在沒有反向制度壓力的條件下強傾向被擴展使用**（強傾向，可反轉）。擴張的弱必要條件是法律限制與技術綁定雙缺位（奧地利 sourcePIN 與德國 nPA 反例校正）。三個機制疊加產生強傾向：path dependency × infrastructure invisibility × institutional layering，三者都是機率語言而非邏輯必然。MVSR（Minimum Viable Slippage Resistance）四層條款在 *建設前* 寫入規格與法源，可顯著提升擴張的邊際成本：sunset + scope-bound + split-key + opt-out by design 跨層級互補，每個工具的失敗模式被另一個工具補位。EUDI ARF v1.4/1.5 與加州 AB1043 是兩個 prima facie 早期實證候選，但兩者上線時間 < 3 年，path dependency 時間常數 5–10 年——當前「沒滑坡」與「尚未滑坡」無法區分，仍待持續觀察。
+  summary: "Structural slippage is real but not necessary; it is a strong tendency, reversible under reverse institutional pressure. The MVSR four-layered combination (sunset + scope-bound + split-key + opt-out) raises the marginal cost of expansion. EUDI ARF and AB1043 provide prima facie evidence pending 5–10 year stress test."
+  formal:
+    expression: |
+      Strong_Tendency_Theorem (STT):
+        ∀ infra I :
+          P(I expands | ¬legal_clause(I) ∧ ¬technical_binding(I) ∧ ¬reverse_pressure)
+          ≈ 0.85 to 1.0     (empirical, 4 cases / 14–90 yrs)
+          where
+            legal_clause(I)      ::= sunset ∨ function_creep_prevention
+            technical_binding(I) ::= scope_bound ∨ sectoral_derivation
+            reverse_pressure     ∈ {constitutional_review, civic_movement,
+                                     cross_national_pressure, technical_affordance}
+
+      Weak_Necessary_Condition (WNC, 校正自 intake):
+        expansion(I) > threshold  ⇒  ¬legal_clause(I) ∧ ¬technical_binding(I)
+        (反例: Austria sourcePIN, German nPA — 任一存在足以顯著減緩擴張)
+
+      Three_Mechanism_Aggregate:
+        P(expand | ¬clause ∧ ¬binding) =
+            f( P_path_dependency, P_infra_invisibility, P_institutional_layering )
+        where each P ∈ probability_language  ¬⊨  logical_necessity
+        反向壓力 reverse_pressure ⇒ 三機制其一被中斷:
+          constitutional_review  ⇒  ¬path_lock        (例: Volkszählungsurteil 1983)
+          technical_affordance   ⇒  ¬invisibility      (例: Estonia X-Road audit log)
+          civic_movement +       ⇒  ¬layering          (例: UK ID Card 2010 廢除)
+          regime_change
+
+      MVSR_Layered_Defense:
+        expansion(I) ≤ threshold  ⇔  Layer₁ ∧ Layer₂ ∧ Layer₃  ∧  (Layer₄ recommended)
+        Layer₁: sunset_clauses           (法律層, automatic_lapse > periodic_review)
+        Layer₂: scope_bound              (密碼學層, SD-JWT VC + KB-JWT + audience claim)
+        Layer₃: split_key                (治理 + 密碼學, k-of-n threshold + cross-class shareholder)
+        Layer₄: opt_out_by_design        (法律 + UX + 工程三層交疊)
+        failure_mode(Layer_i)  absorbed_by  Layer_j        (i ≠ j)
+
+      Time_Window:
+        preset_clauses(I) viable        ⇔  pre_construction_phase(I)
+        post_construction_clauses(I)    ⇒  political_cost(t) ↗ exponential
+
+      Prima_Facie_Evidence_Limit:
+        ARF_v1.5, AB1043 ∈ candidate_evidence  ∧  uptime < 3yr
+        path_dependency_constant ≈ 5–10yr
+        ⇒  ¬distinguish( no_slippage, not_yet_slippage )
+
+    caption: "STT 描述強傾向但非必然；WNC 把擴張的弱必要條件校正為法律 + 技術雙缺位；MVSR 四層 layered defense 透過互補補位提升邊際成本；Time Window 強調建設前的政治機會窗口；Prima Facie 限定 EUDI ARF 與 AB1043 為候選證據而非已驗證有效。"
+    legend:
+      - symbol: I
+        meaning: 身分基礎設施（identity infrastructure，含 Aadhaar、SSN、eIDAS、nPA、sourcePIN、ARF wallet 等）
+      - symbol: legal_clause(I)
+        meaning: 法律層限制條款（sunset clause 或 function-creep prevention clause）
+      - symbol: technical_binding(I)
+        meaning: 技術層範圍綁定（scope-bound design 或 sectoral derivation）
+      - symbol: reverse_pressure
+        meaning: 反向制度壓力（憲法審查 / 強公民運動 / 跨國比較壓力 / 技術 affordance 結構性限制）
+      - symbol: P_path_dependency
+        meaning: 路徑依賴機制機率（Pierson 2004、North 1990）
+      - symbol: P_infra_invisibility
+        meaning: 基礎設施 invisible 化機制機率（Bowker–Star 1999、Edwards 2003、2010）
+      - symbol: P_institutional_layering
+        meaning: 制度疊層機制機率（Mahoney–Thelen 2010、Hacker 2004）
+      - symbol: Layer₁..₄
+        meaning: MVSR 四層條款（sunset / scope-bound / split-key / opt-out by design）
+      - symbol: failure_mode(Layer_i)
+        meaning: 該層工具的失敗模式（sunset 延期 / verifier 串謀 / de facto centralization / dark pattern）
+      - symbol: pre_construction_phase(I)
+        meaning: 規格制定階段（規範性文本 v1 發布前；ARF v1.5 仍在窗口內，Aadhaar 已過窗口）
+      - symbol: ⇔
+        meaning: 「當且僅當」
+      - symbol: ⊨
+        meaning: 「滿足」（模型滿足公式）
+
+transitions:
+  beforeDistinction: "公式給出立場，但要先區分兩種看待結構性滑坡的方式。多數政策論述把擴張視為「結構性必然 → 應該不建」（虛無主義誤讀）或「政治意志薄弱 → 加強監督」（個人主義誤讀），本地圖反對兩者；應視為「強傾向，可被反向制度壓力反轉」，由建設前條款顯著提升擴張的邊際成本。"
+  beforePillars: "區分本身只是宣告。要證明「滑坡是強傾向而非必然」這條路徑，需要五條獨立來源：四個歷史擴張案例（I 歸納）、奧地利 sourcePIN + 德國 nPA 兩個關鍵反例（歸納校正）、path dependency × infrastructure invisibility × institutional layering 三角推導（D 演繹 + C 因果）、四種跨層級預防工具的具體條款與失敗模式（I+A 實作）、EUDI ARF + AB1043 早期證據（Ab 溯因）。五者缺一，論證會被「但這只是少數案例」「但機制是必然」「但 sunset 會被延期」等典型反論一擊摧毀。"
+  beforeChain: "前面五條 pillar 是正向支撐。但「滑坡如何形成」這個主張需要一條具體的因果鏈頂住：從原始建設目的到擴張用途的演變鏈條。六步因果鏈展示這個機制如何形成，並在哪些節點可被 MVSR 條款打斷。"
+  beforeBorders: "立場 + 因果鏈成立後，反論才真的具威脅。「乾脆不建任何身分基礎設施」「sunset 在政治壓力下會被延期」「制度條款是 institutional theatre」三條反論常被引為理由；但仔細檢驗每條反論的證據強度，會發現它們不僅未支持「滑坡無法預防」，反而 flips to support layered defense——亦即反論自己的範圍限制，正好是地圖的第二層支撐。"
+  beforeConditions: "反論被吸收後，留下的是設計含意：在什麼條件下，預防條款能在 *建設前* 寫入並實際發揮作用？四件式 MVSR 推力 + 四種失敗模式互補補位 + 建設前時間窗口三維約束，把抽象的「預防滑坡」翻譯成可被檢驗的工程與政策義務。"
+  beforeConclusion: "把歷史案例、機制推導、預防工具、早期證據、反論回應五層收束起來，地圖最終要說的是滑坡的政治經濟性質——以及一條跨越所有層級的設計原則：寫入時機決定條款效力，建設前的政治機會窗口以月為單位、以政治情勢為單位關閉，不會等待學術研究完成。"
+
+distinction:
+  rejected:
+    label: ❌ 被拒絕
+    title: 「結構性必然 → 不建身分基礎設施」 / 「政治意志薄弱 → 加強監督」
+    body: "兩個誤讀都拒絕。第一個誤讀把擴張寫成結構性必然——既然 Aadhaar、SSN、eIDAS 都滑坡，任何中心化身分基礎設施一旦建成都會擴張，制度設計工具只是延遲滑坡的安慰劑。這個誤讀的政策結論是放棄治療。第二個誤讀把擴張寫成政治意志薄弱——如果立法者更謹慎、行政官僚更節制、公民社會更警覺，滑坡就不會發生。這個誤讀把結構問題降格為個人問題，等於說滑坡是道德缺陷而非制度設計失誤。德國 *Volkszählungsurteil* 1983、英國 ID Card 廢除 2010、美國 CAB 廢除 1985、愛沙尼亞 X-Road 維持限定範圍，這四個反例同時否證「結構性必然」與「個人意志主導」兩個極端立場。"
+    formal: "(expansion(I) ⊨ logical_necessity)  ⇒  no_prevention_possible       (rejected; reverse_pressure cases falsify)\n(expansion(I) ⊨ political_will_failure) ⇒  individualist_remedy_only   (rejected; structural mechanisms exist independently)"
+  accepted:
+    label: ✓ 被辯護
+    title: 「強傾向 + 可被反向制度壓力反轉，建設前 MVSR 四層條款顯著提升邊際成本」
+    body: "結構性滑坡是真實的（path dependency × infrastructure invisibility × institutional layering 三角機制疊加產生強傾向），但不是邏輯必然——三個機制都是機率語言。反向制度壓力（憲法審查、強公民運動、跨國比較壓力、技術 affordance 結構性限制）能在多個歷史案例中反轉滑坡。預防的真實工具是建設前的結構性條款：MVSR 四層（sunset + scope-bound + split-key + opt-out by design）跨層級互補，每個工具的失敗模式被另一個工具補位。EUDI ARF v1.4/1.5 與加州 AB1043 是兩個 prima facie 早期實證候選，但需 5–10 年滑坡壓力測試才能宣稱已驗證有效。"
+    formal: "(STT_strong_tendency) ∧ (WNC_dual_absence) ∧ (MVSR_layered_defense) ∧ (Prima_Facie_evidence_limit) ⇒ slippage(I) ≤ threshold   (under pre-construction-phase deployment)"
+
+pillars:
+  - section: §2 — 四個歷史擴張案例
+    title: Aadhaar / SSN / eIDAS / 中國 real-name 的擴張軌跡
+    role: "提供歸納實證根據——若沒有可信的歷史案例對照，「滑坡是真實機制」是空洞主張。本 pillar 把四個大尺度國家身分基礎設施的擴張時間表展開，明確區分制度層 vs 實踐層，避免把實踐層證據誤當成制度層擴張的證明。"
+    body: "Aadhaar 2009 啟動於福利遞送 → 2011 PDS → 2013 銀行 KYC → 2017 PAN/SIM → 2021–2026 投票名冊 / NPR / CAA 配套（*Puttaswamy II* 2018 部分撤銷 SIM 強制）。SSN 1936 稅務識別 → 1943 軍方 → 1961 IRS TIN → 1965 Medicare → 1976 駕照 → 1990s 信用評分 / 雇主背景查核（90 年滑坡，*Database Nation* 描述為 de facto national identifier）。eIDAS 1.0（2014 電子簽章）→ 2.0（2024 wallet + PID + QEAA）→ 討論中 KYC / 年齡驗證 / 交通票證（10 年規範性文本擴張，每波經正式立法但實際反對窗口被結構性壓縮）。中國 real-name 2012 網絡備案 → 2014–2018 即時通訊 + 微博 + 電商 → 2020+ 行動支付 + 健康碼 + 線上醫療 → 2024 AI 生成內容（rolling implementation，60+ 部委級規範性文件，半數無立法層審議）。"
+    finding: "四案例共同模式：建設階段法源無功能限制條款 + 無技術範圍綁定 → 5–15 年內擴張到原始法源未授權的新用途。各案例擴張機制略異（Aadhaar 行政命令、SSN 跨機關慣例、eIDAS 規範性文本、中國部委級命令），但共同條件高度一致。"
+    formal: "∀ I ∈ {Aadhaar, SSN, eIDAS, China_realname}: ¬legal_clause(I) ∧ ¬technical_binding(I)  ∧  expansion(I, t≥10yr) ≫ original_scope(I)"
+
+  - section: §3 — 兩個關鍵反例與校正歸納
+    title: 奧地利 sourcePIN（無法律有技術）+ 德國 nPA（有法律無技術）
+    role: "提供歸納校正根據——若不引入反例，「未寫條款 → 滑坡」會被反例直接推翻。Austria sourcePIN 部署 22 年無顯著擴張（無法律限制但 sectoral derivation 密碼學綁定承擔限制條款角色）；德國 nPA 部署 16 年三次擴張（有 PAuswG §18-19 限制但技術可重配置使 BVA 行政層慢慢掏空）。兩反例共同支持校正版本：法律 + 技術雙缺位是擴張的弱必要條件，任一存在足以顯著減緩。"
+    body: "Austria sourcePIN（*E-Government Act* 2004 §6）：sourcePIN 永不以原始形式向 verifier 揭露，每個使用情境（稅務、健保、私部門 KYC）獲得 sectoral PIN (ssPIN)，由 sourcePIN 透過 symmetric cryptographic derivation 產生；不同 sector 的 ssPIN 在密碼學上無法相互重組（Hörbe & Hörbst 2008）。22 年部署使用範圍維持原始設計 sector 內，無 Aadhaar 式跨領域 layering、無 SSN 式通用識別符化。德國 nPA（*PAuswG* 2010 §18-19）：function-restricted reading + Berechtigungszertifikat 授權 + pseudonym 預設模式；但核心晶片支援多 application，BVA 授權範圍可由行政命令調整；OZG 2017 推動下 BVA 逐步擴大授權清單（2014、2017、2021 三次擴張）；CCC 與 Stiftung Datenschutz 批評 BVA 實質承擔半立法者角色。"
+    finding: "校正歸納：「未寫入功能限制條款 *且* 未做技術綁定」是大尺度國家身分基礎設施擴張的弱必要條件。法律條款 與 技術綁定 *互為補位*。"
+    formal: "WNC: expansion(I) > threshold ⇒ ¬legal_clause(I) ∧ ¬technical_binding(I)\nAustria: ¬legal_clause(I) ∧ technical_binding(I) ⇒ expansion ≤ threshold\nGermany_nPA: legal_clause(I) ∧ ¬technical_binding(I) ⇒ slow_erosion (不顯著擴張，但鬆動軌跡可見)"
+
+  - section: §4 — 三角因果機制
+    title: Path Dependency × Infrastructure Invisibility × Institutional Layering（機率疊加，非邏輯必然）
+    role: "提供因果根據——若不解釋「為何擴張會發生」，論證停留在描述層。三個機制疊加：(a) Pierson / North path dependency（increasing returns 鎖定）、(b) Bowker–Star / Edwards infrastructure invisibility（穩定後從公共審議退出）、(c) Mahoney–Thelen / Hacker institutional layering（drift / layering / conversion 三形式）。三機制都是機率語言；疊加只能推到「強傾向」，不能推到「邏輯必然」。"
+    body: "Path dependency 四微觀基礎（Pierson 2000）：increasing returns to adoption + learning effects + coordination effects + adaptive expectations。身分基礎設施滿足程度極高（Aadhaar 13 億人 CIDR 累積；各部會學習投資沉沒；PDS / 銀行 / 稅務 API 接入完成；公民與行政官僚預期持續存在）。Infrastructure invisibility（Bowker–Star 1999、Star 1999、Edwards 2003、2010）：基礎設施運作穩定後 invisible 化，存在被視為自然事實而非政治選擇，新擴張被框定為技術整合而非政治選擇。SSN 的 90 年 invisibility 軌跡尤其極端。Institutional layering（Mahoney–Thelen 2010、Hacker 2004）：新政策需求傾向 layered onto 既有制度，重建需 supermajority 而疊層只需邊際多數；SSN / Aadhaar 每一波擴張都是 layering 而非 revision。**修訂收斂**：三個機制都是機率，疊加只能推到高機率而非邏輯必然。反例：德國 *Volkszählungsurteil* 1983（憲法審查打斷 path dependency）、愛沙尼亞 X-Road（cryptographic logging 使 infra 不 invisible 化）、英國 ID Card 廢除 2010（強公民運動 + 政權更替反轉 layering）、美國 CAB 廢除 1985（產業壓力 + 跨黨派共識使制度層減範圍）。"
+    finding: "三機制疊加產生「強傾向」而非「邏輯必然」；反向制度壓力出現時可反轉滑坡；北歐 displacement 在某些政治文化取代 layering 形式但 *不* 取代擴張結果（瑞典 personnummer 軌跡），制度設計形式與擴張結果不是一一對應。"
+    formal: "P(expand | ¬clause ∧ ¬binding) = f(P_path, P_invisible, P_layering)\n∀ P_i ∈ probability_language: P_i ¬⊨ logical_necessity\nreverse_pressure ⇒ ∃ i: P_i interrupted (case-specific: constitutional_review ⇒ ¬path_lock; technical_affordance ⇒ ¬invisibility; civic_movement+regime_change ⇒ ¬layering)"
+
+  - section: §5 — 四種跨層級預防工具
+    title: Sunset + Scope-Bound + Split-Key + Opt-Out by Design（MVSR 三件套 + 補強）
+    role: "提供實作根據——若不展示具體可實施的條款，「跨層級組合」是抽象主張。把 4 工具寫成可被立法者直接抄錄、可被 W3C / IETF / EUDI ARF 直接寫進附錄、可被 cryptography 實作者直接編進 reference implementation 的具體條款；同時誠實列出每個工具的失敗模式，由其他工具補位。"
+    body: "(a) **Sunset clauses（法律層）**：澳洲 *Legislation Act 2003* §50A 範本，*automatic lapse* 而非 *periodic review*（Schoenmaker–Wierts、Davis 2017 跨領域存活率資料）；強制 *Sunset Audit Report* 義務。失敗模式：政治壓力延期（PATRIOT Act §215 多次延期史）。(b) **Scope-bound（密碼學層）**：IETF SD-JWT VC + KB-JWT + audience claim + selective disclosure（W3C VCDM 2.0 + EUDI ARF v1.4/1.5 + AB1043 §22585(b)）。失敗模式：verifier 串謀重組屬性（Ohm 2010 broken anonymization）；wallet-side aggregation control 反制方案研究中。(c) **Split-key（治理 + 密碼學層）**：(k=4, n=7) Pedersen VSS + BLS threshold（Shamir 1979 / Pedersen 1991 / BLS 2001 / FROST 2020）；shareholder 跨主管機關、稽核機關、立法機關、公民社會、學術、互認機關、廠商七類；shareholder 替換閾值高於日常閾值。失敗模式：de facto centralization（Parity / Multichain / Ronin DAO governance post-mortem）。(d) **Opt-out by design（法律 + UX + 工程三層）**：CCPA §1798.135 + GDPR Art. 17 right to erasure；對稱性原則（撤回難度不得高於註冊）；GPC 訊號支援；log retention 上限 + differential privacy + backup 自動到期。失敗模式（最嚴重）：dark pattern（Mathur et al. 2019）+ residual log + derived analytics 不徹底（Netflix re-identification、Narayanan–Shmatikov 2008）。"
+    finding: "MVSR 第 1 層（sunset + scope-bound + split-key 三件套）必做，第 2 層（opt-out）強烈建議，第 3 層（憲法保障）理想條件。每個工具都有失敗模式；組合使用使每個失敗模式被另一個工具補位。Opt-out 是 4 工具中最弱的，但仍是公民最後議價籌碼。"
+    formal: "MVSR_optimal: Layer₁ ∧ Layer₂ ∧ Layer₃  ∧  recommended(Layer₄)\nfailure(Layer₁_sunset_extended) absorbed_by Layer₂ ∧ Layer₃  (即使 sunset 延期，scope-bound + split-key 阻止功能擴張)\nfailure(Layer₂_verifier_collusion) absorbed_by Layer₄  (公民可退出特定 verifier)\nfailure(Layer₃_de_facto_centralization) absorbed_by Layer₁  (sunset 強制週期性重新審議集中化合法性)\nfailure(Layer₄_dark_pattern) absorbed_by Layer₁ ∧ Layer₂ ∧ Layer₃  (其他三層阻止資料進入 derived analytics)"
+
+  - section: §6 — EUDI ARF + AB1043 prima facie 早期證據
+    title: 規範性文本層級的高度一致性（待 5–10 年壓力測試）
+    role: "提供溯因根據——若不評估早期實證候選，「預防工具有效」是基於反向推論的主張。EUDI ARF v1.4/v1.5 採納 minimum disclosure / unobservability / no phone home / scope binding 四項條款；加州 AB 1043 §22585(b) 建立 attribute-bounded 模式 + §22585(e) liability shift。兩者上線時間 < 3 年，path dependency 時間常數 5–10 年——當前無法區分「沒滑坡」與「尚未滑坡」。"
+    body: "EUDI ARF v1.4/v1.5（*Regulation (EU) 2024/1183* 配套）：§4–§6 minimum disclosure + unobservability + no phone home + scope binding；EDPB & EDPS *Joint Opinion 2/2023* 部分建議被採納（unlinkability、minimum disclosure 寫入）部分未採納（pairwise pseudonym 強制使用未明確要求）。AB 1043（2023, *Cal. Civ. Code* §22585）：§22585(b) 年齡驗證系統只能傳遞單一布林訊號（年齡 ≥ X），禁止傳遞具體年齡 / 生日 / 其他屬性；§22585(e) liability shift 把超範圍責任轉移到 verifier；配套 §1798.135 CCPA opt-out + GPC 訊號 + §1798.140 嚴格 de-identified 邊界。**證據限度**：(1) 時間常數限制（< 3 年 vs 5–10 年）；(2) 未經滑坡壓力測試（政權更迭 / 國安事件 / 跨境危機）；(3) 規範性文本 vs 執行行為的層級跳躍（德國 nPA 顯示文本可在執行層慢慢掏空）；(4) 樣本量限制（兩案例無法跨國跨領域歸納）。"
+    finding: "Prima facie 結論：現有早期證據尚未否證 H1 預防工具假設，且 ARF 與 AB1043 條款在規範性層級展現了與滑坡防制學說的高度一致性——這對「應該寫入」的政策建議提供合理候選依據，但對「已驗證有效」不提供任何宣稱。需持續觀察 ARF Implementing Acts、加州 AB 1043 第一次實質執法、EU 成員國本地實作差異、跨境互認最弱環節四個關鍵節點。"
+    formal: "ARF_v1.5 ⊨ {minimum_disclosure, unobservability, no_phone_home, scope_binding}\nAB1043 §22585(b) ⊨ attribute_bounded ∧ §22585(e) ⊨ liability_shift\nbut: uptime < 3yr  ∧  path_constant ≈ 5–10yr  ⇒  ¬falsified(H1) ∧ ¬verified(H1)\nstatus: prima_facie_support  (待持續觀察)"
+
+chain:
+  title: 滑坡形成的六步因果鏈：從原始建設目的到擴張用途
+  legend:
+    - kind: deterministic
+      label: 機制必然（結構性，不依賴外部 trigger）
+    - kind: probabilistic
+      label: 概率性（依賴政策選擇 + 反向制度壓力是否出現）
+  steps:
+    - tag: T0
+      kind: deterministic
+      text: "身分基礎設施在原始有限目的下建成（Aadhaar 福利遞送 / SSN 稅務 / eIDAS 電子簽章 / 中國 real-name 網絡備案）"
+    - tag: T1
+      kind: deterministic
+      text: "Increasing returns 鎖定 path dependency：CIDR / 號碼系統 / trust list / 用戶資料庫累積，新建替代品的邊際成本指數上升"
+    - tag: T2
+      kind: deterministic
+      text: "制度穩定後 invisible 化：基礎設施被視為自然事實而非政治選擇，公共審議觸發機制失效（SSN 90 年 invisibility / Aadhaar 5 年 invisibility）"
+    - tag: T3
+      kind: probabilistic
+      text: "新政策需求 layered onto 既有系統：drift / layering / conversion 三形式之一發生（SIM 強制連結、Medicare 識別、wallet 範疇擴張、健康碼），疊層只需邊際多數"
+    - tag: T4
+      kind: probabilistic
+      text: "若法律或技術綁定缺位，擴張通道放大：法律條款 + 技術綁定任一存在足以顯著減緩（奧地利 sourcePIN、德國 nPA 部分），雙缺位產生強擴張壓力"
+    - tag: T5
+      kind: probabilistic
+      text: "反向制度壓力出現時可反轉：憲法審查打斷 path lock（*Volkszählungsurteil*）/ 技術 affordance 拒絕 invisibility（X-Road audit log）/ 公民運動 + 政權更替反轉 layering（UK ID Card 廢除）"
+
+borders:
+  - label: 反論 1
+    title: 虛無主義（既然滑坡會發生，乾脆不建身分基礎設施）
+    pivot: "反論訴求是「任何中心化身分基礎設施一旦建成都會擴張，制度設計工具是延遲滑坡的安慰劑；理性結論為完全不建，由 SSI / ZKP 取代」。最強支持者：cypherpunk 傳統（May 1992、Hughes 1993）、anarcho-capitalist（Friedman 1989）、後 Snowden 徹底懷疑論（Greenwald 2014、Lyon 2014）。但反事實情境檢驗：若 G20 從 2026 起停止任何中心化身分基礎設施新建，World Bank Findex 2021 估計的 14 億 unbanked 成人因驗證困難擴大 2–4 億；跨境就業法遵成本上升 30–50%；美國 Federal Reserve 估計合成身分詐騙年成本（2020 約 200 億美元）數倍增長；私部門替代（Apple ID / Mastercard ID / 平台帳號）填補空缺但治理品質低於民主國家系統。"
+    flip: "「不建」反論不僅未支持「無預防可能」，反而給「不建有具體規範代價」提供最強論證——Anderson 的 *Private Government* 顯示「不建」把治理成本轉嫁給最弱勢；Habermas 的 *Between Facts and Norms* 顯示基礎設施作為公共善的規範論證；SSI / ZKP 在低端 Android 裝置 ZKP 計算時間 5–30 秒不穩定、BBS+ issuer 端計算成本仍高於傳統 PKI、分散式 trust anchor key recovery 問題。「應該不應該建」的問題已被公民社會真實需求回答；剩下的問題是「應該怎麼建」。"
+  - label: 反論 2
+    title: Public Choice 對 Sunset 的批評（PATRIOT Act §215 證明 sunset 會被延期）
+    pivot: "反論訴求是「sunset clauses 在政治壓力下會被延期，PATRIOT Act §215 是經典反例；行政官僚有強烈動機尋租維繫權力（Niskanen 1971）；遊說團體耗散制度約束（Olson 1965）；立法者本身有延期動機（Buchanan & Tullock 1962）」。最精密版本提出 *category mistake* 命題：sunset 是 *institutional theatre*，真正起作用的是政權更替 / 司法審查 / 公民運動。但跨領域實證資料：澳洲 *Legislation Act 2003* §50A 的 sunset 38% 自動失效率（Davis 2017）；金融監管 sunset *automatic lapse* 失效率顯著高於 *periodic review*（Schoenmaker–Wierts 2011）；真實 sunset 廢除案例（美國 *Independent Counsel Act* 1999、澳洲 control orders 部分失效、加拿大 Anti-terrorism Act 2007）。"
+    flip: "「sunset 會被延期」反論不僅未支持「institutional theatre」，反而給「sunset + 配套 layered defense」提供最強論證——當 sunset 與 scope-bound + split-key 組合時，即使延期通過、功能也無法擴張；*Independent Counsel Act* 1999 失效正是配套責任條款支撐的結果。「會被延期」也不等於「無效」，延期過程本身製造公共討論窗口、增加邊際成本（PATRIOT Act §215 的多次延期都伴隨 ACLU/EFF 反對運動，2015 *USA Freedom Act* 局部修訂收回了 bulk metadata collection 部分權力）。完整失效率 + 部分修訂率 + 邊際抑制效果合計，sunset 的政治經濟效果遠高於「全失效」的兩端比較。"
+  - label: 反論 3
+    title: EUDI ARF 與 AB1043 太新，無法支持任何結論
+    pivot: "反論訴求是「兩案例上線 < 3 年，path dependency 時間常數 5–10 年；當前的『沒滑坡』與『尚未滑坡』無法區分；用 prima facie 證據支持政策建議是過早結論」。這是嚴肅的方法論批評，本文必須誠實面對。但證據限度的承認 *本身* 不否定 prima facie 證據的政策意義：(1) 規範性文本層級的條款設計高度一致於滑坡防制學說，這是獨立於上線時間的論證；(2) ARF + AB1043 的條款結構正是基於前面四個歷史案例（Aadhaar / SSN / eIDAS / 中國 real-name）的反向推論；(3) 政策建議的對象是 *正在規劃中* 的身分基礎設施（台灣 DIW、UK OSA secondary legislation、加州 OpenCred 等），不是已建系統。"
+    flip: "「樣本量太少」反論不僅未支持「政策建議過早」，反而給「需要持續觀察 + 同時寫入新基礎設施」提供論證——若必須等 5–10 年才能確認預防工具有效，那段時間正在規劃中的所有身分基礎設施都會錯過建設前的時間窗口。理性的政策決策需要在不完美證據下做出，prima facie 證據 + 反向因果論證 + 跨層級互補設計合計，足以支持「在新基礎設施寫入 MVSR 條款」的政策建議，同時保留「持續觀察並準備修訂」的學術紀律。"
+
+conditions:
+  title: MVSR 預防條款的合法部署，必須通過四件式 layered defense + 四種失敗模式互補補位 + 建設前時間窗口三維約束
+  formalPrelude: "deploy(MVSR, I) viable ⇔ (Layer₁ ∧ Layer₂ ∧ Layer₃) ∧ recommended(Layer₄) ∧ ⋀_{i,j} absorb(failure_mode(Layer_i), Layer_j) ∧ pre_construction_phase(I)"
+  items:
+    - title: Layer 1 — Sunset clauses（法律層）
+      body: "5–7 年 automatic lapse（非 periodic review），舉證責任分配給延續方；強制 *Sunset Audit Report* 提交立法層；澳洲 *Legislation Act 2003* §50A 提供範本。失敗模式：政治壓力延期（PATRIOT §215）。"
+      formal: "Layer₁: sunset_period ∈ [5, 7]yr ∧ automatic_lapse ∧ audit_report_required"
+    - title: Layer 2 — Scope-bound infrastructure（密碼學 + 標準層）
+      body: "強制 SD-JWT VC + KB-JWT + audience claim + selective disclosure；EUDI ARF v1.4/v1.5 + AB 1043 §22585(b) 提供條款範本；違反者 verifier 不得接收。失敗模式：verifier 串謀重組（Ohm 2010）。"
+      formal: "Layer₂: ∀ credential c: c ⊨ (SD_JWT_VC ∧ KB_JWT ∧ audience_claim ∧ selective_disclosure)"
+    - title: Layer 3 — Split-key governance（治理 + 密碼學層）
+      body: "(k=4, n=7) Pedersen VSS + BLS threshold；shareholder 跨主管機關、稽核機關、立法機關、公民社會、學術、互認機關、廠商七類；shareholder 替換閾值高於日常閾值。失敗模式：de facto centralization（Parity / Multichain / Ronin）。"
+      formal: "Layer₃: issuer_key ⊨ (k, n) Pedersen_VSS ∧ shareholder_class ∈ 7_categories ∧ replacement_threshold > daily_threshold"
+    - title: Layer 4 — Opt-out by design（法律 + UX + 工程三層）
+      body: "個資法明示退出權（CCPA §1798.135 + GDPR Art. 17 範本）；對稱性原則（撤回難度不得高於註冊）；GPC 訊號支援；log retention 上限 + differential privacy + backup 自動到期。失敗模式（最嚴重）：dark pattern + residual log（Mathur 2019、Netflix re-id）。"
+      formal: "Layer₄: opt_out ⊨ (legal_right ∧ symmetry ∧ GPC_signal ∧ log_retention_limit ∧ DP_processing ∧ backup_auto_expiry)"
+    - title: Failure-mode 互補補位
+      body: "Layer₁ 延期 → Layer₂ + Layer₃ 阻止功能擴張；Layer₂ verifier 串謀 → Layer₄ 公民退出特定 verifier；Layer₃ centralization → Layer₁ sunset 週期性審議；Layer₄ dark pattern → Layer₁+Layer₂+Layer₃ 阻止資料進入 derived analytics。每個失敗模式都有對應補位機制。"
+      formal: "∀ Layer_i, ∃ Layer_j (i ≠ j): absorb(failure_mode(Layer_i), Layer_j)"
+    - title: Time Window — 建設前的政治機會窗口
+      body: "MVSR 條款必須在規格制定階段寫入；post-construction 補條款的政治成本指數上升（德國 nPA 部署後補條款幾乎不可能；SSN 90 年仍無法完整收回擴張範圍；Aadhaar *Puttaswamy II* 法院只能事後減縮無法重設條款）。當前窗口：EUDI ARF v1.5 + Implementing Acts、台灣數位憑證皮夾試點、加州 AB 1043 secondary、UK OSA secondary。"
+      formal: "preset_clauses(I) viable ⇔ pre_construction_phase(I) ∧ ¬path_dependency_lock(I)\npost_construction_clauses(I) ⇒ political_cost(t) ↗ exponential"
+
+conclusion:
+  paragraphs:
+    - <strong>結構性滑坡是強傾向，不是邏輯必然。</strong> Path dependency × infrastructure invisibility × institutional layering 三角機制疊加產生擴張的高機率，但三機制都是機率語言；反向制度壓力（憲法審查 / 強公民運動 / 跨國比較壓力 / 技術 affordance 結構性限制）能在多個歷史案例中反轉滑坡。Aadhaar、SSN、eIDAS、中國 real-name 四個高擴張案例與奧地利 sourcePIN（無法律但有技術綁定）、德國 nPA（有法律但無技術綁定）、德國 *Volkszählungsurteil* 1983、愛沙尼亞 X-Road、英國 ID Card 廢除、美國 CAB 廢除六個反例同時否證「結構性必然」與「政治意志薄弱」兩個極端誤讀。
+    - 辯論應從<em>「滑坡是必然 vs 偶然」</em>轉向<em>「條款寫入時機與層級組合」</em>。MVSR 四層 layered defense（sunset + scope-bound + split-key + opt-out by design）在建設前寫入，可顯著提升擴張的邊際成本；每個工具的失敗模式被另一個工具補位（sunset 延期 → scope-bound + split-key；verifier 串謀 → opt-out；centralization → sunset；dark pattern → 前三層）。EUDI ARF v1.4/v1.5 與加州 AB 1043 是兩個 prima facie 早期實證候選，但需 5–10 年滑坡壓力測試才能宣稱已驗證有效。
+    - 一條跨層級原則貫穿全文：<strong>寫入時機決定條款效力，建設前的政治機會窗口以月為單位、以政治情勢為單位關閉，不會等待學術研究完成。</strong>本文延續 article 06「civic burden 重新分配」、article 07「passport-rooted paradox」與 article 11「wallet 作為 essential facility」對「結構性條件 vs 個人意志」的判斷模式，把同樣分析延伸到滑坡的因果機制與預防制度設計；與 article 09「BankID 北歐商業壟斷」、article 12「no-phone-home engineering economics」形成跨文章的耦合論證——基礎設施的政治經濟性質在每個議題上重複出現。把滑坡的政治還給政治，需要的不是更多警告，是把警告轉成具體可寫入規格的條款。
+  formalCoda: |
+    Final form:
+
+      Strong_Tendency_Theorem (STT):
+        ∀ I : P(I expands | ¬legal ∧ ¬binding ∧ ¬reverse_pressure)
+              ≈ 0.85 to 1.0  (4 cases / 14–90 yrs empirical)
+
+      Weak_Necessary_Condition (WNC, 校正自 intake):
+        expansion(I) > threshold ⇒ ¬legal_clause(I) ∧ ¬technical_binding(I)
+
+      Three_Mechanism_Aggregate:
+        P(expand | ¬clause ∧ ¬binding) = f(P_path, P_invisible, P_layering)
+        ∀ P_i ∈ probability_language ¬⊨ logical_necessity
+
+      MVSR_Layered_Defense:
+        slippage ≤ threshold ⇔ Layer₁ ∧ Layer₂ ∧ Layer₃ ∧ recommended(Layer₄)
+        ∀ Layer_i ∃ Layer_j (i ≠ j): absorb(failure_mode(Layer_i), Layer_j)
+
+      Time_Window:
+        preset_clauses(I) viable ⇔ pre_construction_phase(I)
+        post_construction_clauses(I) ⇒ political_cost(t) ↗ exponential
+
+      Prima_Facie_Evidence_Limit:
+        ARF_v1.5, AB1043 ∈ candidate_evidence ∧ uptime < 3yr
+        path_constant ≈ 5–10yr ⇒ ¬distinguish(no_slip, not_yet_slip)
+        status: prima_facie_support, 待 5–10 年壓力測試
+
+    Cross-article coupling:
+      article_06.civic_burden     ← 滑坡擴大 civic burden 不對稱重分配
+      article_07.SRP              ← 主權容器內 ID 的滑坡形成路徑
+      article_09.NCT_BankID       ← 商業壟斷下的特殊滑坡形態
+      article_11.essential_fac    ← wallet 滑坡的市場結構支撐
+      article_12.IDT              ← phone-home 是滑坡的工程化通道
