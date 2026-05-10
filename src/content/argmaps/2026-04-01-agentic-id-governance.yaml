@@ -1,0 +1,223 @@
+slug: 2026-04-01-agentic-id-governance
+title: 誰來治理 AI 代理人的身分？
+subtitle: Agentic Identity Governance — Argument Map (v2, retrofit R1)
+
+# ─────────────────────────────────────────────────────────────
+# Central Thesis + Formal block
+# ─────────────────────────────────────────────────────────────
+coreThesis:
+  text: |
+    AI 代理人身分治理需要從 DNS 治理 25 年經驗中提取四項可移植的制度元素：可執行的權力分配、可訴諸的救濟機制、可持續的財務模型、可被外部審視的透明度。但 DNS 組織形式不可整套移植，因為代理人身分涉及資安、消費者保護、勞動、金融、醫療等跨部門法律體系。三個設計原則為治理架構的支柱：問責必須被嵌入架構（program code-as-law + responsibility-by-design）、正當性需要有結構保障的多方代表性（Allen 五錨點）、治理必須回應委任鏈與分散式道德的現實（Floridi distributed morality）。本文為 article 16（civic-ai-agent-delegation-limits）的 enterprise / institutional 補集，提供 Ch9.1 主稿素材。
+  summary: AI agent identity governance must extract four portable institutional elements from 25 years of DNS governance, anchored by three design principles addressing accountability, multistakeholder legitimacy, and distributed moral responsibility.
+  formal:
+    expression: |
+      Governance(agentic_id) ⊨ ⟨P_acc, P_legit, P_dist⟩
+
+      Inherit_from_DNS = ⟨executable_power, recourse, financial_sustainability, transparency⟩  ⊆  applicable(agentic_id)
+      ¬Inherit(organizational_form_DNS, agentic_id)   (cross-sector legal regime mismatch)
+      P_acc: code-as-law ∧ responsibility-by-design ∧ Strom(accountability_reverse_delegation)
+      P_legit: Allen_five_anchors ∧ Flanagan_who_pays
+      P_dist: Floridi(distributed_morality) ∧ Elish(moral_crumple_zone) ∧ Tomasev(5_components)
+    caption: 代理人身分治理 Governance 由三項設計原則合取構成。從 DNS 治理只繼承四項制度元素（可執行權力 + 救濟 + 財務模型 + 透明度），不繼承組織形式。三原則為問責嵌入架構（P_acc）、結構性多方正當性（P_legit）、分散式道德與委任鏈治理（P_dist）。
+    legend:
+      - symbol: Governance(agentic_id)
+        meaning: AI 代理人身分治理框架
+      - symbol: P_acc
+        meaning: 問責原則（code-as-law + responsibility-by-design + 反向問責）
+      - symbol: P_legit
+        meaning: 正當性原則（多方代表性結構保障 + 永續財務）
+      - symbol: P_dist
+        meaning: 分散式道德原則（道德緩衝區 + 委任鏈五要素）
+      - symbol: Inherit_from_DNS
+        meaning: 從 DNS 治理可移植的四項制度元素
+      - symbol: ⊨
+        meaning: 「滿足 / 蘊含」
+      - symbol: ⊆
+        meaning: 子集
+      - symbol: ∧
+        meaning: 合取（同時成立）
+      - symbol: ¬
+        meaning: 否定
+
+# ─────────────────────────────────────────────────────────────
+# Transitions (區塊之間的接連描述)
+# ─────────────────────────────────────────────────────────────
+transitions:
+  beforeDistinction: |
+    公式給出立場，下一步要把常見誤讀拉開。代理人身分治理的論述常被簡化為「技術標準完備即可」；只要 OpenID GAS、DIF、IETF WIMSE 各自推進的協定能整合，治理問題就解決。但這個技術主義立場遮蔽了制度設計的核心——技術標準處理身分驗證，治理處理權力分配、救濟管道、責任歸屬，兩者範疇不同。地圖第一動作把「技術標準完備即可」與「制度設計 + 技術標準雙軌」這兩個分類拉開。
+
+  beforePillars: |
+    區分本身只是宣告。要證明「制度設計 + 技術標準雙軌」成立，需要五條獨立來源的支撐。類比面從 DNS/ICANN 25 年治理經驗提取可移植制度元素；理論面從委託人-代理人框架（Jensen-Meckling + Strom + Kolt）建立代理問題的分析骨幹；哲學面從責任歸屬與分散式道德處理多手問題；經驗面從全球數位身分案例（DigiNotar / Let's Encrypt / Estonia / Aadhaar / UK Verify / NIIMS）反推制度條件；演化面把人類數位身分與 AI 代理人身分兩條軌跡對照，揭示權力重新分配的可預測張力。五條 pillar 對應五個論證類型。
+
+  beforeChain: |
+    pillars 是正向論證。Aadhaar 案例提供一條從「2009 設計強制連結」到「2024 累積排除致死」的具體因果鏈，前段是規範必然（強制連結 + 行政正當性失敗），後段是概率事件（排除錯誤 20% + Jharkhand 飢餓死亡）。把鏈條展開的目的是把抽象的「制度條件不足」翻譯成可被機制性追溯的事件序列。
+
+  beforeBorders: |
+    立場 + 因果鏈成立後，反論才真的具威脅。Mueller 的管制俘獲反論主張 ICANN 模式本身有結構性偏誤；Hofmann 的程序崇拜反論主張多方治理可能淪為形式化；商業平台鎖定反論主張平台主導不可避免。仔細檢驗每條反論的實證強度，會發現它們不僅未推翻地圖立場，反而 flip to support 三項設計原則——亦即反論自己的證據結構，正好是地圖的第二層支撐。
+
+  beforeConditions: |
+    反論被吸收後，留下的是設計含意。在什麼條件下，「制度設計 + 技術標準雙軌」可以被視為合法的政策路徑？六道條件把抽象的三個設計原則翻譯成可被檢驗的工程或制度義務，填入核心公式的 P_acc / P_legit / P_dist。
+
+  beforeConclusion: |
+    把規範、類比、理論、哲學、案例、演化、設計原則六層收束起來，地圖最終要說的是政治經濟層的成就（治理品質取決於信任赤字時代的刻意建構，而非自然演化）以及一條跨越所有層級的不對稱原則——AI 代理人身分治理品質的上限，由我們刻意設計的制度承接力決定，而非由技術標準的成熟度決定。
+
+# ─────────────────────────────────────────────────────────────
+# Foundational Distinction
+# ─────────────────────────────────────────────────────────────
+distinction:
+  rejected:
+    label: ❌ 被拒絕
+    title: 技術標準完備即可（technology determinism）
+    body: |
+      把代理人身分治理化約為技術標準整合。OpenID GAS、DIF、IETF WIMSE、W3C AI agent identity 各自推進的協定一旦匯流，治理問題就自動解決。這個立場預設「制度會跟著技術走」，但歷史經驗顯示反向——技術標準的採用率受到制度授權、商業誘因、公民信任的形塑。30 個開源 AI 代理人專案的審計顯示 93% 仍依賴環境變數 API 金鑰，技術標準的存在並未自動推動採用；DigiNotar 事件顯示單一憑證機構失守即可瓦解整個信任體系，技術完備性無法防範制度缺陷。
+    formal: "Governance(agentic_id) ⇐ technical_standards   （把治理化約為技術整合）"
+  accepted:
+    label: ✓ 被辯護
+    title: 制度設計 + 技術標準雙軌
+    body: |
+      代理人身分治理需要技術標準與制度設計同步推進。技術標準處理身分驗證、權限管理、稽核紀錄；制度設計處理權力分配、救濟管道、責任歸屬、永續財務。兩者範疇不同，缺一即構成治理失敗。從 DNS/ICANN 25 年經驗繼承四項可移植制度元素（可執行權力 + 救濟 + 財務模型 + 透明度），但不繼承組織形式。三個設計原則為治理架構的支柱——P_acc 問責嵌入架構、P_legit 結構性多方正當性、P_dist 分散式道德與委任鏈治理。
+    formal: "Governance(agentic_id) ⊨ ⟨P_acc, P_legit, P_dist⟩   ;   Inherit_from_DNS = ⟨executable, recourse, finance, transparency⟩"
+
+# ─────────────────────────────────────────────────────────────
+# Five Supporting Pillars
+# ─────────────────────────────────────────────────────────────
+pillars:
+  - section: §2 — 類比（DNS 治理 25 年經驗）
+    title: 可移植四項制度元素，不可整套移植組織形式
+    role: 提供制度先例；若 AI 代理人身分治理被視為「全新設計」，制度承載須從零辯護。從 DNS/ICANN 25 年治理經驗抽取可移植元素，辯護負擔大幅降低；同時必須明示哪些元素不可移植，避免類比過度。
+    body: |
+      ICANN 自 1998 年起運作，2024 會計年度合併收入約 1.494 億美元，靠契約關係與註冊局/註冊商收費維繫。2016 年 IANA 移轉後建立 Empowered Community 機制，社群權力有法律牙齒——可依加州法執行否決預算、阻擋章程修改、罷免董事。技術運作與政策制定分離（PTI 執行技術、社群程序產出政策）為「憑證發放與撤銷」「治理規則制定」提供分層模板。但 DNS 治理的範圍是窄域命名資源，AI 代理人身分涉及跨部門法律體系；新 gTLD 申請費 185,000 美元的門檻反映多方治理對全球南方的排除；ICANN 兩輪 gTLD 評估間 14 年的速度與 AI 代理人以季度為單位演化的節奏難以相容。
+    finding: 可移植元素為「可執行的權力分配 + 可訴諸的救濟機制 + 可持續的財務模型 + 可被外部審視的透明度」四項；組織形式（基於命名資源的契約關係）不可整套移植。
+    formal: "Inherit_DNS(agentic_id) = ⟨executable_power, recourse, finance, transparency⟩  ⊊  ICANN_form"
+
+  - section: §3 — 理論（委託人-代理人理論）
+    title: 委任鏈四種代理問題在 AI 場景下被強化
+    role: 提供分析骨幹；若無系統性的代理問題框架，「為什麼治理難」的論證會散落。Jensen-Meckling + Strom + Kolt 三家理論整合提供四種代理問題的精確分類，使治理設計有可對應的問題清單。
+    body: |
+      Jensen-Meckling 1976 定義代理關係及其不可避免的代理成本（監督成本、保證成本、剩餘損失）。Strom 2000 提出「問責方向與委任方向相反」的議會民主分析框架——委任沿委託人到代理人流動，問責反向流動。Kolt 2025 在 *Governing AI Agents* 辨識四項核心代理問題：(1) 資訊不對稱（使用者對代理人能力與內部運作所知有限）、(2) 權限越界（代理人超出授權範圍）、(3) 忠誠衝突（代理人服務開發者/廣告主而非使用者）、(4) 遞迴委任（代理人再委任給子代理人）。Stocker & Lehr 2025 的「影子委託人」概念深化忠誠衝突——使用者表面上是委託人，但代理人行為受開發者、平台提供者、廣告主利益形塑。
+    finding: 四種代理問題在 AI 場景下全部被強化（不受經濟動機驅動 + 運作速度遠超人類），傳統監督與激勵設計失效；治理設計必須直接編碼「委任鏈反向問責」結構。
+    formal: "Agency_problems(AI) = ⟨asym_info, scope_creep, loyalty_conflict, recursive_delegation⟩  ;  Accountability(AI) = reverse(Delegation(AI))"
+
+  - section: §4 — 哲學（責任歸屬與分散式道德）
+    title: 責任緩衝區與多手問題在 AI 委任鏈下加劇
+    role: 提供哲學基礎；若無「責任如何分配」的明確哲學框架，治理設計易把所有責任推給最近的人類（道德緩衝區效應），重蹈自動駕駛責任分配的歷史錯誤。
+    body: |
+      Floridi & Sanders 2004 在 *Minds and Machines* 論證 AI 代理人可在適當抽象層次被視為道德行動者；可被追究（accountable）但未必負責（responsible）。Floridi 2016 的「分散式道德」概念顯示道德上有意義的後果可從分散式系統中個別無害的行動中浮現。Nissenbaum 1996 的「多手問題」+ Thompson 1980 的「政治治理多手」共同指出，多人共同造成後果使個別歸責困難。Elish 2019 的「道德緩衝區」（moral crumple zones）描述高度自動化系統中人類操作者吸收系統故障全部責任的典型失靈模式。van de Poel 2012 主張「責任設計」（design for responsibility）——把道德責任作為工程系統的設計參數。Lee & See 2004 的信任校準框架補充——治理系統必須提供使用者可理解的信任訊號，既避免盲目信任也避免全面拒斥。
+    finding: 責任分配必須按因果鏈比例分配，避免集中在最近的人類；治理系統須提供可理解的信任校準訊號，不能僅依賴技術性日誌揭露。
+    formal: "Liability_dist(AI_chain) = ⟨proportional_to_causality, responsibility_by_design, ¬moral_crumple⟩"
+
+  - section: §5 — 經驗（全球數位身分案例正反教訓）
+    title: 制度條件決定信任建構與維繫
+    role: 提供經驗基礎；若僅有理論論證，治理建議缺乏可參照的成敗案例。從 DigiNotar / Let's Encrypt / Estonia / Aadhaar / UK Verify / NIIMS 六個案例提取制度條件的反覆出現模式。
+    body: |
+      DigiNotar 2011 入侵事件（憑證偽造涉及數百網站、基本資安措施不足、延遲通報），透過瀏覽器商與荷蘭政府撤除信任根進行系統性去信任，最終公司破產。Let's Encrypt 由 ISRG 營運的非營利模式，2024 年活躍憑證超過 4.2 億張，社群捐助與贊助為主要財源——展示透明度 + 自動化 + 公共利益敘事如何規模化建構信任。Estonia X-Road 連接 929 機構與 1,887 系統，源自 1996 年承包商販售「超級資料庫」的創傷經驗，選擇無中央資料庫的分散式架構。新加坡 SingPass 達 97% 合格公民採用率，IMDA 2026-01 發布全球首個代理人式 AI 治理框架。英國 Gov.UK Verify 消耗 2.333 億英鎊但驗證成功率僅 48%（目標 90%），2023-2024 關閉——政治合法性與公共信任不足直接逆轉大規模身分基礎設施。印度 Aadhaar 截至 2025-03 核發 141.8 crore，但 Jharkhand 田野調查顯示 20% 排除錯誤率與十數起飢餓死亡案例。肯亞 NIIMS 高等法院判決指出立法程序、資料保護框架不足與公共參與爭點。
+    finding: 制度條件（法律授權、資料保護、公共參與、可感知公共利益、避免排除歧視）決定信任建構與維繫；技術完備性不能補償制度缺陷。
+    formal: "Trust(id_system) ⇐ ⟨legal_authority, data_protection, public_participation, perceived_public_benefit, ¬exclusion⟩"
+
+  - section: §6 — 演化（人類身分 vs AI 代理人身分兩條軌跡）
+    title: AI 代理人身分以壓縮時間軸重走人類身分演化路徑
+    role: 提供前瞻分析；若無對演化張力的明確預測，治理建議只能應對當下不能預見未來。人類身分三階段（機構賦予 → 聯邦式 → 可攜自主）為 AI 代理人身分提供結構同構參考。
+    body: |
+      人類數位身分演化三階段。第一階段為機構賦予身分（護照、社安號、Estonia 2002 e-ID、印度 Aadhaar 2009）。第二階段為聯邦式身分（OAuth、SAML 使身分擴展跨平台但控制權集中在 Google / Facebook / Apple 等少數中介者）。第三階段為可攜自主身分（DID + VC + 歐盟 eIDAS 2.0 wallet）。AI 代理人身分以壓縮時間軸重走。今天的環境變數 API 金鑰對應「機構賦予」最原始形態；Microsoft Entra Agent ID + Google A2A 推動聯邦化但控制權仍鎖定平台；DIF Trusted AI Agents Working Group + W3C Agent Protocol Community Group 探索可攜身分層。三個根本差異使預測複雜化：(i) 規模與速度（毫秒 vs 年）、(ii) 身分本體論地位（代理人沒有先驗存在，身分由創建者定義）、(iii) 信任錨定點（人類錨定在國家/法律/社會契約，代理人錨定在平台或密碼學但兩者都不能處理糾紛賠償救濟）。
+    finding: 短期 2026-2028 平台主導聯邦式代理人身分為主流；中期 2028-2032 跨平台互通成為迫切需求；長期關鍵指標為代理人是否發展出獨立於委託人的「信譽資本」（累積行為紀錄 + 能力認證 + 合規歷史）。
+    formal: "Evolution(AI_id) ≅ compressed(Evolution(human_id))   ;   Δ(speed, ontology, trust_anchor)  ⇒  divergence_at_inflection_points"
+
+# ─────────────────────────────────────────────────────────────
+# Causal Chain (Aadhaar exclusion process trace)
+# ─────────────────────────────────────────────────────────────
+chain:
+  title: Aadhaar 排除致死六步因果鏈（強制連結 → 制度條件失敗 → 邊緣群體傷害）
+  steps:
+    - tag: T0
+      kind: deterministic
+      text: 2009-2016 — Aadhaar 強制連結 PDS / 補貼系統設計確立，無 inclusion impact assessment（規範必然）
+    - tag: T1
+      kind: deterministic
+      text: 邊緣群體（手指乾燥的勞工、年長者、低數位識讀者）面臨生物辨識失敗（規範必然）
+    - tag: T2
+      kind: deterministic
+      text: Jean Dreze 田野調查顯示 Jharkhand 等地排除錯誤率達 20%（依資料採樣，仍屬可重現現象）
+    - tag: T3
+      kind: probabilistic
+      text: 2017-2024 — Jharkhand 邦至少十數起 Aadhaar 排除相關飢餓死亡案例（外部 trigger，依個案而異）
+    - tag: T4
+      kind: probabilistic
+      text: 2017-2018 *Puttaswamy I/II* 印度最高法院判決確立隱私權為基本權；2018 後 Aadhaar 強制連結部分被限縮
+    - tag: T5
+      kind: probabilistic
+      text: 2025+ UN Special Rapporteur Alston 2019 報告把 Aadhaar 致死案標為 digital welfare state 失敗代表；制度修補進行中
+  legend:
+    - kind: deterministic
+      label: 機制必然（結構性，不依賴外部 trigger）
+    - kind: probabilistic
+      label: 概率性（需要外部 trigger 才實現，但概率不可忽略）
+
+# ─────────────────────────────────────────────────────────────
+# Border Cases — flip to support
+# ─────────────────────────────────────────────────────────────
+borders:
+  - label: 反論 1
+    title: Mueller — ICANN 模式有結構性管制俘獲傾向
+    pivot: 反論訴求是 Mueller 2002 *Ruling the Root* + 2010 *Networks and States* 指出 ICANN 收入高度依賴受管制實體的模式天然帶有管制俘獲風險；ICANN 模式作為治理參考本身有結構性偏誤。實證強度上，ICANN 收入結構與政策傾向的相關性在學界已有共識。
+    flip: |
+      仔細看，Mueller 的論證實際上凸顯了「不可整套移植 DNS 組織形式」的必要。地圖立場已明示只繼承四項制度元素（可執行權力 + 救濟 + 財務模型 + 透明度），不繼承組織形式（基於命名資源的契約關係）。Mueller 的批評反向支撐「制度元素可移植 vs 組織形式不可移植」的區分，正好是 pillar §2 的核心結論。
+
+  - label: 反論 2
+    title: Hofmann — 多方利害關係人治理為「程序崇拜」
+    pivot: 反論訴求是 Hofmann 2016 *Multi-stakeholderism in Internet governance — putting a fiction into practice* 指出多方治理存在淪為「程序崇拜」的風險——程序本身被視為正當性來源時，實質的權力分配問題被遮蔽。van Klyton et al. 2023 對 ICANN 會議文本的分析揭示語言與議程的霸權性。實證強度高。
+    flip: |
+      Hofmann 與 van Klyton 的批評實際上凸顯了 P_legit 設計原則的必要——「結構保障的多方代表性」（含 Allen 五錨點 + Flanagan 永續財務 + 公民社會諮詢委員會專屬經費 + 全球南方結構保障）正是回應程序崇拜風險的具體機制。反論反向支撐 P_legit 的具體化設計，而非推翻多方治理本身。
+
+  - label: 反論 3
+    title: 商業平台鎖定不可避免（Apple/Google/Microsoft 結構性優勢）
+    pivot: 反論訴求是 AI 平台業者（Microsoft Entra Agent ID + Google A2A + Anthropic MCP）已在程式碼層級事實上主導治理；Lessig 的「程式碼即法律」在代理人生態加倍適用。OpenSecrets 2024 資料顯示 AI 遊說年支出超過 1 億美元，公民社會資源不對稱無法在實質上挑戰平台主導。實證強度高。
+    flip: |
+      平台鎖定的歷史並非治理失敗的證據而是治理必要的證據。人類身分從集中走向分散的歷史中（Facebook 登入 vs Apple Sign in vs DID/VC），每一次轉折都伴隨權力重新分配。歐盟 eIDAS 2.0 制度先例顯示，跨平台代理人身分互通可由監管壓力與企業用戶反彈共同推動。WE BUILD 聯盟政策建議 + Christopher Allen 五錨點 + Talao MCP/OIDC4VP 實作三條路徑示範了如何在平台主導現況下保留制度選擇空間。反論反向支撐 P_legit 的「平台獨立性」與「20 年架構視野」設計。
+
+# ─────────────────────────────────────────────────────────────
+# Procedural Conditions (six firewalls of agentic identity governance)
+# ─────────────────────────────────────────────────────────────
+conditions:
+  title: 任何代理人身分治理框架的合法性，必須先通過六道條件
+  formalPrelude: "valid_governance(g) ⇔ V_account ∧ V_recourse ∧ V_finance ∧ V_transparency ∧ V_dist_moral ∧ V_evolution"
+  items:
+    - title: 可執行的權力分配（V_account）
+      body: |
+        治理框架須包含可執行的權力分配機制——社群權力有法律牙齒，可依司法管轄區的契約法執行否決、罷免、阻擋變更等權力。仿 ICANN Empowered Community 機制依加州法執行。
+      formal: "V_account: ∀ governance_decision d : ∃ community_power(d) ∧ legal_enforceability(d)"
+    - title: 可訴諸的救濟機制（V_recourse）
+      body: |
+        受影響公民、企業、開發者須有具體可訴諸的救濟管道——司法、行政、ADR 三條路徑同步開放。仿 Kenya NIIMS 高等法院判決示範的司法救濟路徑。
+      formal: "V_recourse: ∀ harm h : ∃ remedy_path(h) ⊆ ⟨judicial, administrative, ADR⟩"
+    - title: 可持續的財務模型（V_finance）
+      body: |
+        治理運作須有可持續的財務模型，不依賴單一受管制實體贊助。仿 Let's Encrypt 社群捐助 + 企業贊助 + 非營利模式，回應 Flanagan「誰來維持運作？」核心提問。
+      formal: "V_finance: ∀ governance_org : ∃ financial_model(org) ∧ diversified_sources(org)"
+    - title: 可被外部審視的透明度（V_transparency）
+      body: |
+        治理決策、稽核紀錄、財務報告須對外部審視可及。仿 Let's Encrypt 透明日誌 + ICANN 公開政策程序，避免「責任緩衝區」效應集中在使用者。
+      formal: "V_transparency: ∀ decision d, audit a : public(d) ∧ public(a) ∧ challengeable(d, a)"
+    - title: 分散式道德責任分配（V_dist_moral）
+      body: |
+        責任分配須按因果鏈比例分配，避免集中在最近的人類；委任鏈反向問責結構須編碼為治理協定的核心功能（仿 Tomasev 2026 五要素：權限轉移、責任移轉、問責分配、邊界設定、信任校準）。
+      formal: "V_dist_moral: ∀ delegation chain : Liability_dist(chain) ∝ causality(chain) ∧ ¬moral_crumple"
+    - title: 演化張力的前瞻設計（V_evolution）
+      body: |
+        治理架構須預留 20 年架構視野（Allen 五錨點），保留選擇權、維持平台獨立性、要求非政府方承擔義務、建立制度性防護措施。短期 2026-2028 平台主導 → 中期 2028-2032 跨平台互通 → 長期信譽資本——治理須在每個分岔點保留制度空間。
+      formal: "V_evolution: ∃ 20yr_horizon(g) ∧ platform_independence(g) ∧ ⟨2026-2028, 2028-2032, 2032+⟩ inflection_points"
+
+# ─────────────────────────────────────────────────────────────
+# Conclusion + Formal Coda
+# ─────────────────────────────────────────────────────────────
+conclusion:
+  paragraphs:
+    - <strong>AI 代理人身分治理品質的上限，由我們刻意設計的制度承接力決定，而非由技術標準的成熟度決定。</strong>從 DNS 治理 25 年經驗繼承四項制度元素（可執行權力 + 救濟 + 財務模型 + 透明度），不繼承組織形式。三項設計原則（P_acc 問責嵌入架構、P_legit 結構性多方正當性、P_dist 分散式道德）是治理架構的支柱。
+    - 短期 2026-2028 平台主導聯邦式代理人身分為主流，中期 2028-2032 跨平台互通成為迫切需求，長期關鍵指標為代理人是否發展出獨立於委託人的「信譽資本」。<em>數位身分系統無法創造它所部署的社會中不存在的價值</em>（Nyabola）。代理人身分治理品質取決於我們能否在信任赤字時代（McKinsey AI 信任 2.3/5）刻意且包容地建構制度。
+    - <strong>本文為 article 16（civic-ai-agent-delegation-limits）的 enterprise / institutional 補集</strong>，提供博論 Ch9.1 主稿素材。Civic context 的關鍵價值（民主正當性 + 微觀真實性）與 enterprise context 的關鍵價值（商業效率 + 法人責任）不可直接外推；本文聚焦 enterprise context 的治理結構與 DNS 類比，與 article 16 的 civic 補集形成 Ch9 完整論證。
+  formalCoda: |
+    Final form:
+      Governance(agentic_id) ⊨ ⟨P_acc, P_legit, P_dist⟩
+      Inherit_from_DNS = ⟨executable_power, recourse, financial_sustainability, transparency⟩
+      ¬Inherit(organizational_form_DNS, agentic_id)
+      Evolution(AI_id) ≅ compressed(Evolution(human_id))  ;  inflection_points ∈ {2026-2028, 2028-2032, 2032+}
+      Liability_dist(AI_chain) ∝ causality  ∧  ¬moral_crumple_zone

@@ -1,0 +1,94 @@
+===
+title: 公共鏈被身分基建請出去了嗎？一條 SSI 的去鏈化路徑
+subTitle: DID/VC Public Blockchain Deployments — Argument Map (v2, retrofit R4)
+slug: 2026-05-01-did-vc-public-blockchain
+author: research-article-pipeline argdown export
+model:
+  removeTagsFromText: true
+===
+
+# Central Thesis
+
+[Core Thesis]
+  + <Formal Core>
+  + [Accepted]
+  + <P1>
+  + <P2>
+  + <P3>
+  + <P4>
+  + <P5>
+  + <Causal Chain>
+  + [Deployment Conditions]
+  + <Conclusion>
+  - [Rejected]
+    - [Accepted]
+  + [Accepted]
+  - [Objection 1]
+    - <Reply 1>
+  + <Reply 1>
+  - [Objection 2]
+    - <Reply 2>
+  + <Reply 2>
+  - [Objection 3]
+    - <Reply 3>
+  + <Reply 3>
+
+[Core Thesis]: DID VC 早期有清楚的公共鏈基因，但四道彼此沒對齊的力量（GDPR eIDAS KYC AML 營運責任）疊加推擠後，主流 trust root 走聯盟鏈或 PKI。2024-2026 年陸續浮出三條反例（阿根廷 QuarkID 上 ZKsync L2、不丹 NDI 遷至 Ethereum 主網、台灣數位憑證皮夾把信任清單錨在公共鏈），證明公共鏈在身分基建並非結構不可行，更像治理與法規條件的函數。公共鏈在身分基建仍能站的五個位置 撤銷狀態的不可變冗餘副本、跨組織信任清單的時間戳錨定、跨域審計事件鎖、特定治理脈絡下的直接 trust root、邊角實驗的試錯空間。本文為主系列 article 08（dns-vs-identity-trust-roots） article 12（no-phone-home） article 07（passport-rooted-paradox）的信任根基礎，提供 Ch11.2 主稿。 #thesis
+
+<Formal Core>: Formula Trust root choice(j) public chain, consortium, PKI, no chain De-chain path f(GDPR, eIDAS, KYC AML, operational responsibility) structural inevitability(de-chain) counter-examples QuarkID, NDI Bhutan, TW DIW Public chain positions revocation mirror, timestamp anchor, audit event lock, contextual trust root, experimental space Counter-example(c) governance(c) regulatory(c) tech readiness(c) compatible with public chain Caption 主流 Trust root 走聯盟鏈或 PKI 是四道壓力疊加的結果，並非結構不可行。三條反例證明公共鏈在特定治理與法規脈絡下仍可承擔 trust root 公共鏈在身分基建保有五個可行位置（撤銷副本 時間戳錨定 審計事件鎖 特定 trust root 試錯空間）。 #formal
+
+[Accepted]: 公共鏈在身分基建有特定可行位置，由治理與法規條件決定. 公共鏈在身分基建保有五個可行位置——撤銷狀態的不可變冗餘副本、跨組織信任清單的時間戳錨定、跨域審計事件鎖、特定治理脈絡下的直接 trust root、邊角實驗的試錯空間。五個位置在四道壓力下保有不同強度的可行性，並非邊角讓步而是公共鏈最擅長的結構位（承重牆比喻）。實際採用是治理與法規條件的函數——主流市場（歐盟 東亞主要經濟體 北美）走聯盟鏈 PKI 的事實未被推翻 但「沒位置」的全稱否認也被推翻。 #accepted
+
+[Rejected]: 公共鏈在身分基建沒有位置（全稱否認）. 把公共鏈與身分基建關係化約為「結構不適合」的全稱否認。個資被遺忘權（GDPR Art 17）、撤銷時效（Bitcoin 10 分鐘 block time）、營運責任（QTSP 法人主體）、KYC 監管壓力（FATF Travel Rule）四道結構性障礙使公共鏈在身分基建沒有位置。這個立場在 2022-2024 年曾是合理近似——當時公共鏈在政府級身分計畫的部署實證接近零。但 2024-2026 三條反例（QuarkID 2024 上 ZKsync L2、不丹 NDI 2025-10 遷至 Ethereum 主網、台灣 DIW 把信任清單錨在公共鏈）使全稱否認失效。問題不再是「公共鏈是否有位置」，而是「在什麼治理與法規條件下、承擔什麼具體位置」。 #rejected
+
+<P1>: Title 早期 DID 真的有公共鏈基因 Section 2 — 基因（2015-2018 SSI 規格的公共鏈預設） Role 提供歷史脈絡 若無對 SSI 起源的公共鏈基因認識，「去鏈化」會被誤讀為「公共鏈本來就不適合」。Christopher Allen 2016 早期 method 設計 Sovrin 早期讓步提供歷史路徑的起點。 2015-2018 那一批 SSI 與 DID 文件，公共區塊鏈被當成預設舞台。Christopher Allen 2016 The Path to Self-Sovereign Identity 「Existence」「Control」「Persistence」原則直接把無許可帳本當成 SSI 默認承載體。W3C DID Specification Registries 早期收的 method——did btcr（Allen 等 2017）、did ethr（uPort ConsenSys 2018）、did ion（Microsoft 2019）、did sov（Sovrin Hyperledger Indy）——公共鏈派講話最大聲。但同一條時間軸上妥協已先發生——Sovrin Foundation 2017 Trust Framework 目標寫成「全球公共實用工具」但實作底層挑了 Hyperledger Indy 許可式聯盟鏈，是 SSI 社群在「公共可讀、許可可寫」之間的早期讓步。同期 did web 與 did key 2019 起逐步成形。 Finding 「公共鏈基因」更像一種設計取向的共同預設，並非單一執行模式 早期讓步已預告後續更大幅度的去鏈化。 Formal Genesis(SSI, 2015-2018) public chain default, early compromise(Sovrin Indy 2017) #pillar
+
+<P2>: Title 派系角力在 W3C 留下的工程妥協 Section 3 — 中立化（W3C DID Core 1.0 method 妥協性共識） Role 提供規格層證據 若僅有「DID VC 是中立的」的表面陳述，「為何中立」的政治經濟動機被遮蔽。W3C Director 2022 對 DID 1.0 Formal Objections 的裁決紀錄是「中立化是妥協性共識」的直接證據。 W3C DID Core v1.0 於 2022-07-19 成為 Recommendation。 1 Introduction 寫「This specification does not require any specific blockchain or distributed ledger technology」。Method 設計成可插拔，DID 解析交給各 method 各自負責。但這個中立背後是真實的派系角力——2022-06-30 W3C Director 對 DID 1.0 Formal Objections 裁決紀錄顯示 Mozilla 與 Google 提出反對，質疑在沒有 method 評選機制的情況下就把規格升級為 Recommendation Director 最終批准規格並要求工作組後續處理 method 選型疑慮。把 method 中立化讀成「公共鏈派與無鏈派妥協的結果」屬於溯因推理，是目前可得的最佳解釋之一，不到演繹結論的強度 要再抬高層級需逐條盤點 W3C DID WG GitHub issue 與 mailing list 紀錄。中立化也可能僅僅是「不同 use case 需求不同」的工程務實。 Finding W3C method 中立化是工程務實與政治妥協的疊加產物，留下 method 層的選型自由給後續部署層的法規與營運壓力填上具體選擇。 Formal W3C neutrality pragmatic engineering, factional compromise defer(method selection) deployment layer #pillar
+
+<P3>: Title GDPR eIDAS KYC AML 營運責任 Section 4 — 壓力（四道彼此疊加的去鏈化力量） Role 提供核心因果機制 若無四道壓力的個別與疊加分析，「去鏈化」會被誤讀為單一原因（如 GDPR）的單線推導。每道壓力的反事實檢驗確立多重共因均衡。 第一道 GDPR ——法國 CNIL 2018 Blockchain Solutions for a Responsible Use 明確指出公共區塊鏈與 GDPR 第 17 條被遺忘權的衝突，建議鏈下儲存個資、鏈上只放 hash。EDPB 後續多份意見延續這條立場。「不可變」原本被當成公共鏈優點，在歐洲個資治理框架下成了直接負擔。 第二道 eIDAS ——Regulation (EU) 2024 1183 eIDAS 2.0 Article 5a 5b 規定 EUDI Wallet 與 QEAA issuer 必須是 Qualified Trust Service Provider，由會員國指定監督機構審查。EUDI ARF v1.4.0 6 Trust Model 沿用 eIDAS 1.0 Commission Implementing Decision (EU) 2015 1505 ETSI TS 119 612 XML Trusted List 模型 ARF 是「沿用」而非「拒斥」的論述方式。 第三道 KYC AML ——FATF Recommendation 16 Travel Rule 對 VASP 與發行者的 KYC、紀錄保存要求，加上各國洗錢防制法的舉證鏈，使「可撤銷」「可追究法人」需求高過「演算法保證」。 第四道營運責任 ——政府計畫需要明確的負責機關、預算來源、操作合約、申訴管道，無許可鏈上沒有對應角色，節點承擔不了行政責任。 四道反事實檢驗 ——GDPR 沒有第 17 條的世界裡 eIDAS QTSP 問責仍會逼出 Trusted List 模型 eIDAS 不存在的世界裡 Sovrin 案例顯示營運責任主體本身已把社群推向聯盟鏈 把 FATF Travel Rule 拿掉，QTSP 問責與被遺忘權早已把架構框死 最後一道的反事實最有意思——即使在沒有政府問責的純民間場景，只要服務承擔了一定規模身分發行，運維方仍會被資金來源、SLA、申訴流程逼到去找一個有法人主體的節點集合（Sovrin 紀錄）。 Finding 四道壓力是多重共因均衡，並非哪一道單獨拍板 任何一道力量單獨缺席仍會推動去鏈化，但程度有差。 Formal De-chain path ᵢ Pᵢ where P GDPR 17, eIDAS QTSP, FATF KYC, operational legal subject #pillar
+
+<P4>: Title 撤銷需求與公共鏈基底層的工程不對齊 Section 5 — 工程（撤銷時效 vs 不可變帳本） Role 提供獨立於法規的技術論點 若僅有四道壓力的法規論證，「工程上是否可行」這條獨立軸線會被遺漏。撤銷時效論證確立工程約束，並對 L2 ZK 路線保留開口。 VC 撤銷需要即時、可重複改寫、可批次更新 公共鏈的高 finality 延遲與寫入成本，跟這組需求對不上。Microsoft ION 採 Sidetree 在 Bitcoin 上做 batch anchoring，每筆寫入仍受 Bitcoin block time（自 2009 至今穩定約 10 分鐘）節制。把每張 VC 撤銷狀態都直接上鏈，成本與延遲都不切實際。W3C 規格層做了相容選擇——Bitstring Status List v1.0 規格刻意把撤銷狀態當成「資源可發佈於任何 URL」的中立模型（HTTPS、IPFS、鏈上錨定皆可），避免綁死特定基礎設施 VC Data Model v2.0 5.4 對撤銷機制中立。這些設計選擇是工程社群面對「鏈上即時撤銷不可行」的具體回應。 對 L2 ZK 保留開口 ——Layer 2 與 ZK rollup 把 finality 與寫入成本顯著壓低後，「公共鏈不適合即時撤銷」會被改寫一部分 阿根廷 QuarkID 上 ZKsync 的選擇站在這個技術變遷前緣。本論證範圍鎖在「目前主流公共鏈基底層」，L2 finality 跌破 1 秒之後撤銷時效論點需重新檢驗。 Finding 撤銷時效在主流公共鏈基底層是獨立的工程約束，但 L2 ZK 技術變遷使約束部分鬆動 W3C Bitstring Status List VC Data Model v2.0 的中立性設計已為跨基礎設施部署留下空間。 Formal Revocation(VC) Immutability(public chain L1) L2 ZK advancement partial reconciliation(Revocation, Public chain L2) #pillar
+
+<P5>: Title 三條路線在三個不同強度上對 thesis 提出修正 Section 6 — 實證（主流 反例 失敗三類案例攤平） Role 提供經驗基礎 若僅有規範與工程論證，「公共鏈位置」的命題缺乏跨國比較證據。主流（PKI 聯盟鏈） 反例（公共鏈） 失敗三類案例的攤平揭示路徑的多元性。 主流案例 ——歐盟層級 EBSI 是聯盟鏈（Hyperledger Besu 或 Quorum 變體，由會員國節點維護） ISO IEC 18013-5 2021 mDL 是 PKI 設備本地，完全無鏈 AAMVA 美國駕照數位化指南沿用此架構 新加坡 Singpass 以 NRIC 政府 PKI 印度 Aadhaar 中央化生物特徵資料庫 API 巴西 gov.br 採聯邦 PKI 日本マイナンバー数字認証アプリ 2023 推出仍以 PKI 為信任根 台灣 FidO 自然人憑證 內政部憑證管理中心清一色 PKI 路線。 失敗 受阻案例 ——德國 ID Wallet 2021 上線後因技術穩定性與安全性問題被 BMI 撤回（IDunion 體系採 Hyperledger Indy 變體） 肯亞 Huduma Namba 2021 高等法院裁定資料保護不足部署受阻（中央化資料庫架構失敗，與鏈上鏈下無關） Sovrin Foundation 2021 進入重整（旗艦基金會資金模式無法支撐基礎設施運作）。 公共鏈反例 ——阿根廷 Buenos Aires QuarkID（Extrimian Matter Labs 合作，2024 部署於 ZKsync L2，第一階段已開放給布宜諾斯艾利斯市民日常使用） 不丹 NDI（2023-10 Hyperledger Indy 上線 2024-08 遷至 Polygon 2025-10-13 遷至 Ethereum 主網，預計 2026 Q1 完成 80 萬居民全部 credential 鏈上錨定遷移 GovTech 秘書 Jigme Tenzing 公開選型理由為 Ethereum「高度去中心化使其近乎不可中斷」） 台灣數位憑證皮夾（OpenID4VCI SD-JWT 規格，trust list 記錄於公共鏈，圈內資訊指向 Ethereum 系但具體 chain ID 合約位址 DID method 尚未對外完整揭示）。 代幣化身分另開範疇 ——Cheqd Polygon ID KILT Atala PRISM Worldcoin 各自試點，政府與大型受監管金融機構直接把 trust root 移交給代幣化基礎設施的實證仍接近零。 台灣民間實踐分層 ——Numbers Protocol（影像存證 IPFS 鏈上）與 FAB DAO（鏈上投票 NFT 募款）屬建設性時間戳功能與公民倡議 DAO 治理，未承擔身分根。 Finding 主流仍是 PKI 與聯盟鏈，但公共鏈作為信任錨或 trust root 的反例正在從「個位數零星實驗」變成「跨大洲多國試行」 不丹 trust root 整個搬上公共鏈主網、台灣信任清單錨定在公共鏈、QuarkID 政府級 DID 放在 L2，三條路線在三個不同強度上對 thesis 提出修正但都還沒推翻它。 Formal Cases mainstream(consortium PKI), counter(QuarkID NDI TW DIW), failure(German ID Huduma Sovrin) mainstream dominant structural inevitability of de-chain #pillar
+
+<Causal Chain>: Title 不丹 NDI 五步遷移因果鏈（Indy Polygon Ethereum） T0 (deterministic) 2023-10 — NDI 採 Hyperledger Indy 上線（聯盟鏈選擇，當時主流工程選項） T1 (deterministic) Indy 維運成本與技術可持續性壓力浮現（聯盟鏈節點維運 升級協調的成本結構，規範必然） T2 (deterministic) 2024-08 — 遷至 Polygon（公共 L2，成本與不可中斷性權衡） T3 (probabilistic) 2024-2025 — DHI GovTech 對「人口規模身分系統能否錨在公共網路」的政策判斷成熟（依政權延續性、ETH 生態信任度、技術 readiness 而異） T4 (probabilistic) 2025-10-13 — 正式遷至 Ethereum 主網 GovTech 秘書公開選型理由「高度去中心化使其近乎不可中斷」（外部 trigger，國家治理選擇） T5 (probabilistic) 預計 2026 Q1 完成約 80 萬居民全部 credential 鏈上錨定遷移 中長期跨域互通與後續維運仍待驗證（依個案執行而異） #chain
+
+[Deployment Conditions]: 任何公共鏈承擔身分基建位置的合法性，必須通過六道條件. valid position(p) V no personal data V legal subject V revocation capable V governance layered V finality acceptable V redundancy principle #conditions
+
+<C1>: Title 鏈上不寫個資（V no personal data） 公共鏈僅承擔不寫個資的位置——撤銷狀態 hash、信任清單錨定 hash、事件序列指紋 個資鏈下儲存。仿 CNIL 2018 EDPB 立場。 Formal V no personal data on-chain data personal data(on-chain data) off-chain storage(personal data) #condition
+
+<C2>: Title 法人主體營運責任（V legal subject） 即使公共鏈承擔 trust root，治理與營運責任仍由法定機構或法人主體承擔，仿不丹 DHI GovTech 模式 台灣 DIW 數發部模式。 Formal V legal subject governance decision legal subject(decision) accountable(legal subject) #condition
+
+<C3>: Title 撤銷機制可實作（V revocation capable） VC 撤銷需即時、可重複改寫、可批次更新 公共鏈承擔的位置須與撤銷機制相容（仿 W3C Bitstring Status List 中立模型 Microsoft ION Sidetree batch anchoring）。 Formal V revocation capable on-chain position compatible(position, revocation requirements) #condition
+
+<C4>: Title 治理與技術分層（V governance layered） Trust root 的法定授權由法定機構承擔，公共鏈僅承擔特定技術錨定角色（撤銷副本、時間戳、事件鎖）。仿台灣 DIW「信任清單錨定」模式。 Formal V governance layered trust root legal authority(trust root) tech anchor(trust root) #condition
+
+<C5>: Title Finality 可接受（V finality acceptable） 公共鏈承擔的位置的 finality 延遲須與該位置的功能需求相容——撤銷副本可接受 10 分鐘 Bitcoin block time、政府級 DID 需 L2 ZK 壓低 finality 至秒級。 Formal V finality acceptable position p finality delay(p) functional requirement(p) #condition
+
+<C6>: Title 冗餘原則（V redundancy principle） 公共鏈的位置應以「冗餘」而非「主控」為設計關鍵詞——撤銷狀態不可變副本、跨組織信任清單時間戳、事件鎖均屬冗餘層 不取代主控系統而提供獨立可驗證的替代路徑。 Formal V redundancy principle position p role(p) redundancy verification alternative substitute for main control #condition
+
+<Conclusion>: 主流 trust root 走聯盟鏈與 PKI 是四道壓力疊加的結果，並非結構不可行。 2024-2026 三條反例（QuarkID 上 ZKsync L2、不丹 NDI 遷至 Ethereum 主網、台灣 DIW 把信任清單錨在公共鏈）證明公共鏈在身分基建並非結構不可行，而是治理與法規條件的函數。trust root 的選擇不由技術成熟度決定，而由治理與法規條件決定。 公共鏈在身分基建保有五個可行位置 ——撤銷狀態的不可變冗餘副本、跨組織信任清單的時間戳錨定、跨域審計事件鎖、特定治理脈絡下的直接 trust root、邊角實驗的試錯空間。五個位置在四道壓力下保有不同強度的可行性，並非邊角讓步而是公共鏈最擅長的結構位（承重牆比喻）。 本文為主系列 article 08（dns-vs-identity-trust-roots） article 12（no-phone-home-engineering-economics） article 07（passport-rooted-paradox）的信任根基礎 ，提供博論 Ch11.2 主稿。Article 08 對 DNS vs 身分信任根的歷史比較直接對應本文「為何公共鏈在身分基建未複製 DNS 的成功」 article 12 的工程經濟學直接對應本文「撤銷時效 vs 不可變帳本」的工程論證 article 07 的護照根悖論直接對應本文「四道壓力的多重共因均衡」。台灣 DIW 為「治理與法規條件函數」的本地實證案例，QuarkID 與不丹 NDI 為跨大洲反例的關鍵證據。 Formal Coda Final form Trust root choice(j) public chain, consortium, PKI, no chain Choice(j) f(governance(j), regulatory(j), tech readiness(j)) De-chain path ᵢ Pᵢ where P GDPR 17, eIDAS QTSP, FATF KYC, operational legal subject Counter-examples structural inevitability of de-chain Public chain positions revocation mirror, timestamp anchor, audit event lock, contextual trust root, experimental space position p valid(p) V no personal data V legal subject V revocation capable V governance layered V finality acceptable V redundancy principle #conclusion
+
+# Deployment Conditions
+
+[Deployment Conditions]
+  + <C1>
+  + <C2>
+  + <C3>
+  + <C4>
+  + <C5>
+  + <C6>
+
+# Objections And Replies
+
+[Objection 1]: CNIL 2018 — 公共鏈與 GDPR Art 17 結構性衝突. 反論訴求是 CNIL 2018 Blockchain Solutions for a Responsible Use 論證公共區塊鏈與 GDPR 第 17 條被遺忘權的衝突——「不可變」特性與「個資刪除權」邏輯不相容。EDPB 後續多份意見延續這條立場。實證強度高，是歐洲個資治理框架的明確立場。 #objection
+
+<Reply 1>: Title CNIL 2018 — 公共鏈與 GDPR Art 17 結構性衝突 仔細看，CNIL 與 EDPB 的論證範圍是「公共鏈不適合承載個資」，不是「公共鏈在身分基建無位置」。地圖採此論證並明示「公共鏈不直接寫個資而僅承擔信任錨 時間戳 不可變副本」設計（仿 W3C Bitstring Status List 中立模型 台灣 DIW 信任清單錨定模式）。CNIL 反論反向支撐「五個可行位置」的分層設計——公共鏈承擔不寫個資的位置（撤銷狀態 hash、信任清單錨定、時間戳）正是 CNIL 立場可接受的範圍。 #reply
+
+[Objection 2]: eIDAS 2.0 QTSP 體系 — 法人主體營運責任硬性要求. 反論訴求是 eIDAS 2.0 Article 5a 5b 規定 EUDI Wallet 與 QEAA issuer 必須是 Qualified Trust Service Provider 由會員國指定監督機構審查 EUDI ARF v1.4.0 6 沿用 XML Trusted List 模型，公共鏈在歐盟法定身分基建沒有承擔 trust root 的位置。實證強度高，是歐盟法的明確立場。 #objection
+
+<Reply 2>: Title eIDAS 2.0 QTSP 體系 — 法人主體營運責任硬性要求 eIDAS 體系的硬性要求是「法人主體營運責任」，並非「公共鏈不可用」。地圖立場明示在 eIDAS 法域內公共鏈不承擔 trust root（聯盟鏈或 PKI 主導），但保留「五個可行位置」中的撤銷副本、時間戳錨定、審計事件鎖、邊角試錯空間。台灣 DIW 把「信任清單錨定在公共鏈」是 trust root 治理仍由法定機構承擔、公共鏈僅承擔「信任清單錨定」這個有限角色——這恰好對應「法律問責與技術錨定分層」的可行設計。eIDAS 反論反向支撐分層設計的必要性。 #reply
+
+[Objection 3]: 不丹 NDI 反例不可外推 — 治理脈絡特殊. 反論訴求是不丹 NDI 遷至 Ethereum 主網的條件高度特殊——人口規模 80 萬、GDPR 不適用、QTSP 體系不直接約束、KYC 監管壓力相對輕、政府願意承擔技術前緣風險。把這個案例外推到歐盟或東亞主要經濟體不成立。實證強度上，不丹案例的脈絡特殊性是事實。 #objection
+
+<Reply 3>: Title 不丹 NDI 反例不可外推 — 治理脈絡特殊 不丹的特殊脈絡並非「反例失效」的證據而是「治理與法規條件函數」的證據。地圖立場本來就是「公共鏈在身分基建有特定可行位置，由治理與法規條件決定」——不丹 NDI 在其特殊脈絡下做出公共鏈 trust root 選擇，正是這個函數論的具體實例。台灣 DIW 在更嚴格法規脈絡下選擇「信任清單錨定」而非完整 trust root，QuarkID 在 ZKsync L2 而非主網，三條反例在三個不同強度上對 thesis 提出修正。反論反向支撐「函數論」的核心立場，凸顯「特定位置 治理條件函數」的精細化。 #reply

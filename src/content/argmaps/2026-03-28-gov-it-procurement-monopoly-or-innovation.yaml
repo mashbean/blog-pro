@@ -1,0 +1,217 @@
+slug: 2026-03-28-gov-it-procurement-monopoly-or-innovation
+title: 資訊採購會導致壟斷還是獎勵創新？
+subtitle: Government IT Procurement & Market Concentration — Argument Map (v2, retrofit R3)
+
+# ─────────────────────────────────────────────────────────────
+# Central Thesis + Formal block
+# ─────────────────────────────────────────────────────────────
+coreThesis:
+  text: |
+    政府資訊採購制度的市場結局（集中 vs 開放）不由流程電子化決定，而由「制度如何分配風險、責任、進場條件與退出能力」決定。支出集中與依賴集中須拆開觀察——表面上多供應商參與不等於底層依賴分散。五個機制（合約範圍過大 + 封閉框架閉鎖 + 規格資訊不對稱 + 採購端能力不足 + 鎖定風險）使市場系統性朝少數大型供應商收斂；五個工具（動態採購系統 + 可切分工作包 + 成果導向規格 + 合理資格條件 + 可攜互通退出權）可把市場往較開放方向拉。本文為主系列 article 14（cross-jurisdictional-redress-gap）與 article 11（wallet-as-essential-facility）的採購政治經濟基礎，提供 Ch12.1 主稿。
+  summary: Government IT procurement outcomes (concentration vs openness) are determined by institutional design (risk/responsibility/entry/exit allocation), not by digitalization of process; expenditure-concentration and dependency-concentration must be separated.
+  formal:
+    expression: |
+      Market(IT_procurement) ∈ {concentrated, open}
+
+      Outcome(Market) = f(institutional_design)   ≠ g(digitalization_of_process)
+      Concentration_drivers = ⟨large_contract, closed_framework, asym_info, weak_buyer, lock-in⟩
+      Openness_tools = ⟨DPS, divisible_packages, outcome-based_spec, fair_eligibility, portability⟩
+      Expenditure_concentration  ⊥  Dependency_concentration   (orthogonal axes)
+    caption: 採購市場結局由制度設計而非流程數位化決定。支出集中（金流去向）與依賴集中（替換能力）為正交軸；五個集中驅動機制 vs 五個開放工具的組合決定市場朝哪邊收斂。
+    legend:
+      - symbol: Market(IT_procurement)
+        meaning: 政府資訊採購市場結構
+      - symbol: institutional_design
+        meaning: 制度設計（風險 + 責任 + 進場 + 退出條件的分配）
+      - symbol: DPS
+        meaning: Dynamic Purchasing System 動態採購系統
+      - symbol: ⊥
+        meaning: 「正交」（orthogonal，獨立並行）
+      - symbol: ⇒
+        meaning: 蘊含
+      - symbol: ∧
+        meaning: 合取
+
+# ─────────────────────────────────────────────────────────────
+# Transitions
+# ─────────────────────────────────────────────────────────────
+transitions:
+  beforeDistinction: |
+    公式給出立場，下一步要把常見誤讀拉開。公共部門數位轉型的論述常被簡化為「流程電子化即開放」——只要採購流程上雲、招標電子化、文件可查詢，市場結構自然改善。這個技術主義立場遮蔽了制度設計的核心作用。電子化工具能改善程序摩擦，但真正左右市場走向的是合約如何切分、入場機制如何設計、規格如何撰寫、買方是否有治理能力、資料與系統能否被替換。地圖第一動作把「流程電子化即開放」與「制度設計決定市場結局」這兩個分類拉開。
+
+  beforePillars: |
+    區分本身只是宣告。要證明「制度設計決定市場結局」成立，需要五條獨立來源的支撐。分類面把支出集中與依賴集中拆成正交軸，避免「表面多供應商即開放」誤判；機制面歸納五個系統性收斂驅動機制（合約規模 + 框架閉鎖 + 資訊不對稱 + 採購能力 + 鎖定風險）；工具面合成五個可逆向操作的政策工具（DPS + 工作包 + 成果規格 + 資格條件 + 可攜權）；理論面從 OECD + SIGMA + Hoekman-Taş 比較研究確立工具有效性的邊界條件；實證面從歐盟資料法、ANAO、Olivares 等案例驗證工具實作可行性。五條 pillar 對應五個論證類型。
+
+  beforeChain: |
+    pillars 是正向論證。框架協議閉鎖效應提供一條從「2015 早期框架名單 → 5 年有效期內固定 → 新供應商無法中途加入 → 名單到期前已形成深度依賴 → 續約難以引入競爭」的具體因果鏈。前段是規範必然（框架協議的法律性質決定名單固定），後段是概率事件（依賴深度依資料治理成熟度而異）。把鏈條展開的目的是把抽象的「集中驅動」翻譯成可被機制性追溯的事件序列。
+
+  beforeBorders: |
+    立場 + 因果鏈成立後，反論才真的具威脅。Lewis-Faupel et al. 2016 印度電子採購研究主張「流程數位化確實改善供應商參與」；分案萬靈丹反論主張「把標案切小就能促進競爭」；採購自由放任反論主張「市場會自我修正不需干預」。仔細檢驗每條反論的實證強度，會發現它們不僅未推翻地圖立場，反而 flip to support 「制度設計決定市場結局」——亦即反論自己的證據結構，正好是地圖的第二層支撐。
+
+  beforeConditions: |
+    反論被吸收後，留下的是設計含意。在什麼條件下，「制度設計開放化」可以被視為合法的政策路徑？六道條件把抽象的開放工具翻譯成可被檢驗的工程或法律義務，填入核心公式的 Openness_tools。
+
+  beforeConclusion: |
+    把規範、分類、機制、工具、理論、實證六層收束起來，地圖最終要說的是政治經濟層的成就（市場結構不會自然演化為開放，需要刻意的制度設計持續推進）以及一條跨越所有層級的不對稱原則——公共部門在資訊採購中決定的，從來都超過某一套系統今天由誰得標，實際上決定的是未來幾年這個市場是否還有替代者、政府是否還保有議價能力。
+
+# ─────────────────────────────────────────────────────────────
+# Foundational Distinction
+# ─────────────────────────────────────────────────────────────
+distinction:
+  rejected:
+    label: ❌ 被拒絕
+    title: 流程電子化即市場開放
+    body: |
+      把公共資訊採購的市場結構問題化約為「流程是否電子化」「招標是否電子化」「文件是否易查詢」「採購程序是否有效率」。這個技術主義立場預設電子化工具自動帶來市場開放，但近十年研究反覆顯示，電子化能改善程序摩擦但不自動改變市場底層依賴關係。Lewis-Faupel et al. 2016 印度研究確實顯示電子採購改善供應商參與機率，但該研究的 outcome variable 是「投標供應商數量」，不是「市場集中度長期變化」或「依賴關係結構」。把這個 outcome 直接外推為「電子化解決市場集中」是過度推論。
+    formal: "Market(IT) ⇐ digitalization   （把電子化當作開放的充分條件）"
+  accepted:
+    label: ✓ 被辯護
+    title: 制度設計決定市場結局
+    body: |
+      公共資訊採購的市場結構由制度設計而非流程數位化決定。制度設計含五個維度——合約如何切分、入場機制如何設計、規格如何撰寫、買方治理能力、資料與系統可替換性。支出集中（高額標案流向少數廠商）與依賴集中（替換能力被誰掌握）須拆成正交軸觀察——表面多供應商參與不等於底層依賴分散。五個集中驅動機制 vs 五個開放工具的組合決定市場朝哪邊收斂；流程電子化只能改善程序摩擦，市場結構需要刻意設計持續推進。
+    formal: "Market(IT) = f(institutional_design)   ;   Expenditure_concentration ⊥ Dependency_concentration"
+
+# ─────────────────────────────────────────────────────────────
+# Five Supporting Pillars
+# ─────────────────────────────────────────────────────────────
+pillars:
+  - section: §2 — 分類（支出集中 vs 依賴集中正交軸）
+    title: 兩種集中必須拆開觀察
+    role: 提供分析框架；若無「支出集中 vs 依賴集中」的正交軸分類，「市場開放」概念無法操作化。表面多供應商參與不等於底層依賴分散，這個區分使政策設計可精準對應目標。
+    body: |
+      支出集中（expenditure concentration）反映金流去向——高額標案與大部分採購預算是否長期流向少數大型供應商。依賴集中（dependency concentration）反映替換能力——即使帳面上多廠商存在，真正掌握關鍵資料、接口、維運知識、替換能力的是否仍是少數廠商。對資訊採購來說，第二件事經常更關鍵——大型供應商可能透過維運、升級、轉換每一次循環使替換成本越來越高，市場表面上是分散的而底層依賴越來越集中。國際比較研究（OECD 2018、Hoekman & Taş 2020）對「SME 得標率」的測量主要捕捉支出集中軸，依賴集中軸的測量遠較困難——它需要「資料可移轉性」「接口可替換性」「維運知識文件化程度」等技術指標。
+    finding: 兩軸並非互斥——可能同時支出集中 + 依賴集中（高度鎖定）、支出分散 + 依賴集中（表面開放底層鎖定）、支出集中 + 依賴分散（高金額但可替換）、支出分散 + 依賴分散（真開放）。政策目標須明確指向哪一軸。
+    formal: "Expenditure_conc ⊥ Dependency_conc   ;   ∀ market m : ∃ (axis_position(m)) ∈ {⟨HH, HL, LH, LL⟩}"
+
+  - section: §3 — 機制（五個集中驅動機制）
+    title: 為什麼制度會把市場推向集中
+    role: 提供問題診斷；若無「為什麼會集中」的機制清單，政策設計只能對症狀（市場集中）反應而無法對症（驅動機制）下藥。五個機制提供可被逐一檢驗的清單。
+    body: |
+      **機制 1 — 合約範圍過大整合責任過度集中**：當一個標案同時要求跨系統整合、長期維運、資安承諾、資料轉換、多單位協調、即時 SLA，真正有能力投標的廠商集合很快收斂。Hoekman & Taş 2020 與 OECD 2018 對 SME 參與的研究確認契約規模與程序設計直接影響中小企業得標機率。**機制 2 — 封閉型框架 vs 動態採購系統**：框架協議成立後參與者在有效期間內通常固定，新供應商難中途加入；動態採購系統則持續開放符合條件者進場。SIGMA 2016 對框架協議的對比與 European Commission 2021 對 DPS 使用的指引確立兩種機制的制度差異。**機制 3 — 規格撰寫與前期互動的資訊不對稱**：熟悉既有架構的供應商知道哪些限制寫進規格、哪些接口最難處理、哪些驗收條件對自己最有利；規格自然偏向某種既有系統邏輯，外來者難提競爭力方案。**機制 4 — 採購端能力不足風險偏好保守**：分案、模組化、多供應商治理理論上能替新進者打開空間，但需採購端有定義需求、協調責任邊界、驗收整體服務品質、持續管理多供應商依賴的能力；能力不足時把整合責任交給單一大廠是最省事的選擇（OECD 2023 對採購人員專業化的論述）。**機制 5 — 資料不可攜接口不開放維運知識沉澱鎖定風險**：資訊採購的鎖定常不來自法律獨占而是上線後慢慢成形——資料匯出困難、接口無法互通、遷移成本高、關鍵知識只存在於供應商團隊內部。歐盟《資料法》(EU) 2023/2854 對雲端切換、互通與退出權的規範正是這類鎖定被視為市場競爭層級問題的證據。
+    finding: 五個機制可同時或部分作用，不是互斥而是疊加；政策診斷須對每個機制獨立評估，避免單一工具（如「分案」）被當成萬靈丹。
+    formal: "Concentration ⇐ ⋁ᵢ Mᵢ   where M ∈ {large_contract, closed_framework, asym_info, weak_buyer, lock-in}"
+
+  - section: §4 — 工具（五個開放工具）
+    title: 制度可以把市場往較開放的方向拉
+    role: 提供政策合成；若僅有「為什麼會集中」的機制診斷而無「如何開放化」的工具設計，政策建議停留在批判層次。五個工具提供可逆向操作的政策路徑。
+    body: |
+      **工具 1 — 可動態入場機制（DPS）**：供應商集合在有效期間持續擴張，市場不會在某時間點被早期名單鎖死。對標準化、可商品化程度高的服務最有用（模組型資訊服務、平台服務、重複性高的數位功能採購）。European Commission 2021 DPS 指引 + ANAO 2020 對澳洲 ICT 採購面板的評估提供制度先例。**工具 2 — 可切分且可治理的工作包**：較小工作包確實可能提高 SME 得標機率（Hoekman & Taş 2020），但效果有條件——工作包必須可治理、可驗收、可與其他模組協作，採購端必須具備整合結果能力。沒有這些條件，分案只會把複雜度轉嫁回政府自己身上。**工具 3 — 成果導向規格 + 較成熟的價值評選**：用工時、人數、既有規模、政府履約紀錄作判準大型廠商天然占優；改為重視可交付成果、可維運性、系統品質、接口清晰度、遷移能力後，新進者較有機會用專業能力競爭。難度在採購端必須真有能力定義與驗收成果，否則制度滑回規模導向保守模式。**工具 4 — 更合理的資格條件與履約證據設計**：新進者最常被擋在「既往營收 + 既往大型政府案經驗 + 過去履歷」的自我強化迴圈外。較好方向是降低與實際風險不成比例的行政負擔，讓技術能力、驗證過的成果、可交付證據部分取代大型履歷門檻。Flynn 2025 對 SME 參與公共採購的研究確立此方向。**工具 5 — 把可攜互通替換退出權寫進規格契約驗收**：很多市場看起來有競爭，真正問題卻是退出成本太高。歐盟《資料法》(EU) 2023/2854 為此寫入雲端切換、互通、退出權；可攜要求若沒進入合約與驗收，所謂開放市場很容易只是表面開放。
+    finding: 五個工具須組合使用而非單獨採用；單一工具（如分案）有條件，工具組合才能持續對抗集中機制。Olivares et al. 2024 對政府採購資料科學 + 市場設計的研究示範了多工具組合的實證可行性。
+    formal: "Openness ⇐ ⋀ᵢ Tᵢ   where T ∈ {DPS, divisible_pkg, outcome_spec, fair_eligibility, portability}"
+
+  - section: §5 — 理論（比較研究的邊界條件）
+    title: 工具有效性的條件而非萬靈丹
+    role: 提供工具邊界；若無理論基礎，五個工具會被當作「直接套用即可」。比較研究確立工具有效性的邊界條件，避免政策一刀切。
+    body: |
+      OECD 2018 *SMEs in Public Procurement* 確認分案對 SME 參與機率的正向效果，但同時指出「邊界條件」——適合分案的標的需要邊界清楚、規模適中。Hoekman & Taş 2020 *Procurement policy and SME participation* 對 EU 採購資料的計量分析確認契約規模與 SME 得標的負相關，並識別「採購端能力」為條件變數。SIGMA 2016 對框架協議的比較顯示框架本身不是問題，問題在於框架的「有效期」與「中途加入機制」設計。Flynn 2025 對 SME 參與公共採購的最新研究確認「成果導向規格」需要採購端具備需求定義能力。Khorana et al. 2024 對公共採購透明度指數的研究提供工具效果的量化測量方法。
+    finding: 每個工具有適用邊界——DPS 適合標準化服務、分案需採購端整合能力、成果規格需需求定義能力、資格條件需技術能力評估能力、可攜權需資料治理能力；採購端能力建設（OECD 2023 採購人員專業化）是所有工具的共同前提條件。
+    formal: "∀ tool Tᵢ : effective(Tᵢ) ⇔ ∃ boundary_condition(Tᵢ) ∧ buyer_capability(Tᵢ)"
+
+  - section: §6 — 實證（資料法 + ANAO + 採購資料科學）
+    title: 工具實作的歷史先例與技術可行性
+    role: 提供實作驗證；若僅有規範論證與比較研究，「工具可行性」仍是理論假設。資料法、ANAO 評估、Olivares 採購資料科學三類案例提供工具實作的歷史先例與技術可行性證據。
+    body: |
+      歐盟《資料法》(EU) 2023/2854 把雲端切換、互通、退出權寫成立法，是「工具 5 可攜互通」從規範變政策的歷史性轉折；該規則自 2025-09 生效，截至 2026 已有多個實作指引。澳洲 ANAO 2020 對 ICT 採購面板與相關安排的審計報告（*Establishment and Use of ICT Related Procurement Panels and Arrangements*）提供 DPS-like 機制的實作評估，確認動態入場機制在 ICT 採購的可行性與限制。Olivares et al. 2024 *Saving Millions in Government Procurement Through Data Science and Market Design* 示範了採購資料科學 + 市場設計組合可實證地節省政府支出，間接證明「制度設計決定市場結局」假設。台灣行政院 2023《政府資訊服務採購革新：資安入規及採購指引》+ 公平交易委員會 2026《生成式人工智慧相關競爭法議題徵詢公眾意見彙整報告》提供台灣脈絡的政策起點。
+    finding: 工具實作有歷史先例與技術可行性證據，採購政策從「規範論證」到「實證有效」的證據鏈已建立；台灣具備進入工具實作階段的政策窗口。
+    formal: "∃ {Data_Act_EU_2023, ANAO_2020, Olivares_2024} : empirical_validation(Openness_tools)"
+
+# ─────────────────────────────────────────────────────────────
+# Causal Chain
+# ─────────────────────────────────────────────────────────────
+chain:
+  title: 框架協議閉鎖效應五步因果鏈（早期名單 → 深度依賴 → 續約鎖定）
+  steps:
+    - tag: T0
+      kind: deterministic
+      text: 早期框架協議成立，供應商名單依當時市場結構固定（規範必然，由框架協議法律性質決定）
+    - tag: T1
+      kind: deterministic
+      text: 框架有效期間內（典型 4-7 年）新供應商無法中途加入（規範必然）
+    - tag: T2
+      kind: deterministic
+      text: 既有供應商累積維運知識、資料治理權、接口控制權（規範必然，源於系統運作慣性）
+    - tag: T3
+      kind: probabilistic
+      text: 採購端的依賴深度依資料治理成熟度與接口開放程度而異（依個案組織能力而異）
+    - tag: T4
+      kind: probabilistic
+      text: 框架到期前已形成深度依賴；遷移成本顯著高於續約成本（依鎖定機制 1-5 的疊加而異）
+    - tag: T5
+      kind: probabilistic
+      text: 續約難以引入有意義競爭；下一個框架週期的供應商集合與本週期高度重疊（依市場後續變動而異）
+  legend:
+    - kind: deterministic
+      label: 機制必然（結構性，不依賴外部 trigger）
+    - kind: probabilistic
+      label: 概率性（需要外部 trigger 才實現，但概率不可忽略）
+
+# ─────────────────────────────────────────────────────────────
+# Border Cases — flip to support
+# ─────────────────────────────────────────────────────────────
+borders:
+  - label: 反論 1
+    title: Lewis-Faupel et al. 2016 — 流程數位化確實改善供應商參與
+    pivot: 反論訴求是 Lewis-Faupel, Neggers, Olken, Pande 2016 *Can Electronic Procurement Improve Infrastructure Provision?* 對印度的計量研究顯示電子採購提高了投標供應商數量。實證強度高，研究設計嚴謹。
+    flip: |
+      仔細看，Lewis-Faupel et al. 2016 的 outcome variable 是「投標供應商數量」（短期參與機會），不是「市場集中度長期變化」或「依賴關係結構」。研究本身的範圍是基礎建設採購（公路、橋樑），不是資訊系統採購——後者的鎖定機制（資料不可攜、接口不開放、維運知識沉澱）在前者並不存在。研究的正確使用方式是「電子化改善程序摩擦」而非「電子化解決市場集中」。反論反向支撐「支出集中 vs 依賴集中正交軸」分類，凸顯資訊採購的特殊性。
+
+  - label: 反論 2
+    title: 分案萬靈丹 — 把標案切小就能促進競爭
+    pivot: 反論訴求是「把大型整合標案切成小工作包就會自動帶來市場開放」。OECD 2018 + Hoekman & Taş 2020 對 SME 得標機率的研究是這個立場常被引用的支撐。
+    flip: |
+      OECD 與 Hoekman-Taş 的研究本身就標示了邊界條件——適合分案的標的需邊界清楚、規模適中；工作包必須可治理可驗收可協作，採購端必須有整合結果的能力。沒有這些條件分案只會把複雜度轉嫁回政府自己。分案在缺乏採購端整合能力的脈絡下會「失敗式分散化」——多家供應商表面參與但實際整合責任仍集中在某家或政府自己。反論反向支撐「採購端能力建設是工具有效性的共同前提」，凸顯 OECD 2023 採購人員專業化議程的必要性。
+
+  - label: 反論 3
+    title: 市場自我修正 — 不需政府干預
+    pivot: 反論訴求是市場會透過供應商自然進退、技術替代、新進者商業模式創新自我修正集中問題。實證強度上，部分市場（如 SaaS 雲端服務）確實在 2010 年代出現大規模新進者。
+    flip: |
+      市場自我修正論在資訊採購脈絡下有結構性盲點——資訊採購的「鎖定機制 5」（資料不可攜 + 接口不開放 + 維運知識沉澱）不是市場自然形成的競爭結果而是制度未明文要求可攜的副作用。歐盟《資料法》(EU) 2023/2854 的立法理由正是「市場自我修正未能解決雲端鎖定」。市場若要在資訊採購自我修正，至少需要「可攜權寫進合約」「接口開放標準」「資料治理問責」三項制度前提；缺乏這些前提，自我修正論等同於「等大廠自願放棄鎖定優勢」這個經驗上不會發生的假設。反論反向支撐「工具 5 可攜互通替換退出權」的政策必要性。
+
+# ─────────────────────────────────────────────────────────────
+# Procedural Conditions
+# ─────────────────────────────────────────────────────────────
+conditions:
+  title: 任何資訊採購制度要把市場往開放方向拉，必須通過六道條件
+  formalPrelude: "open_market(IT) ⇔ V_DPS ∧ V_pkg ∧ V_outcome ∧ V_eligibility ∧ V_portability ∧ V_capability"
+  items:
+    - title: 動態入場機制
+      body: |
+        標準化、可商品化程度高的服務應採 DPS 而非封閉框架協議，使供應商集合在有效期間持續擴張。仿 European Commission 2021 DPS 指引 + ANAO 2020 評估。
+      formal: "V_DPS: ∀ standardized_service : ∃ DPS(service) ∧ ¬closed_framework(service)"
+    - title: 可切分可治理工作包
+      body: |
+        大型 IT 標案應切分為邊界清楚、規模適中、可治理可驗收可協作的工作包。仿 OECD 2018 + Hoekman-Taş 2020 對 SME 參與的研究。
+      formal: "V_pkg: ∀ large_contract : ∃ divisible(contract) ∧ governable(packages) ∧ verifiable(packages)"
+    - title: 成果導向規格
+      body: |
+        評選標準應重視可交付成果、可維運性、系統品質、接口清晰度、遷移能力，而非工時 / 人數 / 既往規模。
+      formal: "V_outcome: ∀ evaluation : ⟨deliverable_outcome, maintainability, interface_clarity, migration_capability⟩ ⊆ criteria"
+    - title: 合理資格條件
+      body: |
+        資格條件應降低與實際風險不成比例的行政負擔，讓技術能力 + 驗證過的成果 + 可交付證據部分取代大型履歷門檻。仿 Flynn 2025 對 SME 參與的研究方向。
+      formal: "V_eligibility: ∀ eligibility_criteria : proportional(criteria, actual_risk) ∧ technical_capability_recognized(criteria)"
+    - title: 可攜互通退出權
+      body: |
+        合約 + 規格 + 驗收須包含資料匯出能力 + 接口開放 + 遷移計畫 + 替換測試 + 退出權。仿歐盟《資料法》(EU) 2023/2854。
+      formal: "V_portability: ∀ contract : ⟨data_export, open_interface, migration_plan, exit_right⟩ ⊆ contract_terms"
+    - title: 採購端能力建設
+      body: |
+        所有工具有效性的共同前提是採購端能力。OECD 2023 採購人員專業化議程 + 持續培訓 + 跨機關知識共享。
+      formal: "V_capability: ∀ procurement_org : ∃ professionalization(org) ∧ continuous_training(org) ∧ inter-agency_knowledge_sharing(org)"
+
+# ─────────────────────────────────────────────────────────────
+# Conclusion + Formal Coda
+# ─────────────────────────────────────────────────────────────
+conclusion:
+  paragraphs:
+    - <strong>公共部門在資訊採購中決定的，從來都超過某一套系統今天由誰得標。</strong>實際上決定的是未來幾年這個市場是否還有替代者、政府是否還保有議價能力、新進者能否從陪跑位置真正長出交付能力。流程電子化固然重要，真正的戰場仍然在制度本身——市場結局由制度設計（風險 + 責任 + 進場 + 退出條件的分配）決定，而非由電子化工具決定。
+    - 五個集中驅動機制（合約範圍過大 + 封閉框架閉鎖 + 規格資訊不對稱 + 採購端能力不足 + 鎖定風險）vs 五個開放工具（DPS + 可切分工作包 + 成果導向規格 + 合理資格條件 + 可攜互通退出權）的組合決定市場朝哪邊收斂。<em>沒有任何單一工具是萬靈丹</em>——每個工具有適用邊界，採購端能力建設是所有工具的共同前提條件。
+    - <strong>本文為主系列 article 14（cross-jurisdictional-redress-gap）與 article 11（wallet-as-essential-facility）的採購政治經濟基礎</strong>，提供博論 Ch12.1 主稿。資訊採購的鎖定機制（資料不可攜 + 接口不開放 + 維運知識沉澱）直接對應 article 11 的 essential facility doctrine 套用；採購端能力建設 + 跨法域救濟空白直接對應 article 14 的三軸並行政策合成；五個開放工具與 article 15 civic-proof-inclusion-rights 的 P1 法定義務、P2 等效性、P3 反歧視條款結構同構。台灣行政院 2023 採購革新指引 + 公平會 2026 AI 競爭法議題彙整為本文的台灣政策起點。
+  formalCoda: |
+    Final form:
+      Market(IT_procurement) ∈ {concentrated, open}
+      Outcome(Market) = f(institutional_design)   ≠ g(digitalization_of_process)
+      Concentration_drivers = ⟨large_contract, closed_framework, asym_info, weak_buyer, lock-in⟩
+      Openness_tools = ⟨DPS, divisible_pkg, outcome_spec, fair_eligibility, portability⟩
+      ∀ tool Tᵢ : effective(Tᵢ) ⇔ buyer_capability ∧ boundary_condition(Tᵢ)
+      Expenditure_concentration ⊥ Dependency_concentration

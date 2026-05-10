@@ -22,17 +22,22 @@ const articles: ArticleSpec[] = [
   { no: "06", prompt: "C3", slug: "2026-05-05-civic-burden-redistribution", title: "Civic Burden 的重新分配", part: 2, chapter: "Ch 6.6" },
   { no: "07", prompt: "D2", slug: "2026-05-05-passport-rooted-paradox", title: "護照根的不可能性", part: 2, chapter: "Ch 5.4" },
   { no: "08", prompt: "D3", slug: "2026-05-06-dns-vs-identity-trust-roots", title: "DNS 信任根 vs 身分信任根", part: 4, chapter: "Ch 11.4" },
-  { no: "09", prompt: "D1", slug: "09-bankid-nordic-monopoly-democracy", title: "北歐 BankID 模式：商業壟斷與民主韌性", part: 2, chapter: "Ch 4.4" },
-  { no: "10", prompt: "B2", slug: "10-digital-identity-civic-action-quant", title: "跨國定量：身分制度 × 結社自由", part: 2, chapter: "Ch 4.6" },
-  { no: "11", prompt: "E1", slug: "11-wallet-as-essential-facility", title: "Wallet as Essential Facility — 反壟斷套用", part: 4, chapter: "Ch 10" },
-  { no: "12", prompt: "E2", slug: "12-no-phone-home-engineering-economics", title: "No-Phone-Home 的工程經濟學", part: 4, chapter: "Ch 11.3" },
-  { no: "13", prompt: "E3", slug: "13-structural-slippage-prevention", title: "年齡驗證與結構性滑坡的預防設計", part: 3, chapter: "Ch 7" },
-  { no: "14", prompt: "E4", slug: "14-cross-jurisdictional-redress-gap", title: "跨法域救濟的空白", part: 4, chapter: "Ch 12.3" },
-  { no: "15", prompt: "E5", slug: "15-civic-proof-inclusion-rights", title: "Civic Proof Inclusion Rights — 無 wallet 替代路徑", part: 5, chapter: "Ch 14.4" },
-  { no: "16", prompt: "F1", slug: "16-civic-ai-agent-delegation-limits", title: "AI 代理在公民行動的制度極限", part: 3, chapter: "Ch 9" },
+  { no: "09", prompt: "D1", slug: "2026-05-07-bankid-nordic-monopoly-democracy", title: "北歐 BankID 模式：商業壟斷與民主韌性", part: 2, chapter: "Ch 4.4" },
+  { no: "10", prompt: "B2", slug: "2026-05-08-digital-identity-civic-action-quant", title: "跨國定量：身分制度 × 結社自由", part: 2, chapter: "Ch 4.6" },
+  { no: "11", prompt: "E1", slug: "2026-05-08-wallet-as-essential-facility", title: "Wallet as Essential Facility — 反壟斷套用", part: 4, chapter: "Ch 10" },
+  { no: "12", prompt: "E2", slug: "2026-05-09-no-phone-home-engineering-economics", title: "No-Phone-Home 的工程經濟學", part: 4, chapter: "Ch 11.3" },
+  { no: "13", prompt: "E3", slug: "2026-05-09-structural-slippage-prevention", title: "年齡驗證與結構性滑坡的預防設計", part: 3, chapter: "Ch 7" },
+  { no: "14", prompt: "E4", slug: "2026-05-09-cross-jurisdictional-redress-gap", title: "跨法域救濟的空白", part: 4, chapter: "Ch 12.3" },
+  { no: "15", prompt: "E5", slug: "2026-05-10-civic-proof-inclusion-rights", title: "Civic Proof Inclusion Rights — 無 wallet 替代路徑", part: 5, chapter: "Ch 14.4" },
+  { no: "16", prompt: "F1", slug: "2026-05-11-civic-ai-agent-delegation-limits", title: "AI 代理在公民行動的制度極限", part: 3, chapter: "Ch 9" },
   { no: "17", prompt: "F2", slug: "17-civic-receipts-provenance", title: "Civic Receipts 與證據鏈", part: 3, chapter: "Ch 9.3" },
   { no: "18", prompt: "F3", slug: "18-selective-disclosure-ux-failure", title: "Selective Disclosure 的 UX 認知極限", part: 4, chapter: "Ch 10.3" },
   { no: "19", prompt: "A2", slug: "19-public-realm-political-philosophy", title: "公共領域的政治哲學基礎", part: 1, chapter: "Ch 2.5" },
+  // ── 早期 article 回收（R1-R4，retrofit argmap，作為博論章節主稿素材）───
+  { no: "R1", prompt: "—", slug: "2026-04-01-agentic-id-governance", title: "誰來治理 AI 代理人的身分？（agentic-id-governance）", part: 3, chapter: "Ch 9.1" },
+  { no: "R2", prompt: "—", slug: "2026-04-16-age-verification-digital-rights", title: "年齡驗證法規與數位人權版圖", part: 3, chapter: "Ch 7.1-7.2" },
+  { no: "R3", prompt: "—", slug: "2026-03-28-gov-it-procurement-monopoly-or-innovation", title: "資訊採購會導致壟斷還是獎勵創新？", part: 4, chapter: "Ch 12.1" },
+  { no: "R4", prompt: "—", slug: "2026-05-01-did-vc-public-blockchain", title: "公共鏈與 SSI 去鏈化路徑", part: 4, chapter: "Ch 11.2" },
 ];
 
 // ── 五部 = 五母命題 ─────────────────────────────────────────────
@@ -150,6 +155,31 @@ const crossLinks: CrossLink[] = [
     to: ["18"],
     label: "Essential facility doctrine ↔ Selective disclosure UX 認知極限",
     formal: "essential_facility ∧ ¬cognitive_load_ok  ⇒  ¬accessible(UX)",
+  },
+  // ── R1-R4 回收 article 接合（retrofit cross-links）─────────────────
+  {
+    from: "R1",
+    to: ["16", "17"],
+    label: "Enterprise / institutional AI agent governance ⇒ civic 補集 + receipts provenance",
+    formal: "agentic_id.{P_acc, P_legit, P_dist}  ⊨  civic_delegation.{micro-authenticity, 4-piece, liability_3tier}",
+  },
+  {
+    from: "R2",
+    to: ["13", "15"],
+    label: "年齡驗證 25 國經驗 ⇒ 結構性滑坡預防 + civic proof inclusion 失能者保留",
+    formal: "AV_regime.{tech × gov}  ⊨  slippage_prevention.{sunset, scope, selective}  ∧  CRPD_Art_29_aligned(disability)",
+  },
+  {
+    from: "R3",
+    to: ["14", "11"],
+    label: "採購政治經濟（鎖定機制 × 開放工具）⇒ 跨法域救濟 + essential facility",
+    formal: "Concentration_drivers ∪ Openness_tools  ⊨  ⟨redress_gap, essential_facility⟩",
+  },
+  {
+    from: "R4",
+    to: ["08", "12", "07"],
+    label: "公共鏈 vs 聯盟鏈／PKI ⇒ DNS 對偶 + no-phone-home 工程經濟 + 護照根悖論",
+    formal: "Trust_root_choice = f(governance, regulatory, tech_readiness)  ;  isomorphic(R4, ⟨08, 12, 07⟩)",
   },
 ];
 
