@@ -165,7 +165,7 @@ chain:
       text: issuer 發行被誤用的 credential（概率事件——issuer 是否驗證了 holder 親簽 vs agent 代簽，依 issuer 政策與 W3C VC v2.0 conformance 而定）
     - tag: L5
       kind: probabilistic
-      text: verifier 接受 agent 自動代簽（概率事件——verifier 是否識別了 presentationOrigin: agent 標籤，依 verifier 政策與互通標準成熟度而定；當 5 段在跨法域分屬不同國家時，責任真空從單一節點擴散為五段鏈條）
+      text: "verifier 接受 agent 自動代簽（概率事件——verifier 是否識別了 presentationOrigin=agent 標籤，依 verifier 政策與互通標準成熟度而定；當 5 段在跨法域分屬不同國家時，責任真空從單一節點擴散為五段鏈條）"
   legend:
     - kind: deterministic
       label: 規範必然（結構性，agent 引入後必然存在的治理層）
