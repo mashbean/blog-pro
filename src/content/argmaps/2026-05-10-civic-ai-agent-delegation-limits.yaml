@@ -1,0 +1,249 @@
+slug: 2026-05-10-civic-ai-agent-delegation-limits
+title: AI 代理在公民行動的制度極限：委任五件結構與公民證明三件式的合取必要條件
+subtitle: AI Agent Delegation Limits in Civic Action — Argument Map (v1)
+
+# ─────────────────────────────────────────────────────────────
+# Central Thesis + Formal block
+# ─────────────────────────────────────────────────────────────
+coreThesis:
+  text: |
+    Tomasev (2026) 委任五件具備層級結構的 2+3 構造（形式要件 AT + RT；動態治理要件 AA + BS + TC），與 civic proof 三件式 ⟨𝒩, ℱ, ℬ⟩ 做合取交叉，得到 5×3 = 15 cell 必要條件矩陣（9 條件可滿足、4 機率退化、2 結構不可滿足 RT-ℬ ✗ + AA-ℬ ✗）。據此把公民行動劃分為三區帶（θ₁ ≈ 0.2、θ₂ ≈ 0.7）：可委任、條件可委任、結構不可委任；結構不可委任分常駐型（由 ℬ 哲學基礎決定）與情境型（由 𝒩、ℱ 共同失能決定）。CRPD Art 12 General Comment No. 1 §26-29 是條件可委任區的規範性硬約束（不是法理依據）；跨法域責任真空細分三型，A14 第 5 類缺口拆為 Q10a + Q10b；FTLA-Agent 四層治理在 2026 年呈非對稱厚度，須以時間階段化（5 / 5-10 / 10-15 年）回應。
+  summary: AI agent intervention in civic action requires conjoint analysis of Tomasev's five-element delegation × civic proof's ⟨𝒩, ℱ, ℬ⟩ triple, yielding a 5×3 necessity matrix that demarcates three civic action zones; CRPD Art 12 GC1 §26-29 is a normative hard constraint, cross-jurisdictional liability vacuum splits into three types, and FTLA-Agent four-layer governance is asymmetrically thick.
+  formal:
+    expression: |
+      Delegate(action) ≜ ⟨AT, RT, AA, BS, TC⟩       (Tomasev five elements as 2+3 structure)
+      ⟨𝒩, ℱ, ℬ⟩ ≜ civic proof triple
+      ℬ = ⌊Arendt ∧ Habermas ∧ Pettit⌋               (composite lower bound)
+
+      M[i, j] ∈ {✓, △, ✗}  for i ∈ {AT, RT, AA, BS, TC}, j ∈ {𝒩, ℱ, ℬ}
+      |✓| = 9, |△| = 4, |✗| = 2  ;  M[RT, ℬ] = ✗ ∧ M[AA, ℬ] = ✗
+
+      Zone(action) =
+        Z₁ (delegable)             if  P_degrade ≤ θ₁ ≈ 0.2 ∧ ∄ ✗ cell
+        Z₂ (conditionally delegable) if θ₁ < P_degrade ≤ θ₂ ≈ 0.7 ∧ ∄ ✗ cell
+        Z₃ (structurally non-delegable) if P_degrade > θ₂ ∨ ∃ ✗ cell
+
+      Z₃ = Z₃-intrinsic (ℬ-determined) ∪ Z₃-contextual (𝒩 ∧ ℱ co-failure)
+
+      CRPD Art 12 GC1 §26-29 ≜ hard_constraint(Z₂)
+      Distinguishability(supported, substituted) ⇔ ex_ante ∧ ex_post_reversibility ∧ decision_trace
+      Multi-tenant ≠ Multi-profile
+
+      Vacuum(cross_juris) ∈ {moral_crumple, algorithmic_opaque, cross_juris_diffusion}
+      Q10 = Q10a (authority transfer 密碼學歸責) ∪ Q10b (accountability allocation 跨境多方歸責)
+      FTLA-Agent = ⟨G_industry^A, G_state^A, G_recognition^A, G_oversight^A⟩  (asymmetric thickness 2026)
+    caption: 委任三區帶劃界由 5×3 必要條件矩陣決定；M 矩陣中的 RT-ℬ 與 AA-ℬ 兩 cell 結構不可滿足，對應常駐型不可委任。CRPD Art 12 GC1 §26-29 是 Z₂ 的規範性硬約束；supported 與 substituted 的可區分性必須在事前協商、事後可逆、決策證據鏈三層同步建立。跨法域責任真空細分三型；A14 第 5 類缺口在 SA3+SA5 拆為 Q10a 與 Q10b 兩個次類型。FTLA-Agent 四層治理在 2026 年呈非對稱厚度。
+    legend:
+      - symbol: AT / RT / AA / BS / TC
+        meaning: Tomasev 五件（authority transfer / responsibility transfer / accountability allocation / boundary setting / trust calibration）
+      - symbol: ⟨𝒩, ℱ, ℬ⟩
+        meaning: civic proof 三件式（規範承載 / 形式範圍 / 哲學基礎）
+      - symbol: M[i, j]
+        meaning: 5×3 必要條件矩陣中第 i 件 × 第 j 元的 cell（✓ 條件可滿足 / △ 機率退化 / ✗ 結構不可滿足）
+      - symbol: Z₁ / Z₂ / Z₃
+        meaning: 三區帶（可委任 / 條件可委任 / 結構不可委任）
+      - symbol: Z₃-intrinsic / Z₃-contextual
+        meaning: 結構不可委任的兩種模態（常駐型 / 情境型）
+      - symbol: P_degrade
+        meaning: 概率退化函數（給定情境下 cell 退化機率）
+      - symbol: θ₁ / θ₂
+        meaning: 三區帶劃界閾值（≈ 0.2 / ≈ 0.7，政策建議數）
+      - symbol: Q10a / Q10b
+        meaning: A14 第 5 類缺口拆分（密碼學歸責 / 跨境多方歸責）
+      - symbol: G_industry^A / G_state^A / G_recognition^A / G_oversight^A
+        meaning: FTLA-Agent 四層治理（接 A8 FTLA forward-link）
+      - symbol: ≜
+        meaning: 「定義為」
+      - symbol: ⌊·⌋
+        meaning: 複合下界（合取構成）
+      - symbol: ∧
+        meaning: 合取
+      - symbol: ⇔
+        meaning: 當且僅當
+
+# ─────────────────────────────────────────────────────────────
+# Transitions
+# ─────────────────────────────────────────────────────────────
+transitions:
+  beforeDistinction: |
+    公式給出立場，下一步要把常見誤讀拉開。AI 代理在當前政策論述中常被當作「可化約為傳統 principal-agent」處理；只要這個分類成立，現有委任理論的概念骨架就足以覆蓋公民行動場景，AI 代理只是新工具。地圖的第一動作是把這個化約論述與「Tomasev 五件 × civic proof 三件式合取分析」拉開。
+
+  beforePillars: |
+    區分本身只是宣告。要證明 AI 代理在公民行動需要五件 × 三件式合取分析（而非可化約為兩件），需要五條獨立來源的支撐。演繹面提供合取必要條件矩陣與概率退化函數；政治哲學面提供結構不可委任區的存在論基礎；歸納面提供責任真空在多案例中的表現；溯因面提供 CRPD Art 12 對工程設計的反推約束；類比面提供 FTLA-Agent 四層治理在 AI 代理場景的延伸。五條 pillar 對應五個論證類型，缺一立場就退化為呼籲。
+
+  beforeChain: |
+    pillars 是正向論證。LLM-agent wallet 自動代簽憑證提供從「agent 開發者設計」到「holder 跨境權利失敗」的具體因果鏈。前段是規範必然（agent 介入後責任路徑被五段鏈條取代），後段是概率事件（特定法域組合下的歸責真空）。把鏈條展開的目的是把抽象的 Q10a + Q10b 拆分翻譯成可被機制性追溯的事件序列。
+
+  beforeBorders: |
+    立場 + 因果鏈成立後，反論才真的具威脅。Coeckelbergh relational personhood 主張 AI 代理可滿足 plurality；GDPR Art 22 + EU AI Act Art 25 主張現有法律已涵蓋 AI 代理跨境義務；化約論主張 Tomasev 五件可化約為傳統 principal-agent。仔細檢驗每條反論的實證強度，會發現它們不僅未推翻地圖立場，反而 flip to support 三區帶劃界與 FTLA-Agent 四層治理——亦即反論自己的證據結構，正好是地圖的第二層支撐。
+
+  beforeConditions: |
+    反論被吸收後，留下的是設計含意。在什麼條件下，「AI 代理在公民行動的制度極限」可以被翻譯成可被檢驗的工程或法律義務？六道條件把抽象的三區帶劃界 + 規範性硬約束 + 跨法域治理回應翻譯成可被檢驗的條款，同時填入核心矩陣的 ✓/△/✗ 對應位置。
+
+  beforeConclusion: |
+    把矩陣、政治哲學、責任真空、CRPD 約束、FTLA-Agent 治理、時間階段化六層收束起來，地圖最終要說的是制度極限不是工程極限，五方責任比例與時間階段化是分析性建議而非預測。對台灣讀者而言，TW DIW 即將進入 LLM-agent 階段時，如果繼續把 AI 代理當作工具而非具有獨立委任結構的代理，常駐型結構不可委任區會被工程式越界，supported decision 會在工程預設下退化為 substituted decision。
+
+# ─────────────────────────────────────────────────────────────
+# Foundational Distinction
+# ─────────────────────────────────────────────────────────────
+distinction:
+  rejected:
+    label: ❌ 被拒絕
+    title: AI 代理在公民行動可化約為傳統 principal-agent 模型
+    body: |
+      把 AI 代理視為「可化約為兩件結構」（authority transfer + responsibility transfer）的延伸版 principal-agent。這個結構假設現有委任理論（Pitkin trustee/delegate、Jensen-Meckling principal-agent、Eisenhardt agency theory）的概念骨架足以覆蓋公民行動的所有場景；civic proof 三件式 ⟨𝒩, ℱ, ℬ⟩ 是「身分基礎設施規範」而非公民行動規範，不會自動傳遞到 AI 代理場景。在這個分類下，AI 代理失敗只需用既有 GDPR Art 22、EU AI Act Art 25、principal-agent 訴訟路徑回應，無需新建合取必要條件矩陣或 FTLA-Agent 四層治理。
+    formal: "Delegate(action) ≜ ⟨AT, RT⟩  ∧  ⟨𝒩, ℱ, ℬ⟩ ⊥ Delegate"
+
+  accepted:
+    label: ✓ 被辯護
+    title: AI 代理在公民行動需要 Tomasev 五件 × civic proof 三件式合取分析
+    body: |
+      Tomasev (2026) 五件具備 2+3 結構（形式要件 AT + RT；動態治理要件 AA + BS + TC），三件 dynamic governance 在 civic action 場景特別吃重——AA 處理多方歸責、BS 處理範圍最小化、TC 處理長期信任校準。化約為兩件後 dynamic governance 三件無處安放。civic proof 三件式 ⟨𝒩, ℱ, ℬ⟩ 透過 A15 precursor right 框架下傳到公民資格行使的可問責層；W1 採精準介面傳遞立場（介面層完全傳遞、實質層需另由政治哲學基礎承擔）。合取交叉得到 5×3 必要條件矩陣，9 cell 條件可滿足、4 cell 機率退化、2 cell 結構不可滿足（RT-ℬ ✗ + AA-ℬ ✗），對應三區帶劃界 Z₁/Z₂/Z₃。
+    formal: "Delegate(action) ≜ ⟨AT, RT, AA, BS, TC⟩  ∧  ⟨𝒩, ℱ, ℬ⟩ ⊆ ⋂ M[i, j]"
+
+# ─────────────────────────────────────────────────────────────
+# Five Supporting Pillars
+# ─────────────────────────────────────────────────────────────
+pillars:
+  - section: §3 — 演繹（Tomasev 五件 × ⟨𝒩, ℱ, ℬ⟩ 合取必要條件矩陣）
+    title: 5×3 = 15 cell 矩陣決定三區帶劃界
+    role: 提供合取分析骨架——若五件與三件式不能形式化為矩陣，三區帶劃界就只能停在語言層；若退化函數沒有可量測參數，θ₁/θ₂ 閾值就只是修辭。
+    body: |
+      Tomasev 2026 五件分解可重組為「2+3 結構」：形式委任要件（AT 權威移轉 + RT 責任移轉）+ 動態治理要件（AA 責任歸屬分配 + BS 邊界設定 + TC 信賴校準）。AT+RT 是先決條件，AA+BS+TC 是運行條件；化約為兩件等於放棄 dynamic governance 的可形式化。civic proof ⟨𝒩, ℱ, ℬ⟩ 中 ℬ 並非單一價值（如僅有 Arendt plurality），它是 Arendt plurality + Habermas communicative validity + Pettit contestability 三家會合的「複合下界」。15 cell 中 9 cell 條件可滿足、4 cell 機率退化、2 cell 結構不可滿足(M[RT, ℬ] = ✗ + M[AA, ℬ] = ✗)。退化函數 P_degrade(scenario | cell) 的 α、β、θ 參數依跨法域、共用裝置、行為失能三類情境校準。三區帶判準依賴 θ₁ ≈ 0.2、θ₂ ≈ 0.7 + 「∃ ✗ cell」三條件。結構不可委任分 Z₃-intrinsic（由 ℬ 決定，無論技術成熟度皆不可委任）與 Z₃-contextual（由 𝒩 + ℱ 共同失能決定，可隨制度修補移動邊界）。
+    finding: 矩陣為三區帶劃界的形式骨架；M[RT, ℬ] = ✗ + M[AA, ℬ] = ✗ 兩 cell 是常駐型結構不可委任的數學表達，下游 writer 不可回退到「五件平行 + 三件式單值」的草版。
+    formal: "M ∈ {✓, △, ✗}^{5×3}  ;  |✓|=9, |△|=4, |✗|=2  ;  Z₃-intrinsic ⇔ ∃ M[i, j] = ✗"
+
+  - section: §4 — 演繹（Arendt + Habermas + Pettit 三進路合取）
+    title: 結構不可委任區由四維結構判準合取覆蓋
+    role: 提供存在論基礎——若無法證明結構不可委任區的判準是哲學必然而非政策選擇，三區帶劃界會被 Coeckelbergh relational personhood 反論掏空；若無法區分 plurality 的存在論層級與輸出多樣性，AI 代理只要能提供異質視角即滿足判準，常駐型 Z₃ 不存在。
+    body: |
+      結構不可委任區由 ⟨first-personal stance ∧ ontological plurality ∧ communicative orientation ∧ active-stance contestation⟩ 四維結構判準合取覆蓋。Arendt 1958 *The Human Condition* §1 Prologue (p. 7) 與 §27 給出 plurality 存在論定義，§24-26 (pp. 175-188) 論行動 plurality 與 unique disclosure，§44 (p. 313) 論 mortality stake；plurality 是存在論而非功能論——每個行動者具備不可重複的誕生性（natality）與揭露獨特自我的能力，依附於有限性、有死性、被誕生於世界中這一存在條件。Habermas 1981 *TKH* Bd. I §III.1-§III.4 區分四種行動類型（目的論、策略、規範引導、言說），公民行動在 §III.3 屬言說行動而非策略行動。Pettit 1997 *Republicanism* + 2012 *On the People's Terms* contestation 要求 active stance（站出來主張、承擔後果、進入制度爭訟），不是僅提供異議意見。Pitkin 1967 *The Concept of Representation* §5 trustee 與 delegate 區分提供「執行可委任 vs 歸屬不可委任」的概念骨架——AI 代理可承擔 execution 但不能承擔 attribution，因為它是「無歸屬主體的代理」。
+    finding: 四維判準合取構成結構不可委任區的存在論基礎；Arendt + Habermas + Pettit 三進路任一單獨成立即使該行動不可委任，三者同時成立則該行動處於範疇核心；plurality 存在論立場是哲學立場選擇（拒絕 Coeckelbergh），須在誠實邊界明示。
+    formal: "Z₃-intrinsic ⇔ first_personal ∧ ontological_plurality ∧ communicative ∧ active_contestation"
+
+  - section: §6 — 歸納（moral crumple zone 三型 × 6 案例 case-tracing）
+    title: 跨法域責任真空細分三型，第 5 類缺口拆 Q10a + Q10b
+    role: 提供經驗證據——若無法用多案例驗證責任真空在跨法域的單調擴張，「FTLA-Agent 四層治理」就只是預言；若 A14 第 5 類缺口未拆分，治理回應會被「LLM-agent 是新範疇不適用 Elish 框架」反論掏空。
+    body: |
+      Elish 2019 moral crumple zone 框架在 2019 年後被 Selbst 2021、Mittelstadt 2023、Cobbe & Singh 2024 細分為三型：(i) 道德緩衝區型（最近的人吸收衝擊）+ (ii) 演算法不透明型（連最近的人都無法歸因）+ (iii) 跨法域擴散型（責任在多個法域之間 ping-pong）。三型在 LLM-agent wallet 場景同時疊加。6 個 case-tracing 案例：Robodebt（澳洲 2016-2020 福利自動化）+ Dutch SyRI / Toeslagenaffaire (2018-2024) + Aadhaar PDS / NREGA-ABPS（印度 2020-2025）+ State v Loomis (Wisconsin 2016 量刑) + Tornado Cash 系列（2022-2025）+ SCHUFA C-634/21 (CJEU 2023)。Elish 框架在 LLM-agent 場景需擴張為「責任緩衝鏈」（chain-form）以取代單一緩衝區（明示為延伸，非原文表述）。A14 §3.5 第 5 類「候選缺口」拆為兩個次類型：Q10a「authority transfer 密碼學歸責缺口」（agent 代簽 VC presentation 時 holder 親簽 vs agent 代簽的密碼學區分；prompt injection 場景）+ Q10b「accountability allocation 跨境多方歸責缺口」（issuer / verifier / wallet provider / agent provider / model provider 五方在跨境的責任比例）。Q10 五段鏈條 L1（agent 開發者）→ L2（agent operator）→ L3（wallet provider）→ L4（issuer）→ L5（verifier），現有法律（GDPR Art 22、AI Act Art 25、eIDAS 2.0 Art 5b、Brussels I Recast）各只覆蓋鏈中一段。
+    finding: 三型責任真空 + 五段鏈條 + Q10a/Q10b 拆分共同支撐「跨法域責任真空無法用單一治理層解決」；下游 writer 不可把第 5 類缺口當作單一新缺口處理。
+    formal: "Vacuum ∈ {crumple, opaque, diffusion}  ;  Q10 = Q10a ∪ Q10b  ;  L1...L5 ⊆ jurisdictions"
+
+  - section: §5 — 溯因（CRPD Art 12 × wallet 工程退化）
+    title: CRPD Art 12 GC1 §26-29 是規範性硬約束，三層同步建立 supported/substituted 可區分性
+    role: 提供溯因論證——從 supported decision-making 的法律規範反推工程設計判準。若 CRPD Art 12 僅作為「法理依據」處理，wallet 工程可在「漸進過渡到代理」框架下削弱 supported；若 supported/substituted 的可區分性僅依賴行為層判斷，W4 反論成立——兩者在行為層幾乎不可區分。
+    body: |
+      CRPD Art 12 General Comment No. 1（2014）§26-29 明確要求締約國「廢除一切替代決策制度」（abolish substituted decision-making regimes），這是規範性硬約束而非可被討價還價的依據。supported 與 substituted 在行為層幾乎不可區分（兩者皆呈現為「他人按下了那個按鈕」），可區分性必須在三層同步建立：(i) 事前協商層（ex-ante deliberation：誰參與決策、議程如何形成）+ (ii) 事後可逆層（ex-post reversibility：被代理者是否可單方撤回）+ (iii) 決策證據鏈層（decision-trace：deliberation provenance 而非僅交易 log）。EUDI Wallet ARF v1.4-v1.5 提供 multi-profile（同一 holder 的多檔案）但**不**提供 multi-tenant delegated key custody（多獨立法律主體並存且各自保有可獨立行使的密鑰能力與可獨立撤回的同意能力）；POTENTIAL UC6 + NOBID + DC4EU + EWC 四個 large-scale pilot 2025 mid-term reports 均承認 holder-side delegated key custody 未實作。CRPD Art 12 透過 ICCPR Art 26（平等保護）+ ICESCR Art 9（社會保障近用）回流為對所有 wallet 使用者的普遍工程義務（不是擴張解釋而是規範性論證）。三項工程修正：audit-by-design（捕捉 deliberation provenance）+ minimal delegation（範圍最小化 + 動態評估 + 可單方撤回）+ multi-tenant delegated key custody（W3C DID Core 1.0 controller-subject 分離 + EUDI ARF 缺失的「獨立可撤回的並存主體」原語）。法律對照表:UK Mental Capacity Act 2005 + 2019 amendment（CRPD Concluding Observations 2017 §30-31 已批評 best-interests 是 substituted 偽裝）+ Israel 2016 § 67B-67F（GC1 完整法律化全球第一例）+ Peru DL 1384 (2018)（拉美最徹底的 substituted regime 廢除，廢除 interdicción）+ 台灣意定監護新制（仍是「自願選擇的 substituted」，未達 CRPD supported 標準）。
+    finding: CRPD Art 12 GC1 §26-29 是 Z₂ 條件可委任區的規範性硬約束；wallet 工程的個人擁有 / 個人識別 / 個人私鑰三重預設會在三條退化路徑同時把 supported decision 退化為 substituted decision，三項工程修正缺一不可。
+    formal: "GC1 §26-29 ≜ hard_constraint(Z₂)  ;  Distinguishability ⇔ ex_ante ∧ ex_post_rev ∧ trace  ;  Multi-tenant ≠ Multi-profile  ;  CRPD ⊕ ICCPR Art 26 ⊕ ICESCR Art 9 ⇒ universal_obligation"
+
+  - section: §7 — 類比（FTLA 四層治理延伸到 AI 代理場景）
+    title: FTLA-Agent 四層厚度非對稱 + 時間階段化 + 五方責任比例
+    role: 提供治理回應——若 FTLA 框架不能延伸到 AI 代理場景，A8 forward-link 失效；若四層治理被視為平行對等，2026 年 G_state 與 G_recognition 的薄弱會被 G_industry 與 G_oversight 的相對厚實掩蓋；若無時間階段化，「跨境治理永遠是政治不可行」反論會掏空整個治理路徑。
+    body: |
+      A8 FTLA 四層治理框架（G_industry 協議互通 / G_state 法律承載 / G_recognition 跨境承認 / G_oversight 消費者保護與資料保護底線）延伸到 AI 代理場景為 FTLA-Agent，結構同構性論證須明示——FTLA 源自網絡訊息基礎設施治理史（DNS、IATA、SWIFT、Basel），AI 代理治理涉及「行為主體的代理權」這個身分基礎設施所沒有的元素，結構同構在「協議與標準」維度成立、在「行為主體歸責」維度需 Tomasev 五件補充。四層在 2026 年呈非對稱厚度——G_industry^A 與 G_oversight^A 厚度高（W3C VC v2.0、DIF、MCP/A2A、EDPB 2024 update、EU AI Act Annex III）；G_state^A 弱（多數法域 AI 代理權立法尚未成熟）；G_recognition^A 最弱（無 AI 代理跨境互認框架）。GDPR Art 22 + EU AI Act Art 25 是歐盟內部最低底線，不是跨境互認機制；SCHUFA C-634/21 (CJEU 2023) 對 Art 22 的擴大解釋僅在歐盟內生效。時間階段化為 G_industry^A / G_oversight^A 5 年內可推進、G_state^A 5-10 年可推進至代理權立法承認、G_recognition^A 10-15 年內 OECD 內 mutual recognition、OECD 外覆蓋空白將持續存在。Q10b 的具體治理回應為五方連帶責任比例 issuer 25 / verifier 25 / wallet provider 15 / agent provider 25 / model provider 10（政策建議數，待保險業精算 + 跨境爭議統計支撐）。CoE AI Convention CETS 225 + Hiroshima Process Friends Group 2027-2028 通過《AI 代理跨境代理權承認協議》補充協議；APEC CBPR + Global CBPR Forum 新增 AI 代理工作組。
+    finding: FTLA-Agent 四層治理是 Q10b 跨境多方歸責缺口的必要回應；四層厚度非對稱與時間階段化是分析性建議而非預測；五方責任比例 25/25/15/25/10 須以保險業精算 + 跨境爭議統計校準。
+    formal: "FTLA-Agent ≜ ⟨G_industry^A, G_state^A, G_recognition^A, G_oversight^A⟩  ;  thickness asymmetric (2026)  ;  Liability = (25, 25, 15, 25, 10)"
+
+# ─────────────────────────────────────────────────────────────
+# Causal Chain (Q10 LLM-agent wallet auto-signing five-segment chain)
+# ─────────────────────────────────────────────────────────────
+chain:
+  title: LLM-agent wallet 自動代簽憑證 × 跨境權利失敗五段鏈條（A14 第 5 類缺口形式化）
+  steps:
+    - tag: L1
+      kind: deterministic
+      text: agent 開發者設計 agent 的決策權限與 trust calibration（規範必然——agent 介入必然引入新治理層；對應 Tomasev TC 件）
+    - tag: L2
+      kind: deterministic
+      text: agent operator / 委託人選擇部署場景並下達高層指令（規範必然——委任結構從 holder 直接行動轉為 holder + agent operator 雙層；對應 Tomasev AT + BS 件）
+    - tag: L3
+      kind: deterministic
+      text: wallet provider / EUDI Wallet 發行者提供 holder/agent 區分的密碼學原語；EUDI ARF v1.4-1.5 僅提供 multi-profile 不提供 multi-tenant（規範必然 + 工程現實——multi-tenant 缺失即 supported 退化為 substituted）
+    - tag: L4
+      kind: probabilistic
+      text: issuer 發行被誤用的 credential（概率事件——issuer 是否驗證了 holder 親簽 vs agent 代簽，依 issuer 政策與 W3C VC v2.0 conformance 而定）
+    - tag: L5
+      kind: probabilistic
+      text: verifier 接受 agent 自動代簽（概率事件——verifier 是否識別了 presentationOrigin: agent 標籤，依 verifier 政策與互通標準成熟度而定；當 5 段在跨法域分屬不同國家時，責任真空從單一節點擴散為五段鏈條）
+  legend:
+    - kind: deterministic
+      label: 規範必然（結構性，agent 引入後必然存在的治理層）
+    - kind: probabilistic
+      label: 概率性（依特定政策、標準成熟度、跨法域組合而實現，但概率不可忽略）
+
+# ─────────────────────────────────────────────────────────────
+# Border Cases — flip to support
+# ─────────────────────────────────────────────────────────────
+borders:
+  - label: 反論 1
+    title: Coeckelbergh relational personhood — AI 代理可滿足 plurality 的功能性要求
+    pivot: 反論訴求是 *AI Ethics* (2020) 與 "Robot Rights" (2022) 主張 AI 代理透過關係性實踐獲得 personhood，因此 plurality 不專屬於人；只要 AI 代理能提供異質視角（多模型 ensemble：GPT-5 + Claude 4.7 + Gemini Ultra + Grok-4）即滿足 Arendt plurality 的功能性要求，常駐型 Z₃ 不存在。實證強度上，relational personhood 在華語學界與部分歐陸 AI ethics 研究有結構性支持。
+    flip: |
+      仔細看，Arendt §1 Prologue 的 plurality 定義「the fact that men, not Man, live on the earth and inhabit the world」明示「多個 *who* 的共在」，*who* 是存在論層級的主體性，不是輸出多樣性。多模型 ensemble 滿足的是「functional perspectival heterogeneity」（認識論異質），而非 Arendt 的「Erscheinen vor Anderen」（appearing before others，現象學在場）。把兩者混為一談是 category error，類似把「擁有照片的多樣性」混為「擁有人類社群的多樣性」。Coeckelbergh 反論反向支撐「存在論 vs 功能論區分」的論證紀律——本論的回應在 §4 直接論證，並承認這是哲學立場選擇（在誠實邊界明示），CF3 反事實壓力測試（若 relational personhood 全面接受，矩陣的 ℬ 列須重做但結構不可委任區的 RT-ℬ ✗ + AA-ℬ ✗ 仍站得住）顯示「降一檔不降兩檔」。
+
+  - label: 反論 2
+    title: GDPR Art 22 + EU AI Act Art 25 — 現有法律已涵蓋 AI 代理跨境義務
+    pivot: 反論訴求是 GDPR Art 22 對全自動化決策的覆蓋已被 SCHUFA (C-634/21, 2023) 擴大解釋；EU AI Act Art 25 對 provider 的跨境義務涵蓋；無需新建 FTLA-Agent 四層治理。實證強度上，這兩條規則確實是當代 AI 代理治理的最重要工具，覆蓋範圍涉及歐盟 4.5 億公民。
+    flip: |
+      仔細看，GDPR Art 22 + EU AI Act Art 25 是歐盟內部最低底線，**不是跨境互認機制**。Art 22 對 wallet 場景的 AI 代理（多為半自動化：人類觸發、AI 執行）落在灰區，SCHUFA 擴大解釋僅在歐盟內生效；Art 25 的執行依賴成員國 market surveillance authority，跨境協作機制與 GDPR Art 56 lead supervisory authority 平行但未整合。兩者皆無對歐盟外 AI 代理跨境行為的直接適用。GDPR/AI Act 反論反向支撐「分層治理」的論證紀律——Q10a + Q10b 拆分顯示 Art 22（覆蓋 Q10a 部分）+ Art 25（覆蓋 G_oversight^A 部分）只是 FTLA-Agent 中兩層的局部承載，G_recognition^A 跨境互認層在 2026 年仍空白。
+
+  - label: 反論 3
+    title: 化約論 — Tomasev 五件可化約為傳統 principal-agent 模型
+    pivot: 反論訴求是 Jensen-Meckling (1976) + Eisenhardt (1989) 的 principal-agent 模型已涵蓋委任結構的所有重要面向，Tomasev 五件可被化約為兩件（authority transfer + responsibility transfer），其餘三件（accountability allocation + boundary setting + trust calibration）僅是運行細節。實證強度上，principal-agent 模型在管理學、經濟學、法律學的應用紀錄半個世紀以上，外部效度高。
+    flip: |
+      仔細看，principal-agent 模型隱含預設 utility maximization 與一次性委任（contract-bound），公民行動的目標常非 utility（dignity, recognition, voice），且 AI 代理委任是長期動態而非一次性。Tomasev 五件中的 dynamic governance 三件（AA + BS + TC）正是針對「持續性 + 非 utility 目標 + 多重連繫」場景設計，化約為兩件後 dynamic governance 無處安放——AA 處理多方歸責、BS 處理範圍最小化、TC 處理長期信任校準，這三件在 civic action 場景特別吃重（民主行動的多方互動 + 範圍最小化是 supported decision-making 必備 + 信任校準是 6-18 月 model drift 後的維持機制）。化約論反論反向支撐「2+3 結構」的論證紀律——形式委任要件（AT+RT）與動態治理要件（AA+BS+TC）的分層是必要而非冗餘。
+
+# ─────────────────────────────────────────────────────────────
+# Procedural Conditions (six firewalls)
+# ─────────────────────────────────────────────────────────────
+conditions:
+  title: 把 AI 代理在公民行動的制度極限翻譯成可被檢驗的工程或法律義務，必須通過六道條件
+  formalPrelude: "deployable_agent(action) ⇔ V_matrix ∧ V_phil ∧ V_crpd ∧ V_multitenant ∧ V_ftla_agent ∧ V_q10_split"
+  items:
+    - title: 5×3 必要條件矩陣明示
+      body: |
+        每個 AI 代理在公民行動的部署前須提交 5×3 必要條件矩陣評估報告，明示 9 cell 條件可滿足、4 cell 機率退化、2 cell 結構不可滿足（M[RT, ℬ] = ✗ + M[AA, ℬ] = ✗）；P_degrade 函數的 α、β、θ 參數須以該部署場景的跨法域、共用裝置、行為失能風險校準。
+      formal: "V_matrix: ∀ deployment d : matrix_report(d) ∧ ∀ cell ∈ M : explicit_status(cell)"
+    - title: ℬ 哲學基礎複合下界
+      body: |
+        ℬ 不得被處理為單一價值；任何「結構不可委任區」判定須通過 Arendt plurality + Habermas communicative validity + Pettit contestability 三家會合的合取覆蓋檢驗。第一人稱在場性、政治發言、最終投票、人格表意、刑責承擔屬常駐型 Z₃-intrinsic（無論技術成熟度皆不可委任）。
+      formal: "V_phil: ℬ = ⌊Arendt ∧ Habermas ∧ Pettit⌋  ;  Z₃-intrinsic ⇔ first_personal ∧ ontological_plurality ∧ communicative ∧ active_contestation"
+    - title: CRPD Art 12 GC1 §26-29 規範性硬約束
+      body: |
+        條件可委任區 Z₂ 的部署須通過 CRPD Art 12 General Comment No. 1 §26-29 的規範性硬約束。supported / substituted 可區分性須在事前協商層 + 事後可逆層 + 決策證據鏈層三層同步建立；任一層失能即構成 substituted decision，違反 CRPD Art 4(1)(a)。
+      formal: "V_crpd: deploy(Z₂) ⇒ hard_constraint(GC1 §26-29) ∧ Distinguishability ⇔ ex_ante ∧ ex_post_rev ∧ trace"
+    - title: multi-tenant delegated key custody（不是 multi-profile）
+      body: |
+        Wallet 工程須提供 multi-tenant delegated key custody，定義為「多個獨立法律主體並存且各自保有可獨立行使的密鑰能力與可獨立撤回的同意能力」。EUDI ARF v1.4-v1.5 提供的 multi-profile 不滿足此條件；POTENTIAL UC6 phase 2 holder-side delegated key custody 須在 2027-2028 年推進至 W3C 規格化。chooser_signature 必須由 subject 私鑰簽，否則密碼學上等於 substituted；comprehension_attestation 強制；unilateral revocation 鑰必須在 subject 手上。
+      formal: "V_multitenant: wallet ⇒ multi_tenant ≠ multi_profile  ;  chooser_signature: signed_by(subject)  ;  revocation_key: held_by(subject)"
+    - title: FTLA-Agent 四層治理啟動
+      body: |
+        AI 代理跨法域部署前須提交 FTLA-Agent 四層治理評估，G_industry^A 對齊 W3C VC v2.0 + AgentDelegationProof2026；G_state^A 對齊各國 AI 代理權立法（5-10 年內推進）；G_recognition^A 對齊 CoE CETS 225 補充協議或 Hague Conference 1996 PoA Convention 數位版（10-15 年內 OECD 內推進）；G_oversight^A 對齊 EDPB + EU AI Office + ENISA 三方協調。
+      formal: "V_ftla_agent: deploy(cross_juris) ⇒ ⟨G_industry^A, G_state^A, G_recognition^A, G_oversight^A⟩ : assessed"
+    - title: Q10a + Q10b 拆分 + 五方連帶責任
+      body: |
+        A14 第 5 類缺口須拆為 Q10a（authority transfer 密碼學歸責）+ Q10b（accountability allocation 跨境多方歸責）。LLM-agent 自動代簽憑證須引入 AgentDelegationCapability VC（holder 親簽 enabling envelope + 限制委任範圍 + 公開可查撤銷端點）+ presentationOrigin 標籤（agent vs holder 區分）；civic-action-receipt 須含五方法人標識與 ZK-proof。五方連帶責任比例為 issuer 25 / verifier 25 / wallet provider 15 / agent provider 25 / model provider 10（政策建議數，待精算校準）。
+      formal: "V_q10_split: Q10 = Q10a ∪ Q10b  ;  Liability = (25, 25, 15, 25, 10)  ;  ∀ presentation p : presentationOrigin(p) ∈ {holder, agent}"
+
+# ─────────────────────────────────────────────────────────────
+# Conclusion + Formal Coda
+# ─────────────────────────────────────────────────────────────
+conclusion:
+  paragraphs:
+    - <strong>AI 代理在公民行動的制度極限是制度極限不是工程極限</strong>。Tomasev 五件 × civic proof 三件式合取分析給出 5×3 = 15 cell 必要條件矩陣，9 cell 條件可滿足、4 cell 機率退化、2 cell 結構不可滿足（M[RT, ℬ] = ✗ + M[AA, ℬ] = ✗）；三區帶劃界（θ₁ ≈ 0.2、θ₂ ≈ 0.7）+ 結構不可委任分常駐型（ℬ 決定）與情境型（𝒩 + ℱ 共同失能決定）共同支撐「親自在場性、政治發言、最終投票、人格表意、刑責承擔不可被 AI 代理執行」的規範必然。
+    - 條件可委任區 Z₂ 的規範性硬約束來自 CRPD Art 12 General Comment No. 1 §26-29；supported / substituted 可區分性須在事前協商層、事後可逆層、決策證據鏈層三層同步建立；EUDI Wallet ARF 提供的 multi-profile 不是 multi-tenant，須以三項工程修正補正（audit-by-design + minimal delegation + multi-tenant delegated key custody）。<em>CRPD Art 12 透過 ICCPR Art 26 + ICESCR Art 9 回流為對所有 wallet 使用者的普遍工程義務</em>，不是對特殊群體的「無障礙照顧」。
+    - <strong>跨法域責任真空細分為道德緩衝區型、演算法不透明型、跨法域擴散型三型</strong>，A14 第 5 類缺口拆為 Q10a（authority transfer 密碼學歸責）+ Q10b（accountability allocation 跨境多方歸責）。FTLA-Agent 四層治理在 2026 年呈非對稱厚度，G_industry^A 與 G_oversight^A 厚 / G_state^A 弱 / G_recognition^A 最弱；時間階段化為 5 / 5-10 / 10-15 年三段；五方責任比例 25 / 25 / 15 / 25 / 10 是分析性建議而非預測。對台灣讀者的關鍵警示：當 TW DIW 即將進入 LLM-agent 階段時，若繼續把 AI 代理當作工具而非具有獨立委任結構的代理，常駐型結構不可委任區會被工程式越界，supported decision 會在 wallet 三重預設下退化為 substituted decision。
+  formalCoda: |
+    Final form:
+      Delegate(action) ≜ ⟨AT, RT, AA, BS, TC⟩
+      ⟨𝒩, ℱ, ℬ⟩ ≜ civic proof triple  ;  ℬ = ⌊Arendt ∧ Habermas ∧ Pettit⌋
+      M ∈ {✓, △, ✗}^{5×3}  ;  M[RT, ℬ] = ✗ ∧ M[AA, ℬ] = ✗
+      Zone(action) = Z₁ ∨ Z₂ ∨ Z₃  ;  Z₃ = Z₃-intrinsic ∪ Z₃-contextual
+      hard_constraint(Z₂) ≜ CRPD Art 12 GC1 §26-29
+      Distinguishability(supported, substituted) ⇔ ex_ante ∧ ex_post_rev ∧ trace
+      Multi-tenant ≠ Multi-profile
+      Q10 = Q10a ∪ Q10b  ;  Vacuum ∈ {crumple, opaque, diffusion}
+      FTLA-Agent = ⟨G_industry^A, G_state^A, G_recognition^A, G_oversight^A⟩
+      Liability = (issuer 25, verifier 25, wallet provider 15, agent provider 25, model provider 10)
+      Time-staging = (G_industry^A/G_oversight^A: 5y, G_state^A: 5-10y, G_recognition^A: 10-15y OECD)
