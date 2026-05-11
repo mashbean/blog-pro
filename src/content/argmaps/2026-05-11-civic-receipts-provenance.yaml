@@ -1,0 +1,296 @@
+slug: 2026-05-11-civic-receipts-provenance
+title: Civic Receipts 與證據鏈：條件可委任區的可審計工程原語
+subtitle: Civic Receipts and Provenance Chain — Argument Map (v2)
+
+# ─────────────────────────────────────────────────────────────
+# Central Thesis + Formal block
+# ─────────────────────────────────────────────────────────────
+coreThesis:
+  text: |
+    civic receipts 是條件可委任區 Z₂ 中 supported / substituted 可區分性的密碼學承載；落地需四原語 SA1-SA4——baseline SD-JWT-VC 加上條件性高階 BBS+ Cryptosuite 由 verifier policy 反向約束的混合策略；holder-controlled 為主搭配第三方 qualified preservation service 加密 backup 的雙軌設計，保存時長下限為 30 年（限「無聲明保留之 OECD 與 CRPD 締約國」範圍）；法庭可採性對接 US FRE 901(b)(9)、eIDAS 2024/1183 Chapter III §7-8、台灣電子簽章法 §4 / §10，跨境承認透過 Hague e-APP；跨境互認透過 G_recognition^A 軟法層 5 / 10 / 15 年三段推進。四原語對 F1 §3 5×3 矩陣 9-✓ 與 4-△ cell 在 Z₂ 範圍內覆蓋（定理 T1），對 Z₃-intrinsic 兩 cell（RT-ℬ ✗ / AA-ℬ ✗）為密碼學原語不可達邊界（定理 T2）。SA1 → SA2 → SA3 → SA4 為驗證依賴線性閉包，SA4 → SA1 為設計階段反饋環路。working thesis 與 strengthened thesis 嚴格區分；後者透過 crypto-agility by design、第三方 trusted preservation service 對接、G_recognition^A 多軌備援三大緩解 critical path 在五 CF 全觸發下保留核心功能。
+  summary: Civic receipts operationalise the supported / substituted distinguishability requirement within CRPD Z₂ via four standardisable primitives (cryptosuite / preservation / admissibility / recognition), with a linear SA1→SA2→SA3→SA4 verification closure and an SA4→SA1 design-time feedback loop, sustained under five counterfactuals only when three critical-path mitigations are bundled into the strengthened thesis.
+  formal:
+    expression: |
+      Receipt(r) ≜ ⟨cryptosuite_id, holder_did, agent_did?, deliberation_hash, retention_floor,
+                    jurisdictional_profile, audit_release_policy, recognition_chain, ...⟩  (14 group / 23 leaf)
+
+      V_receipt(r) ⇔ V_cryptosuite(r) ∧ V_preservation(r) ∧ V_admissibility(r) ∧ V_recognition(r)  (T3)
+                  ⇔ ex_ante_deliberation(r) ∧ ex_post_reversibility(r) ∧ decision_trace(r)         (T4)
+
+      CriticalPath : SA1 → SA2 → SA3 → SA4   (linear verification closure)
+      FeedbackLoop : SA4 → SA1               (jurisdictional_profile 反向約束 AcceptedSuites(τ))
+
+      Distinguishability(supported, substituted) ⇔ ex_ante ∧ ex_post_rev ∧ trace
+      CRPD GC1 §29 ≜ hard_constraint(audit_trail)
+
+      Cryptosuite ∈ { SD-JWT-VC (baseline) , BBS+ (advanced, conditional on W3C Rec) ,
+                      ZK-SNARK (narrow profile, F3 議題) }
+      Preservation = {holder-controlled} ⊕ {QPSP encrypted backup, threshold signatures}
+                     ;  retention ≥ 30y  (限「無聲明保留之 OECD + CRPD 締約國」)
+      Admissibility-profile(j) ∈ { us-fre-901b9 , eu-eidas-art25-35 (修正後 Chapter III §7-8) ,
+                                   tw-esign-art4-10 }
+      Recognition-anchor ∈ { OECD-AI-Principles-supplement (≈ 5y) ,
+                             CETS-225-protocol (≈ 10y) ,
+                             Hague-e-APP-extension (≈ 15y) }
+
+      T1 (Z₂ 包覆引理)    : ∀ cell ∈ M[i,j] (✓ ∪ △) , ∃ σ ⊆ {SA1..SA4} : P_degrade(cell|σ) ≤ θ₂ ≈ 0.7
+      T2 (Z₃-intrinsic 不可達) : ∀ σ , P_degrade(M[RT,ℬ] | σ) > θ₂ ∧ P_degrade(M[AA,ℬ] | σ) > θ₂
+
+      StressTest CF1..CF5 ⇒ working_thesis ≠ strengthened_thesis
+      strengthened_thesis ≜ working_thesis ∧ crypto_agility ∧ QPSP_interface ∧ multi-track_recognition
+    caption: |
+      civic-action-receipt 由 14 個欄位群 / 23 個 leaf field 承載，V_receipt 由 C1-C6 六道條件合取定義，定理 T3 把它拆為四原語子句、定理 T4 把它對應到 F1 三層可區分性。SA1 → SA2 → SA3 → SA4 為驗證依賴線性閉包，SA4 → SA1 是 jurisdictional_profile 反向約束 cryptosuite 集合的設計階段環路。Z₂ 範圍內 9-✓ 與 4-△ cell 由四原語覆蓋（T1），Z₃-intrinsic 兩 cell（RT-ℬ ✗ / AA-ℬ ✗）為定理 T2 不可達邊界。五個反事實壓力測試把 working thesis 與 strengthened thesis 拉開——後者透過三大緩解 critical path（crypto-agility / QPSP 對接 / 多軌承認）在 5 CF 全觸發下保留核心功能。
+    legend:
+      - symbol: SA1 / SA2 / SA3 / SA4
+        meaning: 四原語（cryptosuite 選擇 / 長期保存 / 法庭可採性 / 跨境互認）
+      - symbol: V_receipt(r)
+        meaning: receipt-validity 函數，由 C1-C6 六道條件合取定義
+      - symbol: T1 / T2 / T3 / T4
+        meaning: 定理一（Z₂ 包覆）/ 定理二（Z₃-intrinsic 不可達）/ 定理三（critical path 串接）/ 定理四（與 F1 三層可區分性對應）
+      - symbol: M[i, j]
+        meaning: F1 §3 5×3 必要條件矩陣中第 i 件 × 第 j 元的 cell；i ∈ {AT, RT, AA, BS, TC}、j ∈ {𝒩, ℱ, ℬ}
+      - symbol: Z₂ / Z₃-intrinsic
+        meaning: F1 §3.3 條件可委任區 / 常駐型結構不可委任區（由 ℬ 哲學基礎決定）
+      - symbol: P_degrade
+        meaning: F1 §3.2 概率退化函數（給定情境下 cell 退化機率）；θ₂ ≈ 0.7 為 Z₂ / Z₃ 劃界閾值
+      - symbol: AcceptedSuites(τ)
+        meaning: τ 時點仍未被破解且仍在 SDO 認可清單內的 cryptosuite 集合
+      - symbol: G_recognition^A
+        meaning: FTLA-Agent 跨境承認層（article 8 + article 17 §7），由 OECD / CETS 225 / Hague e-APP 三條軟法路徑 5 / 10 / 15 年三段承載
+      - symbol: ⊕
+        meaning: 雙軌組合（holder-controlled 為主、第三方 backup 為次）
+      - symbol: ≜
+        meaning: 「定義為」
+      - symbol: ⇔
+        meaning: 「當且僅當」
+      - symbol: ∧
+        meaning: 合取
+
+# ─────────────────────────────────────────────────────────────
+# Transitions
+# ─────────────────────────────────────────────────────────────
+transitions:
+  beforeDistinction: |
+    公式給出立場，下一步要把常見誤讀拉開。civic-action-receipt 在當前 wallet / VC 工程論述中常被當作「VC Presentation 的一個別名 + 寫入 audit log 就完成」處理；只要這個分類成立，現有 SD-JWT-VC + status list + EUDI ARF 三件套就足以覆蓋公民行動場景，supported / substituted 區分由 wallet UI 承擔。地圖的第一動作是把這個化約論述與「14 欄位 schema + V_receipt 六道條件 + 四原語落地」拉開。
+
+  beforePillars: |
+    區分本身只是宣告。要證明 civic receipts 需要 14 個欄位群 schema + 四原語合取（而非一句「在 VP 上加 audit log」），需要五條獨立來源的支撐——演繹面提供 14 欄位 schema 與 V_receipt 六道條件的形式骨架；歸納因果面提供 SD-JWT-VC / BBS+ / ZK-SNARK 三族在 verifier policy 三時點協商下的工程約束；溯因面提供 30 年下限的三窗口推導與雙軌設計排除設計 B 的規範推論；類比面提供三法域對接、ESI 類比限制、Apostille 公私文書分裂的承載結構；前瞻面提供 5 / 10 / 15 年三段軟法時程與非 OECD 並行軌。五條 pillar 對應五個論證類型，缺一立場就退化為呼籲。
+
+  beforeChain: |
+    pillars 是正向論證。但「critical path 為工程依賴鏈條而非修辭」這個主張，必須由一條具體的依賴鏈頂住。SA1 → SA2 → SA3 → SA4 把四原語以 D1-D3 三條形式條件串為線性閉包，D1 是 cryptosuite 在 retention 期間仍可驗證、D2 是 preservation 完整性對 admissibility 的前置、D3 是來源法域 admissibility 對目標法域承認的前置；SA4 → SA1 反饋環路顯示 jurisdictional_profile 反向約束 AcceptedSuites(τ)（例如 BBS+ over BLS12-381 不在 FIPS 186-5）。鏈條展開的目的是把抽象的「四原語合取」翻譯為可被機制性追溯的依賴條件，並把「PQC 威脅」「30 年保存」這類時間性議題嵌入鏈條結構。
+
+  beforeBorders: |
+    立場 + 因果鏈成立後，反論才真的具威脅。五個反事實壓力測試中，CF1（BBS+ 標準化延後）、CF2（失智長者集體失效）、CF4（BRICS 拒絕 OECD 路徑）三條對 SA1 / SA2 / SA4 主幹各構成獨立威脅；仔細檢驗每條反論的 likelihood-by-mechanism 推論，會發現它們不僅未推翻地圖立場，反而 flip to support 三大緩解 critical path 的必要性——亦即反論自己的證據結構，正好是 strengthened thesis 的第二層支撐。CF3（法庭拒絕）與 CF5（PQC 威脅）作為連鎖衝擊在 conditions 與 conclusion 中處理，避免 borders 過載。
+
+  beforeConditions: |
+    反論被吸收後，留下的是設計含意——在什麼條件下，四原語可被翻譯為可被檢驗的工程或法律義務？六道條件把抽象的「Z₂ 內可履行 CRPD GC1 §29 audit trail」翻譯成可被檢驗的條款，同時填入 V_receipt 的 C1-C6 子句位置。這六道條件構成 V_receipt 結構在工程 / 法律 / 規範三層的具體展開（並非 V_receipt 的別稱）——cryptosuite mixed strategy、30 年下限與設計 B 排除、三法域 admissibility profile、三軟法 anchor、working / strengthened thesis 區分、CRPD §29 audit trail 義務（含反向使用防護）。
+
+  beforeConclusion: |
+    把矩陣、依賴鏈、三反論、六條件、CRPD 約束、時間階段化六層收束起來，地圖最終要說的是工程極限不等於規範極限，四原語落地的條件性可行性、跨境治理的時間階段化、working / strengthened thesis 的嚴格區分三件事必須同時成立才能談承諾。對台灣讀者而言，TW DIW 即將進入 LLM-agent 階段時，若未具備 civic receipts 工程，supported decision 證據鏈無法在民事訴訟 30 年窗口內被重建；具體建議落在 DIW v1.0 spec 明文 QPSP 對接條款 + 30 年保存承諾。
+
+# ─────────────────────────────────────────────────────────────
+# Foundational Distinction
+# ─────────────────────────────────────────────────────────────
+distinction:
+  rejected:
+    label: ❌ 被拒絕
+    title: civic-action-receipt 可化約為 VC Presentation 加 audit log
+    body: |
+      把 civic-action-receipt 視為 W3C VCDM v2.0 §5.7 / §7.1 範疇下 VP 的別名，由 wallet 端在每次出示時寫入 audit log 即完成。在這個分類下，supported / substituted 區分由 wallet UI 承擔，跨境互認由 EUDI Wallet ARF + OpenID4VP 三件套覆蓋，30 年保存與法庭可採性是「下游」工程議題、不影響 schema 設計。混淆 VP 與 receipt 會帶來兩個論證代價——其一，VCDM v2.0 §5.7 對 ZKP 採「合成自原始 VC 但不含原始資料」的表述，audit trail 對「可被 court order 解開的 content_hash 對位」需求即無從成立，正面違反 CRPD GC1 §29 independent review 程序要求；其二，FRE 902(14) 的 process of digital identification 在 Advisory Committee Note 中以 hash value comparison 為典型例，VP 本身不含 hash 對位欄位，receipt 必須含 content_hash 才能符合 902(14) 的工程化條件。
+    formal: "Receipt(r) ≜ VP(r) ∧ AuditLog(r)   ∧   ⟨content_hash, jurisdictional_profile, recognition_chain⟩ ⊥ Receipt"
+
+  accepted:
+    label: ✓ 被辯護
+    title: civic-action-receipt 是 (Subject, Verifier) → Audit 方向的 commitment 物件，由 14 欄位 schema + V_receipt 六道條件 + 四原語落地承載
+    body: |
+      civic-action-receipt 與 VP 的形式位置不同——VP 是 Subject → Verifier 方向的 disclosure 物件，receipt 是 (Subject, Verifier) → Audit 方向的 commitment 物件，由 verifier 端產出、holder 端與 audit trail 端各保留一份。schema 為 14 個欄位群（巢狀展開合計約 23 個 leaf field），繼承 F1 §5.4 DeliberationRecord 與 §7.3.1 enabling envelope，新增 9 個欄位群對應 SA1-SA4 四原語的工程承載（cryptosuite_id / preservation_layer + retention_floor / content_hash + qualified_person_attestation + jurisdictional_profile / recognition_chain + cross_border_envelope）。V_receipt 由 C1-C6 六道條件合取定義，定理 T3 把它拆為四原語子句、定理 T4 把它對應到 F1 三層可區分性（ex_ante_deliberation ∧ ex_post_reversibility ∧ decision_trace）。
+    formal: "V_receipt(r) ⇔ V_cryptosuite(r) ∧ V_preservation(r) ∧ V_admissibility(r) ∧ V_recognition(r)  ;  CriticalPath: SA1 → SA2 → SA3 → SA4  ;  FeedbackLoop: SA4 → SA1"
+
+# ─────────────────────────────────────────────────────────────
+# Five Supporting Pillars
+# ─────────────────────────────────────────────────────────────
+pillars:
+  - section: §3 — 演繹（14 欄位 schema + V_receipt 六道條件 + 定理 T1-T4）
+    title: 14 個欄位群 schema 與 V_receipt 函數構成四原語的形式骨架
+    role: 提供合取分析骨架——若 schema 與 V_receipt 不能形式化為函數，四原語只能停在語言層；若四原語在 F1 5×3 矩陣的對應 cell 不明示，T1 包覆引理與 T2 不可達引理就只是修辭。
+    body: |
+      把 F1 §5.4 DeliberationRecord（11 個欄位群）與 §7.3.1 enabling envelope 合併得到 14 個欄位群 schema，巢狀展開合計約 23 個 leaf field。schema 採兩層計數規約——「欄位群」為最上層命名單元、「leaf field」為展開至基本型別之終端條目；繼承自 DR / ENV 共 11 群、新增 9 群（計數以最強歸屬計），與 leaf 層 1.22:1 比例對位。新增欄位均對應具體 sub-arg 工程需求：cryptosuite_id 對應 SA1 mixed strategy 三時點協商、preservation_layer / retention_floor 對應 SA2 雙軌設計、content_hash / qualified_person_attestation 對應 SA3 FRE 901(b)(9) 對接、jurisdictional_profile 對應 SA3 三法域分軌、recognition_chain / cross_border_envelope 對應 SA4 軟法層三段、audit_release_policy 對應 GDPR Art 5(1)(b)(c) 與 EDPB Statement 1/2024。V_receipt 由 C1（cryptosuite robustness）+ C2（agent-vs-holder distinguishability）+ C3（preservation）+ C4（admissibility）+ C5（recognition）+ C6（revocability）六道條件合取定義，τ 為 receipt 被驗證的當下時間，AcceptedSuites(τ) 是 τ 時點仍未被破解且仍在 SDO 認可清單內的 cryptosuite 集合。四原語對 F1 5×3 矩陣 9-✓ 與 4-△ cell 在 Z₂ 範圍內覆蓋（T1 包覆引理）；對 RT-ℬ ✗ 與 AA-ℬ ✗ 兩 cell 為密碼學原語不可達邊界（T2 不可達引理）；定理 T3 把 V_receipt 拆為四原語子句、定理 T4 把它對應到 F1 三層可區分性。
+    finding: 14 欄位 schema 與 V_receipt 函數構成 F2 四原語的形式骨架；T1 與 T2 把覆蓋邊界與不可達邊界同時釘住，下游 writer 不可主張 civic-action-receipt 能解決 AI 代理根本責任問題（違反 T2）。
+    formal: "schema = 14 group / 23 leaf  ;  V_receipt(r) = ⋀_{i=1..6} Cᵢ(r)  ;  T1: ∀ cell ∈ (✓ ∪ △) , ∃ σ : P_degrade(cell|σ) ≤ θ₂  ;  T2: ∀ σ , P_degrade(M[RT,ℬ]|σ) > θ₂ ∧ P_degrade(M[AA,ℬ]|σ) > θ₂"
+
+  - section: §4 — 歸納 + 因果（SD-JWT-VC / BBS+ / ZK-SNARK 三族 + verifier policy 三時點）
+    title: 混合策略是 verifier policy 反向約束的工程結構，三時點決策承擔協商
+    role: 提供 SA1 cryptosuite 選擇的工程基底——若三族技術不被明示為「規範成熟度 / 簽章大小 / 驗證成本 / unlinkability / quantum-safe / hardware key custody 六維各有取捨」，「BBS+ 為高階」的條件成立分層會被讀成 marketing；若 mixed strategy 被當作「同份 credential 同時帶三族簽章」會錯失工程結構。
+    body: |
+      SD-JWT-VC 屬 IETF OAuth WG 軌道，RFC 9901（2025-04）+ draft-16（2026-04-24）穩定，EUDI Wallet ARF 2025-12 iteration §2.3.1 明文 MUST 支援；hardware key custody 全面支援（Secure Enclave / StrongBox / TPM），PQC 遷移直接（換 ML-DSA / Falcon 即可），但無 unlinkability。BBS+ Cryptosuite 屬 W3C VC WG 軌道，W3C vc-di-bbs 於 2026-04-07 進入 CRD、IRTF CFRG draft-07 於 2025-08 通過 Last Call、W3C VC WG 2025-10 charter renewal 對 Recommendation 時程的字眼為「best-effort Q4 2026 / Q1 2027」；原生 multi-message selective disclosure + unlinkable proof generation，但 Secure Enclave / StrongBox / TPM 不原生支援 BLS12-381，prover 須在 application memory 執行；BLS12-381 在量子電腦下不安全、無近期 PQC 替代路徑。ZK-SNARK on VC 屬廠商實作軌道，W3C Explorer Note (2024-09) 明文標示「not on Recommendation track」，定位為 complex predicate 專用 advanced narrow profile，不替代 baseline。「BBS+ 為高階」採規範性的、條件成立的分層論述——條件為 W3C BBS Cryptosuite 達 Recommendation；若 2027 Q1 前未達，baseline 退回到只用 SD-JWT-VC、BBS+ 分層推遲到 2028。mixed strategy 是 verifier policy 反向約束 issuer 與 holder 選擇的工程結構，由三個時點承擔——(a) issuance-time（issuer 選 cryptosuite，一張 credential 用一族）+ (b) presentation-time（holder 從 wallet 多份 credentials 挑選符合 verifier policy 的呈現方式）+ (c) verification-time（verifier 接受或拒絕，並回傳 fallback 提示）。協商通道為 OpenID4VP draft-23 + DIF Presentation Exchange v2.1。
+    finding: 三族技術的工程版圖決定 SA1 mixed strategy 的承載結構；verifier policy 三時點協商是 SA1 對 SA2-SA4 三條下游原語產生工程約束的具體機制，hardware key custody 在 BBS+ 的工程缺口為 §11 open question O9（ARM TrustZone BBS+ prover）議題。
+    formal: "Cryptosuite ∈ {SD-JWT-VC (RFC 9901 + draft-16, MUST baseline), BBS+ (CRD, conditional advanced), ZK-SNARK (Explorer Note, narrow profile)}  ;  MixedStrategy ≜ ⟨issuance-time, presentation-time, verification-time⟩  ;  verifier-policy reverse-constrains AcceptedSuites(τ)"
+
+  - section: §5 — 溯因（30 年下限三窗口推導 + 三失效模式 + 設計 A / B / C）
+    title: 30 年下限由三規範性窗口聚合推導，雙軌設計排除設計 B
+    role: 提供 SA2 長期保存的溯因論證——從 supported decision-making 的 30 年規範要求反推工程設計判準。若 30 年下限沒有三窗口推導，「分析性建議數」會退化為任意選擇；若設計 B 不被明示排除，court override + 第三方獨立行使私鑰會把 SA2 整體拉回 CRPD §28 substituted 禁令範圍。
+    body: |
+      30 年下限採規範性與經驗性兩類證據的下限均衡推導，由三規範性窗口的最大值聚合——(i) CRPD 給付請領訴訟時效（德國 BGB §197(1) Nr. 1 對確定判決所確認之退休給付請求權 30 年 + SGB I §45 未告知延長，取窗口最大值 30 年）+ (ii) 失能監護宣告爭議的回溯期（極端案例 30 年）+ (iii) Toeslagenaffaire 級事後追溯期（自行推估事後 8 年發現 + 14 年救濟長尾共 22 年）。三窗口聚合落在 22-30 年區間，本文取 30 年並限定為「無聲明保留之 OECD 與 CRPD 締約國」範圍（明示印度 DPDP、巴西 LGPD、印尼 PDP、Aadhaar UIDAI 短時效不普適）。holder-only 設計在三場景下失效——失智症（CDR ≥ 2 後 wallet 私鑰失能）+ 裝置遺失 / 損壞 / OS 強制更新 + 死亡後 digital estate（RUFADAA 假設 fiduciary 能拿到 credentials，self-custody wallet 在缺乏 continuing instructions to fiduciary 時 fiduciary 無法取得）。三種雙軌設計比較中——設計 A（第三方持加密 backup，holder 持唯一解密鑰）+ 設計 C（threshold signatures，建議起點 t=2 / n=3）通過 CRPD §28 檢驗；設計 B（multi-sig escrow with court override，第三方獨立行使私鑰）直接違反 §28 對 substituted 的禁令，本文不採。第三方公證人在雙軌設計下採「保存代理」定位——QPSP 持加密 backup 與完整性證據鏈，不持解密鑰，不替代 holder。Estonia X-Road 25 年保存實踐 + 北歐 BankID 死亡持卡人處理（家屬須提供死亡證明 + 繼承資格 skifteattest + 既存識別資料）構成案例證據。
+    finding: 30 年下限為「分析性建議數」而非「規範性硬約束」，限定範圍明示；設計 A 與設計 C 通過 §28 檢驗、設計 B 違反，雙軌設計採「日常 holder-controlled / 法庭 holder + 第三方共管 / 爭議全程第三方主管」三層方案。
+    formal: "retention_floor = max(W_CRPD_claim, W_capacity_dispute, W_Toeslagen) ≥ 30y  ;  scope ≜ OECD ∩ CRPD_party ∖ reserved  ;  Design = A (QPSP encrypted backup) ⊕ C (threshold t/n)  ;  Design B ⊨ violates CRPD §28"
+
+  - section: §6 — 歸納 + 類比（三法域對接 + ESI 類比 + Apostille 公私文書區分）
+    title: 法庭可採性對接 FRE 901(b)(9) / eIDAS 修正後 §7-§8 / 台灣電子簽章法 §4-§10，Apostille 公私文書區分為破口
+    role: 提供 SA3 法庭可採性的對接結構——若三法域 admissibility profile 不被明示對位，jurisdictional_profile 欄位即無語義邊界；若 ESI 類比的限制不被釘住，Sedona Principles 6 / 11 對 receipts 揭露範圍與 metadata 邊界的混用會掏空 chooser_signature 工程；若 Mata v Avianca 不被定位為負面先例，agent-mediated receipts 在缺乏 chooser_signature 時可能被法院視為 ChatGPT 幻覺紀錄整批不採。
+    body: |
+      三法域對接表把 admissibility profile 拆為三軌——US 採 FRE 901, 902(14), 803(6) + Lorraine v Markel ESI authentication 五步測試 + Daubert 五因子；EU 採 Regulation (EU) 2024/1183 Chapter III §7（preservation；前身 Art 33-34）+ §8（QES 自動等同手寫簽章；前身 Art 35）+ ETSI TS 119 511 / 512；台灣採電子簽章法 §4 / §10 + 民訴法 363 / 363-1 條 + 行政院 2026 修正草案（立法院審議中）。holder-controlled receipts 不走 FRE 902(14) 自證真實，改走 FRE 901(b)(9)「process or system 描述 + accuracy 證明」較重路徑，由 chooser_signature + audit-by-design + revocation_endpoint 三件套承擔。ESI 類比有限——FRCP 26(f) / 34(b) + Sedona Principles 預設「enterprise records」，civic receipts 預設「holder-controlled assertion」帶有訴訟動機；FRE 803(6) hearsay rule 對 receipts 有三條應對路徑——verbal act（行為之發生，落出 hearsay 適用範圍）+ present sense impression（FRE 803(1)，由 timestamp_proposed / decided / presented 三時點承載）+ 803(6) 擴張（Grimm-Capra-Joseph 2017 主張個人 regularly conducted personal record-keeping）。Mata v Avianca, 22-cv-1461 (S.D.N.Y. 2023) 是負面先例 / 反面教材而非合法樣板——任何 agent-mediated receipt 若無 chooser_signature 明示 holder 在場簽署，可能被法院視為 ChatGPT-style 幻覺紀錄整批不採；schema 將 agent_did 設計為 nullable、要求 agent_did ≠ null 時 agent_delegation_proof 與 agent_delegation_capability_hash 兩欄位皆非 null 且可驗證至 subject_did，即此負面先例的工程修正。Apostille 公私文書區分為跨境承認層破口——civic receipt 若由公權力機關（如健保署、長照管理中心）為 issuer，可主張屬廣義 public document；由私人 issuer 則屬私文書，Apostille 不適用、跨境承認須改走 1965 服務公約或個案外交認證。Daubert 五因子在 BBS+ 與 ZK-SNARK 上的張力——BBS+ 第四、第五因子（standards / general acceptance）有舉證壓力，須援引 Tessaro-Zhu (2023) EUROCRYPT 與 Camenisch-Drijvers-Lehmann (2016) TRUST 安全證明；ZK-SNARK 在 federal civic-action 場景未建立 general acceptance，定位為 narrow profile。
+    finding: SA3 法庭可採性對接三法域有明確路徑，Apostille 公私文書區分構成跨境承認層破口（civic receipts 是否屬 public document 須補論）；Mata v Avianca 為負面先例，chooser_signature 工程是回應此負面先例的具體修正；hearsay rule 三條應對路徑為「初步主張」並列入 §11 open question。
+    formal: "jurisdictional_profile ∈ {us-fre-901b9, eu-eidas-art25-35 (修正後 §7-§8), tw-esign-art4-10}  ;  holder-controlled → 901(b)(9) 較重路徑 (¬ 902(14))  ;  hearsay-response ∈ {verbal_act, present_sense_impression, 803(6)-extension}  ;  Apostille(receipt) ⇔ public_document(issuer)"
+
+  - section: §7 — 類比 + 前瞻（5 / 10 / 15 年三段時程 + 非 OECD 並行軌）
+    title: G_recognition^A 軟法層分三段、OECD 外覆蓋空白為承認而非預測
+    role: 提供 SA4 跨境互認的治理回應——若 FTLA 第三層 G_recognition^A 不被拆為 OECD AI Principles 補充指引 5 年期、CETS 225 補充協議 10 年期、Hague PIL e-APP extension 15 年期三段，整層估計會被「跨境治理永遠是政治不可行」反論掏空；若 OECD 外覆蓋空白不被明示為「承認」而非「預測」，非 OECD 並行軌的設計會被誤讀為西方中心主義的補丁。
+    body: |
+      G_recognition^A 在 F1 §7.8 既有用法為 10-15 年總體估計，F2 拆為三段——(i) OECD AI Principles 補充指引（5 年期 2026-2031）：2026-2027 OECD AI Working Party 將 civic receipts 列入工作項、2027-2029 OECD 發布 supplementary guidance、2029-2031 OECD AI Principles 第二輪修訂寫入 Principle 1.5 accountability implementation guidance；條件變項為 OECD 內政治意願不中斷、至少一個 leading member 率先採納、G7 Hiroshima Process Friends Group 不中斷。(ii) CETS 225 補充協議（10 年期 2026-2035）：2027-2028 Conference of Parties 啟動議題、2028-2030 Drafting Committee 草擬、2030-2032 Committee of Ministers 通過、2032-2035 補充協議生效；條件變項為 CETS 225 簽署國維持簽署地位、CoE 補充協議起草歷史平均耗時 5-8 年構成下限。(iii) Hague PIL e-Apostille extension（15 年期 2026-2041）：2026-2028 Special Commission 列入工作項、2028-2031 Permanent Bureau preliminary document、2031-2034 通過 Recommendations、2034-2041 各國內法 implementation 與全面運作；Apostille 概念之根本擴展可能不適合 HCCH 保守風格、亦可能改走 1965 服務公約之數位化，是「最有可能」而非「唯一可能」。OECD 涵蓋全球 GDP 約 65% 但人口僅約 18%（F1 §7.5.4），三條軟法路徑均存在 OECD 外覆蓋空白；OECD 外覆蓋空白為「承認」而非「預測」、並非透過 SA4 可消除的不可消除邊界。非 OECD 並行軌設計——(a) AU Continental AI Strategy 2024（mobile-money + foundational ID 整合）+ (b) APEC CBPR + Global CBPR Forum 2024 Declaration（對台灣特別重要——非 OECD / 非 CoE / 非 EU 之主要承接軌道）+ (c) 印度 DEPA consent artefact（與 civic-action-receipt 結構同構，schema-level functional equivalence 待 DEPA 規範文本進一步公開）+ (d) 巴西 LGPD + ANPD adequacy / 印尼 PDP / GCC Mutual Recognition Initiative / ASEAN DEFA。EUDI 強制階段（Regulation (EU) 2024/1183 Art 5a 要求 2026-12 起會員國強制提供）為 OECD 5 年路徑 accelerator。軟法歷史轉化軌跡——1980 OECD Privacy Guidelines → 2018 GDPR 經 38 年；1990 OECD Cryptography Guidelines → 2001 Budapest Cybercrime Convention 經 11 年；2019 OECD AI Principles → 2024 CETS 225 經 5 年；轉化路徑存在但變項是政治意願與時間。
+    finding: G_recognition^A 三段時程為條件性估計、order of magnitude，非絕對句式；OECD 外覆蓋空白為承認非預測；對台灣的具體承載——APEC CBPR + Global CBPR Forum 為主要承接軌道；CF4 觸發下兩岸軌結構性斷裂為 F2 thesis 對台灣場景的最弱承諾。
+    formal: "G_recognition^A = ⟨anchor_OECD (≈ 5y), anchor_CETS225 (≈ 10y), anchor_Hague (≈ 15y)⟩  ;  parallel-track ∈ {AU, APEC-CBPR, India-DEPA, LGPD, PDP, GCC, ASEAN-DEFA}  ;  OECD-coverage-gap ≜ recognition ¬ prediction"
+
+# ─────────────────────────────────────────────────────────────
+# Causal Chain (critical path SA1 → SA2 → SA3 → SA4 + feedback loop SA4 → SA1)
+# ─────────────────────────────────────────────────────────────
+chain:
+  title: 四原語驗證依賴 SA1 → SA2 → SA3 → SA4 線性閉包 + SA4 → SA1 設計階段反饋環路
+  legend:
+    - kind: deterministic
+      label: 機制必然（結構性依賴，不依賴外部 trigger）
+    - kind: probabilistic
+      label: 概率性（需要外部 trigger 才實現，但概率不可忽略）
+  steps:
+    - tag: D1
+      kind: deterministic
+      text: |
+        SA1 → SA2 形式條件：preservation 對 30 年後 verifier 仍可驗證，iff cryptosuite 在 retention_floor 期間內 hash + signature 未被破解、或 QPSP 執行 timestamp 重簽（V_preservation(r) ⇒ Crypto_Robust(r.cryptosuite_id, r.retention_floor) ∨ TimestampReseal(r.timestamp_token, r.retention_floor)）。SD-JWT-VC 的 JOSE 簽章在 30 年內可重新驗證、BBS+ 在 BLS12-381 公鑰的 30 年保存上需 accumulator 狀態持續維護——cryptosuite 選擇結構性決定 preservation 工程負擔。
+    - tag: D2
+      kind: deterministic
+      text: |
+        SA2 → SA3 形式條件：admissibility 要求 receipt 在訴訟發生時可被「再現 + 驗證」，preservation 是 admissibility 的前置條件（V_admissibility(r) ⇒ V_preservation(r) ∧ ContentHashMatch(r.content_hash, retrieved_content) ∧ QualifiedPersonCertification(r.qualified_person_attestation)）。若 receipt 在訴訟提起前已被竄改或遺失，FRE 902(14) 的 process of digital identification 不成立——preservation 結構性決定 admissibility 可能性。
+    - tag: D3
+      kind: deterministic
+      text: |
+        SA3 → SA4 形式條件：跨境互認要求 receipt 在來源法域 J₁ 已具備 admissibility、且目標法域 J₂ 透過 recognition mechanism 承認 J₁ 的 admissibility（V_recognition(r, J₁, J₂) ⇒ V_admissibility(r) under J₁ ∧ Recognize(J₂, J₁, r.jurisdictional_profile) ∧ ∃ ra ∈ r.recognition_chain : ra.target = J₂）。單一法域內 admissibility 結構性決定跨境承認的可能性。
+    - tag: F1
+      kind: probabilistic
+      text: |
+        SA4 → SA1 反饋環路（設計階段約束）：jurisdictional_profile 反向約束 AcceptedSuites(τ) 集合。FRE 902(14) 自證真實對「數位簽章」的承認以 NIST-approved algorithm 為前提——SD-JWT-VC 的 ES256 / EdDSA 屬於 NIST-approved，BBS+ over BLS12-381 不在 FIPS 186-5 範圍，902(14) 自證真實對 BBS+ 屬未確定（無判例）。形式語義（lattice over (cryptosuite, jurisdiction) 對）歸 §11 open question O1，但反饋環路在設計階段已實證可見。
+    - tag: T-CRPD
+      kind: probabilistic
+      text: |
+        CRPD §29 audit trail 義務的時間性依賴：30 年 retention_floor + 5-10 年 PQC migration = 35-40 年；若 cryptographically relevant quantum computer 在 2035-2045 出現（主流估計區間），2026-2035 期間生成的 receipts 在 2045-2055 期間 verification 不安全（Mosca's theorem 機制）。crypto-agility by design（cryptosuite 抽象層 + hybrid signing during transition + archive re-anchoring 自動化）是緩解路徑，但 BBS+ 的 PQC 替代（lattice-based unlinkable signature, Bootle et al. 2024 後續）仍在 IACR ePrint 研究級階段。
+    - tag: T-Feedback
+      kind: probabilistic
+      text: |
+        CRPD GC1 §29 → §12 反向使用環路：CF2 觸發後（失智長者 receipts 集體失效），CRPD Committee 援引 §29 audit trail 要求作為 §12 違反證據——civic receipts 工程未能區分 supported / substituted 即構成 Art 12 違反證明而非合規證明。strengthened thesis 透過三大緩解 critical path（threshold + court anchor + cognitive endorsement engineering）阻擋此反向使用；working thesis 在 CF2 觸發下實證失效。
+
+# ─────────────────────────────────────────────────────────────
+# Border Cases — flip to support (對應 article §9 CF1 / CF2 / CF4)
+# ─────────────────────────────────────────────────────────────
+borders:
+  - label: 反論 1
+    title: CF1 BBS+ 標準化順延 — 高階分層不成立故 mixed strategy 是過度設計
+    pivot: |
+      W3C BBS Cryptosuite WG 2026 Q4 預定 Recommendation 順延至 2029，順延原因可拆三條機制鏈——互操作測試失敗鏈（BLS12-381 與 hardware token batch verification 不相容）+ IPR 揭露鏈（IBM 2004-2009 group signature 專利族與 Microsoft anonymous credential 申請的 W3C PAG 處理時程不可預期）+ 政策爭議鏈（歐盟、美國、日本對 unlinkability 強度評估分歧）。第一條已部分顯現——2024 W3C BBS Cryptosuite WG issue tracker 中關於 BLS12-381 與 hardware 相容性的 issue 至 2025 中尚未關閉。觸發機率 medium。實證強度上，若 BBS+ 延後到 2029-2031，SA1「baseline + 高階」雙層分工的高階層消失，mixed strategy 退化為 SD-JWT-VC-only，整個四原語架構的工程複雜度反論成立。
+    flip: |
+      仔細看，CF1 觸發反向支撐「mixed strategy 是條件成立的工程結構」這條紀律。F2 thesis 在 §4.4 已明示「BBS+ 為高階」採規範性的、條件成立的分層論述（條件為 W3C BBS Cryptosuite 達 Recommendation），fallback 表述為「若 2027 Q1 前未達，baseline 退回到只用 SD-JWT-VC、BBS+ 分層推遲到 2028」。CF1 觸發後 SA1 退化為 SD-JWT-VC-only baseline，但 SA1 主結構（verifier policy 三時點反向約束）仍成立，OpenID4VP + DIF PE 協商通道不依賴 BBS+；IETF JOSE/COSE 對 BBS 演算法獨立 RFC 路徑作為 W3C 路徑的 fallback、EU Wallet Consortium Phase 2 dual-issuance 試行（DE / NL / SE 三成員國）構成承載結構。CF1 反論反向支撐 strengthened thesis 對「條件性可行性」的承諾——working thesis 對 BBS+ 高階層的依賴在 CF1 觸發下需條件化重述，這正是 strengthened thesis 主張的「不依賴單一技術路徑」紀律的具體表現。
+
+  - label: 反論 2
+    title: CF2 失智長者 receipts 集體失效 — holder-controlled 預設崩塌故 SA2 整層失效
+    pivot: |
+      2030 年台灣 / EU / 日本三地同時發現 civic receipts 在失智長者場景的 substituted regime 退化問題。WHO 2024 估計全球失智人口 2030 約 7,800 萬，三地 65+ 失智盛行率 2030 約 7-10%、合計約 1,200-1,500 萬人；即使「30% 退化率」（假設值，需 pilot study 驗證）取保守估計，substituted 化 receipts 規模約 ≥ 350 萬人份。機制鏈三條——cognitive endorsement 工程缺口（wallet UX 普遍預設成人完全認知）+ 長照人員代簽常態化（外籍看護為效率代為操作 wallet，holder 端 biometric authentication 在失智者場景容易被物理引導完成，形成物理 holder 但 cognitive non-holder 狀態）+ 法定代理人空窗（台灣 2019 監護宣告改革「輔助宣告 + 意定監護」覆蓋率 2024 仍不足失智人口 5%）。觸發機率 medium-high (50-65%)。實證強度上，若失智長者規模化退化為 substituted，CRPD GC1 §29 audit trail 義務在 30 年窗口內難以履行，§29 會被 CRPD Committee 反向使用為 §12 違反證據——SA2 holder-controlled 規範基礎被翻轉。
+    flip: |
+      仔細看，CF2 觸發反向支撐「雙軌設計（設計 A + C 混合）與 threshold signatures + supporter co-signing 緩解 critical path」這條紀律。F2 strengthened thesis 在 §5.3 已建立——日常 receipts holder-controlled、長照場景 holder + 法定代理人 + 醫療機構代表三方 threshold signatures（建議起點 t=2 / n=3，並開放配置空間）、失智宣告後 wallet 在 receipts 生成前須有法院核可的監護人 / 輔助人簽字 anchor、cognitive endorsement 工程強制（EUDI ARF 後續版本加入失智宣告者帳戶的 micro-consent 確認延遲與 supporter co-signing 強制）。CF2 反論反向支撐 §29 audit trail 義務需透過「工程修正 + 法律制度」雙層履行——supported decision-making 法律基礎（台灣 2019 監護宣告改革、Israel 2016 §67B-67F、Peru DL 1384 (2018)）與 civic receipts 工程修正共同承擔。CF2 也釘住 working / strengthened thesis 區分的具體政策意涵——working thesis 在 CF2 單獨觸發下實證失效、strengthened thesis 透過三大緩解阻擋 §29 反向使用，這是 F2 區分兩層命題的最直接證據。剩餘風險（threshold signatures 在失能群體規模化部署的 UX 成本、法院命令 anchor 對偏鄉低收入長者可近性不足）為 §11 open question O38（threshold signatures pilot study 需求）議題。
+
+  - label: 反論 3
+    title: CF4 BRICS 集體拒絕 OECD 路徑 — G_recognition^A 三段時程在多極世界不成立
+    pivot: |
+      2032 年 BRICS 擴員（中、俄、印、巴、南非、阿聯酋、伊朗、埃及、衣索比亞、沙烏地阿拉伯）集體拒絕以 OECD AI Principles 2024 update 為核心的全球 civic receipts 互認路徑，轉而推動 BRICS-led AI 治理替代框架。機制鏈三條——中國《生成式人工智慧服務管理暫行辦法》(2023-08) Art 4 外推（政府預審 issuer 列表、跨境 verifier 須在中國境內備案）+ BRICS Kazan Declaration 2024 + Rio 2025 對「全球南方主體性」「對等技術治理」「拒絕單極技術標準」三項立場 + 資料 sovereignty 立法浪潮（印度 DPDP 2023、印尼 PDP 2022、巴西 LGPD 2018、俄 152-FZ 2022 修訂）。集體拒絕機率 medium、部分拒絕機率 high。實證強度上，若 BRICS 集體拒絕 OECD 路徑，三條軟法路徑皆受影響，全球 civic receipts 分裂為 OECD 軌與 BRICS-AAGF 軌兩個不互通網絡，G_recognition^A 整層估計失效。
+    flip: |
+      仔細看，CF4 觸發反向支撐「OECD 外覆蓋空白為承認非預測 + APEC CBPR / ITU 中性對話橋樑 + 台灣對中軌道特殊衝擊」這條紀律。F2 thesis 在 §7.2 已明示「OECD 涵蓋全球 GDP 約 65% 但人口僅約 18%」、三條軟法路徑均存在 OECD 外覆蓋空白、OECD 外覆蓋空白為「承認」而非「預測」、非 OECD 並行軌（AU、APEC CBPR、印度 DEPA、巴西 LGPD、印尼 PDP、GCC、ASEAN DEFA）以「並行」而非「替代」角度設計。CF4 觸發後緩解設計——APEC CBPR 作為中間橋樑（中、越、台、韓、日、菲、墨、加、美、智利、紐、澳皆在 APEC）+ ITU AI for Good 作為非結盟對話（193 成員、無 OECD / BRICS 軸線預設）+ Hague PIL 維持中性（91 成員含中、俄、印、巴）。對台灣的特殊衝擊在三個場景同時顯現——陸配權利保護（依親居留 receipts vs 大陸法院證據能力）+ 台商長期居留 receipts（生涯 20-40 年跨境正好落在 receipts 設計核心保存窗口內）+ 兩岸投資人權利保護（CIETAC 對 holder-controlled receipts reliability 評估缺乏先例 + 〈海峽兩岸投資保障和促進協議〉(2012) 預設紙本書面證據）。CF4 反論反向支撐 working / strengthened thesis 對台灣場景的承諾差距——strengthened thesis 對台灣兩岸跨境權利主張場景的承諾弱於對 OECD 內互認場景的承諾、working thesis 在 CF4 觸發下對台灣場景實證失效；這是 F2 區分兩層命題後在台灣場景的最具體政策意涵，並導出對 TW DIW v1.0 spec 明文 QPSP 對接條款 + 30 年保存承諾的具體建議。
+
+# ─────────────────────────────────────────────────────────────
+# Procedural Conditions (六道條件 / firewalls)
+# ─────────────────────────────────────────────────────────────
+conditions:
+  title: 把 civic receipts 四原語翻譯成可被檢驗的工程或法律義務，必須通過六道條件
+  formalPrelude: "deployable_receipt(r) ⇔ V_cryptosuite(r) ∧ V_preservation(r) ∧ V_admissibility(r) ∧ V_recognition(r) ∧ V_thesis_layer(r) ∧ V_crpd_audit(r)"
+  items:
+    - title: V_cryptosuite — mixed strategy 三時點決策 + AcceptedSuites(τ) 時點演化
+      body: |
+        SA1 cryptosuite 選擇須採 mixed strategy 三時點決策——(a) issuance-time decision（issuer 選 cryptosuite，一張 credential 用一族）+ (b) presentation-time decision（holder 從 wallet 多份 credentials 挑選符合 verifier policy 的呈現方式）+ (c) verification-time decision（verifier 接受或拒絕，並回傳 fallback 提示）。協商通道為 OpenID4VP draft-23 `client_metadata.vp_formats_supported` + DIF Presentation Exchange v2.1 `submission_requirements`；AcceptedSuites(τ) 在 τ 時點演化規則歸 G_industry^A 層，由 SDO 機制設計（§11 open question O2）。「BBS+ 為高階」為條件成立分層——若 2027 Q1 前 W3C BBS Cryptosuite 未達 Recommendation，baseline 退回到只用 SD-JWT-VC、BBS+ 分層推遲到 2028。hardware key custody 在 BBS+ 的工程缺口可透過 ARM TrustZone BBS+ prover 部分緩解（§11 open question O9）。
+      formal: "V_cryptosuite: r.cryptosuite_id ∈ AcceptedSuites(τ) ∧ SigVerify(r.chooser_signature, r.subject_did) ∧ HolderBind(r.holder_binding_method, r.cryptosuite_id)"
+    - title: V_preservation — 30 年下限 + 設計 A 加密 backup（QPSP 不持解密鑰）+ 排除設計 B
+      body: |
+        SA2 雙軌保存須採設計 A（QPSP 持加密 backup 與完整性證據鏈、holder 持唯一解密鑰）+ 設計 C（threshold signatures，建議起點 t=2 / n=3，並開放配置空間）混合，排除設計 B（multi-sig escrow with court override，第三方獨立行使私鑰違反 CRPD §28）。30 年下限為「分析性建議數」而非「規範性硬約束」，限定為「無聲明保留之 OECD 與 CRPD 締約國」範圍；規範性下限應引自 eIDAS implementing acts 或國內法。preservation_layer ≠ holder-controlled 時 timestamp_token 須非 null（IETF RFC 3161 TSP 或 RFC 5816 升級版）。第三方公證人在雙軌設計下採「保存代理」定位（避用「中介信任」措辭），不持解密鑰、不替代 holder。
+      formal: "V_preservation: r.preservation_layer ∈ {holder-controlled, QPSP, dual} ∧ (now − r.timestamp_decided) ≤ r.retention_floor ∧ (r.preservation_layer ≠ holder-controlled → r.timestamp_token ≠ null) ∧ Design ∈ {A, C, A⊕C} ∧ Design ≠ B"
+    - title: V_admissibility — 三法域分軌 + chooser_signature + chain-of-custody log
+      body: |
+        SA3 法庭可採性按 jurisdictional_profile 三軌分流——us-fre-901b9 須 qualified_person_attestation ≠ null（走 FRE 901(b)(9) process / system 描述 + accuracy 證明較重路徑，不走 902(14) 自證真實）+ eu-eidas-art25-35（修正後 Chapter III §7-§8）須 timestamp_token ≠ null（QPSP 對接）+ tw-esign-art4-10 須 chooser_signature 符合電子簽章法 §4 要件齊備。content_hash 對位 retrieved_content 是 ESI 框架下的 Lorraine 五步測試起點；hearsay rule 三條應對路徑（verbal act / present sense impression / 803(6) 擴張）為「初步主張」，具體選擇歸個案訴訟戰術。Mata v Avianca 是負面先例——agent_did ≠ null 時 agent_delegation_proof 與 agent_delegation_capability_hash 兩欄位皆非 null 且可驗證至 subject_did。
+      formal: "V_admissibility: ContentHashMatch(r.content_hash, retrieved_content) ∧ (us-fre-901b9 → r.qualified_person_attestation ≠ null) ∧ (eu-eidas-art25-35 → r.timestamp_token ≠ null) ∧ (tw-esign-art4-10 → r.chooser_signature ⊨ §4) ∧ (r.agent_did ≠ null → r.agent_delegation_proof ≠ null ∧ VC_Verify(r.agent_delegation_capability_hash, r.subject_did))"
+    - title: V_recognition — 三軟法 anchor 5 / 10 / 15 年三段 + Apostille 公私文書區分補論
+      body: |
+        SA4 跨境互認須透過 recognition_chain 對接三軟法 anchor——OECD AI Principles 補充指引（≈ 5y 期 2026-2031）+ CETS 225 補充協議（≈ 10y 期 2026-2035）+ Hague PIL e-APP digital identity extension（≈ 15y 期 2026-2041）。三段時程為條件性估計、order of magnitude，非絕對句式。Apostille 公私文書區分為跨境承認層破口——civic receipts 是否屬 public document 須補論：若由公權力機關（健保署、長照管理中心）為 issuer 可主張屬廣義 public document；若由私人 issuer 則屬私文書、Apostille 不適用、跨境承認須改走 1965 服務公約。OECD 外覆蓋空白為「承認」而非「預測」——非 OECD 並行軌（AU、APEC CBPR、印度 DEPA、巴西 LGPD、印尼 PDP、GCC、ASEAN DEFA）以「並行」設計。台灣非 Hague Apostille 締約國，APEC CBPR + Global CBPR Forum 為主要承接軌道。
+      formal: "V_recognition: ∀ J₂ ∈ targetJurisdictions(r) , ∃ ra ∈ r.recognition_chain : ra.target = J₂ ∧ Anchor_Valid(ra)  ;  recognition_chain ⊆ {OECD-supp (5y), CETS225-protocol (10y), Hague-eAPP-ext (15y)}  ;  parallel-track for non-OECD"
+    - title: V_thesis_layer — working thesis 與 strengthened thesis 嚴格區分 + 三大緩解 critical path
+      body: |
+        F2 採 strengthened thesis 為正式立場、working thesis 僅作為論證起點。working thesis（無緩解版）在 CF2（失智長者退化）或 CF5（PQC 威脅）任一單獨觸發下實證失效；strengthened thesis（含三大緩解 critical path——crypto-agility by design、第三方 trusted preservation service 對接、G_recognition^A 多軌備援）在五個 CF 全部觸發的極端情境下保留核心功能（第三段全球互認失敗、第二段 OECD 內互認部分保留、第一段單原語密碼學承載完整保留）。三大緩解部署估期——緩解 1 crypto-agility 2026-2028 規範整合、2028-2030 工程實作；緩解 2 QPSP 對接 2026-2028 EU 內整合、2028-2030 OECD 推展；緩解 3 多軌承認 2026-2032 介面協調、2032-2040 具體互認操作。
+      formal: "V_thesis_layer: strengthened_thesis ≜ working_thesis ∧ crypto_agility ∧ QPSP_interface ∧ multi-track_recognition  ;  ∀ CFᵢ , strengthened_thesis ⊨ partial_survival(CFᵢ)  ;  working_thesis ⊭ survive(CF2 ∨ CF5)"
+    - title: V_crpd_audit — CRPD GC1 §29 audit trail 義務（含反向使用防護）
+      body: |
+        Z₂ 範圍內 CRPD Art 12 GC1 §29 audit trail 義務的履行——強制 audit_release_policy 須能在「事前」嚴格 access control（避免被作為個人監控基礎設施）、「事後」court order 可解（避免救濟程序受 access denial 阻擋）兩態切換；revocation_window ≠ null ∧ revocation_endpoint 可達；§29 independent review 由 V_receipt C5 + C6 子句承載（recognition_chain 提供跨法域 anchor、audit_release_policy 提供 court order 解開條件）。對 CF2 觸發後 §29 被反向使用為 §12 違反證據的風險，採三層阻擋——threshold signatures（設計 C）+ court-anchored backup（失智宣告後 wallet 受法院核可監護人 / 輔助人 anchor）+ cognitive endorsement engineering（micro-consent 確認延遲、supporter co-signing 強制）。超出 Z₂ 進入 Z₃-intrinsic（RT-ℬ ✗ / AA-ℬ ✗ 兩 cell）為定理 T2 不可達邊界——任何宣稱 civic-action-receipt 可解決 AI 代理根本責任問題的論述都違反此邊界。
+      formal: "V_crpd_audit: hard_constraint(GC1 §29) ∧ Reachable(r.audit_release_policy) under {subject, court_order} ∧ ¬reverse_use(§29 → §12 violation) under strengthened_thesis  ;  T2: ∀ σ , P_degrade(M[RT,ℬ]|σ) > θ₂ ∧ P_degrade(M[AA,ℬ]|σ) > θ₂"
+
+# ─────────────────────────────────────────────────────────────
+# Conclusion + Formal Coda
+# ─────────────────────────────────────────────────────────────
+conclusion:
+  paragraphs:
+    - <strong>四原語落地的條件性可行性</strong>。civic receipts 作為條件可委任區 Z₂ 中 supported / substituted 可區分性的密碼學承載，在 W3C VCDM v2.0 Recommendation (2025-05-15)、IETF SD-JWT-VC draft-16 (2026-04-24)、W3C BBS Cryptosuite CRD (2026-04-07)、EUDI ARF 2025-12 iteration、IRTF CFRG BBS Signatures draft-07 五條既有規範路徑下，可在 5-10 年內標準化落地。落地的形式承載為 14 欄位 schema 與 V_receipt 函數的 C1-C6 六道條件。條件性表述——若 W3C BBS Cryptosuite 在 2027 Q1 前達 Recommendation，第一原語 mixed strategy 採 baseline SD-JWT-VC + 高階 BBS+ 雙層分工；否則 baseline 退回到只用 SD-JWT-VC、BBS+ 分層推遲到 2028。30 年下限為「分析性建議數」而非「規範性硬約束」、限定為「無聲明保留之 OECD 與 CRPD 締約國」範圍；FRE 902(14) 對 holder-controlled 屬非主路徑、改走 901(b)(9) 較重路徑；Apostille 公私文書區分構成跨境承認層破口、civic receipts 是否屬 public document 須補論。
+    - <strong>跨境治理時間階段化</strong>。跨境互認透過 G_recognition^A 軟法層 5 / 10 / 15 年三段推進——OECD AI Principles 補充指引 2029-2031、CETS 225 補充協議 2030-2035、Hague PIL e-Apostille digital identity extension 2038-2041；時程為條件性估計、order of magnitude，非絕對句式。OECD 涵蓋全球 GDP 約 65% 但人口僅約 18%，<em>OECD 外覆蓋空白為承認非預測</em>，非 OECD 並行軌（AU、APEC CBPR、印度 DEPA、巴西 LGPD、印尼 PDP、GCC、ASEAN DEFA）以「並行」而非「替代」角度設計。EUDI 強制階段為 OECD 5 年路徑 accelerator。對台灣的具體承載——APEC CBPR + Global CBPR Forum 為非 OECD / 非 CoE / 非 EU 的主要承接軌道；CF4 觸發下兩岸軌結構性斷裂為 F2 thesis 對台灣場景的最弱承諾，三個場景（陸配權利保護、台商長期居留 receipts、兩岸投資人權利保護）同時顯現結構性斷裂、SA4 緩解設計只能提供降級互通而非對等互認。
+    - <strong>working thesis 與 strengthened thesis 的嚴格區分，三大緩解 critical path 承擔生存差距</strong>。F2 working thesis（無緩解版）在 CF2 或 CF5 任一單獨觸發下實證失效；F2 strengthened thesis（含三大緩解 critical path——crypto-agility by design、第三方 trusted preservation service 對接、G_recognition^A 多軌備援）在五個 CF 全部觸發的極端情境下保留核心功能（第三段全球互認失敗、第二段 OECD 內互認部分保留、第一段單原語密碼學承載完整保留）。F2 主文採 strengthened thesis 為正式立場、working thesis 僅作為論證起點。對 CRPD GC1 §29 audit trail 義務——strengthened thesis 在 Z₂ 範圍內透過四原語可履行、超出 Z₂ 進入 Z₃-intrinsic（RT-ℬ ✗ 與 AA-ℬ ✗ 兩 cell）不可履行，這是密碼學原語對存在論結構的不可達邊界（定理 T2）。對台灣 TW DIW 進入 LLM-agent 階段前的具體警示——<strong>若未具備 civic receipts 工程，supported decision 證據鏈無法在民事訴訟 30 年窗口內被重建；DIW v1.0 spec 應明文 QPSP 對接條款 + 30 年保存承諾</strong>。
+  formalCoda: |
+    Final form:
+      Receipt(r) ≜ ⟨cryptosuite_id, holder_did, agent_did?, deliberation_hash, retention_floor,
+                    jurisdictional_profile, audit_release_policy, recognition_chain, ...⟩  (14 group / 23 leaf)
+
+      V_receipt(r) ⇔ ⋀_{i=1..6} Cᵢ(r)
+                  ⇔ V_cryptosuite(r) ∧ V_preservation(r) ∧ V_admissibility(r) ∧ V_recognition(r)         (T3)
+                  ⇔ ex_ante_deliberation(r) ∧ ex_post_reversibility(r) ∧ decision_trace(r)               (T4)
+
+      CriticalPath : SA1 → SA2 → SA3 → SA4   (linear verification closure with deterministic D1, D2, D3)
+      FeedbackLoop : SA4 → SA1               (jurisdictional_profile 反向約束 AcceptedSuites(τ))
+
+      Cryptosuite ∈ {SD-JWT-VC (RFC 9901 + draft-16, MUST baseline),
+                     BBS+ (W3C CRD, conditional advanced — IF W3C Rec by 2027 Q1 ELSE 2028),
+                     ZK-SNARK (Explorer Note, narrow profile, F3 議題)}
+      Preservation = {holder-controlled} ⊕ {QPSP encrypted backup, threshold signatures t=2/n=3}
+                     ;  retention ≥ 30y  (限「無聲明保留之 OECD + CRPD 締約國」)
+                     ;  Design ∈ {A, C, A⊕C}  ;  Design B ⊨ violates CRPD §28
+      Admissibility-profile(j) ∈ {us-fre-901b9 (901(b)(9) heavier path),
+                                  eu-eidas-art25-35 (修正後 Chapter III §7-§8),
+                                  tw-esign-art4-10}
+                                ;  hearsay-response ∈ {verbal_act, present_sense_impression, 803(6)-ext}
+                                ;  Apostille(receipt) ⇔ public_document(issuer)  (公私文書區分破口)
+      Recognition-anchor ∈ {OECD-supp (≈ 5y, 2029-2031), CETS225-protocol (≈ 10y, 2030-2035),
+                             Hague-eAPP-ext (≈ 15y, 2038-2041)}
+                          ;  parallel-track for non-OECD ≜ recognition ¬ prediction
+
+      T1 (Z₂ 包覆引理)         : ∀ cell ∈ M[i,j] (✓ ∪ △) , ∃ σ ⊆ {SA1..SA4} : P_degrade(cell|σ) ≤ θ₂ ≈ 0.7
+      T2 (Z₃-intrinsic 不可達) : ∀ σ , P_degrade(M[RT,ℬ]|σ) > θ₂ ∧ P_degrade(M[AA,ℬ]|σ) > θ₂
+
+      CF1..CF5 ⇒ working_thesis ≠ strengthened_thesis
+      strengthened_thesis ≜ working_thesis ∧ crypto_agility ∧ QPSP_interface ∧ multi-track_recognition
+                          ⊨ partial_survival(CF1 ∧ CF2 ∧ CF3 ∧ CF4 ∧ CF5)
+      working_thesis ⊭ survive(CF2 ∨ CF5)
+
+      CRPD GC1 §29 ≜ hard_constraint(audit_trail)
+      ¬ reverse_use(§29 → §12 violation) under strengthened_thesis
+      Z₂ ⊨ V_receipt-deployable   ;   Z₃-intrinsic ⊭ V_receipt-deployable   (T2 邊界)
+
+      Time-staging:
+        crypto-agility   :  2026-2028 規範整合 / 2028-2030 工程實作
+        QPSP interface   :  2026-2028 EU 內整合 / 2028-2030 OECD 推展
+        multi-track recog:  2026-2032 介面協調 / 2032-2040 具體互認操作
