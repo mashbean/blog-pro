@@ -1,0 +1,350 @@
+slug: 2026-05-12-public-realm-political-philosophy
+title: 公共領域的政治哲學基礎：civic-proof 系列規範下界的 Arendt / Habermas / Pettit / Mouffe 四家合取
+subtitle: Public Realm Floor (PRF) — Argument Map (v2)
+
+# ─────────────────────────────────────────────────────────────
+# Central Thesis + Formal block
+# ─────────────────────────────────────────────────────────────
+coreThesis:
+  text: |
+    Arendt plurality（natality + mortality + uniqueness 存在論三層）、Habermas Öffentlichkeit（ideal speech situation + Geltungsansprüche 三聲稱 Wahrheit / Richtigkeit / Wahrhaftigkeit + Sluice 模型）、Pettit contestation（Equally Accepted Terms + Equally Accessible Influence + Active Stance bearer position + editorial democracy 四條件）、Mouffe agonism（legitimate adversary 三條件——相互承認 ∧ 共享規則 ∧ 爭議框架）四家於 civic-proof 系列場景下構成複合規範下界 PRF ≜ ⟨plurality, validity, contestation, agonism⟩。四家各自必要、不可化約、不可由其他三家補位（由四條形式定理 T_PRF1–T_PRF4 承擔）；任一分量被違反即 LegitimacyDegrade(d) ≥ θ_dem ≈ 0.5（由定理 T_PRF0 承擔）。系列既有 8 篇核心承擔者（A1 / A3 / A8 / A14 / A15 / F1 / F2 / F3）× 四分量構成 32 cell 承擔矩陣（● 核心 18 cell / ○ 部分 9 cell / — 不對應 5 cell），F1 為四分量全核心承擔者；F1 RT-ℬ ✗ / AA-ℬ ✗ 兩 cell 之 Z₃-intrinsic 邊界由定理 T_PRF5「PRF 下界之工程不可達引理」承擔，工程不能跨越亦不能取代。五類反論（CF1 Coeckelbergh relational personhood / CF2 Floridi infosphere monism / CF3 後人類主義 Braidotti + Hayles / CF4 數位民主樂觀派 Benkler / CF5 元反論「為何選四家」）於 likelihood × impact 矩陣下「削弱但不推翻」PRF 之合取下界。PRF 為複合下界非絕對唯一，開放 Rawls / Sen / Nussbaum / Honneth 為 ceiling 或 boundary。
+  summary: Arendt plurality + Habermas Öffentlichkeit + Pettit contestation + Mouffe agonism conjunction constitutes the civic-proof series' composite normative floor PRF; violation of any component triggers LegitimacyDegrade ≥ θ_dem ≈ 0.5; the 8×4 = 32 cell bearer matrix maps the eight core series articles onto the four PRF components, with F1 as the only article that bears all four core, and T_PRF5 forbids engineering bypass of the floor.
+  formal:
+    expression: |
+      PRF ≜ ⟨plurality, validity, contestation, agonism⟩                    (定義 3.1)
+
+      PRF_violated(d) ⇔ ∃ i ∈ {plurality, validity, contestation, agonism}
+                        : violation(d, PRF_i)                                (合取下界)
+
+      PRF_satisfied(d) ⇔ ⋀_{i ∈ {plurality, validity, contestation, agonism}} satisfies(d, PRF_i)
+
+      LegitimacyDegrade(d) ≜ σ( β₁·violation_intensity(d, plurality)
+                              + β₂·violation_intensity(d, validity)
+                              + β₃·violation_intensity(d, contestation)
+                              + β₄·violation_intensity(d, agonism) )
+      其中 σ ≜ logistic sigmoid（與 F1 §3.2 P_degrade 同形），β₁=β₂=β₃=β₄≈1.0（先驗等權重，待實證校準）
+
+      T_PRF0 : PRF_violated(d) ⇒ LegitimacyDegrade(d) ≥ θ_dem ≈ 0.5
+
+      T_PRF1 : ¬∃ d : (d satisfies validity ∧ contestation ∧ agonism)
+                      ∧ (d violates plurality) → legitimate(d)               (plurality 必要)
+      T_PRF2 : ¬∃ d : (d satisfies plurality ∧ contestation ∧ agonism)
+                      ∧ (d violates validity)  → legitimate(d)               (validity 必要)
+      T_PRF3 : ¬∃ d : (d satisfies plurality ∧ validity ∧ agonism)
+                      ∧ (d violates contestation) → legitimate(d)            (contestation 必要)
+      T_PRF4 : ¬∃ d : (d satisfies plurality ∧ validity ∧ contestation)
+                      ∧ (d violates agonism)   → legitimate(d)               (agonism 必要)
+
+      T_PRF5 (PRF 下界之工程不可達引理) :
+        ∀ engineering design d : ¬ (PRF_violated(d) ∧ LegitimacyDegrade(d) < θ_dem)
+        F1 RT-ℬ ✗ ⇒ violation(plurality) ∧ violation(validity)
+        F1 AA-ℬ ✗ ⇒ violation(contestation) ∧ violation(agonism)
+
+      PRF ⊆ NormativeFloors                                                 (複合下界非絕對唯一)
+      NormativeFloors ⊇ {PRF, Rawls justice, Sen capability, Nussbaum dignity, Honneth recognition, ...}
+
+      8 篇 × 4 分量承擔矩陣 (32 cell)：
+                    | plurality | validity | contestation | agonism
+        A1 可問責    |     ●     |    ○     |      ○       |    ●
+        A3 概念定位  |     ●     |    ●     |      ○       |    —
+        A8 FTLA      |     ○     |    ●     |      ●       |    ●
+        A14 救濟空白 |     —     |    ○     |      ●       |    ●
+        A15 inclusion|     ●     |    ●     |      ●       |    ○
+        F1 委任極限  |     ●     |    ●     |      ●       |    ●   (核心承擔 = 4)
+        F2 receipts  |     ○     |    ●     |      ●       |    ○   (F2 §9 CF1-CF5 為 agonistic 工程化升格)
+        F3 UX 認知   |     ○     |    ●     |      ○       |    ●
+
+        ● 核心 18 cell / ○ 部分 9 cell / — 不對應 5 cell
+        ●_plurality = 4 / ●_validity = 5 / ●_contestation = 4 / ●_agonism = 5
+
+      Stress Test (likelihood × impact，含緩解版)：
+        CF1 Coeckelbergh   ⇒ plurality      ; medium-high → low-medium (F1 §4.1 降一檔不降兩檔)
+        CF2 Floridi        ⇒ plurality      ; medium      → low        (範疇區分 描述 vs 規範)
+        CF3 後人類主義     ⇒ plurality + contestation ; medium-low → low (主體性條件 非 人類例外)
+        CF4 Benkler        ⇒ validity + agonism      ; low        → low (new affordance ≠ new legitimacy)
+        CF5 元反論         ⇒ 整體方法論                 ; low-medium → low (開放下界立場)
+    caption: |
+      PRF 由四家分量合取構成複合下界；LegitimacyDegrade 為四家 violation_intensity 線性組合之 sigmoid，閾值 θ_dem ≈ 0.5 為分析性建議數。T_PRF1-T_PRF4 由「不可由其他三家補位」之 reductio 結構承擔；T_PRF5 把 F1 RT-ℬ ✗ / AA-ℬ ✗ 之 Z₃-intrinsic 邊界擴展至所有工程設計層，斷言任何工程承載不可繞道 PRF 下界。32 cell 承擔矩陣以 ●/○/— 三類標記 8 篇 × 4 分量之對應強度，F1 為唯一四分量全核心承擔者，F2 §9 CF1-CF5 壓力測試之 agonistic 工程化使 F2-agonism 由 — 升格為 ○。五類反論於含緩解版下「削弱但不推翻」PRF，最強衝擊 CF1 Coeckelbergh 對 plurality 之削弱由 F1 §4.1 存在論 vs 功能論區分回應。
+    legend:
+      - symbol: PRF
+        meaning: Public Realm Floor，四家合取構成之 civic-proof 系列複合規範下界 ⟨plurality, validity, contestation, agonism⟩
+      - symbol: plurality
+        meaning: Arendt 1958 §1 + §24 + §44 存在論意義之 multiple who 共在（natality + mortality + uniqueness 三層存在條件）
+      - symbol: validity
+        meaning: Habermas 1962 / 1981 / 1992 Öffentlichkeit 結構 ∧ Geltungsansprüche 三聲稱 Wahrheit / Richtigkeit / Wahrhaftigkeit ∧ Sluice 模型
+      - symbol: contestation
+        meaning: Pettit 1997 / 2012 active-stance bearer position ∧ Equally Accepted Terms ∧ Equally Accessible Influence ∧ editorial democracy 四條件
+      - symbol: agonism
+        meaning: Mouffe 2000 / 2013 legitimate adversary 三條件（相互承認 ∧ 共享規則 ∧ 爭議框架），與 antagonism 嚴格區分
+      - symbol: T_PRF1 / T_PRF2 / T_PRF3 / T_PRF4
+        meaning: 四家「各自必要、不可由其他三家補位」之四條形式定理
+      - symbol: T_PRF5
+        meaning: "PRF 下界之工程不可達引理：任何工程設計不可繞道 PRF；對應 F1 RT-ℬ ✗（plurality + validity 雙違反）與 AA-ℬ ✗（contestation + agonism 雙違反）兩 cell 之 Z₃-intrinsic 邊界"
+      - symbol: LegitimacyDegrade
+        meaning: 四家 violation_intensity 線性組合之 logistic sigmoid（[0,1] 區間值），「合法性退化機率」非「已退化之經驗測量」
+      - symbol: θ_dem
+        meaning: 合法性退化閾值 ≈ 0.5（分析性建議數，待 V-Dem 2024 / Bertelsmann Transformation Index / Freedom House 反向校準）
+      - symbol: 32 cell 矩陣
+        meaning: 系列 8 篇核心承擔者 × 4 分量 = 32 cell；● 核心承擔 18 / ○ 部分承擔 9 / — 不對應 5
+      - symbol: ●  /  ○  /  —
+        meaning: 核心承擔（主規範主張直接落於分量） / 部分承擔（間接支撐） / 不對應（無顯著關聯）
+      - symbol: ≜
+        meaning: 「定義為」
+      - symbol: ⇔
+        meaning: 「當且僅當」
+      - symbol: ∧
+        meaning: 合取
+
+# ─────────────────────────────────────────────────────────────
+# Transitions
+# ─────────────────────────────────────────────────────────────
+transitions:
+  beforeDistinction: |
+    公式給出立場，下一步要把常見誤讀拉開。civic-proof 系列前 18 篇於不同層面隱用四家政治哲學為規範錨點，但學界與工程社群常見之誤讀採綜合（synthesis / syncretism）取徑，把四家融合為新版「複合民主理論」並消解原著之概念張力；只要這個分類成立，PRF 即被讀為「另一個民主理論候選版本」，與 Rawls / Sen / Nussbaum / Honneth 並列為可被工程實作直接優化之上界，工程承載可獨立承擔合法性。地圖之第一動作是把這個綜合進路與「合取下界 + 各自必要 + 不可由其他三家補位」拉開——PRF 採合取（conjunction）方法論，四家於合取下保留各自原著立場與張力，PRF 為下界（缺一即敗）非上界（達到合法性最高水準）。
+  beforePillars: |
+    區分本身只是宣告。要證明 PRF 四家合取作為系列規範下界（而非可被任一家替代之化約），需要五條獨立來源之支撐——演繹面提供 PRF 函數定義 + LegitimacyDegrade sigmoid + T_PRF0 違反蘊涵 + T_PRF1–T_PRF4 四家各自必要 + T_PRF5 工程不可達引理 + 32 cell 承擔矩陣之形式骨架；Arendt 存在論面提供 plurality 三層存在條件（natality + mortality + uniqueness）與華人「群」傳統之結構同構檢驗；Habermas 規範結構面提供 Öffentlichkeit 三層規範性結構（ideal speech situation + Geltungsansprüche 三聲稱 + Sluice 模型）+ Fraser counterpublics 補正 + 華人「公」傳統對應；Pettit 共和主義面提供三層 first-personal 要求（Equally Accepted Terms + Equally Accessible Influence + Active Stance）+ bearer position 三層檢驗 + freedom as non-domination + 華人「諫議」傳統對應；Mouffe agonistic 面提供 agonism / antagonism 嚴格區分 + Habermas + Mouffe 合取（非互斥）+ 華人「諍友」傳統對應。五條 pillar 對應五個論證層次，缺一立場退化為宣告。
+  beforeChain: |
+    pillars 是正向論證。但「四家合取為系列規範下界」這個主張，必須由一條具體因果鏈頂住——從四家原著之概念合取出發，經 8 篇承擔矩陣之系列具體化，落於 civic-proof 系列規範下界之承擔關係。鏈條展開之目的是把抽象的「四家合取」翻譯為可被機制性追溯的承擔條件：四家原著概念於 §3.1 定義為 PRF 四分量、四分量於 §3.4 經 T_PRF1–T_PRF4 形式化為各自必要、各自必要於 §3.3 投射為 8×4 = 32 cell 承擔矩陣、矩陣於 §10 接合系列 8 篇 forward-link、最終於 §12 收束為「四分量合取構成系列規範下界」之條件性學術結論。鏈條包含一條 deterministic 結構性閉包（四家概念 → PRF 函數 → 32 cell 矩陣 → 系列承擔關係）與兩條 probabilistic 機制鏈（CF5 LLM-agent 補位對 F1 邊界之工程延伸 / 數位場景對四家跨時代適用性之壓力）。
+  beforeBorders: |
+    立場加因果鏈成立後，反論才真的具威脅。五個反事實壓力測試中 CF1（Coeckelbergh relational personhood 全面替代）、CF2（Floridi infosphere monism 全面替代）、CF5（元反論「為何選這四家」）三條對 PRF plurality 分量、PRF 本體論基礎、PRF 四家選擇判準各構成獨立威脅；仔細檢驗每條反論之 likelihood-by-mechanism 推論，會發現它們不僅未推翻地圖立場，反而 flip to support 三項紀律——其一，CF1 反向支撐「存在論 vs 功能論區分」之 F1 §4.1「降一檔不降兩檔」立場；其二，CF2 反向支撐「描述性 ontology 與規範性下界範疇區分」之方法論紀律；其三，CF5 反向支撐「PRF 為複合下界非絕對唯一」與「開放其他進路為 ceiling / boundary」之開放邊界立場。CF3（後人類主義 Braidotti + Hayles）與 CF4（數位民主樂觀派 Benkler）作為連鎖衝擊在 conditions 與 conclusion 中處理，避免 borders 過載。
+  beforeConditions: |
+    反論被吸收後，留下的是設計含意——在什麼條件下，PRF 四分量可作為可被檢驗之規範下界？六道條件把抽象的「四家合取下界」翻譯成可被檢驗之承擔結構，每道對應 PRF 之一個結構性要件——C1 V_plurality 承擔 Arendt 存在論三層 ∧ 拒絕 functional perspectival heterogeneity 取代；C2 V_validity 承擔 Geltungsansprüche 三聲稱 + reciprocal recognition；C3 V_contestation 承擔 Pettit 三層 first-personal 要求 + bearer position 三層檢驗；C4 V_agonism 承擔 agonism / antagonism 嚴格區分 + 拒絕 Schmitt 殲滅邏輯；C5 V_method 承擔規範性與描述性嚴格分離 + 合取（非綜合）方法論；C6 V_floor_boundary 承擔 PRF 邊界與 F1 RT-ℬ ✗ / AA-ℬ ✗ 邊界明示——PRF 為規範下界，工程不能跨越亦不能取代。
+  beforeConclusion: |
+    把 PRF 函數、LegitimacyDegrade、32 cell 承擔矩陣、四條形式定理、T_PRF5 工程不可達引理、五類反論壓力測試、六道條件七層收束起來，地圖最終要說的是三項跨層級原則——其一，PRF 四家合取構成 civic-proof 系列規範下界，四家各自必要、不可化約、不可由其他三家補位；其二，工程不能取代規範下界，密碼學原語 + UX 設計 + 平台治理可承擔 PRF 四分量之具體實作，但 F1 RT-ℬ ✗ / AA-ℬ ✗ 邊界於 T_PRF5 形式化為任何工程設計不可繞道之 Z₃-intrinsic 不可達；其三，系列 8 篇承擔矩陣為「條件性對應」非「絕對描述」，反映前 18 篇之當前詮釋，並對政治哲學學界、公民科技社群、數位身分政策學者三組讀者各自承擔分立建議。對台灣讀者警示——TW DIW 進入 LLM-agent 階段之具體衝擊（以 F3 supporter UI 三層分離為例），須在 DIW v1.0 規格明示「LLM-agent 補位不取代 supporter UI 三層分離之工程承擔」。
+
+# ─────────────────────────────────────────────────────────────
+# Foundational Distinction
+# ─────────────────────────────────────────────────────────────
+distinction:
+  rejected:
+    label: ❌ 被拒絕
+    title: 四家可融合為新版「複合民主理論」，PRF 為民主理論候選版本之上界，工程承載可獨立承擔合法性
+    body: |
+      把 Arendt / Habermas / Pettit / Mouffe 四家視為可融合為新版「複合民主理論」之元素，由 syncretic-fusion 取徑消解四家原著之概念張力（如 Habermas consensus 與 Mouffe agonism 之根本分歧、Arendt 存在論 plurality 與 Pettit 共和主義 contestability 之層級差異）；只要這個分類成立，PRF 即被讀為「另一個民主理論候選版本」，與 Rawls justice、Sen capability、Nussbaum dignity、Honneth recognition 並列為可被工程實作直接優化之上界，工程承載（wallet schema、UX 設計、平台治理）可獨立承擔民主合法性。混淆下界與上界帶來三個論證代價——其一，syncretic-fusion 容易把不同層級之概念（如 Arendt 存在論 plurality 與 Mouffe 政治理論 agonism）強行合併，失去原著之概念精度；其二，四家於 civic-proof 系列前 18 篇之隱用程度最深（F1 §4 三進路合取已建立 Arendt + Habermas + Pettit 之承擔，Mouffe 於 F1 §4.2 (iii) 為輔助），把四家視為可被任一家替代之化約使 32 cell 承擔矩陣失效；其三，工程承載若可獨立承擔合法性，F1 RT-ℬ ✗ 與 AA-ℬ ✗ 之 Z₃-intrinsic 邊界（責任承擔需 first-personal mens rea、contestation bearer 需 Pettit active-stance）即被取消，PRF 下界於工程實作層被繞道。
+    formal: "syncretic_PRF(d) ≜ fusion(plurality, validity, contestation, agonism)  ∧  PRF_as_ceiling(d) ⇒ engineering_floor(d)"
+
+  accepted:
+    label: ✓ 被辯護
+    title: 四家於合取下保留各自原著立場與張力，PRF 為複合規範下界（缺一即敗），工程承載為下界之具體實作（不可取代）
+    body: |
+      四家原著（Arendt 1958 *The Human Condition*；Habermas 1962 *Strukturwandel der Öffentlichkeit* + 1981 *TKH* + 1992 *Faktizität und Geltung*；Pettit 1997 *Republicanism* + 2012 *On the People's Terms*；Mouffe 2000 *The Democratic Paradox* + 2013 *Agonistics*）各自於 civic-proof 系列前 18 篇之不同篇章承擔下界錨點，但未於系列任一篇正面承擔四家合取為系列規範下界。本文把四家合取提升為系列規範下界之正面論述，採合取（conjunction）方法論：四家於 PRF 中保留各自原著立場與張力（如 Habermas 之 consensus 立場與 Mouffe 之 agonism 立場之張力保留，兩家於「公共領域承擔人類人格性主體」一點上合取），不主張融合為新理論。合取下界之兩項蘊涵——其一，四家任一分量被違反即 PRF 整體被違反，不允許以另一家補強被違反者之 trade-off；其二，滿足 PRF 為必要條件（充分性不在主張範圍），未主張「達到上界」。PRF ⊆ NormativeFloors（複合下界非絕對唯一），開放 Rawls / Sen / Nussbaum / Honneth 為 ceiling 或 boundary 條件。
+    formal: "PRF ≜ ⟨plurality, validity, contestation, agonism⟩  ;  PRF_violated(d) ⇔ ∃ i : violation(d, PRF_i)  ;  PRF ⊆ NormativeFloors  ;  T_PRF5 : ∀ engineering d , ¬(PRF_violated(d) ∧ LegitimacyDegrade(d) < θ_dem)"
+
+# ─────────────────────────────────────────────────────────────
+# Five Supporting Pillars
+# ─────────────────────────────────────────────────────────────
+pillars:
+  - section: §3 — 演繹（PRF 形式定義 + LegitimacyDegrade + T_PRF0-T_PRF5 + 32 cell 承擔矩陣）
+    title: PRF 形式骨架與 32 cell 承擔矩陣構成四家合取下界之形式表述
+    role: 提供合取下界之形式骨架——若 PRF 函數定義、LegitimacyDegrade sigmoid、四條形式定理 T_PRF1-T_PRF4 與 T_PRF5 工程不可達引理不形式化，「四家合取」只能停在語言層；若 8×4 = 32 cell 承擔矩陣不展開，「系列規範下界」只是修辭，「F1 為四分量全核心承擔者」之系列意義無從承擔。
+    body: |
+      PRF ≜ ⟨plurality, validity, contestation, agonism⟩ 採合取下界（conjunctive normative floor）定義，PRF_violated(d) ⇔ ∃ i : violation(d, PRF_i)（任一分量違反即整體違反，不允許 trade-off 補強）。PRF ⊆ NormativeFloors 採開放邊界立場（複合下界非絕對唯一）。LegitimacyDegrade(d) 採 logistic sigmoid 形式（與 F1 §3.2 P_degrade 同形），四家等權重 β = 1.0 為先驗設定；θ_dem ≈ 0.5 為分析性建議數（待 V-Dem / Bertelsmann / Freedom House 反向校準）。T_PRF0 把 PRF_violated ⇒ LegitimacyDegrade ≥ θ_dem 形式化；T_PRF1-T_PRF4 把四家各自必要以「reductio: 若違反該家而其餘三家滿足，則退化為 X」結構承擔——plurality 違反退化為「無共在主體之程序」（Arendt §28 共同世界）、validity 違反退化為「策略性互動」（Habermas strategisches Handeln）、contestation 違反退化為「無挑戰管道之共識」（Pettit hegemonic consensus）、agonism 違反退化為「antagonism 內戰」或「post-political consensual 儀式」（Mouffe 兩種失能）。T_PRF5 把 F1 RT-ℬ ✗（plurality + validity 雙違反）與 AA-ℬ ✗（contestation + agonism 雙違反）之 Z₃-intrinsic 邊界擴展為「任何工程設計不可繞道 PRF 下界」之引理。8×4 = 32 cell 承擔矩陣以 ●/○/— 三類標記 8 篇 × 4 分量對應強度，統計分布為 ● 18 / ○ 9 / — 5；F1 為唯一四分量全核心承擔者（4 ●），F2 §9 CF1-CF5 壓力測試之 agonistic 工程化使 F2-agonism 由 — 升格為 ○，最終 — cell 僅餘 A3-agonism、A14-plurality、A1-某分量等共 5 處。
+    finding: PRF 函數加上 LegitimacyDegrade sigmoid 加上 T_PRF1-T_PRF5 五條定理加上 32 cell 承擔矩陣構成本文對 civic-proof 系列規範下界之形式延伸；下游 writer 不可主張任一家可由其他三家補位（違反 T_PRF1-T_PRF4），亦不可主張工程承載可獨立承擔合法性（違反 T_PRF5）。
+    formal: "PRF ≜ ⟨plurality, validity, contestation, agonism⟩  ;  PRF_violated(d) ⇔ ∃ i : violation(d, PRF_i)  ;  T_PRF0 : PRF_violated(d) ⇒ LegitimacyDegrade(d) ≥ θ_dem ≈ 0.5  ;  T_PRF5 : ∀ engineering d , ¬(PRF_violated(d) ∧ LegitimacyDegrade(d) < θ_dem)"
+
+  - section: §4 — 哲學詮釋（Arendt plurality 三層存在條件 + 華人「群」傳統 + 系列場景）
+    title: Arendt plurality 採存在論層級三層條件（natality + mortality + uniqueness），不可化約為 liberal pluralism
+    role: 提供 SA1 plurality 分量之 Arendt 存在論承擔——若 plurality 被讀為「liberal pluralism 多元價值觀並存」（政治理論層級），則 F1 §4.1 對 AI agent 之「無 natality / 無 mortality stake / 無 uniqueness disclosure」三理由失效，CF1 Coeckelbergh relational personhood 全面替代之反論即無回應空間；若華人「群」傳統與 Arendt plurality 之結構同構性未明示為「結構同構但歷史承載條件不同」之保守立場，跨文化推論被讀為類比過度。
+    body: |
+      Arendt 1958 *The Human Condition* §1 Prologue「the fact that men, not Man, live on the earth and inhabit the world」（諸人共在地球；單一抽象之「人」不在 Arendt 立場之內，p.7）建立 plurality 為存在論層級。三層存在條件——natality（§44 p.313-320 + p.177「each man begins something new」之「能起頭」存在條件，非生物學事實描述）、mortality（§44 與 natality 對位之存在條件，行動承擔不可撤回之 stake-taking；AI agent 之「重新生成」摧毀此存在基礎）、uniqueness（§24 p.175-181「The Disclosure of the Agent in Speech and Action」之 *who/what* 區分，*who* 只能在行動中向他人揭露，*what* 是屬性層描述）。Honig 1993 把 natality 連結到「政治行動之開放性」；d'Entrèves 1994、Benhabib 1996 把 *who/what* 區分連結到政治主體性之不可化約。Arendt plurality 嚴格區分 liberal pluralism 三項——存在論層級 vs 政治理論層級、subject of disclosure vs subject of choice、*who* 之共在 vs 價值觀並列。華人「群」傳統（朱雲漢 2012 對台灣公共領域多元承載者之分析；林宗弘 2020 對台灣社運與政黨「正當對手」關係；Wang Hui 2003 對中國「公」概念轉化）與 Arendt plurality 之結構同構性在「諸人共在」之存在條件，但「群」之歷史承載條件（儒家修身齊家治國平天下之 hierarchical structure）與 Arendt 存在論之 horizontal plurality 仍有差距。三個系列場景對應——A1 §2 NAACP v. Alabama 等三案承擔匿名政治言論之 multiple *who*；A15 §3 對無證件者 / 無國籍者 / 流亡者經驗排除盤點承擔 enrollment 條件檢驗；F1 §4.1 對 AI agent 之三層存在條件論證承擔「結構不可委任」之核心理由。
+    finding: plurality 採 Arendt 存在論三層條件構成 SA1 承擔骨架；CF1 Coeckelbergh 之 relational personhood 即使法律承認某種地位亦無法改變存在論結構（F1 §4.1「降一檔不降兩檔」立場），CF3 後人類主義對 plurality 之擴張壓力轉為「主體性條件之檢驗」（非「人類例外」立場），華人「群」傳統與 plurality 採「結構同構但歷史承載條件不同」之保守立場。
+    formal: "plurality ≜ Arendt(1958)·natality ∧ mortality ∧ uniqueness  ;  plurality ⊥ liberal_pluralism (層級不同)  ;  ∀ AI agent a : ¬natality(a) ∧ ¬mortality_stake(a) ∧ ¬uniqueness_disclosure(a) ⇒ ¬plurality_bearer(a)"
+
+  - section: §5 — 哲學詮釋（Habermas Öffentlichkeit 三層規範性結構 + Fraser counterpublics + 華人「公」傳統）
+    title: Habermas Öffentlichkeit 採三層規範性結構（ideal speech situation + Geltungsansprüche 三聲稱 + Sluice 模型），不可化約為 empirical public opinion
+    role: 提供 SA2 validity 分量之 Habermas 規範結構承擔——若 Öffentlichkeit 被讀為「empirical public opinion 民意調查」（實證測量），則 ideal speech situation 之 counterfactual idealization 性質失效，三聲稱 Wahrheit / Richtigkeit / Wahrhaftigkeit 之 normative force 退化為 platform algorithm 之 metric；若 Fraser counterpublics 補正未明示為「擴張但保留下界」立場，PRF 之單一 Öffentlichkeit 結構被讀為排他；若華人「公」傳統與 Öffentlichkeit 對應未明示歷史承載條件差距，跨文化推論被讀為類比過度。
+    body: |
+      Habermas Öffentlichkeit 概念橫貫三本錨點原著（1962 *Strukturwandel* + 1981 *TKH* + 1992 *Faktizität und Geltung*）。三層規範性結構——第一層 ideal speech situation（1981 TKH Bd. I §III.3 把 kommunikatives Handeln 定義為「以達成相互理解為目標的行動」，預設四項 counterfactual 條件，所有相關方皆可參與、無權力扭曲、無時間限制、無內外部脅迫；ideal speech situation 為 counterfactual idealization 而非 empirical claim，作用是給出「合理共識」之規範性參考點）；第二層 Geltungsansprüche 三聲稱（TKH §III.3 p.410-427 把言說行動拆解為 Wahrheit 真理性 / Richtigkeit 正當性 / Wahrhaftigkeit 真誠性，保留德文原文以避免中譯歧義）；第三層 Sluice 模型（1992 *Faktizität und Geltung* Kap. VII-VIII，民主立法之 legitimacy 來自「非正式意見形成」與「formal decision-making」兩層 Sluice 之溝通管道，zivilgesellschaftliche Öffentlichkeit 之非正式意見形成置於 institutional decision-making 之上游）。Öffentlichkeit 嚴格區分 empirical public opinion 三項——input 為言說行動之 rational-critical debate vs 意見 aggregation、output 為合理共識 vs 多數偏好測量、normative structure vs platform algorithm 可扭曲之 metric。Fraser 1990 *Rethinking the Public Sphere* 對單一性預設之批判由 Warner 2002 *Publics and Counterpublics* 系統化；本文採「擴張但保留下界」立場，多個 counterpublics 之並存符合 plurality，但各 counterpublic 仍須各自滿足 validity 之 normative structure。Habermas 1992 Kap. VIII 對 zivilgesellschaftliche Öffentlichkeit 之 Sluice 模型已部分回應 Fraser 批判。華人「公」傳統（Wang Hui 2003 對中國「公」概念歷史轉化；朱雲漢 2012 把「公」連結到台灣公共領域 institutional 承載：大法官釋憲、立法院運作、公投制度、地方議會、媒體監督五大承擔）與 Öffentlichkeit 之結構同構性在「normative structure 之 institutional 承擔」，但「公」之歷史承載條件（科舉、士大夫、清議）與 Habermas 18 世紀資產階級公共領域之歷史承載條件（咖啡館、沙龍、印刷品）不同。三個系列場景對應——GDPR cookie banner 八年失敗承擔 Wahrhaftigkeit 退化為 ritual 之 case、台灣 2018-2021 公投案例承擔 Öffentlichkeit 之台灣 institutional 履行、2024 美國大選 platform manipulation 承擔 Geltungsansprüche 三聲稱在 platform 中介下之承擔者位置侵蝕。
+    finding: validity 採 Habermas 三層規範性結構構成 SA2 承擔骨架；Fraser counterpublics 補正採「擴張但保留下界」立場（多個 counterpublics 符合 plurality，各自滿足 validity）；華人「公」傳統與 Öffentlichkeit 採「結構同構但歷史承載條件不同」之保守立場；CF2 Floridi infosphere monism 對 plurality 之本體論壓力由「描述性 ontology 與規範性下界範疇區分」回應。
+    formal: "validity ≜ Habermas·(ideal_speech_situation ∧ Geltungsansprüche ∧ Sluice)  ;  Geltungsansprüche ≜ Wahrheit ∧ Richtigkeit ∧ Wahrhaftigkeit  ;  validity ⊥ empirical_public_opinion (範疇不同)  ;  counterpublics ⊆ plurality_extension ∧ ∀ cp ∈ counterpublics : satisfies(cp, validity_normative_structure)"
+
+  - section: §6 — 哲學詮釋（Pettit contestation 三層 first-personal 要求 + bearer position 三層 + non-domination + 華人「諫議」傳統）
+    title: Pettit contestation 採三層 first-personal 要求（Equally Accepted Terms + Equally Accessible Influence + Active Stance），bearer position 不可委任
+    role: 提供 SA3 contestation 分量之 Pettit 共和主義承擔——若 contestation 被讀為「異議之 input function」（被動接受意見徵詢），則 active-stance 之 first-personal 要求失效，AI agent 可作為 contestation bearer 之邏輯空間被開啟，F1 AA-ℬ ✗ 邊界被工程式繞道；若 freedom as non-domination 未嚴格區分 Berlin negative freedom（不被干預）與 republican freedom（無 arbitrary power 之可能性），Lovett 2010 三條件失能；若華人「諫議」傳統之歷史承載條件（君臣關係 / 士大夫倫理 / 家國一體）與 Pettit republican democracy（公民身份 / 平等政治權 / institutional 制衡）差距未明示，跨文化推論被讀為類比過度。
+    body: |
+      Pettit contestation 概念橫貫兩本錨點原著（1997 *Republicanism* + 2012 *On the People's Terms*）。三層 first-personal 要求——第一層 Equally Accepted Terms（2012 Ch.3「公民必須能在平等條件下接受公共政策之 terms」，此 first-personal 要求不可由 representative 替代，任何 representative 之 acceptance 須以公民自身能 first-personally 接受為條件）；第二層 Equally Accessible Influence（2012 Ch.5 Eyeball Test p.81-105「公民能與權力持有者眼神平視而不畏縮」，預設可及之影響管道，含挑戰 / 申訴 / 投票 / 抗議）；第三層 Active Stance（1997 Ch.6 + 2012 Ch.6 contestation 主體必須「主動」採取異議立場，非「被動」接受意見徵詢；此區分對 AI agent 場景之意義在於 AI 可作為意見徵詢之 input function，但不可作為 active-stance bearer）。F1 §4.3 已建立 bearer position 三層檢驗（執行 execution 可委任 / endorsement 條件可委任 / bearer 不可委任，對應 Pitkin 1967 formal-substantive representation 區分）；F1 RT-ℬ ✗ 與 AA-ℬ ✗ 邊界即第三層之不可達。Freedom as non-domination（1997 Ch.2「不被任何人或機構任意地干預」）比 Berlin negative freedom（不被干預）更強，即使無實際干預，若存在「被任意干預之可能性」仍屬 domination；Lovett 2010 三條件（power 之 actual exercise / dispositional capacity / arbitrary character）任一缺失即 domination 狀態降級。對數位場景之蘊涵——當 wallet schema、verifier 演算法、issuer 撤銷機制等基礎設施可「任意」改變 holder 之行為條件，即使未實際干預仍為 domination；F1 §3.2 P_degrade-TC「calibration 由 agent 自報而無外部 contestation 渠道」即此 mechanism 之具體案例。華人「諫議」傳統（中國史「諫諍」之三層結構直諫 / 諷諫 / 死諫；台灣大法官釋憲聲請制度之三層結構人民聲請 / 法官聲請 / 機關聲請）與 Pettit contestation 之結構同構性在 first-personal active stance 之承擔，但「諫議」之歷史承載條件（君臣關係 / 士大夫倫理 / 家國一體）與 Pettit republican democracy 之歷史承載條件（公民身份 / 平等政治權 / institutional 制衡）差距較大。三個系列場景對應——台灣大法官釋憲聲請（釋字 803 / 791 / 748 號）承擔 bearer position 之具體實踐、CJEU SCHUFA C-634/21（2023）承擔 GDPR Art 22「不受自動化決策約束之權利」之 institutional 對應、SEC v. Jarkesy（2024）承擔行政程序對 fraud 案件之 jury trial 權利。
+    finding: contestation 採 Pettit 三層 first-personal 要求加 bearer position 三層檢驗構成 SA3 承擔骨架；freedom as non-domination 比 Berlin negative freedom 更強之 domination 機率性條件；華人「諫議」傳統與 Pettit contestation 採「結構同構但歷史承載條件不同」之保守立場；F1 RT-ℬ ✗ 與 AA-ℬ ✗ 之 Z₃-intrinsic 邊界於 T_PRF5 形式化為工程不可達引理。
+    formal: "contestation ≜ Pettit·(Equally_Accepted_Terms ∧ Equally_Accessible_Influence ∧ Active_Stance) ∧ bearer_position_three_layer  ;  freedom_non_domination ⊨ ¬arbitrary_power (Lovett 三條件)  ;  ∀ AI agent a : a ⊨ input_function ∧ ¬active_stance_bearer(a)"
+
+  - section: §7 — 哲學詮釋（Mouffe agonism / antagonism 嚴格區分 + legitimate adversary 三條件 + Habermas + Mouffe 合取 + 華人「諍友」傳統）
+    title: Mouffe agonism 採 legitimate adversary 三條件（相互承認 ∧ 共享規則 ∧ 爭議框架），與 antagonism 之 enemy 殲滅邏輯嚴格區分
+    role: 提供 SA4 agonism 分量之 Mouffe 對抗政治承擔——若 agonism 被讀為「antagonism 敵對」（無 legitimate adversary 預設），則 Schmitt 殲滅邏輯被引入，agonism 之規範性立場崩解；若 Habermas + Mouffe 未採合取（非互斥）立場，PRF 之 validity 與 agonism 兩分量被讀為互斥；若華人「諍友」傳統之歷史承載條件（儒家倫理 / 士大夫關係 / 私人友誼 / 君臣對話 hierarchical 預設）與 Mouffe institutional agonism（多黨政治 / 公共辯論 / 媒體監督 / 公民團體 confrontation）差距未明示，跨文化推論被讀為類比過度。
+    body: |
+      Mouffe agonism 概念橫貫兩本錨點原著（2000 *The Democratic Paradox* + 2013 *Agonistics*）。agonism 與 antagonism 之嚴格區分——agonism 預設 legitimate adversary（正當對手），antagonism 預設 enemy（敵人）。legitimate adversary 三條件（2000 Ch.4 p.80-107）為相互承認（mutual recognition）、共享規則（shared rules）、爭議框架（agonistic frame）；三條件之共同預設為「對手之政治表達權被承認為正當，即使其立場與自身對立」。antagonism 之 enemy 結構則否，對手之政治表達權不被承認，互動退化為殲滅邏輯。Mouffe 吸收 Schmitt 1932 *The Concept of the Political* 對抗政治概念，但拒絕 Schmitt 之 friend/enemy 殲滅邏輯；Schmitt 為納粹法學家，引用須誠實邊界明示——Mouffe 吸收 Schmitt 對「政治本質含對抗性」之洞察，把 enemy 結構轉化為 legitimate adversary 結構。Mouffe 2000 Ch.4 p.102-105 對 Habermas deliberative consensus 之批判明示「政治不能化約為理性共識」，若把民主合法性化約為共識，會消解民主之 agonistic 維度，退化為 post-political consensual。本文採 Habermas + Mouffe 合取（非互斥）立場，依賴 F1 §4.2 既有方法論——兩家之合取結構在於 Habermas 之 Öffentlichkeit 與 Geltungsansprüche 三聲稱承擔「言說行動之規範結構」，Mouffe 之 legitimate adversary 三條件承擔「對抗政治之規範結構」，兩者在「政治發言要求人類人格性主體」一點上合取，在「共識 vs 對抗」之張力上保留；Norval 2007 *Aversive Democracy* 對 Mouffe + Cavell 對話進一步把此合取系統化。華人「諍友」傳統（《論語‧季氏》之「益者三友：友直、友諒、友多聞」之直言相諫；中國史韓愈 / 范仲淹 / 王安石 / 顧炎武等士大夫間直言相諫之傳承；宋明理學「君子和而不同」與 Mouffe legitimate adversary 三條件之語意承擔同構）與 Mouffe agonism 之結構同構性在 legitimate adversary 相互承認，但「諍友」之歷史承載條件（私人 / 半公領域之倫理結構）與 Mouffe institutional agonism（多黨制度之公領域結構）差距較大。三個系列場景對應——2024 台灣大選後立法院三黨不過半之「藍白合」vs「綠營小聯合」動態結構承擔 agonism 之台灣 institutional 履行、2019-2020 香港反送中運動之 agonism / antagonism 邊界滑移、2024 美國大選極化政治承擔 agonism 退化為 antagonism 之衝擊。
+    finding: agonism 採 Mouffe legitimate adversary 三條件構成 SA4 承擔骨架；agonism / antagonism 嚴格區分採規範性立場（經驗性區分不在本文承擔範圍）；Habermas + Mouffe 合取（非互斥）立場依賴 F1 §4.2 既有方法論；華人「諍友」傳統與 Mouffe agonism 採「結構同構但歷史承載條件不同」之保守立場；Schmitt 引用限定於 agonism 之系譜性 acknowledgment（不延伸至納粹政治立場）。
+    formal: "agonism ≜ Mouffe·legitimate_adversary(mutual_recognition ∧ shared_rules ∧ agonistic_frame)  ;  agonism ≠ antagonism (殲滅邏輯被拒)  ;  Habermas ∧ Mouffe : 合取於「政治發言要求人類人格性主體」（張力保留於 consensus vs 對抗）"
+
+# ─────────────────────────────────────────────────────────────
+# Causal Chain (四家概念 → PRF 函數 → 32 cell 矩陣 → 系列承擔關係 → 規範下界)
+# ─────────────────────────────────────────────────────────────
+chain:
+  title: 四家概念 → PRF 函數合取定義 → T_PRF1-T_PRF5 形式化 → 32 cell 承擔矩陣 → 系列 8 篇 forward-link → civic-proof 系列規範下界
+  legend:
+    - kind: deterministic
+      label: 機制必然（結構性，不依賴外部 trigger）
+    - kind: probabilistic
+      label: 概率性（需要外部 trigger 但不可忽略）
+  steps:
+    - tag: D1
+      kind: deterministic
+      text: |
+        D1 四家原著概念 → PRF 函數合取定義。Arendt 1958 §1+§24+§44 plurality 三層存在條件、Habermas 1962+1981+1992 Öffentlichkeit 三層規範性結構、Pettit 1997+2012 contestation 三層 first-personal 要求、Mouffe 2000+2013 agonism legitimate adversary 三條件，於 §3.1 合取為 PRF ≜ ⟨plurality, validity, contestation, agonism⟩。形式表述為 PRF_satisfied(d) ⇔ ⋀_{i} satisfies(d, PRF_i)；合取下界於 §3.2 定義為 PRF_violated(d) ⇔ ∃ i : violation(d, PRF_i)，PRF ⊆ NormativeFloors（複合下界非絕對唯一）。
+    - tag: D2
+      kind: deterministic
+      text: |
+        D2 PRF 函數 → T_PRF0 違反蘊涵 + LegitimacyDegrade sigmoid。§3.2 把 LegitimacyDegrade 形式化為四家 violation_intensity 之 logistic sigmoid（與 F1 §3.2 P_degrade 同形），β = 1.0 先驗等權重，θ_dem ≈ 0.5 分析性建議數。T_PRF0 把 PRF_violated(d) ⇒ LegitimacyDegrade(d) ≥ θ_dem 形式化為條件性蘊涵；σ(β·1.0) ≈ 0.731 為單一分量完全違反、σ(β·0.5) ≈ 0.622 為單一分量中度違反、σ(0) = 0.5 為基線。
+    - tag: D3
+      kind: deterministic
+      text: |
+        D3 T_PRF0 → T_PRF1-T_PRF4「四家各自必要」+ T_PRF5 工程不可達引理。§3.4 四條形式定理採「reductio: 若違反該家而其餘三家滿足，則退化為 X」結構——T_PRF1 plurality 違反退化為「無共在主體之程序」、T_PRF2 validity 違反退化為「策略性互動」、T_PRF3 contestation 違反退化為「無挑戰管道之共識」、T_PRF4 agonism 違反退化為「antagonism 內戰或 post-political consensual 儀式」。T_PRF5 把 F1 RT-ℬ ✗（plurality + validity 雙違反）與 AA-ℬ ✗（contestation + agonism 雙違反）之 Z₃-intrinsic 邊界擴展為「任何工程設計不可繞道 PRF 下界」之引理。
+    - tag: D4
+      kind: deterministic
+      text: |
+        D4 T_PRF1-T_PRF5 → 32 cell 承擔矩陣。§3.3 把系列 8 篇核心承擔者（A1 / A3 / A8 / A14 / A15 / F1 / F2 / F3）× 4 分量 = 32 cell 投射為承擔矩陣，採三類標記 ●（核心承擔，主規範主張直接落於分量）/ ○（部分承擔，間接支撐）/ —（不對應，無顯著關聯）。統計分布為 ● 18 cell / ○ 9 cell / — 5 cell；四分量之 ● cell 數量為 plurality 4 / validity 5 / contestation 4 / agonism 5；F1 為唯一四分量全核心承擔者（4 ●），F2 §9 CF1-CF5 壓力測試之 agonistic 工程化使 F2-agonism 由 — 升格為 ○。
+    - tag: D5
+      kind: deterministic
+      text: |
+        D5 32 cell 矩陣 → 系列 8 篇 forward-link → civic-proof 系列規範下界。§10 對 A1（plurality + agonism 雙錨點）、A3（plurality + validity 概念地景）、A8（validity + contestation + agonism 三家治理框架）、A14（contestation + agonism 救濟空白）、A15（plurality + validity + contestation 三家 inclusion rights）、F1（四分量全核心 + RT-ℬ ✗ / AA-ℬ ✗ 邊界）、F2（validity + contestation + agonism 升格 receipts）、F3（validity + agonism supporter UI 三層分離）八篇之規範主張回應，承擔系列規範下界之具體化。32 cell 承擔矩陣為「條件性對應」非「絕對描述」，反映前 18 篇之當前詮釋；若詮釋變動，矩陣須重做（§11 高風險主張 R7）。
+    - tag: T-LLM-Agent-F1
+      kind: probabilistic
+      text: |
+        T-LLM-Agent-F1 CF5 LLM-agent 補位對 F1 邊界之工程實作層延伸——2026 至 2030 LLM-agent in wallet 提供 comprehension 協助、attribute filtering 建議、決策建議三項服務時，agent 與 supporter 角色滑移使 F1 RT-ℬ ✗ / AA-ℬ ✗ 邊界於工程實作層脆弱化。緩解設計為 F1 §7.3.1 AgentDelegationProof + presentationOrigin 標籤 + comprehension_attestation 與 chooser_signature 分離 + agent 與 supporter 密碼學區分四件設計合取維持邊界，限定於 Z₂ 範圍內延伸、不繞過 F1 RT-ℬ ✗ / AA-ℬ ✗ 兩條常駐型不可委任邊界。TW DIW 進入 LLM-agent 階段之衝擊為具體案例。
+    - tag: T-CrossTime-Cultural
+      kind: probabilistic
+      text: |
+        T-CrossTime-Cultural 跨時代與跨文化推論之 PRF 適用性壓力——四家錨點原著為 1958 至 2013 時段之西方政治哲學，本文應用於 2026 數位場景之效力依賴四家之跨時代適用性（Arendt plurality 對 LLM-agent 場景 / Habermas Öffentlichkeit 對 platform 場景 / Pettit contestation 對演算法治理場景 / Mouffe agonism 對 polarization 場景）；跨文化推論依賴華人「群」「公」「諫議」「諍友」四傳統與四家之結構同構性。本文採「結構同構但歷史承載條件不同」之保守立場，於 §11 誠實邊界明示；歷史承載條件差距於 §4.3 / §5.4 / §6.4 / §7.3 個別說明。
+
+# ─────────────────────────────────────────────────────────────
+# Border Cases — flip to support (對應 article §9 CF1 / CF2 / CF5)
+# ─────────────────────────────────────────────────────────────
+borders:
+  - label: 反論 1
+    title: CF1 Coeckelbergh relational personhood 全面替代 — AI 透過關係性實踐獲得 personhood，PRF plurality 容納 AI 故四家合取下界失能
+    pivot: |
+      Coeckelbergh 2020 *AI Ethics* Ch.4-6 與 2024 *Why AI Undermines Democracy* 主張 relational personhood 之擴展，使「人格性主體」邊界可包含 AI agent。若 AI 透過關係性實踐獲得 personhood，則 PRF plurality 之 multiple *who* 共在容納 AI、PRF validity 之 Wahrhaftigkeit 聲稱承擔者可包含 AI、PRF 之人本預設被全面替代。likelihood 評估為 medium（Coeckelbergh 2020 + 2024 已在華語學界與部分歐陸 AI ethics 形成結構性承擔），impact 評估為 medium-high（最強衝擊在 plurality 分量；CF5 LLM-agent 補位之工程實作層延伸亦在此反論結構內）。實證強度上，2027 至 2030 年 LLM-agent in wallet 提供 comprehension 協助、attribute filtering 建議、決策建議三項服務時，若工程社群採 Coeckelbergh relational personhood 立場為設計準則，F1 RT-ℬ ✗ / AA-ℬ ✗ 邊界在工程實作層即被視為「規範外推之累贅」而被繞道。
+    flip: |
+      仔細看，CF1 觸發反向支撐「存在論 vs 功能論區分」之 F1 §4.1「降一檔不降兩檔」立場——即使法律承認某種 relational personhood，第 §4 plurality 之存在論論證（natality + mortality + uniqueness）不依賴於法律承認，法律可承認某種地位但不能改變該主體之存在論結構。plurality 分量之 Arendt 存在論定義以「multiple *who* 在 natality + mortality 條件下之共在」為錨；AI agent 之 relational personhood 即使法律承認，仍欠缺 natality（每個個體作為新開始）與 mortality stake，故 plurality 分量仍不可承擔 AI。validity 分量之 Habermas Wahrhaftigkeit 要求說話者「真誠表達自己的意圖」；AI agent 之意圖歸屬問題在哲學上仍未解決，故 validity 分量仍不可承擔 AI。Coeckelbergh 2024 內部張力反向支撐 PRF——書中明示 AI 對民主構成威脅（deepfake、micro-targeting、opinion manipulation），呼籲人類民主主體之反擊能力，此立場與 PRF「公共領域進入條件以人類民主主體為核心」一致。contestation 與 agonism 兩分量於 CF1 壓力測試下「降一檔不降兩檔」，可能擴大 AI agent 之操作空間（如 AI 作為 contestation 之輔助 bearer），但仍不能取代人類 active-stance bearer 位置。
+
+  - label: 反論 2
+    title: CF2 Floridi infosphere monism — 人與 AI 在 informational ontology 中皆為 inforg，PRF plurality 之 ontology 選擇被單一本體論替代
+    pivot: |
+      Floridi 2014 *The Fourth Revolution* 主張 infosphere monism——人與 AI 在 informational ontology 中皆為 inforg。若 PRF plurality 分量採 informational ontology，multiple *who* 之共在容納所有 inforg（含 AI agent），則 PRF 之四家合取被 infosphere monism 之單一 ontology 替代。likelihood 評估為 medium（Floridi 2014 在 information ethics 與部分 AI ethics 已形成結構性承擔），impact 評估為 medium（最強衝擊在 plurality 分量之本體論基礎，但其餘三分量未提供等效替代）。實證強度上，infosphere monism 之 ontology shift 在哲學立場上可獨立爭論；若 PRF plurality 分量被 informational ontology 取代，Arendt phenomenological ontology 之 natality + mortality + worldliness 三層存在條件即被讀為「歷史哲學殘餘」，數位身分基礎設施可在 informational ontology 預設下繞道 plurality 分量。
+    flip: |
+      仔細看，CF2 觸發反向支撐「描述性 ontology 與規範性下界範疇區分」之方法論紀律——Floridi infosphere monism 主要處理「描述性 ontology」（人類與 AI 之 informational nature），與 PRF 之「規範性下界」屬不同範疇。infosphere monism 對 validity、contestation、agonism 三分量並未提供等效之替代承載；informational ontology 並未產生「正當性聲稱承擔者」「主動異議者」「正當對手」三類規範性主體之具體承載。PRF 框架於 Floridi 壓力測試下「削弱但不推翻」——plurality 分量之 ontology 選擇承擔哲學壓力（PRF 於 §11.4 誠實邊界明示採 Arendt 存在論立場為哲學立場選擇，非邏輯必然），其餘三分量不受影響。範疇區分之蘊涵——PRF 不必否定 infosphere ontology 之描述力，infosphere ontology 亦不必否定 PRF 之規範力，兩者於不同範疇承擔各自之論證任務。
+
+  - label: 反論 3
+    title: CF5 元反論「為何選這四家」— Rawls / Sen / Nussbaum / Honneth 加入合取或替換四家，PRF 是否削弱或補強
+    pivot: |
+      元反論——為何選 Arendt / Habermas / Pettit / Mouffe 四家，不選 Rawls / Sen / Nussbaum / Honneth / 後期 Habermas Diskursethik 等？若 Rawls justice、Sen capability、Nussbaum dignity、Honneth recognition 加入合取或替換四家中之一，PRF 是否削弱或補強？likelihood 評估為 high（為合理之學界質疑，政治哲學社群對四家選擇判準必有挑戰），impact 評估為 low-medium（含開放邊界後挑戰下降）。實證強度上，若 PRF 之四家選擇被讀為「作者私自選擇」（無方法論判準），32 cell 承擔矩陣之合理性即被削弱，「F1 為四分量全核心承擔者」之系列意義被讀為循環論證（先選四家、再以四家詮釋 F1）；若其他進路加入合取或替換四家中之一，PRF 之具體形式需要重做。
+    flip: |
+      仔細看，CF5 觸發反向支撐「PRF 為複合下界非絕對唯一」與「開放其他進路為 ceiling / boundary」之開放邊界立場——PRF ⊆ NormativeFloors，NormativeFloors ⊇ {Rawls, Sen, Nussbaum, Honneth, ...}。四家選擇判準有三項——其一，四家共同承擔「公共領域進入條件」主題（Rawls 主題為分配正義 / Sen 為個體能力 / Nussbaum 為人類尊嚴 / Honneth 為相互承認，主題與 civic-proof 系列「公民證明可被合法承擔」之對應較間接）；其二，四家於 civic-proof 系列前 18 篇之隱用程度最深（F1 §4 三進路合取已建立 Arendt + Habermas + Pettit，Mouffe 於 F1 §4.2 (iii) 為輔助，本文承擔提升 Mouffe 為獨立分量），其他進路於系列前 18 篇之隱用程度較淺；其三，四家於數位場景之衝擊最具體（Arendt natality 對 LLM 重複既有、Habermas Wahrhaftigkeit 對 deepfake、Pettit contestation 對演算法治理、Mouffe agonism 對 polarization，皆於數位場景有具體 mechanism）。CF5 反論反向支撐 PRF 框架對未來加入第五分量（如 Honneth recognition / Sen capability）之開放空間——PRF 之具體承擔結構於 §11.2 之 O3 / O21 列為 open questions，未來研究路徑可選擇加入合取或作為 boundary 條件。
+
+# ─────────────────────────────────────────────────────────────
+# Procedural Conditions (六道條件 / firewalls)
+# ─────────────────────────────────────────────────────────────
+conditions:
+  title: 把 PRF 四家合取下界翻譯為可被檢驗之承擔結構，必須通過六道條件
+  formalPrelude: "PRF_deployable(d) ⇔ V_plurality(d) ∧ V_validity(d) ∧ V_contestation(d) ∧ V_agonism(d) ∧ V_method(d) ∧ V_floor_boundary(d)"
+  items:
+    - title: V_plurality — Arendt 存在論三層（natality + mortality + uniqueness）不可由 functional perspectival heterogeneity 取代
+      body: |
+        V_plurality 採 Arendt 存在論三層條件合取——natality（行動者作為新開始之「能起頭」存在條件，非生物學事實描述）、mortality（行動承擔不可撤回之 stake-taking，AI agent 之「重新生成」摧毀此存在基礎）、uniqueness（*who/what* 區分，*who* 只能在行動中向他人揭露）。V_plurality 採 phenomenological ontology 立場，不採 informational ontology（CF2 Floridi infosphere monism 採後者立場為哲學立場選擇）；不採 liberal pluralism 之「多元價值觀並列」（subject of choice 對 subject of disclosure 之範疇不同）；不採 functional perspectival heterogeneity 之化約（AI agent 之「多視角」不等於 multiple *who* 之共在）。Arendt 著作之歐洲中心傾向為已知 gap（§11 誠實邊界明示），跨文化適用須結構同構檢驗。
+      formal: "V_plurality(d) ⇔ d ⊨ natality ∧ mortality ∧ uniqueness  ;  V_plurality ⊥ functional_perspectival_heterogeneity  ;  V_plurality ⊥ liberal_pluralism (層級不同)"
+    - title: V_validity — Geltungsansprüche 三聲稱（Wahrheit + Richtigkeit + Wahrhaftigkeit）+ reciprocal recognition
+      body: |
+        V_validity 採 Habermas 三層規範性結構合取——ideal speech situation（counterfactual idealization，四項條件所有相關方參與 + 無權力扭曲 + 無時間限制 + 無內外部脅迫）、Geltungsansprüche 三聲稱（Wahrheit 真理性對外部世界、Richtigkeit 正當性對規範世界、Wahrhaftigkeit 真誠性對內部世界，保留德文原文避免中譯歧義）、Sluice 模型（非正式意見形成 + formal decision-making 兩層溝通管道，zivilgesellschaftliche Öffentlichkeit 之非正式意見形成置於 institutional decision-making 之上游）。V_validity 採 normative structure 立場，不採 empirical public opinion 之 aggregation 化約；Fraser counterpublics 補正採「擴張但保留下界」立場（多個 counterpublics 之並存符合 plurality，各 counterpublic 仍須各自滿足 validity 之 normative structure）；Habermas 18 世紀資產階級公共領域之歐洲中心傾向為已知 gap。
+      formal: "V_validity(d) ⇔ d ⊨ ideal_speech_situation ∧ Wahrheit ∧ Richtigkeit ∧ Wahrhaftigkeit ∧ Sluice_model  ;  V_validity ⊥ empirical_public_opinion (範疇不同)  ;  counterpublics ⊆ plurality_extension ∧ ∀ cp : satisfies(cp, V_validity_normative_structure)"
+    - title: V_contestation — Equally Accepted Terms + Equally Accessible Influence + Active Stance + bearer position 三層檢驗
+      body: |
+        V_contestation 採 Pettit 三層 first-personal 要求合取——Equally Accepted Terms（公民必須能在平等條件下接受公共政策之 terms，first-personal 要求不可由 representative 替代）、Equally Accessible Influence（Eyeball Test「公民能與權力持有者眼神平視而不畏縮」，預設可及之影響管道含挑戰 / 申訴 / 投票 / 抗議）、Active Stance（contestation 主體必須「主動」採取異議立場，非「被動」接受意見徵詢；AI 可作為 input function 但不可作為 active-stance bearer）。bearer position 三層檢驗（執行 execution 可委任 / endorsement 條件可委任 / bearer 不可委任）對應 F1 §4.3 既有方法論；F1 RT-ℬ ✗ 與 AA-ℬ ✗ 邊界即第三層之不可達。freedom as non-domination 採「無 arbitrary power 之可能性」立場（比 Berlin negative freedom 更強），Lovett 2010 三條件之任一缺失即 domination 狀態降級。
+      formal: "V_contestation(d) ⇔ d ⊨ Equally_Accepted_Terms ∧ Equally_Accessible_Influence ∧ Active_Stance ∧ bearer_position_three_layer  ;  freedom_non_domination ⊨ ¬arbitrary_power (Lovett 三條件)  ;  ∀ AI agent a : a ⊨ input_function ∧ ¬active_stance_bearer(a)"
+    - title: V_agonism — agonism vs antagonism 嚴格區分 + legitimate adversary 三條件 + 拒絕 Schmitt 殲滅邏輯
+      body: |
+        V_agonism 採 Mouffe legitimate adversary 三條件合取——相互承認（mutual recognition）、共享規則（shared rules）、爭議框架（agonistic frame）。三條件共同預設「對手之政治表達權被承認為正當，即使其立場與自身對立」。V_agonism 嚴格區分 antagonism 之 enemy 殲滅邏輯（對手政治表達權不被承認、互動退化為殲滅）；Mouffe 吸收 Schmitt 1932 對抗政治概念，但拒絕 Schmitt friend/enemy 殲滅邏輯（Schmitt 為納粹法學家，引用限定於 agonism 系譜性 acknowledgment）。V_agonism 與 V_validity 採合取（非互斥）立場，依賴 F1 §4.2 既有方法論——兩家於「公共領域承擔人類人格性主體」一點上合取，於「共識 vs 對抗」之張力上保留。agonism / antagonism 邊界於實際政治中容易滑移（2019-2020 香港反送中 / 2024 美國大選極化政治為案例），規範意義上兩者嚴格不同。
+      formal: "V_agonism(d) ⇔ d ⊨ legitimate_adversary(mutual_recognition ∧ shared_rules ∧ agonistic_frame)  ;  V_agonism ⊥ antagonism (殲滅邏輯被拒)  ;  V_validity ∧ V_agonism : 合取於「政治發言要求人類人格性主體」（張力保留於 consensus vs 對抗）"
+    - title: V_method — 規範性 vs 描述性嚴格分離 + 合取（非綜合）方法論
+      body: |
+        V_method 採兩項方法論紀律合取——其一規範性與描述性嚴格分離：PRF 主張採條件性語式「若違反 PRF 任一分量，則 LegitimacyDegrade(d) ≥ θ_dem」（normative claim），不採實證描述「數位民主必然符合 PRF」（descriptive claim）；PRF 不是經驗事實之歸納，四家錨點原著之 personhood 預設、Öffentlichkeit normative structure、contestability active-stance bearer、agonism legitimate adversary，皆為規範條件之形式化。其二合取（非綜合）方法論：四家於 PRF 中保留各自原著立場與張力，不主張融合為新版「複合民主理論」；合取方法論之優點在於保留四家原著之獨立詮釋空間，避免 syncretism 偽綜合容易把不同層級之概念（如 Arendt 存在論 plurality 與 Mouffe 政治理論 agonism）強行合併而失去原著之概念精度。F1 §4.4 三進路合取表為方法論前例，本文擴展至四進路合取並提升為系列規範下界承擔。
+      formal: "V_method(d) ⇔ normative_descriptive_separated(d) ∧ conjunction_not_synthesis(d)  ;  normative_PRF ⊨ conditional_implication (violation ⇒ LegitimacyDegrade ≥ θ_dem)  ;  ¬ (PRF ⇔ syncretic_fusion(plurality, validity, contestation, agonism))"
+    - title: V_floor_boundary — PRF 邊界與 F1 RT-ℬ ✗ / AA-ℬ ✗ 邊界明示 + T_PRF5 工程不可達引理
+      body: |
+        V_floor_boundary 採 PRF 邊界與 F1 既有邊界對位明示——PRF 為規範下界（normative floor）非絕對上界（normative ceiling），不主張「達到合法性最高水準」之充分性；PRF ⊆ NormativeFloors，開放 Rawls / Sen / Nussbaum / Honneth 為 ceiling 或 boundary 條件。F1 RT-ℬ ✗（first-personal mens rea 失能）對應 PRF plurality + validity 雙分量違反；F1 AA-ℬ ✗（contestation bearer 失能）對應 PRF contestation + agonism 雙分量違反；兩者皆為 PRF 違反之強情形。T_PRF5 把此邊界擴展為「任何工程設計不可繞道 PRF 下界」之引理——工程承載（wallet schema、密碼學原語、UX 工程、治理框架、法律承載）可承擔 PRF 四分量之具體實作，但不能取代四分量之規範地位。CF5 LLM-agent 補位之工程實作層延伸限定於 Z₂ 範圍內延伸（不繞過 F1 Z₃ 邊界），F3 supporter UI 三層分離為此邊界於 UX 層之具體承載。
+      formal: "V_floor_boundary(d) ⇔ PRF ⊆ NormativeFloors ∧ T_PRF5(d)  ;  T_PRF5 : ∀ engineering d , ¬(PRF_violated(d) ∧ LegitimacyDegrade(d) < θ_dem)  ;  F1 RT-ℬ ✗ ⇒ violation(plurality) ∧ violation(validity)  ;  F1 AA-ℬ ✗ ⇒ violation(contestation) ∧ violation(agonism)"
+
+# ─────────────────────────────────────────────────────────────
+# Conclusion + Formal Coda
+# ─────────────────────────────────────────────────────────────
+conclusion:
+  paragraphs:
+    - <strong>PRF 四家合取構成 civic-proof 系列規範下界</strong>。Arendt plurality（multiple <em>who</em> 之存在論共在 + natality + mortality + uniqueness 三層存在條件）、Habermas Öffentlichkeit（ideal speech situation + Geltungsansprüche 三聲稱 Wahrheit / Richtigkeit / Wahrhaftigkeit + Sluice 模型）、Pettit contestation（Equally Accepted Terms + Equally Accessible Influence + Active Stance + bearer position 三層檢驗 + editorial democracy 四條件）、Mouffe agonism（legitimate adversary 三條件——相互承認 + 共享規則 + 爭議框架）四家於 civic-proof 系列場景下構成合取下界 PRF。四家各自必要、不可化約、不可由其他三家補位（由定理 T_PRF1 至 T_PRF4 承擔）；任一分量被違反即 LegitimacyDegrade(d) ≥ θ_dem ≈ 0.5（由定理 T_PRF0 承擔）。<em>θ_dem ≈ 0.5 為分析性建議數</em>，待 V-Dem 2024 liberal democracy index 退化案例分布、Bertelsmann Transformation Index、Freedom House 年度報告反向校準。PRF ⊆ NormativeFloors（複合下界非絕對唯一），開放 Rawls / Sen / Nussbaum / Honneth 為 ceiling 或 boundary 條件。
+    - <strong>工程不能取代規範下界</strong>。密碼學原語（wallet、receipts、selective disclosure）、UX 設計（supporter UI 三層分離）、平台治理（FTLA 四層、跨境互認）等工程承載可承擔 PRF 四分量之具體實作，但不能取代四分量之規範地位。F1 RT-ℬ ✗（責任承擔需 first-personal mens rea，對應 plurality + validity 雙分量違反）與 AA-ℬ ✗（contestation bearer 需 Pettit active-stance，對應 contestation + agonism 雙分量違反）之 Z₃-intrinsic 邊界於定理 T_PRF5 形式化為「PRF 下界之工程不可達引理」——任何工程設計不可繞道 PRF 下界。CF5 LLM-agent 補位之工程實作層延伸限定於 Z₂ 範圍內延伸（不繞過 F1 Z₃ 邊界），F3 supporter UI 三層分離為此邊界於 UX 層之具體承載。對 EUDI Wallet、TW DIW、Aadhaar 等基礎設施之規範性要求，應以 PRF 四分量為下界判準，工程承載為下界之具體實作；不主張工程承載可獨立承擔合法性。
+    - <strong>系列 8 篇承擔矩陣為「條件性對應」非「絕對描述」+ 對三組讀者分立建議</strong>。32 cell 承擔矩陣（§3.3）反映前 18 篇規範主張之當前詮釋（● 18 cell / ○ 9 cell / — 5 cell）；F1 為唯一四分量全核心承擔者（4 ●），F2 §9 CF1-CF5 壓力測試之 agonistic 工程化使 F2-agonism 由 — 升格為 ○。若系列其他篇章詮釋更新或新增系列文章，矩陣須重做（§11 高風險主張 R7）。對 <strong>政治哲學學界</strong>——本文採合取（非綜合）方法論於 §8.2 明示，學界後續可延伸 PRF 與其他政治哲學進路之合取關係（O3 / O21）、跨文化 PRF 之對應與張力（O11 / O22）、PRF 對非民主政體之描述力與規範力區分（O4 / O14）。對 <strong>公民科技社群</strong>——32 cell 承擔矩陣為系列規範主張之承擔關係形式化，F1 RT-ℬ ✗ / AA-ℬ ✗ 邊界為工程設計上界限制，supporter UI 三層分離 / wallet 三重預設退化分析 / 跨法域救濟空白為 PRF 在工程承載之應用。對 <strong>數位身分政策學者</strong>——對台灣讀者警示，<strong>TW DIW 進入 LLM-agent 階段須在 DIW v1.0 規格明示「LLM-agent 補位不取代 supporter UI 三層分離之工程承擔，contestation 維度之人類民主主體承擔不可由 LLM-agent 取代」</strong>；歐盟 EUDI Wallet、印度 Aadhaar、台灣 TW DIW 等基礎設施之政策評估，可援引 PRF 四分量為規範下界判準。
+  formalCoda: |
+    Final form:
+      PRF ≜ ⟨plurality, validity, contestation, agonism⟩                    (定義 3.1)
+      PRF_violated(d)  ⇔ ∃ i ∈ {plurality, validity, contestation, agonism}
+                         : violation(d, PRF_i)
+      PRF_satisfied(d) ⇔ ⋀_{i} satisfies(d, PRF_i)
+      PRF ⊆ NormativeFloors  (複合下界非絕對唯一)
+
+      LegitimacyDegrade(d) ≜ σ( β₁·violation_intensity(d, plurality)
+                              + β₂·violation_intensity(d, validity)
+                              + β₃·violation_intensity(d, contestation)
+                              + β₄·violation_intensity(d, agonism) )
+      其中 σ ≜ logistic sigmoid（與 F1 §3.2 P_degrade 同形），β = 1.0（先驗等權重）
+
+      T_PRF0 : PRF_violated(d) ⇒ LegitimacyDegrade(d) ≥ θ_dem ≈ 0.5
+
+      Definitions:
+        plurality    ≜ Arendt(1958)·(natality ∧ mortality ∧ uniqueness)
+        validity     ≜ Habermas(1962+1981+1992)·(ideal_speech ∧ Geltungsansprüche ∧ Sluice)
+        contestation ≜ Pettit(1997+2012)·(Equally_Accepted_Terms ∧ Equally_Accessible_Influence ∧ Active_Stance)
+        agonism      ≜ Mouffe(2000+2013)·legitimate_adversary(mutual_recognition ∧ shared_rules ∧ agonistic_frame)
+
+      四條形式定理 (各自必要)：
+        T_PRF1 : ¬∃ d : (d ⊨ validity ∧ contestation ∧ agonism)
+                        ∧ (d violates plurality)    → legitimate(d)
+        T_PRF2 : ¬∃ d : (d ⊨ plurality ∧ contestation ∧ agonism)
+                        ∧ (d violates validity)     → legitimate(d)
+        T_PRF3 : ¬∃ d : (d ⊨ plurality ∧ validity ∧ agonism)
+                        ∧ (d violates contestation) → legitimate(d)
+        T_PRF4 : ¬∃ d : (d ⊨ plurality ∧ validity ∧ contestation)
+                        ∧ (d violates agonism)      → legitimate(d)
+
+      推論 C_PRF : PRF_satisfied(d) ⇔ ⋀_{i} satisfies(d, PRF_i)
+
+      T_PRF5 (PRF 下界之工程不可達引理) :
+        ∀ engineering design d : ¬ (PRF_violated(d) ∧ LegitimacyDegrade(d) < θ_dem)
+        F1 RT-ℬ ✗ ⇒ violation(plurality) ∧ violation(validity)
+        F1 AA-ℬ ✗ ⇒ violation(contestation) ∧ violation(agonism)
+
+      8 篇 × 4 分量承擔矩陣 (32 cell)：
+                    | plurality | validity | contestation | agonism
+        A1 可問責    |     ●     |    ○     |      ○       |    ●
+        A3 概念定位  |     ●     |    ●     |      ○       |    —
+        A8 FTLA      |     ○     |    ●     |      ●       |    ●
+        A14 救濟空白 |     —     |    ○     |      ●       |    ●
+        A15 inclusion|     ●     |    ●     |      ●       |    ○
+        F1 委任極限  |     ●     |    ●     |      ●       |    ●   (核心承擔 = 4)
+        F2 receipts  |     ○     |    ●     |      ●       |    ○   (F2 §9 升格)
+        F3 UX 認知   |     ○     |    ●     |      ○       |    ●
+
+        ● 核心 18 cell / ○ 部分 9 cell / — 不對應 5 cell
+        ●_plurality = 4 / ●_validity = 5 / ●_contestation = 4 / ●_agonism = 5
+
+      Stress Test (含緩解版 likelihood × impact)：
+        CF1 Coeckelbergh   ⇒ plurality              ; medium-high → low-medium (F1 §4.1 降一檔不降兩檔)
+        CF2 Floridi        ⇒ plurality (ontology)   ; medium      → low        (範疇區分 描述 vs 規範)
+        CF3 後人類主義     ⇒ plurality + contestation ; medium-low → low      (主體性條件 非 人類例外)
+        CF4 Benkler        ⇒ validity + agonism     ; low         → low        (new affordance ≠ new legitimacy)
+        CF5 元反論         ⇒ 整體方法論              ; low-medium  → low        (開放下界立場 + 其他進路為 ceiling)
+
+      Cross-time / Cross-cultural：
+        四家原著 1958-2013 西方政治哲學 → 2026 數位場景    (跨時代適用性，誠實邊界明示)
+        Arendt plurality   ↔ 華人「群」傳統（朱雲漢 / 林宗弘）
+        Habermas Öffent.   ↔ 華人「公」傳統（Wang Hui 2003 / 朱雲漢 2012）
+        Pettit contestation↔ 華人「諫議」傳統（中國史諫諍 / 台灣大法官釋憲聲請）
+        Mouffe agonism     ↔ 華人「諍友」傳統（《論語‧季氏》益者三友 / 君子和而不同）
+        結構同構但歷史承載條件不同（§11 誠實邊界明示）
+
+      Z₂ ⊨ PRF-engineering-bearer        ;   Z₃-intrinsic ⊭ PRF-engineering-bearer    (T_PRF5 邊界)
