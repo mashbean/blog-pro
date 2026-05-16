@@ -21,6 +21,8 @@ slug: 2026-05-08-digital-identity-civic-action-quant
 
 **本文是 pilot 研究，量化結果是預期值（pilot estimates）而非實際計算結果**。本研究無法在 blog 撰寫範圍內跑完整 R / Stata 分析；引用的相關係數與信賴區間是基於既有相似研究的 effect size 錨點（Khera 2019、Helm 2024、Schiff et al. 2023<sup>5,6,7</sup>）所做的預期。寫成 pilot 的目的，是把編碼方案、識別策略、機制證據三層工作建立起來，使後續 RA（量化研究助理）能在這個基礎上跑實際統計。
 
+**本文定位明示**：B2 = method pilot / research design / mechanism existence support；B2 ≠ empirical result chapter。本文不在主文承擔具體效應量數值；所有「r ≈」「CI [...]」「每年 X」之類具體小數一律由方向性語式（β_1 < 0 / γ_1 < 0）與量級語言（10⁻³ 至 10⁻² 量級）替代，待 RA 完成資料建構、bootstrap、panel regression 後以實證數據替換。在 civic-proof 系列中本文承擔「方向性預期 + 識別設計 + 機制存在性 + 對照組」四層工作，不承擔「主因果結論」。
+
 論述骨架分四個獨立子論證構成：(1) ID-Authority Index（IAI）兩維 5 級編碼方案，覆蓋 70 國；(2) APS（Authority-without-Privacy Score）與結社自由代理變數的跨國相關（pilot estimates）；(3) 五個 natural experiment 候選的因果識別評估；(4) 三個機制存在性案例與四個對照組。最後以研究限制與政策含意收束。
 
 本文的核心結論是條件性的：(a) APS 與結社自由衰退在統計上預期非獨立，可拒絕「身分制度設計與結社自由是統計上獨立的」這一虛無假設；(b) 至少存在三條「身分制度被武器化」的機制路徑（福利條件化 / 強制動員 + 制裁名單 / 監控 + 抗議者識別）；(c) 因果方向的識別仍然有限，五個 natural experiment 都有不同 confounders，最佳策略（印度 Aadhaar State × Year DID）仍與 BJP 政體性格的同期變化糾纏；(d) 整體研究需要 multi-method triangulation；量化 panel + DID + 定性 process tracing 三者交叉。
@@ -86,7 +88,7 @@ v2x_cspart_i = β_0 + β_1 · APS_i + β_2 · log(GDP_i)
              + β_3 · RoW_i + β_4 · Internet_i + ε_i
 ```
 
-預期結果：β_1 < 0 且 95% bootstrap CI 不含 0。Pearson r ≈ −0.42（CI [−0.58, −0.24]，pilot estimate 待 RA 實際計算驗證）<sup>17</sup>。
+預期方向為 β_1 < 0；相關強度與 95% bootstrap CI 僅能在 RA 實際完成資料建構與 bootstrap 後報告。本文目前僅提出方向性預期與識別設計，**不在主文承擔具體效應量數值**（避免被外部讀為已執行迴歸之結果）<sup>17</sup>。
 
 ### 3.2 五個結社代理變數方向一致
 
@@ -121,7 +123,7 @@ v2x_cspart_i = β_0 + β_1 · APS_i + β_2 · I(RoW=2) · APS_i
 Δv2x_cspart_it = γ_0 + γ_1 · ΔAPS_it + α_i + δ_t + ε_it
 ```
 
-預期 γ_1 < 0（APS 變化率 ↑ ↔ v2x_cspart 變化率 ↓），效應量 Δβ ≈ −0.004 至 −0.010 / 年（pilot estimate）<sup>20</sup>。
+預期 γ_1 < 0（APS 變化率 ↑ ↔ v2x_cspart 變化率 ↓）。若未來資料支持，效應量可能落在每年 10⁻³ 至 10⁻² 的量級，但此量級僅作為文獻錨點（illustrative anchor），不能外推到單一國家，且須待 RA 完成 panel regression 後以實證數據替換<sup>20</sup>。
 
 ### 3.5 敏感度分析
 
@@ -161,7 +163,7 @@ D = 數位轉型政策（影響 X 與 Y）
 U = 非觀察變數（如「政體性格」）
 ```
 
-主要後門路徑：X ← R → Y（政體類型同時驅動）；X ← E → Y（發展階段同時驅動）；X ← D → Y（數位轉型政策同時驅動）。要找乾淨 IV，需要一個影響 X 但不直接影響 Y 的變數；身分制度的設計選擇受國家政治結構深度影響，幾乎所有候選 IV 都會違反 exclusion restriction<sup>24</sup>。
+主要後門路徑：X ← R → Y（政體類型為共同前因）；X ← E → Y（發展階段為共同前因）；X ← D → Y（數位轉型政策為共同前因）。本文於 DAG 上採「共因影響 / 共變關係」之保守措辭，避免使用「驅動」「決定」之單向因果語式。要找乾淨 IV，需要一個影響 X 但不直接影響 Y 的變數；身分制度的設計選擇受國家政治結構深度影響，幾乎所有候選 IV 都會違反 exclusion restriction<sup>24</sup>。
 
 結論：找不到乾淨 IV，仰賴 natural experiment + DID。
 
@@ -427,6 +429,12 @@ Aadhaar 福利條件化、Russian 戰時動員、Belarus 抗議識別是三條 *
 - pilot estimates 與實際結果的差距是可量化研究問題
 
 最後一句話：本文 pilot 結論的最強形式，是「我們有理由相信身分制度與結社自由的關係非獨立 + 機制存在 + 因果尚未識別」這個三段式立場。每一段都需要後續更系統性的研究來確認或推翻。
+
+---
+
+## Revision Note（2026-05-16）
+
+本文於修訂中明示**B2 之定位為 method pilot / research design / mechanism existence support，B2 ≠ empirical result chapter**；撤回主文具體效應量數值之引用方式，改採方向性語式與量級語言。具體修訂位置：(a) §3.1 預期結果段：撤「r ≈ −0.42（CI [−0.58, −0.24]）」之具體小數，改為「預期方向為 β_1 < 0；具體強度與 CI 僅能在 RA 實際完成資料建構與 bootstrap 後報告」；(b) §3.4 縱貫面板回歸段：撤「效應量 Δβ ≈ −0.004 至 −0.010 / 年」之具體小數，改為「若未來資料支持，效應量可能落在每年 10⁻³ 至 10⁻² 量級（illustrative anchor），不能外推到單一國家」；(c) §4 DAG 後門路徑段：「政體類型 / 發展階段 / 數位轉型政策同時驅動」之單向因果語式改為「共同前因 / 共因影響」之保守措辭；(d) §1 導論補入「本文定位明示」段，限縮 B2 之承擔範圍為「方向性預期 + 識別設計 + 機制存在性 + 對照組」四層，不承擔「主因果結論」。修訂依據為 civic-proof series Phase 1+2 audit + GPT-5.5-pro 二輪 audit（2026-05-16）對 B2 R_CA / R_EV 風險之判斷（撤主文具體小數，維持 S1+，不可升 S2）。核心論證骨架（IAI 兩維 5 級編碼 / 70 國覆蓋 / 5 natural experiment 評估 / 3 機制存在性案例 / 多 method triangulation）未動。
 
 ## 參考資料
 
