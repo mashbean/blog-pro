@@ -313,7 +313,7 @@ CRLite 是「規模化、低 phone-home 模式可行」的存在性證明，把�
 33. OID4VC. *Implementer Survey 2024*. OpenID Foundation, 2024. 來源等級 A。
 34. EU eIDAS 2.0, Regulation (EU) 2024/1183. 來源等級 A。
 35. EU Implementing Regulation (EU) 2024/2979. 來源等級 A。
-36. EUDI Wallet ARF v1.4 / v1.5, Annex 2 Topic 7. 來源等級 A。
+36. EUDI Wallet ARF, 2025-12 Cooperation Group rolling iteration（歷史快照 v1.4 / v1.5）, Annex 2 Topic 7. 來源等級 A。
 37. AAMVA. *mDL Implementation Guidelines v1.4*. 2024-12. 來源等級 A。
 38. AAMVA. *mDL Implementation Guidelines v1.5*. 2025-05. 來源等級 A。
 39. CNIL. *Bitouzet, J. Phone-Home 隱私分析*. 法國資料保護機構, 2022. 來源等級 A。

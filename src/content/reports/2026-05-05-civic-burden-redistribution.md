@@ -43,7 +43,7 @@ lang: "zh-TW"
 
 **(2) 撤銷與恢復**。MOICA 體系下，遺失或竊用透過 24 小時失效機制 + 戶政臨櫃補發；TW DIW 體系下，holder 在 wallet app 內發起撤銷，信任清單同步失效，但若手機損毀或遺失，恢復路徑取決於備援機制（健保卡 + 行動電話雙因子，或重新臨櫃）。撤銷恢復是 holder 而非 issuer 主動發起，holder 需具備判斷「何時該撤銷」的能力。
 
-**(3) 驗證接入：verifier 整合合規負擔**。MOICA 體系下，verifier 透過簽約取得 SAM 卡，由內政部統一認證；TW DIW 體系下，verifier 透過 OpenID4VP / OpenID4VCI 整合<sup>23</sup>，目前暫無強制 verifier 認證。EU EUDI ARF v1.4.1 第 5 章估計 relying party 的整合成本為 3-12 萬歐元<sup>24</sup>，在台灣脈絡下對中小型 verifier（如地方政府單一窗口、小型醫療院所、社區藥局）構成顯著進入門檻。
+**(3) 驗證接入：verifier 整合合規負擔**。MOICA 體系下，verifier 透過簽約取得 SAM 卡，由內政部統一認證；TW DIW 體系下，verifier 透過 OpenID4VP / OpenID4VCI 整合<sup>23</sup>，目前暫無強制 verifier 認證。EU EUDI ARF（2025-12 Cooperation Group iteration；引用以 v1.4.1 / 2024-12 為穩定快照）第 5 章估計 relying party 的整合成本為 3-12 萬歐元<sup>24</sup>，在台灣脈絡下對中小型 verifier（如地方政府單一窗口、小型醫療院所、社區藥局）構成顯著進入門檻。
 
 **(4) 信任判斷：holder 判斷 verifier 真偽**。MOICA 體系下，民眾不需判斷 verifier 是否合法；TW DIW 體系下，holder 在揭露身分屬性前必須判斷 verifier 是否在信任清單上、是否符合目的最小必要原則。對低數位識讀者，這是接近不可能的負擔。
 
@@ -380,7 +380,7 @@ C 層的計算依據：衛福部 2021 年身心障礙者生活狀況調查顯示
 21. 國發會 2024 公開簡報；數位發展部《行動自然人憑證（TW DIW）試辦計畫說明》2024。來源等級 C。
 22. ENISA 2024 *Mobile eID and mDL Trust Framework Report*, Chapter 4。來源等級 A。
 23. OpenID4VCI / OpenID4VP Specifications。來源等級 A。
-24. EU EUDI Wallet ARF v1.4.1 (2024-12), Chapter 5。來源等級 B。
+24. EU EUDI Wallet ARF, 2025-12 Cooperation Group iteration（歷史快照 v1.4.1, 2024-12）, Chapter 5。來源等級 B。
 25. Regulation (EU) 2024/1183, Article 5a。來源等級 A。
 26. Apple Wallet 服務條款 § 8。來源等級 C。
 27. W3C VC Data Model 2.0；ISO/IEC 18013-5:2021 mDL；AAMVA 2024 mDL Implementation Guidelines v1.4。來源等級 A。
@@ -432,7 +432,7 @@ C 層的計算依據：衛福部 2021 年身心障礙者生活狀況調查顯示
 73. France Identité ANSSI Report 2025。來源等級 B。
 74. Norsk Regnesentral (2021). *Digital Identity in the Nordics: Lessons and Limits*. NR Notat DART/01/2021。來源等級 B。
 75. Hartzog, W. (2018). *Privacy's Blueprint*. Harvard UP, Chapter on design-as-law。來源等級 A。
-76. EU EUDI Wallet ARF v1.4.1 (2024-12), Chapter 5 (relying party 整合成本估計)。來源等級 B。
+76. EU EUDI Wallet ARF, 2025-12 Cooperation Group iteration（歷史快照 v1.4.1, 2024-12）, Chapter 5 (relying party 整合成本估計)。來源等級 B。
 77. 中華民國消費者保護法 1994 / 2015 修法第 43-47 條。來源等級 B。
 78. 中華民國個人資料保護法 2010 / 2023 修法第 28-31 條。來源等級 B。
 79. Solove, D. J., & Hartzog, W. (2014). *The FTC and the New Common Law of Privacy*. *Columbia Law Review* 114(3), 583-676。來源等級 A。
@@ -513,7 +513,7 @@ C 層的計算依據：衛福部 2021 年身心障礙者生活狀況調查顯示
 154. ENISA 2024 *Mobile eID and mDL Trust Framework Report*。來源等級 A。
 155. W3C WCAG 2.2 SC 1.4.3 / 1.4.4 / 1.4.10 / 2.5.7 / 2.5.8。來源等級 A。
 156. SA-3 § 5.3 三條 C3 機關建構路徑分析。
-157. EU EUDI Wallet ARF v1.4.1 (2024-12), Chapter 5。來源等級 B。
+157. EU EUDI Wallet ARF, 2025-12 Cooperation Group iteration（歷史快照 v1.4.1, 2024-12）, Chapter 5。來源等級 B。
 158. UK Government Digital Service 2023 *Assisted Digital Strategy*。來源等級 D。
 159. Digitaliseringsstyrelsen (Denmark) 2023 *MitID Alternative Channels Evaluation Report*。來源等級 D。
 160. Pensionsmyndigheten 2023 *Tillgänglighet och digital inkludering*。來源等級 D。
