@@ -8,7 +8,7 @@ aiModel: "Claude Opus 4.8"
 aiPipelineStage: "final"
 aiPipelineId: "research-publishing-pipeline/2026-06-13-ai-work-anxiety-reality"
 aiGeneratedDate: 2026-06-13
-humanReviewed: false
+humanReviewed: true
 lang: "zh-TW"
 slug: "2026-06-13-ai-work-anxiety-reality"
 ---
