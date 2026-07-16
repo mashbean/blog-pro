@@ -1,0 +1,181 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Mesh from "../components/Mesh.astro";
+import Guides from "../components/Guides.astro";
+import Masthead from "../components/Masthead.astro";
+import Iris from "../components/Iris.astro";
+import Footer from "../components/Footer.astro";
+import ReadingProgress from "../components/ReadingProgress.astro";
+import ScrollReveal from "../components/ScrollReveal.astro";
+import { readingTime } from "../utils/reading-time";
+import { getSeriesNeighbours } from "../utils/fiction";
+import "../styles/global.css";
+
+interface Props {
+  id: string;
+  title: string;
+  /** 不上版面，只餵 <meta description> 與分享摘要。 */
+  description: string;
+  series: string;
+  seriesOrder: number;
+  protagonist: string;
+  institution: string;
+  framedBy: string;
+  aiModel?: string;
+  body: string;
+}
+
+const {
+  id,
+  title,
+  description,
+  series,
+  seriesOrder,
+  protagonist,
+  institution,
+  framedBy,
+  aiModel,
+  body,
+} = Astro.props;
+
+const readTime = readingTime(body);
+const num = String(seriesOrder).padStart(2, "0");
+const { prev, next } = await getSeriesNeighbours(id);
+---
+
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <BaseHead
+      title={`${title}｜${series}`}
+      description={description}
+      ogImage={`og/fiction/${id}.png`}
+    />
+  </head>
+  <body>
+    <Mesh />
+    <Guides />
+    <ReadingProgress />
+    <Masthead />
+
+    <article class="article">
+      <a href="/fiction/" class="article__back">← 《{series}》</a>
+
+      <p class="article__kicker">{series} · 第 {num} 篇</p>
+      <h1 class="article__title">{title}</h1>
+
+      <div class="article__meta">
+        <span><strong>{protagonist}</strong></span>
+        <span>{institution}</span>
+        <span style="margin-left:auto">{readTime}</span>
+      </div>
+
+      <div class="fiction-prose">
+        <slot />
+      </div>
+
+      <p class="colophon">框架：{framedBy}。文字：{aiModel ?? "AI"}。</p>
+    </article>
+
+    <nav class="seriesnav">
+      {prev ? (
+        <a href={`/fiction/${prev.id}/`} class="seriesnav__item seriesnav__item--prev">
+          <span class="seriesnav__dir">← 前一篇</span>
+          <span class="seriesnav__title">{prev.data.title}</span>
+          <span class="seriesnav__who">{prev.data.protagonist}</span>
+        </a>
+      ) : (
+        <span class="seriesnav__item seriesnav__item--empty">
+          <span class="seriesnav__dir">選集開頭</span>
+        </span>
+      )}
+      {next ? (
+        <a href={`/fiction/${next.id}/`} class="seriesnav__item seriesnav__item--next">
+          <span class="seriesnav__dir">下一篇 →</span>
+          <span class="seriesnav__title">{next.data.title}</span>
+          <span class="seriesnav__who">{next.data.protagonist}</span>
+        </a>
+      ) : (
+        <a href="/fiction/" class="seriesnav__item seriesnav__item--next">
+          <span class="seriesnav__dir">選集結尾 →</span>
+          <span class="seriesnav__title">回到《{series}》</span>
+          <span class="seriesnav__who">五篇目次</span>
+        </a>
+      )}
+    </nav>
+
+    <Footer />
+    <Iris />
+    <ScrollReveal />
+
+    <style>
+      .colophon {
+        margin: var(--space-8) 0 0;
+        padding-top: var(--space-4);
+        border-top: 1px solid var(--color-rule);
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        color: var(--color-ink-muted);
+      }
+
+      .seriesnav {
+        position: relative;
+        z-index: 2;
+        width: 80%;
+        max-width: 680px;
+        margin: 0 auto var(--space-10);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-4);
+      }
+      .seriesnav__item {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-1);
+        padding: var(--space-4);
+        border: 1px solid var(--color-rule);
+        border-radius: var(--radius-md);
+        text-decoration: none;
+        transition: border-color var(--dur-fast) var(--ease-standard);
+      }
+      a.seriesnav__item:hover {
+        border-color: var(--color-ink);
+      }
+      .seriesnav__item--next {
+        text-align: right;
+      }
+      .seriesnav__item--empty {
+        opacity: 0.4;
+        justify-content: center;
+      }
+      .seriesnav__dir {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-wide);
+        color: var(--color-ink-muted);
+      }
+      .seriesnav__title {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: var(--text-md);
+        color: var(--color-ink);
+      }
+      .seriesnav__who {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        color: var(--color-ink-subtle);
+      }
+
+      @media (max-width: 768px) {
+        .seriesnav {
+          width: 90%;
+          grid-template-columns: 1fr;
+        }
+        .seriesnav__item--next {
+          text-align: left;
+        }
+      }
+    </style>
+  </body>
+</html>

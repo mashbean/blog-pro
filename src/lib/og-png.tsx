@@ -109,11 +109,17 @@ export function postScene({
   kicker,
   author,
   date,
+  path = "reports",
+  footRight = `${SITE_SHORT}｜${SITE_SUBTITLE}`,
 }: {
   title: string;
   kicker: string;
   author: string;
   date: string;
+  /** URL section under the domain, shown in the top chrome. */
+  path?: string;
+  /** Bottom-right strapline. Fiction overrides it — 由豆泥提問 is the research framing. */
+  footRight?: string;
 }): React.ReactElement {
   const fontSize = fontSizeForTitle(title);
   const sideMargin = 72;
@@ -143,7 +149,7 @@ export function postScene({
         <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
           <span style={{ ...monoStyle, fontSize: "22px" }}>{kicker.toUpperCase()}</span>
           <span style={{ ...monoStyle, fontSize: "14px", opacity: 0.75 }}>
-            pro.mashbean.net / reports
+            pro.mashbean.net / {path}
           </span>
         </div>
       </div>
@@ -195,9 +201,7 @@ export function postScene({
           <span>
             <span style={{ color: "#0e0e0e", fontWeight: 500 }}>{author}</span>  ·  {date}
           </span>
-          <span>
-            {SITE_SHORT}｜{SITE_SUBTITLE}
-          </span>
+          <span>{footRight}</span>
         </div>
       </div>
     </div>

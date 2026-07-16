@@ -32,6 +32,40 @@ const reports = defineCollection({
   schema: reportSchema,
 });
 
+// ── Fiction ────────────────────────────────────────────────────
+// 小說區塊。與 reports 刻意分開：報告要被掃讀（aiPrompt、論證地圖、
+// 標籤），小說只要被讀。頁面上不解釋框架，只在頁尾署名。
+//
+// 目前唯一的選集是《普通人》，順序由 seriesOrder 決定，不看 pubDate。
+
+const fictionSchema = z.object({
+  title: z.string(),
+  /** 不上版面，只餵 <meta description> 與分享摘要。 */
+  description: z.string(),
+  pubDate: z.coerce.date(),
+  updatedDate: z.coerce.date().optional(),
+  draft: z.boolean().default(false),
+  lang: z.string().default("zh-TW"),
+
+  // 選集與篇序
+  series: z.string().default("普通人"),
+  seriesOrder: z.number().int().positive(),
+
+  // 這一篇裡，普通人是誰、他站在哪一個體制裡
+  protagonist: z.string(),
+  institution: z.string(),
+
+  // 署名：框架是人給的，字是 AI 寫的
+  framedBy: z.string().default("豆泥"),
+  aiModel: z.string().optional(),
+  aiGeneratedDate: z.coerce.date().optional(),
+});
+
+const fiction = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/fiction" }),
+  schema: fictionSchema,
+});
+
 // ── Argument maps (one per report) ─────────────────────────────
 // 結構化的論證地圖資料。每個 argmap 對應一篇文章（slug 對應）。
 //
@@ -173,4 +207,4 @@ const argmaps = defineCollection({
   schema: argmapSchema,
 });
 
-export const collections = { reports, argmaps };
+export const collections = { reports, fiction, argmaps };

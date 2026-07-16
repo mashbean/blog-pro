@@ -1,0 +1,209 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getFictionInReadingOrder } from "../../utils/fiction";
+import { readingTime } from "../../utils/reading-time";
+
+const stories = await getFictionInReadingOrder();
+const series = stories[0]?.data.series ?? "普通人";
+const framedBy = stories[0]?.data.framedBy ?? "豆泥";
+
+const entries = stories.map((s) => ({
+  num: String(s.data.seriesOrder).padStart(2, "0"),
+  href: `/fiction/${s.id}/`,
+  readTime: readingTime(s.body ?? ""),
+  ...s.data,
+}));
+
+// 不上版面，只餵 <meta description> 與分享摘要。
+const description = `${series}：五篇小說。框架：${framedBy}。文字：AI。`;
+---
+
+<BaseLayout title={`${series}｜小說`} description={description}>
+  <section class="cover">
+    <p class="cover__kicker">Fiction · 選集</p>
+    <h1 class="cover__title">{series}</h1>
+    <div class="cover__meta">
+      <span><strong>{entries.length}</strong> 篇</span>
+      <span>框架：{framedBy}</span>
+      <span>文字：AI</span>
+    </div>
+  </section>
+
+  <section class="toc">
+    <div class="toc__head">
+      <span class="toc__label">目次 · 建議閱讀順序</span>
+    </div>
+
+    <ol class="toc__list">
+      {entries.map((e) => (
+        <li class="entry">
+          <a href={e.href} class="entry__link">
+            <span class="entry__num">{e.num}</span>
+            <span class="entry__main">
+              <span class="entry__head">
+                <h3 class="entry__title">{e.title}</h3>
+                <span class="entry__who">{e.protagonist}</span>
+              </span>
+              <span class="entry__institution">{e.institution}</span>
+              <span class="entry__foot">
+                <span class="entry__time">{e.readTime}</span>
+                <span class="entry__cta">閱讀 →</span>
+              </span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ---- Cover ---- */
+  .cover {
+    position: relative;
+    z-index: 2;
+    width: 80%;
+    margin: 0 auto var(--space-7);
+  }
+  .cover__kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-ink-muted);
+    margin: 0 0 var(--space-4);
+  }
+  .cover__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-4xl);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    margin: 0;
+  }
+  .cover__meta {
+    display: flex;
+    gap: var(--space-5);
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    margin-top: var(--space-6);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-rule);
+  }
+  .cover__meta strong {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  /* ---- Table of contents ---- */
+  .toc {
+    position: relative;
+    z-index: 2;
+    width: 80%;
+    margin: 0 auto var(--space-10);
+  }
+  .toc__head {
+    border-top: 1px solid var(--color-ink);
+    padding-top: var(--space-3);
+    margin-bottom: var(--space-5);
+  }
+  .toc__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-ink-muted);
+  }
+  .toc__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .entry {
+    border-bottom: 1px solid var(--color-rule);
+  }
+  .entry__link {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: var(--space-4);
+    padding: var(--space-6) 0;
+    text-decoration: none;
+    transition: opacity var(--dur-fast) var(--ease-standard);
+  }
+  .entry__link:hover {
+    opacity: 0.68;
+  }
+  .entry__num {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    color: var(--color-ink-subtle);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
+  }
+  .entry__main {
+    display: block;
+    min-width: 0;
+  }
+  .entry__head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+  .entry__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-xl);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-ink);
+    margin: 0;
+  }
+  .entry__who {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-subtle);
+  }
+  .entry__institution {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-ink-muted);
+    margin-top: var(--space-2);
+  }
+  .entry__foot {
+    display: flex;
+    gap: var(--space-4);
+    align-items: baseline;
+    margin-top: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-subtle);
+  }
+  .entry__cta {
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 768px) {
+    .cover,
+    .intro,
+    .toc {
+      width: 90%;
+    }
+    .intro {
+      gap: var(--space-6);
+    }
+    .entry__link {
+      grid-template-columns: 2.5rem 1fr;
+      gap: var(--space-3);
+      padding: var(--space-5) 0;
+    }
+    .entry__num {
+      font-size: var(--text-base);
+    }
+  }
+</style>
