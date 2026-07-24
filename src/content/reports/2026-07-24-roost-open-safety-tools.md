@@ -29,7 +29,7 @@ slug: "2026-07-24-roost-open-safety-tools"
 
 ## ROOST 的緣起與現狀
 
-ROOST 的種子早於巴黎峰會 16 個月。它的研究源頭是哥倫比亞大學 SIPA 的 Institute of Global Politics 在 2023 年底起舉辦的一系列開放與安全論壇，Mozilla 提供了早期的一筆小額種子資助，把探索性研究法人化為獨立 501(c)(3) 的臨門一腳則來自 Eric Schmidt 旗下的機構<sup>2</sup>。2025 年 2 月的巴黎 AI Action Summit 提供了發表舞台與「開放即安全」的政策框架，同場法國宣布了 4 億美元的公共利益 AI 基金<sup>3</sup>。
+ROOST 的種子早於巴黎峰會 16 個月。它的研究源頭是哥倫比亞大學 SIPA 的 Institute of Global Politics 在 2023 年底起舉辦的一系列開放與安全論壇，Mozilla 提供了早期的一筆小額種子資助，臨門一腳則來自 Eric Schmidt 創立的 Special Competitive Studies Project（SCSP）等 Schmidt 系機構，它們協助把哥倫比亞大學的探索性研究，快速法人化為獨立的 501(c)(3) 非營利組織<sup>2</sup>。2025 年 2 月的巴黎 AI Action Summit 提供了發表舞台與「開放即安全」的政策框架，同場法國宣布了 4 億美元的公共利益 AI 基金<sup>3</sup>。
 
 現狀是一個小核心、重外部貢獻的精實組織。執行團隊約五人，總裁 Camille François 出身哥大與 Google 的 Jigsaw；董事會十席在 2025 年底定案，主席是 Discord 法務長，副主席出身 Schmidt 系智庫，成員還包括 Google 兒少安全主管、Mozilla 總裁，以及台灣首任數位發展部長唐鳳<sup>4</sup>。這份名單本身透露了 ROOST 的重心所在，也留下了華語圈進入其治理層的一個現成接點。
 
