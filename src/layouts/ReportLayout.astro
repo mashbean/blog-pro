@@ -10,11 +10,13 @@ import TableOfContents from "../components/TableOfContents.astro";
 import AiMetaBadge from "../components/AiMetaBadge.astro";
 import ScrollReveal from "../components/ScrollReveal.astro";
 import CitationTooltip from "../components/CitationTooltip.astro";
+import SearchPalette from "../components/SearchPalette.astro";
 import { formatDate } from "../utils/date";
-import { readingTime } from "../utils/reading-time";
+import { readingTime, estimateReadingMinutes } from "../utils/reading-time";
 import { getPublishedReports } from "../utils/reports";
-import { reportToPost } from "../lib/reports-to-posts";
-import { hashSeed, mulberry, themeFor } from "../lib/theme-generator";
+import { relatedTo, seriesNeighbours } from "../lib/related";
+import { topicOf, seriesMeta, sortTags } from "../lib/taxonomy";
+import { withBase } from "../utils/paths";
 import { getCollection } from "astro:content";
 import "../styles/global.css";
 
@@ -57,19 +59,15 @@ const argmaps = await getCollection("argmaps");
 const matchedArgmap = argmaps.find((a) => a.data.slug === id);
 const argmapHref = matchedArgmap ? `/argmaps/${matchedArgmap.id}/` : undefined;
 
-// Related pool — everything except this report
 const allReports = await getPublishedReports();
-const otherPosts = allReports
-  .filter((r) => r.id !== id)
-  .map(reportToPost);
-const relatedRandom = mulberry(hashSeed(`${id}:related`));
-const relatedPosts = [...otherPosts]
-  .sort(() => relatedRandom() - 0.5)
-  .slice(0, 3)
-  .map((post) => ({
-    post,
-    theme: themeFor(post.id),
-  }));
+const self = allReports.find((r) => r.id === id);
+
+// 相關文章走相似度，不是亂數（見 src/lib/related.ts）
+const related = self ? relatedTo(self, allReports, 4) : [];
+const seriesInfo = self?.data.series ? seriesMeta(self.data.series) : undefined;
+const series = self ? seriesNeighbours(self, allReports, seriesInfo?.entry) : undefined;
+const topic = topicOf(self?.data.topic);
+const orderedTags = sortTags(tags);
 ---
 
 <!doctype html>
@@ -86,7 +84,20 @@ const relatedPosts = [...otherPosts]
     <article class="article">
       <a href="/" class="article__back">← All essays</a>
 
-      <p class="article__kicker">{kicker}</p>
+      <p class="article__kicker">
+        {topic ? (
+          <a class="article__topic" href={withBase(`/topics/${topic.id}/`)} data-topic={topic.id}>
+            {topic.label}
+          </a>
+        ) : kicker}
+        {seriesInfo && series && series.total > 1 && (
+          <span class="article__seriesbadge">
+            {seriesInfo.label}
+            {/* 顯示作者自己的篇號，沒標號的就不編——不拿發表位次冒充篇號 */}
+            <em>{self?.data.seriesOrder ? `第 ${self.data.seriesOrder} 篇` : `共 ${series.total} 篇`}</em>
+          </span>
+        )}
+      </p>
       <h1 class="article__title">{title}</h1>
       <p class="article__lede">“{description}”</p>
 
@@ -100,10 +111,12 @@ const relatedPosts = [...otherPosts]
         <span style="margin-left:auto">#{id.split("/").pop()}</span>
       </div>
 
-      {tags.length > 0 && (
+      {orderedTags.length > 0 && (
         <div class="article__tags">
-          {tags.map((tag) => (
-            <a class="article__tag" href={`/tags/${tag}/`}>#{tag}</a>
+          {orderedTags.map((tag) => (
+            <a class="article__tag" href={withBase(`/tags/${encodeURIComponent(tag)}/`)}>
+              {tag}
+            </a>
           ))}
         </div>
       )}
@@ -135,32 +148,176 @@ const relatedPosts = [...otherPosts]
       </aside>
     </article>
 
-    {relatedPosts.length > 0 && (
+    {series && (series.prev || series.next) && (
+      <nav class="seriesnav" aria-label="系列導覽">
+        <p class="seriesnav__label">
+          {seriesInfo?.label ?? "系列"} · 依發表順序第 {series.position} / {series.total} 篇
+        </p>
+        <div class="seriesnav__pair">
+          {series.prev ? (
+            <a class="seriesnav__item" href={withBase(`/reports/${series.prev.id}/`)}>
+              <span class="seriesnav__dir">← 前一篇</span>
+              <span class="seriesnav__t">{series.prev.data.title}</span>
+            </a>
+          ) : <span />}
+          {series.next ? (
+            <a class="seriesnav__item seriesnav__item--next" href={withBase(`/reports/${series.next.id}/`)}>
+              <span class="seriesnav__dir">下一篇 →</span>
+              <span class="seriesnav__t">{series.next.data.title}</span>
+            </a>
+          ) : <span />}
+        </div>
+      </nav>
+    )}
+
+    {related.length > 0 && (
       <section class="related">
         <div class="related__head">
-          <span class="related__label">Continue reading</span>
+          <span class="related__label">相關文章</span>
         </div>
-        <div class="related__grid">
-          {relatedPosts.map(({ post, theme }) => (
-            <a
-              href={post.href}
-              class="related__item"
-              style={`background: ${theme.bg}; color: ${theme.text};`}
-            >
-              <p class="related__author">{post.author}</p>
-              <h3 class="related__title">{post.title}</h3>
-            </a>
+        <ul class="related__list">
+          {related.map(({ report: r, reason }) => (
+            <li>
+              <a class="related__row" href={withBase(`/reports/${r.id}/`)}>
+                <time class="related__date" datetime={r.data.pubDate.toISOString()}>
+                  {r.data.pubDate.toISOString().slice(0, 10)}
+                </time>
+                <span class="related__t">{r.data.title}</span>
+                <span class="related__why">{reason}</span>
+                <span class="related__mins">
+                  {estimateReadingMinutes((r.body ?? "").toString())} 分鐘
+                </span>
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
     )}
 
     <Footer />
+    <SearchPalette />
     <Iris />
     <ScrollReveal />
     <CitationTooltip />
 
     <style>
+      .article__kicker {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        flex-wrap: wrap;
+      }
+      .article__topic {
+        color: oklch(0.46 0.12 var(--topic-h, 0));
+        text-decoration: none;
+        border-bottom: 1px solid currentColor;
+      }
+      .article__seriesbadge {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 6px;
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        color: var(--color-ink-muted);
+        border: 1px solid var(--color-rule);
+        border-radius: var(--radius-pill);
+        padding: 2px 10px;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+      .article__seriesbadge em {
+        font-style: normal;
+        color: var(--color-ink-subtle);
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* ---- 系列前後篇 ---- */
+      .seriesnav {
+        width: min(960px, calc(100% - 2 * var(--space-5)));
+        margin: 0 auto var(--space-7);
+      }
+      .seriesnav__label {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-wide);
+        color: var(--color-ink-subtle);
+        margin: 0 0 var(--space-3);
+      }
+      .seriesnav__pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-4);
+      }
+      .seriesnav__item {
+        display: grid;
+        gap: var(--space-2);
+        padding: var(--space-4);
+        border: 1px solid var(--color-rule-strong);
+        border-radius: var(--radius-md);
+        background: var(--color-surface);
+        text-decoration: none;
+        color: var(--color-ink);
+        transition: all var(--dur-fast) var(--ease-standard);
+      }
+      .seriesnav__item:hover { border-color: var(--color-ink); transform: translateY(-2px) }
+      .seriesnav__item--next { text-align: right }
+      .seriesnav__dir {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        color: var(--color-ink-subtle);
+      }
+      .seriesnav__t {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: var(--text-sm);
+        line-height: var(--leading-snug);
+      }
+      @media (max-width: 720px) {
+        .seriesnav__pair { grid-template-columns: 1fr }
+        .seriesnav__item--next { text-align: left }
+      }
+
+      /* ---- 相關文章 ---- */
+      .related__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border-top: 1px solid var(--color-rule);
+      }
+      .related__row {
+        display: grid;
+        grid-template-columns: 6.5rem 1fr auto auto;
+        gap: var(--space-4);
+        align-items: baseline;
+        padding: var(--space-3) 0;
+        border-bottom: 1px solid var(--color-rule);
+        text-decoration: none;
+        color: var(--color-ink);
+      }
+      .related__row:hover .related__t {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .related__date,
+      .related__why,
+      .related__mins {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        color: var(--color-ink-subtle);
+        white-space: nowrap;
+      }
+      .related__t {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: var(--text-sm);
+        line-height: var(--leading-snug);
+      }
+      @media (max-width: 720px) {
+        .related__row { grid-template-columns: 1fr; gap: var(--space-1) }
+        .related__why { display: none }
+      }
+
       .article__tags {
         display: flex;
         gap: var(--space-2);

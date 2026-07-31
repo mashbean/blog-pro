@@ -1,34 +1,139 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getPublishedReports, getAllTags } from "../../utils/reports";
+import { getPublishedReports } from "../../utils/reports";
+import { TAG_CLUSTERS, TOPICS } from "../../lib/taxonomy";
 import { withBase } from "../../utils/paths";
 
 const reports = await getPublishedReports();
-const tags = getAllTags(reports);
 
-const tagCounts = new Map<string, number>();
+const counts = new Map<string, number>();
 for (const r of reports) {
-  for (const t of r.data.tags) {
-    tagCounts.set(t, (tagCounts.get(t) || 0) + 1);
-  }
+  for (const t of r.data.tags ?? []) counts.set(t, (counts.get(t) ?? 0) + 1);
 }
+
+const clusters = TAG_CLUSTERS.map((c) => ({
+  label: c.label,
+  tags: c.tags.filter((t) => (counts.get(t) ?? 0) > 0),
+})).filter((c) => c.tags.length > 0);
+
+const total = [...counts.values()].reduce((a, b) => a + b, 0);
 ---
 
-<BaseLayout title="標籤">
-  <h1 class="text-3xl font-bold font-serif mb-8 reveal">標籤</h1>
+<BaseLayout title="標籤" description="全站受控標籤詞彙。">
+  <section class="tagshero">
+    <p class="tagshero__kicker">Tags</p>
+    <h1 class="tagshero__title">標籤</h1>
+    <p class="tagshero__sub">
+      {counts.size} 個受控標籤，{total} 次標記。標籤是跨主題的篩選面向——
+      想從整體結構切入，走 <a href={withBase("/topics/")}>主題</a>；
+      想找特定一篇，按 <kbd>⌘K</kbd> 全文搜尋。
+    </p>
+    <div class="tagshero__topics">
+      {TOPICS.map((t) => (
+        <a class="chip chip--topic" data-topic={t.id} href={withBase(`/topics/${t.id}/`)}>
+          {t.label}
+        </a>
+      ))}
+    </div>
+  </section>
 
-  <div class="flex flex-wrap gap-3 reveal">
-    {tags.map((tag) => (
-      <a
-        href={withBase(`/tags/${tag}/`)}
-        class="px-4 py-2 rounded-full border border-[var(--color-border)]
-               text-[var(--color-text-muted)]
-               hover:border-[var(--color-accent)]/40 hover:text-[var(--color-accent)]
-               transition-colors"
-      >
-        {tag}
-        <span class="ml-1 text-xs opacity-60">({tagCounts.get(tag)})</span>
-      </a>
-    ))}
-  </div>
+  {clusters.map((c) => (
+    <section class="tagcluster">
+      <h2 class="tagcluster__label">{c.label}</h2>
+      <div class="tagcluster__chips">
+        {c.tags.map((t) => (
+          <a class="tagchip" href={withBase(`/tags/${encodeURIComponent(t)}/`)}>
+            {t}<span>{counts.get(t)}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
 </BaseLayout>
+
+<style>
+  .tagshero {
+    width: var(--browse-w);
+    margin: 0 auto var(--space-7);
+  }
+  .tagshero__kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-ink-muted);
+    margin: 0 0 var(--space-3);
+  }
+  .tagshero__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-3xl);
+    line-height: var(--leading-tight);
+    margin: 0;
+  }
+  .tagshero__sub {
+    margin: var(--space-3) 0 0;
+    max-width: 56ch;
+    color: var(--color-ink-muted);
+    line-height: var(--leading-relaxed);
+  }
+  .tagshero__sub kbd {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    border: 1px solid var(--color-rule-strong);
+    border-radius: 3px;
+    padding: 1px 5px;
+    background: var(--color-surface);
+  }
+  .tagshero__topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+  .tagshero__topics .chip { text-decoration: none }
+
+  .tagcluster {
+    width: var(--browse-w);
+    margin: 0 auto var(--space-6);
+  }
+  .tagcluster__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-ink-subtle);
+    margin: 0 0 var(--space-3);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--color-rule);
+    font-weight: 400;
+  }
+  .tagcluster__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .tagchip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    font-size: var(--text-sm);
+    color: var(--color-ink);
+    text-decoration: none;
+    background: var(--color-surface);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-pill);
+    padding: 5px 14px;
+    transition: all var(--dur-fast, 160ms) var(--ease-standard, ease);
+  }
+  .tagchip:hover {
+    border-color: var(--color-ink);
+    transform: translateY(-1px);
+  }
+  .tagchip span {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-subtle);
+    font-variant-numeric: tabular-nums;
+  }
+</style>

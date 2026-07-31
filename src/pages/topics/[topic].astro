@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostRows from "../../components/PostRows.astro";
+import { getPublishedReports } from "../../utils/reports";
+import { TOPICS, topicOf, sortTags } from "../../lib/taxonomy";
+import { withBase } from "../../utils/paths";
+
+export async function getStaticPaths() {
+  const reports = await getPublishedReports();
+  return TOPICS.map((t) => ({
+    params: { topic: t.id },
+    props: { topicId: t.id, reports: reports.filter((r) => r.data.topic === t.id) },
+  }));
+}
+
+const { topicId, reports } = Astro.props;
+const topic = topicOf(topicId)!;
+
+// 這個主題底下實際用到的標籤，讓讀者可以再往下切一層
+const tagCounts = new Map<string, number>();
+for (const r of reports) {
+  for (const t of r.data.tags ?? []) tagCounts.set(t, (tagCounts.get(t) ?? 0) + 1);
+}
+const tags = sortTags([...tagCounts.keys()]);
+---
+
+<BaseLayout title={topic.label} description={topic.blurb}>
+  <section class="topichead" data-topic={topic.id}>
+    <a class="topichead__back" href={withBase("/topics/")}>← 所有主題</a>
+    <h1 class="topichead__title">{topic.label}</h1>
+    <p class="topichead__blurb">{topic.blurb}</p>
+    <p class="topichead__n">{reports.length} 篇</p>
+
+    {tags.length > 0 && (
+      <div class="topichead__tags">
+        {tags.map((t) => (
+          <a class="chip" href={withBase(`/tags/${encodeURIComponent(t)}/`)}>
+            {t}<span class="chip__n">{tagCounts.get(t)}</span>
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
+
+  <PostRows reports={reports} omitTopic />
+</BaseLayout>
+
+<style>
+  .topichead {
+    width: var(--browse-w);
+    margin: 0 auto var(--space-6);
+  }
+  .topichead__back {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    text-decoration: none;
+  }
+  .topichead__back:hover { color: var(--color-ink) }
+  .topichead__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-3xl);
+    line-height: var(--leading-tight);
+    margin: var(--space-3) 0 0;
+    color: oklch(0.38 0.12 var(--topic-h, 0));
+  }
+  .topichead__blurb {
+    margin: var(--space-3) 0 0;
+    max-width: 56ch;
+    color: var(--color-ink-muted);
+    line-height: var(--leading-relaxed);
+  }
+  .topichead__n {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-subtle);
+    margin: var(--space-4) 0 0;
+  }
+  .topichead__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+  .topichead__tags .chip { text-decoration: none }
+</style>

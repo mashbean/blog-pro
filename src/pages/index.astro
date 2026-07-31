@@ -3,27 +3,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import HomeApp from "../components/islands/HomeApp.tsx";
 import { getPublishedReports } from "../utils/reports";
 import { reportToPost } from "../lib/reports-to-posts";
+import { TOPICS } from "../lib/taxonomy";
 import { SITE_TAGLINE } from "../site.config";
 
 const reports = await getPublishedReports();
 const posts = reports.map(reportToPost);
 
 const essayCount = posts.length;
-const authors = new Set(posts.map((p) => p.author));
-const kicker = `Essays · Notes · Field reports — ${new Date().toLocaleDateString("en-US", { month: "short", year: "numeric" })}`;
+const topicCount = new Set(posts.map((p) => p.topic).filter(Boolean)).size;
+const latest = posts.reduce((a, p) => (p.date > a ? p.date : a), "");
 ---
 
 <BaseLayout>
-  <section class="hero">
+  <section class="hero hero--compact">
     <div>
-      <p class="hero__kicker">{kicker}</p>
+      <p class="hero__kicker">Essays · Notes · Field reports</p>
       <h1 class="hero__title">難題</h1>
       <p class="hero__sub">{SITE_TAGLINE}</p>
     </div>
     <div class="hero__meta">
-      <span><strong>{essayCount}</strong> essays</span>
-      <span>{authors.size} {authors.size === 1 ? "author" : "authors"}</span>
-      <span>Updated weekly</span>
+      <span><strong>{essayCount}</strong> 篇</span>
+      <span>{topicCount} / {TOPICS.length} 個主題</span>
+      <span>最近更新 {latest}</span>
     </div>
   </section>
 
@@ -35,10 +36,17 @@ const kicker = `Essays · Notes · Field reports — ${new Date().toLocaleDateSt
     font-family: var(--font-display);
     font-style: normal;
     font-weight: 700;
-    font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
     line-height: var(--leading-snug);
     color: var(--color-ink);
     margin: var(--space-3) 0 0;
     text-wrap: balance;
+  }
+  /* 首頁的主角改成下面那條檢索列了，標題區不再吃掉整個首屏 */
+  .hero--compact {
+    margin-bottom: var(--space-5);
+  }
+  .hero--compact :global(.hero__title) {
+    font-size: var(--text-3xl);
   }
 </style>

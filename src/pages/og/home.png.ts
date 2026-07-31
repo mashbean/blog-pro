@@ -5,7 +5,7 @@ import { SITE_TAGLINE } from "../../site.config";
 
 export const GET: APIRoute = async () => {
   const png = await renderPng(homeScene({ tagline: SITE_TAGLINE }));
-  return new Response(png, {
+  return new Response(new Uint8Array(png), {
     headers: {
       "Content-Type": "image/png",
       "Cache-Control": "public, max-age=86400",

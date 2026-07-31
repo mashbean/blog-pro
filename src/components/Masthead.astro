@@ -12,6 +12,7 @@ const {
   brand = SITE_TITLE,
   nav = [
     { href: "/", label: "Essays" },
+    { href: "/topics/", label: "Topics" },
     { href: "/fiction/", label: "Fiction" },
     { href: "/civic-proof-map/", label: "Map" },
     { href: "/about/", label: "About" },
@@ -26,6 +27,14 @@ const {
     <nav class="masthead__nav">
       {nav.map((item) => <a href={item.href}>{item.label}</a>)}
     </nav>
+    <button class="searchbtn" type="button" data-search-open aria-label="搜尋文章">
+      <svg viewBox="0 0 20 20" aria-hidden="true">
+        <circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+        <path d="M13.5 13.5 L17.5 17.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+      </svg>
+      <span class="searchbtn__label">搜尋</span>
+      <kbd>⌘K</kbd>
+    </button>
     <a
       class="masthead__cta"
       href={MAIN_SITE_URL}

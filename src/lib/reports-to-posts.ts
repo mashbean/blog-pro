@@ -1,8 +1,9 @@
 // Convert a blog-pro report (content collection entry) to the
-// Post shape used by the ported React prototypes.
+// Post shape used by the home page island.
 
 import type { CollectionEntry } from "astro:content";
 import { DEFAULT_AUTHOR } from "../site.config";
+import { estimateReadingMinutes } from "../utils/reading-time";
 
 export type Post = {
   id: string;       // slug
@@ -13,33 +14,31 @@ export type Post = {
   kicker: string;
   quote: string;    // description
   href: string;     // /reports/<slug>/
+  topic: string;    // taxonomy topic id
+  tags: string[];   // controlled vocabulary
+  series?: string;
+  seriesOrder?: number;
+  lang: string;
 };
-
-// Rough CJK-aware word count mirroring src/utils/reading-time.ts (500 cjk/min, 250 latin/min).
-function estimateMinutes(text: string): number {
-  const cjk = (text.match(/[\u4e00-\u9fff\u3400-\u4dbf]/g) || []).length;
-  const latin = text
-    .replace(/[\u4e00-\u9fff\u3400-\u4dbf]/g, "")
-    .split(/\s+/)
-    .filter(Boolean).length;
-  return Math.max(1, Math.ceil(cjk / 500 + latin / 250));
-}
 
 export function reportToPost(report: CollectionEntry<"reports">): Post {
   const data = report.data;
   const body = (report.body ?? "").toString();
-  const firstTag = data.tags?.[0];
-  const kicker = firstTag ?? data.category ?? "Essay";
   const date = data.pubDate.toISOString().slice(0, 10);
 
   return {
     id: report.id,
     author: data.aiModel ?? DEFAULT_AUTHOR,
     date,
-    readMinutes: estimateMinutes(body),
+    readMinutes: estimateReadingMinutes(body),
     title: data.title,
-    kicker,
+    kicker: data.tags?.[0] ?? data.category ?? "Essay",
     quote: data.description,
     href: `/reports/${report.id}/`,
+    topic: data.topic ?? "",
+    tags: data.tags ?? [],
+    series: data.series,
+    seriesOrder: data.seriesOrder,
+    lang: data.lang ?? "zh-TW",
   };
 }

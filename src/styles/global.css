@@ -11,6 +11,8 @@
 @import "./tokens.css";
 @import "./ds-tokens.css";
 @import "./ds-app.css";
+@import "./ds-browse.css";
+@import "./ds-search.css";
 @import "./ds-card.css";
 @import "./prose.css";
 @import "./fiction.css";

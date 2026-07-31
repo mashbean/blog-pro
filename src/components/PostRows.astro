@@ -1,0 +1,76 @@
+---
+// 伺服器端渲染的密集索引列。與首頁 IndexView 共用 .indexrow 樣式，
+// 這樣主題頁、標籤頁、系列頁看起來都是同一套東西。
+import { topicLabel, sortTags, seriesMeta } from "../lib/taxonomy";
+import { withBase } from "../utils/paths";
+import { estimateReadingMinutes } from "../utils/reading-time";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  reports: CollectionEntry<"reports">[];
+  /** 這一頁本身就是某個標籤／主題時，列上不必再重複顯示它。 */
+  omitTag?: string;
+  omitTopic?: boolean;
+}
+
+const { reports, omitTag, omitTopic = false } = Astro.props;
+
+const rows = reports.map((r) => ({
+  slug: r.id,
+  title: r.data.title,
+  desc: r.data.description,
+  date: r.data.pubDate.toISOString().slice(0, 10),
+  minutes: estimateReadingMinutes((r.body ?? "").toString()),
+  topic: r.data.topic ?? "",
+  tags: sortTags(r.data.tags ?? []).filter((t) => t !== omitTag),
+  series: r.data.series,
+  seriesOrder: r.data.seriesOrder,
+  lang: r.data.lang ?? "zh-TW",
+}));
+---
+
+<ol class="indexlist">
+  {rows.map((row) => (
+    <li class="indexrow">
+      <a class="indexrow__main" href={withBase(`/reports/${row.slug}/`)}>
+        <time class="indexrow__date" datetime={row.date}>{row.date}</time>
+        <span class="indexrow__title">{row.title}</span>
+        <span class="indexrow__meta">
+          {!omitTopic && row.topic && (
+            <span class="indexrow__topic" data-topic={row.topic}>
+              {topicLabel(row.topic)}
+            </span>
+          )}
+          <span class="indexrow__mins">{row.minutes} 分鐘</span>
+          {row.lang === "en" && <span class="indexrow__lang">EN</span>}
+        </span>
+      </a>
+      <p class="indexrow__desc">{row.desc}</p>
+      <div class="indexrow__tags">
+        {row.series && (
+          <a
+            class="indexrow__tag indexrow__tag--series"
+            href={withBase(`/?series=${encodeURIComponent(row.series)}`)}
+          >
+            {seriesMeta(row.series)?.label ?? row.series}
+            {row.seriesOrder ? ` #${row.seriesOrder}` : ""}
+          </a>
+        )}
+        {row.tags.slice(0, 5).map((t) => (
+          <a class="indexrow__tag" href={withBase(`/tags/${encodeURIComponent(t)}/`)}>{t}</a>
+        ))}
+        {row.tags.length > 5 && (
+          <span class="indexrow__tagmore">+{row.tags.length - 5}</span>
+        )}
+      </div>
+    </li>
+  ))}
+</ol>
+
+<style>
+  /* 這裡的列是 <a>，首頁那邊是 <button>——把外觀對齊 */
+  .indexrow__tag {
+    text-decoration: none;
+    display: inline-block;
+  }
+</style>

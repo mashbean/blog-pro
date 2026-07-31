@@ -1,44 +1,94 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import ReportCard from "../../components/ReportCard.astro";
+import PostRows from "../../components/PostRows.astro";
 import { getPublishedReports, getAllTags } from "../../utils/reports";
+import { TOPICS } from "../../lib/taxonomy";
+import { withBase } from "../../utils/paths";
 
 export async function getStaticPaths() {
   const reports = await getPublishedReports();
-  const tags = getAllTags(reports);
-  return tags.map((tag) => ({
+  return getAllTags(reports).map((tag) => ({
     params: { tag },
-    props: {
-      tag,
-      reports: reports.filter((r) => r.data.tags.includes(tag)),
-    },
+    props: { tag, reports: reports.filter((r) => (r.data.tags ?? []).includes(tag)) },
   }));
 }
 
 const { tag, reports } = Astro.props;
+
+// 這個標籤橫跨哪些主題——標籤的用處就在於它是跨主題的
+const topicCounts = new Map<string, number>();
+for (const r of reports) {
+  const id = r.data.topic ?? "";
+  topicCounts.set(id, (topicCounts.get(id) ?? 0) + 1);
+}
+const spread = TOPICS.filter((t) => topicCounts.has(t.id));
 ---
 
-<BaseLayout title={`#${tag}`}>
-  <h1 class="text-3xl font-bold font-serif mb-8 reveal">
-    <span class="text-[var(--color-accent)]">#</span>{tag}
-    <span class="text-base font-normal text-[var(--color-text-muted)] ml-2">
-      ({reports.length} 篇)
-    </span>
-  </h1>
+<BaseLayout title={`#${tag}`} description={`標記為「${tag}」的 ${reports.length} 篇文章。`}>
+  <section class="taghead">
+    <a class="taghead__back" href={withBase("/tags/")}>← 所有標籤</a>
+    <h1 class="taghead__title">{tag}</h1>
+    <p class="taghead__n">{reports.length} 篇</p>
 
-  <div class="grid gap-6 md:grid-cols-2 reveal-stagger">
-    {reports.map((report) => (
-      <div class="reveal">
-        <ReportCard
-          title={report.data.title}
-          description={report.data.description}
-          pubDate={report.data.pubDate}
-          tags={report.data.tags}
-          slug={report.id}
-          body={report.body ?? ""}
-          aiModel={report.data.aiModel}
-        />
-      </div>
-    ))}
-  </div>
+    {spread.length > 0 && (
+      <p class="taghead__spread">
+        橫跨
+        {spread.map((t, i) => (
+          <>
+            {i > 0 && "、"}
+            <a href={withBase(`/topics/${t.id}/`)} data-topic={t.id}>
+              {t.label}
+            </a>
+            <span class="taghead__c">{topicCounts.get(t.id)}</span>
+          </>
+        ))}
+      </p>
+    )}
+  </section>
+
+  <PostRows reports={reports} omitTag={tag} />
 </BaseLayout>
+
+<style>
+  .taghead {
+    width: var(--browse-w);
+    margin: 0 auto var(--space-6);
+  }
+  .taghead__back {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-muted);
+    text-decoration: none;
+  }
+  .taghead__back:hover { color: var(--color-ink) }
+  .taghead__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-3xl);
+    line-height: var(--leading-tight);
+    margin: var(--space-3) 0 0;
+  }
+  .taghead__n {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-subtle);
+    margin: var(--space-3) 0 0;
+  }
+  .taghead__spread {
+    margin: var(--space-3) 0 0;
+    font-size: var(--text-sm);
+    color: var(--color-ink-muted);
+  }
+  .taghead__spread a {
+    color: oklch(0.46 0.12 var(--topic-h, 0));
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+  .taghead__c {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-ink-subtle);
+    vertical-align: super;
+    margin-left: 2px;
+  }
+</style>
