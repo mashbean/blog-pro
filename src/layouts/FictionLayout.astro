@@ -7,6 +7,7 @@ import Iris from "../components/Iris.astro";
 import Footer from "../components/Footer.astro";
 import ReadingProgress from "../components/ReadingProgress.astro";
 import ScrollReveal from "../components/ScrollReveal.astro";
+import SearchPalette from "../components/SearchPalette.astro";
 import { readingTime } from "../utils/reading-time";
 import { getSeriesNeighbours } from "../utils/fiction";
 import "../styles/global.css";
@@ -105,6 +106,7 @@ const { prev, next } = await getSeriesNeighbours(id);
     </nav>
 
     <Footer />
+    <SearchPalette />
     <Iris />
     <ScrollReveal />
 

@@ -1,0 +1,347 @@
+---
+// 全站搜尋面板（⌘K / Ctrl+K / 按 /）。
+// 刻意用原生 TS 而不是 React island——這東西掛在 BaseLayout 上，
+// 每頁都要載，沒必要為了一個搜尋框把 React runtime 推到文章頁去。
+import { TOPICS } from "../lib/taxonomy";
+import { withBase } from "../utils/paths";
+
+const topics = TOPICS.map((t) => ({
+  id: t.id,
+  label: t.label,
+  href: withBase(`/topics/${t.id}/`),
+}));
+---
+
+<div class="cmdk" data-state="closed" hidden>
+  <div class="cmdk__scrim" data-cmdk-close></div>
+  <div
+    class="cmdk__panel"
+    role="dialog"
+    aria-modal="true"
+    aria-label="搜尋文章"
+  >
+    <div class="cmdk__inputrow">
+      <svg class="cmdk__icon" viewBox="0 0 20 20" aria-hidden="true">
+        <circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.7" />
+        <path d="M13.5 13.5 L17.5 17.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+      </svg>
+      <input
+        class="cmdk__input"
+        type="search"
+        placeholder="搜尋標題、標籤、內文……"
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="false"
+        aria-controls="cmdk-results"
+        aria-expanded="true"
+        role="combobox"
+      />
+      <button class="cmdk__esc" type="button" data-cmdk-close aria-label="關閉搜尋">esc</button>
+    </div>
+
+    <div class="cmdk__body">
+      <div class="cmdk__empty" data-cmdk-empty>
+        <p class="cmdk__hint">依主題瀏覽</p>
+        <div class="cmdk__topics">
+          {topics.map((t) => (
+            <a class="cmdk__topic" href={t.href}>{t.label}</a>
+          ))}
+        </div>
+        <p class="cmdk__hint">最近發表</p>
+        <ul class="cmdk__recent" data-cmdk-recent></ul>
+      </div>
+      <ul class="cmdk__results" id="cmdk-results" role="listbox" data-cmdk-results hidden></ul>
+      <p class="cmdk__noresult" data-cmdk-noresult hidden></p>
+    </div>
+
+    <div class="cmdk__footer">
+      <span><kbd>↑</kbd><kbd>↓</kbd> 選擇</span>
+      <span><kbd>↵</kbd> 開啟</span>
+      <span><kbd>esc</kbd> 關閉</span>
+      <span class="cmdk__ft" data-cmdk-ftstate></span>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { search, FIELD_LABELS, type SearchHit, type Segment } from "../lib/search";
+  import type { SearchDoc } from "../lib/search-index";
+  import { topicLabel } from "../lib/taxonomy";
+
+  const BASE = import.meta.env.BASE_URL;
+  const url = (p: string) =>
+    BASE === "/" ? `/${p.replace(/^\/+/, "")}` : `${BASE.replace(/\/+$/, "")}/${p.replace(/^\/+/, "")}`;
+
+  // 模組層快取：同一次瀏覽再開面板不用重抓
+  let docs: SearchDoc[] | null = null;
+  let bodies: string[] = [];
+  let docsPromise: Promise<SearchDoc[]> | null = null;
+  let bodiesPromise: Promise<string[]> | null = null;
+
+  const root = document.querySelector<HTMLElement>(".cmdk");
+  if (root) {
+    const input = root.querySelector<HTMLInputElement>(".cmdk__input")!;
+    const resultsEl = root.querySelector<HTMLUListElement>("[data-cmdk-results]")!;
+    const emptyEl = root.querySelector<HTMLElement>("[data-cmdk-empty]")!;
+    const recentEl = root.querySelector<HTMLUListElement>("[data-cmdk-recent]")!;
+    const noResultEl = root.querySelector<HTMLElement>("[data-cmdk-noresult]")!;
+    const ftStateEl = root.querySelector<HTMLElement>("[data-cmdk-ftstate]")!;
+
+    let hits: SearchHit[] = [];
+    let active = 0;
+    let lastFocus: HTMLElement | null = null;
+
+    // ── 資料 ──────────────────────────────────────────────────
+    function loadDocs(): Promise<SearchDoc[]> {
+      if (docs) return Promise.resolve(docs);
+      if (!docsPromise) {
+        docsPromise = fetch(url("search-index.json"))
+          .then((r) => r.json())
+          .then((d: SearchDoc[]) => {
+            docs = d;
+            return d;
+          })
+          .catch((e) => {
+            docsPromise = null;
+            throw e;
+          });
+      }
+      return docsPromise;
+    }
+
+    // 全文有 1.3MB，只在使用者真的打開搜尋後才在背景抓；
+    // 沒抓到之前 tier 1 已經能出結果，抓到再自動重跑一次查詢。
+    function loadBodies(): Promise<string[]> {
+      if (bodies.length) return Promise.resolve(bodies);
+      if (!bodiesPromise) {
+        ftStateEl.textContent = "全文索引載入中……";
+        bodiesPromise = fetch(url("search-fulltext.json"))
+          .then((r) => r.json())
+          .then((b: string[]) => {
+            bodies = b;
+            ftStateEl.textContent = "已含全文";
+            return b;
+          })
+          .catch(() => {
+            ftStateEl.textContent = "全文索引載入失敗，僅搜尋標題與標籤";
+            bodiesPromise = null;
+            return [];
+          });
+      }
+      return bodiesPromise;
+    }
+
+    // ── 繪製 ──────────────────────────────────────────────────
+    function segNodes(segs: Segment[]): DocumentFragment {
+      const frag = document.createDocumentFragment();
+      for (const s of segs) {
+        if (s.hit) {
+          const m = document.createElement("mark");
+          m.textContent = s.text;
+          frag.appendChild(m);
+        } else {
+          frag.appendChild(document.createTextNode(s.text));
+        }
+      }
+      return frag;
+    }
+
+    function renderRecent(list: SearchDoc[]) {
+      recentEl.replaceChildren();
+      for (const d of list.slice(0, 6)) {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = url(`reports/${d.s}/`);
+        a.className = "cmdk__recentlink";
+        const t = document.createElement("span");
+        t.className = "cmdk__recenttitle";
+        t.textContent = d.t;
+        const meta = document.createElement("span");
+        meta.className = "cmdk__recentmeta";
+        meta.textContent = `${d.dt} · ${topicLabel(d.tp)}`;
+        a.append(t, meta);
+        li.appendChild(a);
+        recentEl.appendChild(li);
+      }
+    }
+
+    function renderResults() {
+      resultsEl.replaceChildren();
+      hits.forEach((hit, i) => {
+        const li = document.createElement("li");
+        li.className = "cmdk__result";
+        li.role = "option";
+        li.id = `cmdk-opt-${i}`;
+        li.setAttribute("aria-selected", String(i === active));
+
+        const a = document.createElement("a");
+        a.href = url(`reports/${hit.doc.s}/`);
+        a.className = "cmdk__resultlink";
+
+        const title = document.createElement("span");
+        title.className = "cmdk__resulttitle";
+        title.appendChild(segNodes(hit.titleSegments));
+
+        const meta = document.createElement("span");
+        meta.className = "cmdk__resultmeta";
+        const bits = [hit.doc.dt, topicLabel(hit.doc.tp), `${hit.doc.m} 分鐘`];
+        if (hit.doc.l === "en") bits.push("EN");
+        meta.textContent = bits.join(" · ");
+
+        const snip = document.createElement("span");
+        snip.className = "cmdk__snippet";
+        snip.appendChild(segNodes(hit.snippet));
+
+        const why = document.createElement("span");
+        why.className = "cmdk__why";
+        for (const f of hit.fields) {
+          const chip = document.createElement("em");
+          chip.textContent = FIELD_LABELS[f] ?? f;
+          why.appendChild(chip);
+        }
+
+        a.append(title, meta, snip, why);
+        li.appendChild(a);
+        li.addEventListener("mousemove", () => setActive(i));
+        resultsEl.appendChild(li);
+      });
+      syncActive();
+    }
+
+    function setActive(i: number) {
+      if (i === active) return;
+      active = i;
+      syncActive();
+    }
+
+    function syncActive() {
+      const items = resultsEl.querySelectorAll<HTMLElement>(".cmdk__result");
+      items.forEach((el, i) => {
+        el.setAttribute("aria-selected", String(i === active));
+        if (i === active) {
+          el.scrollIntoView({ block: "nearest" });
+          input.setAttribute("aria-activedescendant", el.id);
+        }
+      });
+    }
+
+    function run() {
+      const q = input.value.trim();
+      if (!docs || !q) {
+        hits = [];
+        emptyEl.hidden = !!q;
+        resultsEl.hidden = true;
+        noResultEl.hidden = true;
+        resultsEl.replaceChildren();
+        return;
+      }
+      hits = search({ docs, bodies }, q);
+      active = 0;
+      emptyEl.hidden = true;
+      if (!hits.length) {
+        resultsEl.hidden = true;
+        noResultEl.hidden = false;
+        noResultEl.textContent = bodies.length
+          ? `找不到「${q}」。試試更短的關鍵字，或用主題瀏覽。`
+          : `目前的標題與標籤裡找不到「${q}」，全文索引還在載入。`;
+        resultsEl.replaceChildren();
+        return;
+      }
+      noResultEl.hidden = true;
+      resultsEl.hidden = false;
+      renderResults();
+    }
+
+    let debounce: number | undefined;
+    input.addEventListener("input", () => {
+      window.clearTimeout(debounce);
+      debounce = window.setTimeout(run, 60);
+    });
+
+    // ── 開關 ──────────────────────────────────────────────────
+    function open(prefill = "") {
+      if (root!.dataset.state === "open") return;
+      lastFocus = document.activeElement as HTMLElement | null;
+      root!.hidden = false;
+      root!.dataset.state = "open";
+      document.documentElement.style.overflow = "hidden";
+      input.value = prefill;
+      requestAnimationFrame(() => input.focus());
+
+      loadDocs()
+        .then((d) => {
+          renderRecent(d);
+          run();
+          return loadBodies();
+        })
+        .then(() => run())
+        .catch(() => {
+          noResultEl.hidden = false;
+          noResultEl.textContent = "搜尋索引載入失敗，請重新整理頁面。";
+        });
+    }
+
+    function close() {
+      root!.dataset.state = "closed";
+      root!.hidden = true;
+      document.documentElement.style.overflow = "";
+      lastFocus?.focus();
+    }
+
+    root.querySelectorAll("[data-cmdk-close]").forEach((el) =>
+      el.addEventListener("click", close),
+    );
+
+    document.addEventListener("keydown", (e) => {
+      const openNow = root!.dataset.state === "open";
+      const el = e.target as HTMLElement | null;
+      const typing =
+        el?.tagName === "INPUT" ||
+        el?.tagName === "TEXTAREA" ||
+        el?.isContentEditable === true;
+
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        openNow ? close() : open();
+        return;
+      }
+      if (!openNow && e.key === "/" && !typing && !e.metaKey && !e.ctrlKey) {
+        e.preventDefault();
+        open();
+        return;
+      }
+      if (!openNow) return;
+
+      if (e.key === "Escape") {
+        e.preventDefault();
+        close();
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        if (hits.length) setActive((active + 1) % hits.length);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        if (hits.length) setActive((active - 1 + hits.length) % hits.length);
+      } else if (e.key === "Enter") {
+        const hit = hits[active];
+        if (hit) {
+          e.preventDefault();
+          window.location.href = url(`reports/${hit.doc.s}/`);
+        }
+      }
+    });
+
+    // 任何帶 data-search-open 的東西都能叫出面板（masthead 按鈕、首頁搜尋列）
+    document.querySelectorAll<HTMLElement>("[data-search-open]").forEach((el) =>
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        open(el.dataset.searchPrefill ?? "");
+      }),
+    );
+
+    // 閒置時先把小的那層索引拉下來，⌘K 才會是即時的
+    const idle =
+      (window as any).requestIdleCallback ??
+      ((fn: () => void) => window.setTimeout(fn, 1200));
+    idle(() => loadDocs().catch(() => {}));
+  }
+</script>

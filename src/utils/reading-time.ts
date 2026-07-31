@@ -1,10 +1,13 @@
-/** CJK-aware reading time estimator (~500 chars/min for Chinese). */
-export function readingTime(text: string): string {
-  const cjk = (text.match(/[\u4e00-\u9fff\u3400-\u4dbf]/g) || []).length;
+/** CJK-aware reading time estimator (~500 chars/min for Chinese, 250 words/min for Latin). */
+export function estimateReadingMinutes(text: string): number {
+  const cjk = (text.match(/[一-鿿㐀-䶿]/g) || []).length;
   const latin = text
-    .replace(/[\u4e00-\u9fff\u3400-\u4dbf]/g, "")
+    .replace(/[一-鿿㐀-䶿]/g, "")
     .split(/\s+/)
     .filter(Boolean).length;
-  const minutes = Math.ceil(cjk / 500 + latin / 250);
-  return `${Math.max(1, minutes)} 分鐘`;
+  return Math.max(1, Math.ceil(cjk / 500 + latin / 250));
+}
+
+export function readingTime(text: string): string {
+  return `${estimateReadingMinutes(text)} 分鐘`;
 }
