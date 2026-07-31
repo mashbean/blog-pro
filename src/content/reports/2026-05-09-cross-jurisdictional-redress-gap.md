@@ -1,8 +1,10 @@
 ---
 title: "當你的數位皮夾在另一個國家被拒絕：跨法域救濟的法律空白"
 description: "wallet 跨境救濟空白可分四類典型缺口；歐盟內已部分修補，歐盟外幾乎完全空白。經文獻檢索後三項論證升級：從『規則真空』退守到『規則模糊 + 強制力缺失』；『one-stop redress』降溫為三機制功能等價結構，規範遞延 ≠ 單邊外推；三條補強路徑改為三軸並行，無國籍者議題作為獨立並行層次處理。對台灣公民最關鍵的警示是現行架構下幾乎沒有有效救濟管道。"
+topic: digital-identity
+tags: ["公民證明", "數位皮夾", "隱私", "共融與可及性", "法律與救濟", "歐盟"]
+keywords: ["wallet", "cross-border-redress", "private-international-law", "eIDAS-2.0", "GDPR", "digital-identity", "civic-proof", "Brussels-I", "Rome-II", "stateless-persons", "UNCITRAL-MLETR", "Hague-Conference"]
 pubDate: 2026-05-09
-tags: ["wallet", "cross-border-redress", "private-international-law", "eIDAS-2.0", "GDPR", "digital-identity", "civic-proof", "Brussels-I", "Rome-II", "stateless-persons", "UNCITRAL-MLETR", "Hague-Conference"]
 category: "數位身分與民主理論"
 aiModel: "Claude Opus 4.7"
 aiPrompt: "當 issuer 法域與 verifier 法域不一致，wallet 跨境爭議的受害公民可在哪個法院起訴／哪個 DPA 投訴／哪個監理機關尋求救濟？"
@@ -11,6 +13,7 @@ aiPipelineId: "research-publishing-pipeline/2026-05-09-cross-jurisdictional-redr
 aiGeneratedDate: 2026-05-09
 humanReviewed: false
 lang: "zh-TW"
+series: civic-proof
 ---
 
 ## 1. 導論

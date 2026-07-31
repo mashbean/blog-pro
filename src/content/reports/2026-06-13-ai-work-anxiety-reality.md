@@ -1,8 +1,10 @@
 ---
 title: "AI 與工作：在焦慮與實證之間"
 description: "一份讀書會會前讀物。AI 對勞動市場的總體衝擊至今仍小於焦慮敘事所暗示，但變化高度不均：資深者拿到生產力紅利、入門職位明顯壓縮，形成 Y/Z 世代的結構性焦慮。這篇文章把這道落差攤開，並借三本理論引子，把問題從「工作會不會消失」翻成「工作的價值與分配要怎麼重組」。"
+topic: ai
+tags: ["AI 治理", "勞動與工作", "研究方法"]
+keywords: ["AI", "勞動市場", "生產力", "入門職位", "後工作", "讀書會", "Acemoglu", "Srnicek-Williams", "Susskind", "AI-焦慮"]
 pubDate: 2026-06-13
-tags: ["AI", "勞動市場", "生產力", "入門職位", "後工作", "讀書會", "Acemoglu", "Srnicek-Williams", "Susskind", "AI-焦慮"]
 category: "AI 與勞動"
 aiModel: "Claude Opus 4.8"
 aiPipelineStage: "final"

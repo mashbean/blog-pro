@@ -1,9 +1,11 @@
 ---
 title: "為什麼憑證的撤銷一定要回家報到：no-phone-home 的工程經濟學"
 description: "Phone-home 是工程偏好（非工程必然）。技術早已成熟（W3C Bitstring Status List 1.0 / ISO 18013-5 mDL / Hyperledger Anoncreds v1.0 D1-D4 全生產級），但無監管推力下自發採用率僅 1.6-5%。Issuer Disincentive Theorem (IDT) 形式化三層動機；四件式推力組合（EU EUDI ARF 規範分層 + AAMVA mDL v1.4→v1.5 採購禁止 + 隱私法強制 + wallet 切換）可推到 60-90%；time-limited refresh + Mozilla CRLite 化解新鮮度反論。"
+topic: digital-identity
+tags: ["公民證明", "數位皮夾", "可驗證憑證"]
+keywords: ["civic-proof", "digital-identity", "no-phone-home", "revocation", "w3c", "eudi", "mdl"]
 pubDate: 2026-05-09
 draft: false
-tags: [civic-proof, digital-identity, no-phone-home, revocation, w3c, eudi, mdl]
 lang: zh-TW
 aiModel: claude-opus-4-7
 aiPipelineStage: published

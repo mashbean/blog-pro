@@ -1,9 +1,11 @@
 ---
 title: "從 Sutton OpenBook 到全台 22 縣市"
 description: "逐一盤點台灣 22 縣市的預算資料條件，檢查 OpenFun、TwinkleAI 與官方 API、MCP 現況，並提出一套可維護、可追溯的全台 OpenBook 架構。"
+topic: open-government
+tags: ["開放資料", "公民科技", "AI 代理人", "台灣"]
+keywords: ["開放預算", "地方政府", "開放資料", "公民科技", "OpenFun", "TwinkleAI", "MCP", "台灣"]
 pubDate: 2026-07-22
 updatedDate: 2026-07-23
-tags: ["開放預算", "地方政府", "開放資料", "公民科技", "OpenFun", "TwinkleAI", "MCP", "台灣"]
 category: "數位治理"
 aiModel: "Codex GPT-5"
 aiPipelineStage: "final"

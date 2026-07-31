@@ -1,8 +1,10 @@
 ---
 title: "不會用皮夾的人怎麼辦：公民證明取得權作為基本權利"
 description: "本文主張，當 civic proof 成為進入民主基礎設施的事實必要通道時，其取得權具有作為「人權層級前置權利」（precursor right）的學理位階主張空間。論述採三層拆分：（L1 access interest）取得 civic proof 是民主基礎設施近用利益；（L2 institutional entitlement）當 civic proof 成為事實必要通道，國家有建立可近用、可救濟、可替代路徑的制度義務；（L3 treaty-level human right）目前不主張已達成文公約權利地位，僅以 Marshall 三層公民權結構與 UDHR Art 6 / ICCPR Art 16 法律人格權作為類比錨點。國家義務三層保障結構（程序 / 實質 / 制度）對應 L2 制度義務；Wallet 工程的個人擁有 / 個人識別 / 個人私鑰三重預設本身須被檢驗為規範偏誤。"
+topic: digital-identity
+tags: ["公民證明", "數位皮夾", "共融與可及性", "AI 代理人", "民主理論"]
+keywords: ["civic-proof", "inclusion-rights", "digital-identity", "human-rights", "Marshall", "Sen-capability-approach", "CRPD", "stateless-persons", "shared-device", "delegated-authority", "supported-decision-making", "inclusion-impact-assessment", "wallet"]
 pubDate: 2026-05-10
-tags: ["civic-proof", "inclusion-rights", "digital-identity", "human-rights", "Marshall", "Sen-capability-approach", "CRPD", "stateless-persons", "shared-device", "delegated-authority", "supported-decision-making", "inclusion-impact-assessment", "wallet"]
 category: "數位身分與民主理論"
 aiModel: "Claude Opus 4.7"
 aiPrompt: "哪些人群在 civic proof 取得上面臨結構性障礙？civic proof 取得權應如何被法律保障——程序保障 / 實質保障 / 制度保障？"
@@ -11,6 +13,7 @@ aiPipelineId: "research-publishing-pipeline/2026-05-10-civic-proof-inclusion-rig
 aiGeneratedDate: 2026-05-10
 humanReviewed: false
 lang: "zh-TW"
+series: civic-proof
 ---
 
 ## 1. 導論

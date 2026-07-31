@@ -1,8 +1,10 @@
 ---
 title: "非營利的社群平台能活下去嗎？"
 description: "Wikipedia 撐過了 25 年，Signal 淨資產為負，Mozilla 超過八成收入靠 Google，Cohost 在善意中關站。一篇從財務數字、治理結構、失敗案例與理論框架出發，認真回答這個問題的文章。"
+topic: platform-media
+tags: ["平台治理", "非營利與基金會", "網路治理"]
+keywords: ["數位治理", "開放網路", "platform cooperativism", "非營利", "enshittification", "fediverse"]
 pubDate: 2026-03-30
-tags: ["數位治理", "開放網路", "platform cooperativism", "非營利", "enshittification", "fediverse"]
 category: "數位治理"
 aiModel: "Claude Opus 4"
 aiPrompt: "非營利的社群平台有無永續經營的可能？許多社群平台不是走向數位封建主義，就是在資本市場上失敗，有沒有非營利的經營路徑，而且獲得成功呢？"

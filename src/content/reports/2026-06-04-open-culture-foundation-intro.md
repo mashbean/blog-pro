@@ -1,8 +1,10 @@
 ---
 title: "開放文化基金會（OCF）：台灣開放科技與數位人權的中介組織"
 description: "財團法人開放文化基金會成立於 2014 年，以「中介組織」自我定位，為台灣開放原始碼、開放資料與數位人權社群提供財務代管與法人後盾，並連結國際網絡。一篇中性百科體的組織介紹，涵蓋沿革、宗旨、主要計畫、治理財務與生態系角色。"
+topic: organizations
+tags: ["公民科技", "開源", "非營利與基金會", "台灣"]
+keywords: ["open-source", "open-culture-foundation", "digital-rights", "civic-tech", "taiwan", "fiscal-sponsorship", "g0v"]
 pubDate: 2026-06-04
-tags: ["open-source", "open-culture-foundation", "digital-rights", "civic-tech", "taiwan", "fiscal-sponsorship", "g0v"]
 category: "數位治理"
 lang: "zh-TW"
 aiModel: "Claude Opus 4.8"

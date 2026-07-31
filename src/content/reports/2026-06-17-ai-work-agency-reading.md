@@ -1,8 +1,10 @@
 ---
 title: "AI、工作焦慮與能動性的三層設計"
 description: "一份讀書會會前閱讀。本文把 AI 失業焦慮拆成總體、入口、任務與意義四個尺度，並用 Srnicek 與 Williams、Susskind、Acemoglu、David Krakauer 的框架，討論個人、組織與社會如何重新設計能動性。"
+topic: ai
+tags: ["組織管理", "勞動與工作", "複雜科學"]
+keywords: ["AI", "工作", "讀書會", "能動性", "後工作", "Acemoglu", "Susskind", "Srnicek-Williams", "David Krakauer", "SFI", "Santa Fe Institute"]
 pubDate: 2026-06-17
-tags: ["AI", "工作", "讀書會", "能動性", "後工作", "Acemoglu", "Susskind", "Srnicek-Williams", "David Krakauer", "SFI", "Santa Fe Institute"]
 category: "AI 與勞動"
 aiModel: "Codex GPT-5"
 aiPipelineStage: "final"

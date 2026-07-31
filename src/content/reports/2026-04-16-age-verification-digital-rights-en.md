@@ -1,8 +1,10 @@
 ---
 title: "Prove You're Old Enough: How Age-Verification Laws Are Quietly Building a Global Identity Infrastructure"
 description: "At least twenty-five countries have pushed age-verification legislation in three years. The technical choices embedded in these laws will determine whether the result is a child-safety tool or a mass surveillance apparatus — and political urgency is tilting most nations toward the wrong end of that spectrum."
+topic: digital-identity
+tags: ["年齡驗證", "隱私", "內容審核與安全"]
+keywords: ["age-verification", "digital-identity", "privacy", "children-safety", "online-safety", "digital-rights"]
 pubDate: 2026-04-17
-tags: ["age-verification", "digital-identity", "privacy", "children-safety", "online-safety", "digital-rights"]
 category: "Digital Rights"
 lang: "en"
 aiModel: "Claude Opus 4.6"

@@ -1,9 +1,11 @@
 ---
 title: "當 Network State、Coordination 與流亡社群被放到同一張桌子上"
 description: "過去五年，三種跨國社群被放到同一個「新政治社群」的問題檯面——流亡社群、Balaji 那條 Network State 路線，還有 QF／RetroPGF 那套 Coordination 派。外觀很像，處理的政治層級完全不同。這篇把三者並置不是要排光譜，是要讓彼此互相照出盲點，尤其讓流亡社群當照妖鏡，把合法性、退出、機制這三個被偷換的語彙重新壓回地面。"
+topic: democracy-theory
+tags: ["民主理論", "流亡與離散", "區塊鏈與加密貨幣"]
+keywords: ["network-state", "coordination", "exile-politics", "plurality", "legitimacy", "governance", "political-theory", "web3"]
 pubDate: 2026-04-24
 date: 2026-04-24
-tags: ["network-state", "coordination", "exile-politics", "plurality", "legitimacy", "governance", "political-theory", "web3"]
 category: "治理與民主"
 aiModel: "Claude Opus 4.7"
 aiPrompt: "Network State 與 Coordination 能否生成真正的政治共同體？跟流亡社群相比，它們處理的是哪一層級的問題？"

@@ -1,8 +1,10 @@
 ---
 title: "為什麼有了 Tor 與 Signal，數位結社仍然失敗：身分隱私假說的實證檢驗"
 description: "mashbean 原始假說「身分不夠隱私 → 數位結社失敗」的最強讀法（H0）在文獻檢索後修正為三道牆合取假說 H1' = ¬F ⇔ W1 ∧ W2 ∧ W3。Civic proof 4 條件恰好對應三道牆所需的規範必要條件。但目前尚無案例同時解三道牆，假說只能否證式檢驗。本文是博論第 3 篇研究 article，與 article 01 (accountability without identification) 與 article 02 (civic proof concept positioning) 在三道牆框架上正式接合。"
+topic: digital-identity
+tags: ["公民證明", "公民社會", "區塊鏈與加密貨幣", "研究方法"]
+keywords: ["digital-association", "civic-proof", "three-walls-hypothesis", "assembly-vs-association", "connective-action", "DAO-governance", "tor", "signal", "briar", "process-tracing", "arendt", "tocqueville"]
 pubDate: 2026-05-03
-tags: ["digital-association", "civic-proof", "three-walls-hypothesis", "assembly-vs-association", "connective-action", "DAO-governance", "tor", "signal", "briar", "process-tracing", "arendt", "tocqueville"]
 category: "數位公民與結社理論"
 aiModel: "Claude Opus 4.7"
 aiPrompt: "為何已有 Tor / Signal / Briar / Cwtch 等匿名工具存在多年，仍然沒有規模化的數位結社案例？身分不夠隱私這個假說，是真的嗎？"
@@ -11,6 +13,7 @@ aiPipelineId: "research-publishing-pipeline/2026-05-03-digital-association-empir
 aiGeneratedDate: 2026-05-03
 humanReviewed: false
 lang: "zh-TW"
+series: civic-proof
 ---
 
 ## 一、導論

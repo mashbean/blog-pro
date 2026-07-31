@@ -1,8 +1,10 @@
 ---
 title: "Civic Receipts 與證據鏈：條件可委任區的可審計工程原語"
 description: "civic-proof 系列第 17 篇 (F2)。承接 article 16 (F1) §5.4 DeliberationRecord schema 與 §7.3.1 civic-action-receipt envelope，把可區分性需求落地為四個可標準化密碼學原語——SA1 SD-JWT-VC baseline 加 BBS+ 條件性高階混合策略、SA2 holder-controlled 加 qualified preservation service 雙軌保存（30 年下限對應 CRPD 給付請領訴訟時效）、SA3 對接 FRE 901(b)(9) 與 eIDAS 2024/1183 Chapter III §7-8 與台灣電子簽章法第 4/10 條的法庭可採性、SA4 透過 G_recognition^A 軟法層 5/10/15 年三段推進的跨境互認。形式骨架為 14 欄位群（含 23 leaf field）civic-action-receipt schema、V_receipt 函數 C1-C6 六道條件、定理 T1-T4。四原語對 F1 5×3 矩陣 9-✓ 與 4-△ cell 在 Z₂ 範圍內覆蓋（定理 T1）；對 Z₃-intrinsic 兩 cell（RT-ℬ ✗、AA-ℬ ✗）為密碼學原語不可達邊界（定理 T2）。CF1-CF5 反事實壓力測試含 CRPD §12 反向使用議題、台灣陸配 / 台商 / 兩岸投資人三場景在 CF4 觸發下的結構性斷裂。working thesis 與 strengthened thesis 嚴格區分；後者透過 crypto-agility by design、第三方 trusted preservation service 對接、G_recognition^A 多軌備援三大緩解 critical path 在五 CF 全觸發下保留核心功能。"
+topic: digital-identity
+tags: ["公民證明", "數位皮夾", "可驗證憑證", "密碼學", "隱私", "共融與可及性", "法律與救濟", "台灣", "歐盟", "美國", "北歐", "中國"]
+keywords: ["civic-proof", "civic-receipts", "verifiable-credentials", "selective-disclosure", "SD-JWT-VC", "BBS-cryptosuite", "ZK-SNARK", "EUDI-Wallet", "long-term-preservation", "qualified-preservation-service", "eIDAS-2024-1183", "FRE-902-14", "FRE-901-b-9", "Mata-v-Avianca", "Apostille", "Hague-PIL", "CETS-225", "OECD-AI-Principles", "APEC-CBPR", "CRPD-Article-12", "supported-decision-making", "threshold-signatures", "PQC-migration", "crypto-agility", "Estonia-X-Road", "BankID", "Toeslagenaffaire", "TW-DIW", "cross-strait-recognition"]
 pubDate: 2026-05-11
-tags: ["civic-proof", "civic-receipts", "verifiable-credentials", "selective-disclosure", "SD-JWT-VC", "BBS-cryptosuite", "ZK-SNARK", "EUDI-Wallet", "long-term-preservation", "qualified-preservation-service", "eIDAS-2024-1183", "FRE-902-14", "FRE-901-b-9", "Mata-v-Avianca", "Apostille", "Hague-PIL", "CETS-225", "OECD-AI-Principles", "APEC-CBPR", "CRPD-Article-12", "supported-decision-making", "threshold-signatures", "PQC-migration", "crypto-agility", "Estonia-X-Road", "BankID", "Toeslagenaffaire", "TW-DIW", "cross-strait-recognition"]
 category: "數位身分與民主理論"
 aiModel: "Claude Opus 4.7"
 aiPrompt: "civic-proof series 第 17 篇 F2，承接 article 16 §5.4 DeliberationRecord schema 與 §7.3.1 civic-action-receipt envelope 與 §10 預告。跨境 selective disclosure 應採 SD-JWT-VC、BBS+ 還是混合策略？civic receipts 長期保存責任如何在 holder-controlled 與第三方公證人間雙軌分配？保存時長下限 30 年（對應 CRPD 給付請領訴訟時效）如何成立？法庭可採性如何對接 US FRE 902(14) 與 eIDAS 2024/1183 Chapter III §7-8 與台灣電子簽章法第 4/10 條？跨境互認透過 G_recognition^A 軟法層（OECD AI Principles 補充指引 + CETS 225 補充協議 + Hague PIL e-Apostille extension）5-10-15 年三段如何階段化推進？四原語在 Z₂ 條件可委任區的覆蓋邊界與 Z₃-intrinsic 不可達結構為何？"
@@ -11,6 +13,7 @@ aiPipelineId: "research-publishing-pipeline/2026-05-11-civic-receipts-provenance
 aiGeneratedDate: 2026-05-11
 humanReviewed: false
 lang: "zh-TW"
+series: civic-proof
 ---
 
 # 一、導論——從 article 16 (F1) 留下的三件未完成議題出發

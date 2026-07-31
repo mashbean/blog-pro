@@ -1,8 +1,10 @@
 ---
 title: "把安全工具開源成公共財：ROOST 的啟示與華語世界的缺口"
 description: "ROOST 把大平台的信任與安全工具開源成公共財。本文盤點它的緣起、經費與實際影響，切開全球生態系的兩個治理域，檢視華語世界的缺口，並提出一條以工具泛用化為地基的佈建路徑。"
+topic: platform-media
+tags: ["信任根與信任清單", "平台治理", "內容審核與安全", "公民科技", "開源", "台灣"]
+keywords: ["信任與安全", "開源", "平台治理", "ROOST", "內容審核", "公民科技", "TWNIC", "Matters"]
 pubDate: 2026-07-24
-tags: ["信任與安全", "開源", "平台治理", "ROOST", "內容審核", "公民科技", "TWNIC", "Matters"]
 category: "數位治理"
 aiModel: "Claude Opus 4.8"
 aiPipelineStage: "final"

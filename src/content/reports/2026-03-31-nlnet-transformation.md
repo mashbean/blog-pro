@@ -1,8 +1,10 @@
 ---
 title: "從網路骨幹商轉型到新興網路支持者，NLnet 基金會如何轉型"
 description: "一個荷蘭小基金會如何從鋪光纖走到資助 Mastodon，以及這對台灣數位公共財的啟示。"
+topic: organizations
+tags: ["開源", "非營利與基金會", "網路治理", "歐盟"]
+keywords: ["digital-commons", "NLnet", "open-source", "internet-governance", "EU-NGI"]
 pubDate: 2026-03-31
-tags: ["digital-commons", "NLnet", "open-source", "internet-governance", "EU-NGI"]
 category: "數位治理"
 aiModel: "Claude Opus 4"
 aiPrompt: "NLnet 如何從早期核心網路骨幹營運者轉型為新興網路的捐助基金？轉型過程中荷蘭政府和歐盟扮演什麼角色？這種制度演化對台灣有何借鑑？"

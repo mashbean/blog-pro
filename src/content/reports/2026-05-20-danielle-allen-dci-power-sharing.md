@@ -1,9 +1,11 @@
 ---
 title: 數位身分要讓人分享權力，Danielle Allen 如何補上 DCI 的政治靈魂
 description: 從 Danielle Allen 的政治平等、參與權利、權力分享自由主義與數位公共基礎設施論述，重新理解 DCI 與數位身分，說明為什麼公民證明要讓 voice 走向 influence。
+topic: digital-identity
+tags: ["公民證明", "公民科技", "民主理論", "審議與參與"]
+keywords: ["civic-proof", "Danielle-Allen", "digital-civic-infrastructure", "digital-public-infrastructure", "DCI", "digital-identity", "civic-proof-general-reader", "democracy-renovation", "power-sharing-liberalism", "political-equality", "AllenBridge", "public-realm-floor", "participatory-readiness", "voice-to-influence", "public-interest-technology", "input-to-action-loop", "Ash-Center", "Allen-Lab"]
 pubDate: 2026-05-20
 updatedDate: 2026-05-21
-tags: ["civic-proof", "Danielle-Allen", "digital-civic-infrastructure", "digital-public-infrastructure", "DCI", "digital-identity", "civic-proof-general-reader", "democracy-renovation", "power-sharing-liberalism", "political-equality", "AllenBridge", "public-realm-floor", "participatory-readiness", "voice-to-influence", "public-interest-technology", "input-to-action-loop", "Ash-Center", "Allen-Lab"]
 category: "數位身分與民主理論"
 aiModel: "GPT-5 Codex"
 aiPrompt: "使用 research-publishing-pipeline，將 Danielle Allen / AllenBridge 橋接文轉寫為一般讀者可讀的 pro.mashbean.net 文章，強調 Danielle Allen 的政治平等、參與權利、權力分享自由主義，以及其與 Digital Civic Infrastructure 和 civic-proof 0' 的關係。"

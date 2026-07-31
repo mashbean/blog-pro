@@ -1,8 +1,10 @@
 ---
 title: "2020 後的共融設計與公共政策：理論轉向、各國路徑、預算流變"
 description: "把 EAA、ADA Title II、加拿大 ASC、日本差別解消法的時間群聚攤在一起看，2020 後的共融設計已經從『設計圈的好實踐』移到『公共治理的基礎設施議題』。本文整理理論轉向（disability justice / mismatch / co-design / neurodiversity）、法規時點群聚、COVID 的真實角色，比較澳洲 NDIS 與加拿大 ASC 兩個案例的預算結構，最後提出區域治理的初步四分類，並收束於三層落差。"
+topic: institutions-culture
+tags: ["可驗證憑證", "共融與可及性", "美國"]
+keywords: ["inclusive-design", "disability-justice", "co-design", "public-policy", "design-governance", "EAA", "ADA", "NDIS", "accessibility-standards"]
 pubDate: 2026-04-26
-tags: ["inclusive-design", "disability-justice", "co-design", "public-policy", "design-governance", "EAA", "ADA", "NDIS", "accessibility-standards"]
 category: "公共議題"
 aiModel: "Claude Opus 4.7 (research-publishing-pipeline v3)"
 aiPrompt: "2020 年後，共融設計如何從產品/UX 概念升級為公共政策的治理框架？各國在理論、政策工具、預算分配上呈現什麼差異路徑與共通張力？"

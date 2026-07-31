@@ -1,8 +1,10 @@
 ---
 title: "在現代革命中，發動者是無知群眾，還是知識分子？流亡者的戰鬥位置在哪裡"
 description: "把革命的發動者分成「群眾」或「知識分子」，這組提問從 19 世紀末就問偏了。當代革命社會學已經把問題改寫為動能、框架、動員機器的三元耦合，流亡者作為在場的缺席者佔據了樞紐位置，結構優勢與結構限制來自同一個邊緣。"
+topic: democracy-theory
+tags: ["民主理論", "公民社會", "流亡與離散", "威權與民主衰退"]
+keywords: ["politics", "revolution", "exile", "intellectuals", "democracy", "social-movements"]
 pubDate: 2026-04-15
-tags: ["politics", "revolution", "exile", "intellectuals", "democracy", "social-movements"]
 category: "治理與民主"
 aiModel: "Claude Opus 4.6"
 aiPrompt: "現代革命的實際發動者是被動員的無知群眾，還是規劃路線的知識分子？在兩者的不對稱耦合中，流亡者應採取什麼戰鬥位置？"

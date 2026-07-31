@@ -1,8 +1,10 @@
 ---
 title: "聖塔菲研究所（SFI）與複雜科學：起源、運作與 faculty 制度"
 description: "聖塔菲研究所成立於 1984 年，是專注複雜系統科學的獨立非營利研究機構。一篇中性百科體介紹，涵蓋複雜科學的起源與應用、SFI 的創立沿革與營運財務，並詳述其小常駐核心、龐大外部教授網絡與 Omidyar 博士後構成的 faculty 制度。"
+topic: institutions-culture
+tags: ["非營利與基金會", "教育", "複雜科學", "研究方法"]
+keywords: ["santa-fe-institute", "complexity-science", "complex-systems", "interdisciplinary-research", "faculty-system", "emergence", "research-institution"]
 pubDate: 2026-06-05
-tags: ["santa-fe-institute", "complexity-science", "complex-systems", "interdisciplinary-research", "faculty-system", "emergence", "research-institution"]
 category: "複雜科學"
 lang: "zh-TW"
 aiModel: "Claude Opus 4.8"

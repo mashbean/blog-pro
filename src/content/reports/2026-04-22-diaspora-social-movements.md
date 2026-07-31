@@ -1,8 +1,10 @@
 ---
 title: "如何評估流亡社群——錢、人與回力鏢"
 description: "海外社群做社會運動，到底在做什麼？為什麼他們總是在吵架？為什麼能見度那麼高，結構卻那麼難動？這篇整理了我最近幾個月讀完的一堆離散政治與社會運動文獻的心得，從 MEK、SWHK、ANC、Mahsa Amini 到西藏流亡 NGO 生態，嘗試把資金來源、組織資本、境內連結與政權可穿透性四個變數組合起來，重新設計一套不只看能見度的成效尺。"
+topic: democracy-theory
+tags: ["民主理論", "公民社會", "流亡與離散"]
+keywords: ["diaspora", "social-movements", "exile-politics", "hong-kong", "tibet", "iran", "uyghur", "south-africa", "political-theory"]
 pubDate: 2026-04-22
-tags: ["diaspora", "social-movements", "exile-politics", "hong-kong", "tibet", "iran", "uyghur", "south-africa", "political-theory"]
 category: "公共議題"
 aiModel: "Claude Opus 4.7 + GPT-5.4-Pro (Deep Research)"
 aiPrompt: "流亡社群如何從事社會運動？資金、組織形態、與母國連結如何決定其成效？"

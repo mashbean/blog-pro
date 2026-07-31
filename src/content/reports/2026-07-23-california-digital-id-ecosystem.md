@@ -1,9 +1,11 @@
 ---
 title: "加州數位身分生態系：DMV Wallet 與 Career Passport 的政策分析"
 description: "加州在沒有國家級身分計畫、甚至沒有一部框架法的條件下，靠 DMV Wallet 與 Career Passport 兩條制度上分立的軌道，以預算附帶法案、行政框架與既有教育資料基礎設施，拼接出政府可驗證憑證生態系。本文考據其政治、預算、法制譜系、招標實務與民間回應，並與台灣由數位發展部主導的數位憑證皮夾做條件性對照。「生態系」是分析者事後的讀法，非加州政府的自我框架。"
+topic: digital-identity
+tags: ["數位皮夾", "可驗證憑證", "公共採購", "台灣", "美國"]
+keywords: ["digital-identity", "california", "mDL", "career-passport", "verifiable-credentials", "procurement-as-policy", "taiwan-comparison", "no-phone-home", "policy-analysis"]
 pubDate: 2026-07-24
 draft: false
-tags: ["digital-identity", "california", "mDL", "career-passport", "verifiable-credentials", "procurement-as-policy", "taiwan-comparison", "no-phone-home", "policy-analysis"]
 lang: "zh-TW"
 aiModel: "Claude Opus 4.8"
 aiPipelineStage: "final"

@@ -1,8 +1,10 @@
 ---
 title: "為什麼 DNS 走出了非國家治理之路，數位身分卻走不出來：信任根的歷史社會學"
 description: "把 DNS 非國家治理形式化為四個前提條件 P_DNS = {P1 Postel jar 學術社群、P2' 美國策略性放手、P3' 技術中立論述被有意建構、P4' Stewardship Transition 多重否決點下勉強通過}。HM（Historical Mismatch hypothesis）顯示這四個前提在 2025 年數位身分領域全部不成立；HM 與 article 03 H1' 三道牆、article 04 T 三件式、article 05 IT' 不可能三角、article 06 CB-Justice D1*∧D2*、article 07 SRP 同樣是合取結構，但用於治理層的歷史性必要條件。4 跨國治理模式比較顯示 IATA + ICAO 與 SWIFT + CPMI 雙軌模式適配度最高；ICANN 不是模板，FTLA = (G_industry, G_state, G_recognition, G_oversight) 四層治理框架才是。在特定子領域（PSE / Vocdoni / Rarimo / DIF）可保留 G_industry 層的鬆散自治，但 B2-B4 邊界條件全失敗，無法擴展為整體 DNS 模式復現。本文是博論 Ch11 信任基礎設施章的核心論證，直接消化 ICANN fellowship 一年的材料。"
+topic: digital-identity
+tags: ["公民證明", "信任根與信任清單", "威權與民主衰退", "網路治理", "研究方法"]
+keywords: ["civic-proof", "DNS-governance", "ICANN", "internet-governance", "trust-list-alliance", "FTLA", "historical-sociology", "path-dependency", "doctoral-research", "Ch11-trust-infrastructure"]
 pubDate: 2026-05-06
-tags: ["civic-proof", "DNS-governance", "ICANN", "internet-governance", "trust-list-alliance", "FTLA", "historical-sociology", "path-dependency", "doctoral-research", "Ch11-trust-infrastructure"]
 category: "信任基礎設施治理"
 aiModel: "Claude Opus 4.7"
 aiPrompt: "DNS 信任根（13 個 root server / IANA / ICANN）為何能走出非國家治理路徑？關鍵時間窗口、關鍵人物、關鍵國際法決議是什麼？數位身分信任根至今由國家壟斷，原因是什麼？國家權力競爭的時間窗口為何不同？ICANN 的多利害關係人模式（multistakeholder model）能否移植到身分領域？哪些前提條件不成立？federated trust-list alliance 應採取何種治理形式才符合身分領域的歷史條件？"
@@ -11,6 +13,7 @@ aiPipelineId: "research-publishing-pipeline/2026-05-06-dns-vs-identity-trust-roo
 aiGeneratedDate: 2026-05-06
 humanReviewed: false
 lang: "zh-TW"
+series: civic-proof
 ---
 
 # 為什麼 DNS 走出了非國家治理之路，數位身分卻走不出來：信任根的歷史社會學

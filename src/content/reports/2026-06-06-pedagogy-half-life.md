@@ -1,8 +1,10 @@
 ---
 title: "教學法的半衰期：制度衰變、時間係數，與在 AI 時代有意識地重訓大腦"
 description: "再好的教學法是否傾向於隨時間從「啟發能動性」衰變為「按表操課的儀式」？本文整合制度社會學、教育理論與實證、認知科學與自動化研究、機制設計與治理、政治哲學與衡量學五個視角，論證這是一個有理論根據的強傾向而非鐵律，AI 是放大器而非新病因，並提出把時間當成內建常數、週期再協商衡量指標的設計回應。"
+topic: institutions-culture
+tags: ["AI 治理", "勞動與工作", "教育", "研究方法"]
+keywords: ["pedagogy", "institutional-decay", "ai-and-learning", "deskilling", "governance-design", "measurement"]
 pubDate: 2026-06-06
-tags: ["pedagogy", "institutional-decay", "ai-and-learning", "deskilling", "governance-design", "measurement"]
 category: "教育與制度"
 lang: "zh-TW"
 aiModel: "Claude Opus 4.8"

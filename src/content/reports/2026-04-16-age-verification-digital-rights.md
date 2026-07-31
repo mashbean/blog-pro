@@ -2,7 +2,9 @@
 title: "以兒童安全為名的年齡驗證法規，將如何改寫數位身分與數位人權的版圖"
 pubDate: 2026-04-16
 description: "當全球至少二十五個國家在三年內推動年齡驗證立法，「證明你幾歲」這件事正在催生一套全民數位身分基礎設施。技術選擇決定它落在保護工具還是監控基礎設施的哪一端，而政治急迫性正把多數國家推向高風險端。"
-tags: ["age-verification", "digital-identity", "privacy", "children-safety", "online-safety", "digital-rights"]
+topic: digital-identity
+tags: ["年齡驗證", "隱私", "內容審核與安全"]
+keywords: ["age-verification", "digital-identity", "privacy", "children-safety", "online-safety", "digital-rights"]
 category: "數位人權"
 aiModel: "Claude Opus 4.6"
 aiPrompt: "各國以保護兒童為由推動的年齡驗證法規，其數位身分驗證機制將帶來哪些數位人權風險？"

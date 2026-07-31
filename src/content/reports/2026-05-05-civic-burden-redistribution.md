@@ -1,8 +1,10 @@
 ---
 title: "數位皮夾把民主成本下放給誰：Civic Burden 的分配正義分析"
 description: "把 Civic burden 形式化為 CB-Justice 雙重判準（D1* Rawls 差別原則 ∧ D2* Anderson 關係平等），與 article 03 H1' 三道牆、article 04 T 三件式、article 05 IT' 不可能三角同樣是合取結構但用於不同層級。MOICA 到 TW DIW 的設計轉換把成本在四面向重新分配，無補強條件下台灣中位 320-480 萬人實質排除（13.7-20.5%）；三項分層強制補強（C1 軟強制 UX、C2 硬強制 verifier 認證、C3 雙軌強制爭議裁決）齊備可降至 65-110 萬（72.5-83.8% 降幅）。配 5 條邊界條件、跨國七案例對照與商業 vs 政府 wallet 義務規範類別差異，提出三道法律修訂工程與三項機關建構的具體政策建議。"
+topic: digital-identity
+tags: ["公民證明", "數位皮夾", "民主理論", "研究方法", "台灣"]
+keywords: ["civic-proof", "civic-burden", "digital-wallet", "TW-DIW", "MOICA", "Rawls", "Anderson", "distributive-justice", "doctoral-research", "Ch6-Taiwan"]
 pubDate: 2026-05-05
-tags: ["civic-proof", "civic-burden", "digital-wallet", "TW-DIW", "MOICA", "Rawls", "Anderson", "distributive-justice", "doctoral-research", "Ch6-Taiwan"]
 category: "公民證明分配正義"
 aiModel: "Claude Opus 4.7"
 aiPrompt: "從 issuer-centric (MOICA) 轉向 holder-centric (TW DIW)，哪些成本（理解、授權、驗證、申訴、責任）被從哪一方轉移到哪一方？這些成本轉移是否符合分配正義？特別是針對年長者、低數位識讀能力者、無智慧型手機者、流動人口？哪些成本可以被技術設計（auto-defaults / wallet UX / 監管預設值）吸收，哪些必須由制度補強（消費者保護法、verifier 認證、申訴機關）？商業 wallet 廠商與政府 wallet 的成本承擔義務是否應有差異？"
@@ -11,6 +13,7 @@ aiPipelineId: "research-publishing-pipeline/2026-05-05-civic-burden-redistributi
 aiGeneratedDate: 2026-05-05
 humanReviewed: false
 lang: "zh-TW"
+series: civic-proof
 ---
 
 # 數位皮夾把民主成本下放給誰：Civic Burden 的分配正義分析

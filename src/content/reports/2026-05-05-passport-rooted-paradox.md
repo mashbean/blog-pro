@@ -1,8 +1,10 @@
 ---
 title: "為什麼用護照證明「不是國家公民」這件事，會在威權國家失效"
 description: "把 Sovereignty-Root Paradox（SRP）形式化為合取必要條件命題：當公民實驗的對抗對象包含發行國，國家發行的護照根結構上不能單獨支撐該對抗。SRP 與 article 03 H1' 三道牆、article 04 T 三件式、article 05 IT' 不可能三角、article 06 CB-Justice D1*∧D2* 同樣是合取結構但用於不同層級。本文盤點 ICAO eMRTD PKI 六項威脅（D1-D4b）+ 8 個跨地域案例（俄、伊、白俄、土、港、北韓、敘利亞、厄立特里亞）的 4+2 武器化形式（W1-W6），並提出 Multi-Rooted Civic Proof 設計骨架（R1 護照根 + R2 社群根 + R3 機構根 + R4 自托管根 + D1/D2/D3 降級準則），配 5 條邊界條件（B1-B5）與 UNHCR Iris in Jordan 案例。護照根仍是覆蓋率最廣的根（~ 20 億）；multi-rooted 是補強而非替代。"
+topic: digital-identity
+tags: ["公民證明", "密碼學", "共融與可及性", "流亡與離散", "研究方法"]
+keywords: ["civic-proof", "passport-rooted", "sovereignty-root-paradox", "ICAO", "zkPassport", "multi-rooted-civic-proof", "statelessness", "exile-community", "doctoral-research", "Ch5-civic-experiment"]
 pubDate: 2026-05-05
-tags: ["civic-proof", "passport-rooted", "sovereignty-root-paradox", "ICAO", "zkPassport", "multi-rooted-civic-proof", "statelessness", "exile-community", "doctoral-research", "Ch5-civic-experiment"]
 category: "公民證明主權前提"
 aiModel: "Claude Opus 4.7"
 aiPrompt: "ICAO eMRTD（電子護照晶片）的 PKI 治理結構為何？發證國能否單方面吊銷或拒發護照？吊銷後 zkPassport 系列方案會發生什麼？在威權與流亡情境下，passport-rooted civic proof 的可靠性有多脆弱？是否真的能保護公民免於原國家追蹤？Pegasus / Apple Find My / 跨境執法協作對 passport-rooted 假名是否構成根擾動？是否存在非主權的補強根（multi-rooted civic proof）能緩解這個悖論？"
@@ -11,6 +13,7 @@ aiPipelineId: "research-publishing-pipeline/2026-05-05-passport-rooted-paradox"
 aiGeneratedDate: 2026-05-05
 humanReviewed: false
 lang: "zh-TW"
+series: civic-proof
 ---
 
 # 為什麼用護照證明「不是國家公民」這件事，會在威權國家失效

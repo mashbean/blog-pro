@@ -1,8 +1,10 @@
 ---
 title: "AI 代理在公民行動的制度極限：委任五件結構與公民證明三件式的合取必要條件"
 description: "把 Tomasev (2026) 委任五件（authority transfer / responsibility transfer / accountability allocation / boundary setting / trust calibration，呈 2+3 結構）與 civic proof 三件式 ⟨𝒩, ℱ, ℬ⟩ 做合取交叉，得到 5×3 = 15 cell 必要條件矩陣，其中 9 cell 條件可滿足、4 cell 機率退化、2 cell 結構不可滿足（RT-ℬ ✗ 與 AA-ℬ ✗）。據此把公民行動劃分為可委任、條件可委任、結構不可委任三區帶（θ₁ ≈ 0.2、θ₂ ≈ 0.7），並區分常駐型結構不可委任（由 ℬ 哲學基礎決定）與情境型結構不可委任（由 𝒩、ℱ 共同失能決定）。CRPD Art 12 General Comment No. 1 §26-29 廢除替代決策的硬性要求是條件可委任區的規範性硬約束，非法理依據；supported 與 substituted 的可區分性必須在事前協商層、事後可逆層、決策證據鏈層三層同步建立；EUDI Wallet ARF 提供的是 multi-profile 而非 multi-tenant delegated key custody；CRPD 透過 ICCPR Art 26 + ICESCR Art 9 回流為對所有 wallet 使用者的普遍工程義務。跨法域責任真空細分為道德緩衝區型、演算法不透明型、跨法域擴散型三型，A14 第 5 類缺口拆為 Q10a（authority transfer 密碼學歸責）與 Q10b（accountability allocation 跨境多方歸責），FTLA-Agent 四層治理（G_industry / G_state / G_recognition / G_oversight）在 2026 年呈現非對稱厚度，時間階段化為 5 / 5-10 / 10-15 年三段，五方責任比例建議為 25 / 25 / 15 / 25 / 10。"
+topic: digital-identity
+tags: ["公民證明", "數位皮夾", "信任根與信任清單", "共融與可及性", "AI 倫理", "AI 代理人", "民主理論", "法律與救濟", "歐盟"]
+keywords: ["civic-proof", "AI-agent", "delegation", "Tomasev-five-elements", "civic-proof-conjunction-matrix", "Arendt", "Habermas", "Pettit", "moral-crumple-zone", "FTLA-Agent", "CRPD-Article-12", "supported-decision-making", "multi-tenant", "EUDI-Wallet", "cross-jurisdictional-liability"]
 pubDate: 2026-05-10
-tags: ["civic-proof", "AI-agent", "delegation", "Tomasev-five-elements", "civic-proof-conjunction-matrix", "Arendt", "Habermas", "Pettit", "moral-crumple-zone", "FTLA-Agent", "CRPD-Article-12", "supported-decision-making", "multi-tenant", "EUDI-Wallet", "cross-jurisdictional-liability"]
 category: "數位身分與民主理論"
 aiModel: "Claude Opus 4.7"
 aiPrompt: "當 AI 代理介入公民行動（投票、結社、請願、資料近用、跨境權利主張、福利請領），Tomasev 委任五件 × civic proof 三件式 ⟨𝒩, ℱ, ℬ⟩ 的合取必要條件為何？哪些公民行動落入結構不可委任區？跨法域、共用裝置、行為失能三類典型情境的概率退化邊界與分層治理回應為何？"
@@ -11,6 +13,7 @@ aiPipelineId: "research-publishing-pipeline/2026-05-10-civic-ai-agent-delegation
 aiGeneratedDate: 2026-05-10
 humanReviewed: false
 lang: "zh-TW"
+series: civic-proof
 ---
 
 ## 1. 導論

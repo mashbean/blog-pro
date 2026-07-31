@@ -1,8 +1,10 @@
 ---
 title: "平台中介者如何成為保護獨立記者的屏障——在田間學講稿"
 description: "2026 年 8 月 26 日「在田間學」線上活動講稿書面版。從平台服務業者的視角，看發表者從查資料到收款會留下哪些數位足跡、可連結性為何比單一紀錄更接近實際風險，以及隱私金流三代演化如何把問題從技術轉為治理。"
+topic: platform-media
+tags: ["隱私", "平台治理", "內容審核與安全", "媒體與新聞"]
+keywords: ["privacy", "digital-safety", "journalism", "platform-governance", "privacy-money", "matters"]
 pubDate: 2026-08-26
-tags: ["privacy", "digital-safety", "journalism", "platform-governance", "privacy-money", "matters"]
 category: "數位治理"
 series: "演講講稿"
 aiModel: "Claude Opus 4.8"

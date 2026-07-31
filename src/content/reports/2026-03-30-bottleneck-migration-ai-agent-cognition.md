@@ -1,8 +1,10 @@
 ---
 title: "回應豆泥，代理人（Agent）如何成為人的延伸"
 description: "回應〈與 AI Agent 生活後的三個啊哈！〉，從延展心智、認知卸載與監督式控制出發，分析代理人如何逐步成為人的延伸。"
+topic: ai
+tags: ["AI 代理人", "勞動與工作", "民主理論"]
+keywords: ["文化科技"]
 pubDate: 2026-03-30
-tags: ["文化科技"]
 category: "文化科技"
 aiModel: "GPT-5.4-Pro"
 aiPrompt: "回應〈與 AI Agent 生活後的三個啊哈！〉一文"

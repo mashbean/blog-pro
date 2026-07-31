@@ -1,9 +1,11 @@
 ---
 title: "Danielle Allen 的權力分享自由主義如何改寫數位公民基礎設施"
 description: "本文作為 civic-proof 系列的 Danielle Allen 橋接文，主張 Allen 的 power-sharing liberalism 不宜被加入為 Public Realm Floor 第五軸；本文將其作為 PRF 四軸通往數位公民建設的制度轉譯層。2026 年 5 月 21 日修訂加入 From Voice to Influence、digital public infrastructure 與 experiential civic learning，使 AllenBridge 從 Act 層權力分享擴為 participatory readiness、public-interest technology、voice-to-influence loop 的檢核工具。"
+topic: digital-identity
+tags: ["公民證明", "公民科技", "AI 治理", "民主理論", "審議與參與"]
+keywords: ["civic-proof", "Danielle-Allen", "power-sharing-liberalism", "political-equality", "digital-civic-infrastructure", "digital-public-infrastructure", "AllenBridge", "public-realm-floor", "civic-proof-postscript", "rights-of-participation", "participatory-readiness", "voice-to-influence", "public-interest-technology", "non-domination", "non-monopoly", "co-ownership", "input-to-action-loop", "AI-governance", "technology-democracy", "Allen-Lab", "Ash-Center"]
 pubDate: 2026-05-19
 updatedDate: 2026-05-21
-tags: ["civic-proof", "Danielle-Allen", "power-sharing-liberalism", "political-equality", "digital-civic-infrastructure", "digital-public-infrastructure", "AllenBridge", "public-realm-floor", "civic-proof-postscript", "rights-of-participation", "participatory-readiness", "voice-to-influence", "public-interest-technology", "non-domination", "non-monopoly", "co-ownership", "input-to-action-loop", "AI-governance", "technology-democracy", "Allen-Lab", "Ash-Center"]
 category: "數位身分與民主理論"
 aiModel: "GPT-5 Codex"
 aiPrompt: "使用 research-publishing-pipeline，根據 Danielle Allen corpus 第二輪審查、civic-proof 0'、PRF article，撰寫一篇獨立橋接文。核心問題：Danielle Allen 的 power-sharing liberalism 應如何進入 civic-proof 與數位公民建設？是否應作為 PRF 第五軸？"

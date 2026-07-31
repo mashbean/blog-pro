@@ -1,8 +1,10 @@
 ---
 title: "弱國青年國際參與如何不再大內宣"
 description: "台灣青年的國際參與被困在「台灣之光」的英雄敘事裡，原子化、不傳承、與職涯脫鉤。如何從個人英雄轉向集體系統？結合 ICANN Fellowship、NetMission、UNICEF Innocenti 2024 等實證研究，提出以互助網絡和制度養成取代一次性曝光的五條路徑。"
+topic: international
+tags: ["國際關係", "網路治理", "台灣"]
+keywords: ["international-participation", "youth", "public-diplomacy", "internet-governance", "multi-stakeholder", "taiwan"]
 pubDate: 2026-04-03
-tags: ["international-participation", "youth", "public-diplomacy", "internet-governance", "multi-stakeholder", "taiwan"]
 category: "國際參與"
 aiModel: "Claude Opus 4"
 aiPrompt: "台灣青年參與國際多邊與多方關係人會議，如何從象徵性的「為台灣發聲」轉化為長期、結構性的影響力？"

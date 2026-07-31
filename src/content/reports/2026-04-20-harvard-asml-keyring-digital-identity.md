@@ -1,8 +1,10 @@
 ---
 title: "哈佛 ASML 的 Keyring 錢包——一場押在「身份主權歸誰」的結構賭注"
 description: "哈佛 ASML 把選擇性揭露、Profile Badges 與 First-Person Credentials 三塊零件綁在社群平台的 profile 欄位旁邊，端出一個叫 Keyring 的錢包。這篇文章拆解它的技術血統、示範平台選擇、三個最脆弱的地方，以及判斷它會不會成功的四個追蹤指標。"
+topic: digital-identity
+tags: ["可驗證憑證", "隱私", "平台治理"]
+keywords: ["數位身分", "隱私", "可驗證憑證", "Bluesky", "SSI"]
 pubDate: 2026-04-20
-tags: ["數位身分", "隱私", "可驗證憑證", "Bluesky", "SSI"]
 category: "身分與平台治理"
 lang: "zh-TW"
 aiModel: "AI 協作"

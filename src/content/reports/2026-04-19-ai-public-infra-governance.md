@@ -1,8 +1,10 @@
 ---
 title: "當 AI 公司成為準公共基礎設施：治理、海外能動性與台灣軍事 AI 的三個追問"
 description: "Anthropic 在 2026 年 3 月把五角大廈告上聯邦地院，把模型公司紅線、政府採購權、法院審查、產業同業立場與公民自由團體拉到同一個爭點上。這篇文章把 OpenAI 與 Anthropic 的治理結構、海外使用者的能動性，以及台灣軍事 AI 的邊界擺在一起談，提出七項治理原則與九項軍事 AI 採購原則，作為 4 月 26 日 Claude Taipei 第三場讀書會的前置研究。"
+topic: ai
+tags: ["AI 治理", "國防與安全", "台灣"]
+keywords: ["AI 治理", "Anthropic", "OpenAI", "台灣國防", "公共政策"]
 pubDate: 2026-04-19
-tags: ["AI 治理", "Anthropic", "OpenAI", "台灣國防", "公共政策"]
 category: "治理與民主"
 lang: "zh-TW"
 aiModel: "AI 協作"

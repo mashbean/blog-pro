@@ -1,9 +1,11 @@
 ---
 title: "身分基礎設施為什麼一定會擴張——以及如何預防"
 description: "結構性滑坡的因果機制是真實的（強傾向，可被反向制度壓力反轉），歷史擴張案例的共同條件是法律限制與技術綁定雙缺位，4 種預防工具是跨層級組合而非互斥選項。本文從四個歷史案例（Aadhaar、SSN、eIDAS、中國 real-name）與兩個關鍵反例（奧地利 sourcePIN、德國 nPA）抽出共同模式，用 path dependency / infrastructure studies / institutional layering 三角推導因果機制，評估 EUDI ARF 與加州 AB1043 的 prima facie 證據，回應虛無主義與 public choice 兩個反論，最後給出 MVSR（最小可行滑坡阻力）三層條款。"
+topic: digital-identity
+tags: ["公民證明", "數位皮夾", "威權與民主衰退", "法律與救濟"]
+keywords: ["civic-proof", "digital-identity", "structural-slippage", "path-dependency", "sunset-clauses", "prevention-design"]
 pubDate: 2026-05-09
 draft: false
-tags: [civic-proof, digital-identity, structural-slippage, path-dependency, sunset-clauses, prevention-design]
 lang: zh-TW
 aiModel: claude-opus-4-7
 aiPipelineStage: published

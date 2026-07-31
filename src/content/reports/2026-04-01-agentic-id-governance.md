@@ -1,8 +1,10 @@
 ---
 title: "誰來治理 AI 代理人的身分？"
 description: "當數十億 AI 代理人代替人類行動，我們需要什麼樣的治理架構來管理它們的身分、授權與問責？從 DNS 治理的二十五年經驗、委託人-代理人理論、全球數位身分案例，到責任哲學，這篇文章探索技術標準之外的信任建構。"
+topic: digital-identity
+tags: ["信任根與信任清單", "AI 治理", "AI 代理人", "網路治理"]
+keywords: ["AI-governance", "digital-identity", "DNS", "ICANN", "agent-identity", "trust-architecture", "multistakeholder"]
 pubDate: 2026-04-01
-tags: ["AI-governance", "digital-identity", "DNS", "ICANN", "agent-identity", "trust-architecture", "multistakeholder"]
 category: "數位治理"
 aiModel: "Claude Opus 4"
 aiPrompt: "當數十億 AI agent 代表人類行動，我們需要怎樣的治理架構來管理它們的身分、授權與問責？現有的多方利害關係人治理模式（如 ICANN/DNS）能否作為參考？技術標準之外，信任如何在人與代理人之間建立？"

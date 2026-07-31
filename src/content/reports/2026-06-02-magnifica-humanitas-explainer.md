@@ -1,8 +1,10 @@
 ---
 title: "教宗良十四世首道通諭《Magnifica Humanitas》：在 AI 時代守護人的尊嚴"
 description: "教宗良十四世首道通諭《Magnifica Humanitas》以 AI 為切入點，把它放回天主教社會訓導百餘年的脈絡中。本文採還原其論證的中性立場，逐項梳理科技永不中立、本體尊嚴不可剝奪、勞動、權力私有化、正義戰爭論過時等主張，並標明每條主張的來源等級與論證強度。"
+topic: ai
+tags: ["AI 治理", "AI 倫理", "勞動與工作"]
+keywords: ["pope-leo-xiv", "magnifica-humanitas", "catholic-social-teaching", "ai-ethics", "human-dignity", "rerum-novarum", "autonomous-weapons", "just-war", "ai-governance", "encyclical", "technology-and-power", "labor-and-work"]
 pubDate: 2026-06-02
-tags: ["pope-leo-xiv","magnifica-humanitas","catholic-social-teaching","ai-ethics","human-dignity","rerum-novarum","autonomous-weapons","just-war","ai-governance","encyclical","technology-and-power","labor-and-work"]
 category: "AI 倫理與社會思想"
 aiModel: "Claude Opus 4.7"
 aiPrompt: "用 research-article-pipeline 解釋教宗良十四世首道通諭《Magnifica Humanitas》，寫成嚴謹引用的中性 explainer；不使用 mashbean-accent。"

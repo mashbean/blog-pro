@@ -1,9 +1,11 @@
 ---
 title: "投誠者的資訊安全賽局"
 description: "以 NSB「中國民眾聯繫窗口」為例，把投誠者、監控者與吸收單位放進同一個資訊安全賽局，並用 PRISM、WikiLeaks、Snowden、Manning 與國家監控型窗口補強初次投遞分析。"
+topic: international
+tags: ["假名與匿名", "隱私", "內容審核與安全", "國防與安全", "美國"]
+keywords: ["數位安全", "匿名通報", "投誠", "情資", "SecureDrop", "GlobaLeaks", "CoverDrop", "PRISM", "WikiLeaks", "AWS WAF"]
 pubDate: 2026-06-19
 updatedDate: 2026-06-19
-tags: ["數位安全", "匿名通報", "投誠", "情資", "SecureDrop", "GlobaLeaks", "CoverDrop", "PRISM", "WikiLeaks", "AWS WAF"]
 category: "數位安全"
 aiModel: "Codex GPT-5"
 aiPipelineStage: "final"

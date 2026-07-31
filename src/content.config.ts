@@ -7,7 +7,14 @@ const reportSchema = z.object({
   pubDate: z.coerce.date(),
   updatedDate: z.coerce.date().optional(),
   draft: z.boolean().default(false),
+
+  // 導覽用的兩層分類（見 src/lib/taxonomy.ts）。
+  // topic 一篇一個當主軸，tags 是受控詞彙當跨主題篩選，
+  // keywords 是遷移前的自由標籤——不當導覽面向，只餵搜尋與相關文章。
+  topic: z.string().optional(),
   tags: z.array(z.string()).default([]),
+  keywords: z.array(z.string()).default([]),
+
   cover: z.string().optional(),
   coverAlt: z.string().optional(),
   lang: z.string().default("zh-TW"),

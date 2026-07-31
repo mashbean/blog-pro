@@ -1,9 +1,11 @@
 ---
 title: "分潤之外的分潤——世界各地正在發生的媒體營收實驗"
 description: "當平台廣告分潤鬆動、AI 搜尋一點一滴吃掉點擊，媒體到底靠什麼活下去？這篇整理了澳洲 NMBC、加拿大 Online News Act、歐盟 DSM 第 15 條、Mediapart 與 The Correspondent、Defector 與 The Messenger、NYT bundle、FT Strategies、OpenAI 一連串授權合約、Cloudflare Pay per Crawl、AJP/RFA/LJI 與 CIPER 等六條路線的正反案例，盡量把成功與失敗並排，不急著下結論。"
+topic: platform-media
+tags: ["平台治理", "媒體與新聞", "產業經濟"]
+keywords: ["媒體", "分潤", "AI", "訂閱制", "公民媒體", "公共政策"]
 pubDate: 2026-04-21
 date: 2026-04-21
-tags: ["媒體", "分潤", "AI", "訂閱制", "公民媒體", "公共政策"]
 category: "媒體產業與公共政策"
 lang: "zh-TW"
 aiModel: "AI 協作"

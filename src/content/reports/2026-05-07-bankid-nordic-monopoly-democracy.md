@@ -1,9 +1,11 @@
 ---
 title: "北歐商業身分基礎設施的代價：當登入民主政府需要商業銀行的同意"
 description: "北歐五國 BankID/MitID 是四種治理形態並存的商業身分基礎設施，覆蓋率 92-99.9% 掩蓋 60-95 萬人系統性排除。五國央行 2022 年起發出「viktigt komplement」警示；本文以「單一壟斷者 + 無救濟程序 → infrastructural tyranny」結構批判，評估技術 < 治理 << 社會結構三層輸出難度梯度。"
+topic: digital-identity
+tags: ["公民證明", "數位皮夾", "產業經濟", "民主理論", "北歐"]
+keywords: ["civic-proof", "digital-identity", "bankid", "nordic", "infrastructural-rights", "central-banks"]
 pubDate: 2026-05-07
 draft: false
-tags: [civic-proof, digital-identity, bankid, nordic, infrastructural-rights, central-banks]
 lang: zh-TW
 aiModel: claude-opus-4-7
 aiPipelineStage: published

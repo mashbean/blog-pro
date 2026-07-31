@@ -1,8 +1,10 @@
 ---
 title: "為什麼民主社會早就接受過假名式參與：從吹哨者保護到 sealed indictment 的法理重建"
 description: "民主憲政體系已在五個獨立法律場域承認「常態假名加事後條件性啟封」作為合法穩定的制度範式。把吹哨者保護法、John Doe 訴訟、sealed indictment、匿名捐款上限制度、證人保護程序的條件條款抽取為制度模板三件式 T = (Trigger, Authority, Remedy)，可類比移植到四個 civic proof 場景，並提煉為 5 段法律契約規格初稿。法律工具不缺，欠缺的是技術-法律對接的契約規格；但部署仍受 5 條邊界條件約束。本文是博論第 1 篇法律支柱研究 article，與 article 01 / 02 / 03 在三件式合取結構上正式接合。"
+topic: digital-identity
+tags: ["公民證明", "假名與匿名", "密碼學", "法律與救濟", "研究方法"]
+keywords: ["civic-proof", "pseudonymity", "whistleblower-protection", "sealed-indictment", "John-Doe-litigation", "WITSEC", "campaign-finance", "legal-contract-spec", "threshold-cryptography", "doctoral-research"]
 pubDate: 2026-05-04
-tags: ["civic-proof", "pseudonymity", "whistleblower-protection", "sealed-indictment", "John-Doe-litigation", "WITSEC", "campaign-finance", "legal-contract-spec", "threshold-cryptography", "doctoral-research"]
 category: "公民假名與法律支柱"
 aiModel: "Claude Opus 4.7"
 aiPrompt: "哪些既有法律制度已承認常態匿名加事後問責？這些制度的條件條款能否抽取為制度模板，移植到數位 civic proof 場景？法律工具不夠，還是技術與法律對接的契約規格欠缺？"
@@ -11,6 +13,7 @@ aiPipelineId: "research-publishing-pipeline/2026-05-04-pseudonymous-participatio
 aiGeneratedDate: 2026-05-04
 humanReviewed: false
 lang: "zh-TW"
+series: civic-proof
 ---
 
 

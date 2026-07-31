@@ -1,9 +1,11 @@
 ---
 title: "我們試著用資料看身分制度與民主衰退的關係：跨國定量初探"
 description: "本文提出 ID-Authority Index（IAI）兩維 5 級編碼方案覆蓋 70 國，並做跨國回歸 + 5 個 natural experiment 評估 + 3 機制存在性案例（Aadhaar / Russian Gosuslugi / Belarus e-ID）。Pilot 研究：量化結果為預期值（待 RA 驗證）；可拒絕「身分制度與結社自由統計獨立」的虛無假設，但因果尚未識別。"
+topic: digital-identity
+tags: ["公民證明", "公民社會", "威權與民主衰退", "研究方法"]
+keywords: ["civic-proof", "digital-identity", "quantitative", "v-dem", "civil-society", "hybrid-regime"]
 pubDate: 2026-05-08
 draft: false
-tags: [civic-proof, digital-identity, quantitative, v-dem, civil-society, hybrid-regime]
 lang: zh-TW
 aiModel: claude-opus-4-7
 aiPipelineStage: published

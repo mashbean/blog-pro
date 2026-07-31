@@ -1,9 +1,11 @@
 ---
 title: "下班還在當醫師的人——麻醉科把 AI Agent 放回它真正能做的位置"
 description: "麻醉科的累，比起工時，更核心的是身分下不了班。我把這幾個月讀的麻醉 burnout 研究、ambient AI 文獻、Watson 與 Epic Sepsis 兩個翻車案例擺在一起，整理出一個自己用得下手的判斷——AI Agent 在麻醉科真正能做的，是把四類結構化雜務切走；它做不到、也不該做的，是臨床判斷與情感勞動。雜務切走之後，反而會把那些不能外包的時刻照得更亮。"
+topic: ai
+tags: ["AI 代理人", "勞動與工作", "醫療", "台灣"]
+keywords: ["anesthesiology", "ai-agent", "burnout", "healthcare-ai", "phi", "ambient-ai", "clinical-decision-support", "taiwan-healthcare"]
 pubDate: 2026-04-25
 date: 2026-04-25
-tags: ["anesthesiology", "ai-agent", "burnout", "healthcare-ai", "phi", "ambient-ai", "clinical-decision-support", "taiwan-healthcare"]
 category: "醫療與科技"
 aiModel: "Claude Opus 4.7"
 aiPrompt: "麻醉科醫師長期 burnout 的結構是什麼？AI Agent 在這個結構裡能做什麼、不能做什麼？"

@@ -1,8 +1,10 @@
 ---
 title: "可問責不以實名為前提：從密碼學到政治哲學的雙向論證"
 description: "民主問責性是結果性條件而非前置性條件。當啟封權力被多方持有、啟封門檻明定、啟封過程可稽核時，密碼學假名加上條件性開封機制可同時滿足匿名與問責，且邊界場景（AML、選舉、跨境制裁）反而強化此論點。"
+topic: digital-identity
+tags: ["公民證明", "假名與匿名", "密碼學", "民主理論", "法律與救濟"]
+keywords: ["accountability", "pseudonymity", "digital-identity", "cryptography", "political-philosophy", "civic-proof", "republicanism", "due-process", "threshold-cryptography"]
 pubDate: 2026-05-02
-tags: ["accountability", "pseudonymity", "digital-identity", "cryptography", "political-philosophy", "civic-proof", "republicanism", "due-process", "threshold-cryptography"]
 category: "數位身分與民主理論"
 aiModel: "Claude Opus 4.7"
 aiPrompt: "民主問責性能否在不要求前置實名識別的情況下成立？滿足什麼工程與政治條件下成立？邊界在哪？"
@@ -11,6 +13,7 @@ aiPipelineId: "research-publishing-pipeline/2026-05-02-accountability-without-id
 aiGeneratedDate: 2026-05-02
 humanReviewed: false
 lang: "zh-TW"
+series: civic-proof
 ---
 
 ## 一、導論：兩層信任模型與核心問題

@@ -1,9 +1,11 @@
 ---
 title: "組織縮小，能動性放大：三個月變三天背後的管理學"
 description: "和前 CTO 約咖啡時兩個人同時愣住。以前要三個月的事，現在三天就能交一版。這篇把這個 N=2 的觀察拆給組織管理學去解。Brooks 通道數、Conway's Law、OODA、SDT、Coase 與 Williamson 一路串下來，加上 Zappos、Healthcare.gov、Stability AI 這些失敗對照，最後落在四個條件式判準（任務複雜度、領導風格、回饋鏈條、場域性質）。能看見條件，比相信故事更有用。"
+topic: organizations
+tags: ["組織管理", "AI 代理人", "法律與救濟"]
+keywords: ["organizational-management", "ai-agent", "team-topology", "coase", "self-determination-theory", "brooks-law", "conway-law", "minimum-viable-team"]
 pubDate: 2026-05-16
 date: 2026-05-16
-tags: ["organizational-management", "ai-agent", "team-topology", "coase", "self-determination-theory", "brooks-law", "conway-law", "minimum-viable-team"]
 category: "組織與科技"
 aiModel: "Claude Opus 4.7"
 aiPrompt: "為什麼組織縮小（搭配 AI Agent）會讓開發週期從三個月縮減到三天，並且同時帶來團隊動機提升、使用者反饋改善與服務『人味』回返？這是工具偶然產生的局部效應，還是組織管理學早已預示的結構性現象？"

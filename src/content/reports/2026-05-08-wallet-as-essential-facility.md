@@ -1,9 +1,11 @@
 ---
 title: "為什麼皮夾應該被當成電信業：Apple Wallet 不是中性產品"
 description: "當 wallet 變成進入政府服務、年齡驗證、選舉投票的必要通道，它應受 essential facility doctrine、DMA 與電信業互通義務 framework 約束。本文採 multi-pronged 路徑：US Aspen-MCI + EU DMA Article 6 路徑甲 + 國家立法 §251 機制層參考 + W3C-OID4VC 標準正式化；SSI 反論的對偶從「監管 vs 自由」改寫為「廠商鎖定 vs 互通性義務」。"
+topic: digital-identity
+tags: ["公民證明", "數位皮夾", "產業經濟", "歐盟"]
+keywords: ["civic-proof", "digital-identity", "wallet", "essential-facility", "dma", "antitrust"]
 pubDate: 2026-05-08
 draft: false
-tags: [civic-proof, digital-identity, wallet, essential-facility, dma, antitrust]
 lang: zh-TW
 aiModel: claude-opus-4-7
 aiPipelineStage: published

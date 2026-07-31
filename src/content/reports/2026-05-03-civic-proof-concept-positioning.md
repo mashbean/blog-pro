@@ -1,8 +1,10 @@
 ---
 title: "Civic Proof 是什麼，又不是什麼：與既有數位身分概念的區辨"
 description: "Civic proof 是規範性概念而非工程容器。透過既有概念地景的層級錯置分析、Nissenbaum contextual integrity 的 non-derivability 推導、Marshall 公民權三層的啟發式類比、與四需求型態的溯因論證，將 civic proof 定位為一個合格的概念工程提案，是規範條件束的整合命名，而非已驗證的最佳上位概念。"
+topic: digital-identity
+tags: ["公民證明", "可驗證憑證", "隱私", "民主理論"]
+keywords: ["civic-proof", "concept-engineering", "contextual-integrity", "verifiable-credentials", "digital-identity", "citizenship-theory", "privacy-theory", "marshall", "nissenbaum", "cohen", "hildebrandt", "cappelen"]
 pubDate: 2026-05-03
-tags: ["civic-proof", "concept-engineering", "contextual-integrity", "verifiable-credentials", "digital-identity", "citizenship-theory", "privacy-theory", "marshall", "nissenbaum", "cohen", "hildebrandt", "cappelen"]
 category: "數位身分與概念工程"
 aiModel: "Claude Opus 4.7"
 aiPrompt: "為什麼需要 Civic Proof 這個新詞？它與既有概念的關係為何？是工程概念還是規範概念？"
@@ -11,6 +13,7 @@ aiPipelineId: "research-publishing-pipeline/2026-05-03-civic-proof-concept-posit
 aiGeneratedDate: 2026-05-03
 humanReviewed: false
 lang: "zh-TW"
+series: civic-proof
 ---
 
 ## 一、導論：拒絕兩個極端誤讀

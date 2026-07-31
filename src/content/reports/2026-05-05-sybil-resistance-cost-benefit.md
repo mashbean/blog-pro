@@ -1,8 +1,10 @@
 ---
 title: "一人一帳號的代價：從 Worldcoin 到 zkPassport 的唯一性證明矩陣"
 description: "把 Sybil resistance 形式化為不可能三角 IT' = ¬∃ S [ U(S) = max ∧ D(S) = min ∧ I(S) = max ]，配 9 條子維度與 5 條邊界條件，逐一拆解 Worldcoin、BrightID、Gitcoin Passport、zkPassport、Proof of Humanity 在唯一性、揭露成本、包容性三軸的 corner 取捨。CAP-IT' 中強類比給設計指引（不給形式化推論），PACELC 引申 IS-AUEL-D 弱級別方法論，與 article 03（H1' 三道牆）、article 04（T 三件式）在合取結構上同構但用於不同層級。"
+topic: digital-identity
+tags: ["公民證明", "可驗證憑證", "密碼學", "區塊鏈與加密貨幣", "研究方法"]
+keywords: ["civic-proof", "sybil-resistance", "personhood-proof", "worldcoin", "zkpassport", "brightid", "gitcoin-passport", "proof-of-humanity", "impossibility-triangle", "doctoral-research"]
 pubDate: 2026-05-05
-tags: ["civic-proof", "sybil-resistance", "personhood-proof", "worldcoin", "zkpassport", "brightid", "gitcoin-passport", "proof-of-humanity", "impossibility-triangle", "doctoral-research"]
 category: "公民證明工程比較"
 aiModel: "Claude Opus 4.7"
 aiPrompt: "Worldcoin、BrightID、Gitcoin Passport、zkPassport、Proof of Humanity 在公民層 attack model 下各自表現？Sybil resistance 的『夠用就好』原則如何分層？每種方案的政治代價（資料集中、不可逆生物特徵、社交圖暴露、平台依賴、包容性）為何？是否存在『唯一性 ↔ 揭露 ↔ 包容性』的不可能三角？"
@@ -11,6 +13,7 @@ aiPipelineId: "research-publishing-pipeline/2026-05-05-sybil-resistance-cost-ben
 aiGeneratedDate: 2026-05-05
 humanReviewed: false
 lang: "zh-TW"
+series: civic-proof
 ---
 
 
