@@ -143,6 +143,8 @@ export const SERIES = {
       "從概念區辨、法理支柱、工程比較一路走到規範下界與台灣案例。",
     /** 系列入口（第 0′ 版），列表固定排最前面。 */
     entry: "2026-05-17-civic-proof-foundations",
+    /** 系列專站；有專站的系列在首頁只留一張卡片外連過去。 */
+    site: "https://civic-proof.mashbean.net",
   },
   演講講稿: {
     label: "演講講稿",
@@ -155,5 +157,5 @@ export type SeriesId = keyof typeof SERIES;
 
 export function seriesMeta(id: string | undefined) {
   if (!id) return undefined;
-  return (SERIES as Record<string, { label: string; blurb: string; entry?: string }>)[id];
+  return (SERIES as Record<string, { label: string; blurb: string; entry?: string; site?: string }>)[id];
 }

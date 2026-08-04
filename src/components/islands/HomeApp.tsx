@@ -414,56 +414,42 @@ function SeriesRail({
   const big = [...groups.entries()].filter(([, list]) => list.length >= 3);
   if (!big.length) return null;
 
+  // 收斂成一張卡：標題＋簡介＋動作，不再攤開整份篇目
+  // （24 篇的清單把首頁撐成一面白牆；要逛全集就去系列專站）。
   return (
     <section className="serieszone">
       {big.map(([id, list]) => {
         const meta = seriesMeta(id);
-        // 入口篇固定第一，其餘照發表順序。
-        // 不用 seriesOrder 排——那是作者論文裡的篇號，24 篇只有 10 篇標了，
-        // 拿來排會把先發表的 14 篇全擠到後面（詳見 src/lib/related.ts）。
-        const sorted = [...list].sort((a, b) => {
-          if (meta?.entry) {
-            if (a.id === meta.entry) return -1;
-            if (b.id === meta.entry) return 1;
-          }
-          return a.date.localeCompare(b.date);
-        });
         return (
           <div key={id} className="seriesblock">
-            <div className="seriesblock__head">
-              <h2 className="seriesblock__title">{meta?.label ?? id}</h2>
-              <span className="seriesblock__n">{list.length} 篇</span>
-            </div>
-            {meta?.blurb && <p className="seriesblock__blurb">{meta.blurb}</p>}
-            <div className="seriesblock__actions">
-              {meta?.entry && (
-                <a
-                  className="pill pill--solid"
-                  href={sorted.find((p) => p.id === meta.entry)?.href}
-                >
-                  從系列入口讀起 →
-                </a>
-              )}
-              <button
-                className="pill"
-                onClick={() => onFilters({ ...EMPTY, series: id })}
-              >
-                只看這個系列
-              </button>
-            </div>
-            <ol className="seriesblock__list">
-              {sorted.map((p) => (
-                <li key={p.id}>
-                  <a href={p.href}>
-                    <span className="seriesblock__idx" title={p.seriesOrder ? `作者篇號 #${p.seriesOrder}` : undefined}>
-                      {p.id === meta?.entry ? "0′" : p.seriesOrder ? `#${p.seriesOrder}` : "·"}
-                    </span>
-                    <span className="seriesblock__t">{p.title}</span>
-                    <span className="seriesblock__m">{p.readMinutes} 分鐘</span>
+            <p className="seriesblock__kicker">
+              Series <span className="seriesblock__n">{list.length} 篇</span>
+            </p>
+            <div className="seriesblock__body">
+              <div>
+                <h2 className="seriesblock__title">{meta?.label ?? id}</h2>
+                {meta?.blurb && <p className="seriesblock__blurb">{meta.blurb}</p>}
+              </div>
+              <div className="seriesblock__actions">
+                {meta?.site ? (
+                  <a
+                    className="pill pill--solid"
+                    href={meta.site}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    前往系列專站 →
                   </a>
-                </li>
-              ))}
-            </ol>
+                ) : (
+                  <button
+                    className="pill"
+                    onClick={() => onFilters({ ...EMPTY, series: id })}
+                  >
+                    只看這個系列
+                  </button>
+                )}
+              </div>
+            </div>
           </div>
         );
       })}
