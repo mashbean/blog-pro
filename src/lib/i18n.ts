@@ -69,7 +69,7 @@ export const UI: Record<Locale, UIStrings> = {
       { href: "/fiction/", label: "小說" },
       { href: "/specials/", label: "專題" },
       { href: "/about/", label: "關於" },
-      { href: "/topics/", label: "主題搜尋" },
+      { href: "/topics/", label: "主題" },
     ],
     search: "搜尋",
     backToMain: "← 回到豆泥部落格",
