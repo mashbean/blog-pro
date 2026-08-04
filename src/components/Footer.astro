@@ -1,10 +1,24 @@
 ---
 import { MAIN_SITE_URL } from "../site.config";
+import type { Locale } from "../lib/i18n";
+
+interface Props {
+  locale?: Locale;
+}
+const { locale = "zh" } = Astro.props as Props;
+
+const ccHref =
+  locale === "en"
+    ? "https://creativecommons.org/licenses/by-nc/4.0/"
+    : "https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hant";
 ---
 
 <footer class="site-footer">
   <span>AI-powered research — <a href={MAIN_SITE_URL} target="_blank" rel="noopener">mashbean.net</a></span>
-  <span>&copy; {new Date().getFullYear()}</span>
+  <span>
+    &copy; {new Date().getFullYear()} ·
+    <a href={ccHref} target="_blank" rel="noopener license">CC BY-NC 4.0</a>
+  </span>
 </footer>
 
 <style>

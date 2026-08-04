@@ -137,42 +137,12 @@ function Controls({
   onShuffle: () => void;
   ui: HomeUI;
 }) {
-  const inputRef = useRef<HTMLInputElement>(null);
-
+  // 篩選輸入整段退場（搜尋走 masthead ⌘K）；這裡只剩排序與檢視切換。
+  // 篩選狀態仍可由列內 #標籤 或網址參數進入，所以「篩出 N 篇／清除」
+  // 只在真的有條件時才現身。
   return (
     <div className="controls">
       <div className="controls__row">
-        <div className="controls__search">
-          <svg viewBox="0 0 20 20" aria-hidden="true">
-            <circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" strokeWidth="1.7" />
-            <path d="M13.5 13.5 L17.5 17.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-          </svg>
-          <input
-            ref={inputRef}
-            type="search"
-            value={filters.q}
-            placeholder={ui.searchPlaceholder}
-            aria-label={ui.searchAria}
-            onChange={(e) => onFilters({ ...filters, q: e.target.value })}
-          />
-          {filters.q && (
-            <button
-              className="controls__clearq"
-              aria-label={ui.clearAria}
-              onClick={() => {
-                onFilters({ ...filters, q: "" });
-                inputRef.current?.focus();
-              }}
-            >
-              ×
-            </button>
-          )}
-        </div>
-
-        <button className="controls__full" data-search-open type="button">
-          {ui.fulltext} <kbd>⌘K</kbd>
-        </button>
-
         <div className="controls__spacer" />
 
         <select
@@ -205,18 +175,14 @@ function Controls({
         </div>
       </div>
 
-      <div className="controls__count">
-        {shown === total ? (
-          <>{ui.all(total)}</>
-        ) : (
-          <>
-            {ui.filtered(shown, total)}
-            <button className="controls__reset" onClick={() => onFilters(EMPTY)}>
-              {ui.clear}
-            </button>
-          </>
-        )}
-      </div>
+      {shown !== total && (
+        <div className="controls__count">
+          {ui.filtered(shown, total)}
+          <button className="controls__reset" onClick={() => onFilters(EMPTY)}>
+            {ui.clear}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
@@ -595,7 +561,8 @@ export default function HomeApp({
   }, [posts, palette]);
 
   const [filters, setFilters] = useState<Filters>(EMPTY);
-  const [view, setView] = useState<View>("index");
+  // 預設散落牆——首頁先給氛圍，要查找的人切「索引」或走 ⌘K／主題頁
+  const [view, setView] = useState<View>("scatter");
   const [sort, setSort] = useState<Sort>("new");
   const [shuffleKey, setShuffleKey] = useState(0);
   const [flippedId, setFlippedId] = useState<string | null>(null);

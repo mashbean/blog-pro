@@ -3,29 +3,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import HomeApp from "../components/islands/HomeApp.tsx";
 import { getPublishedReports } from "../utils/reports";
 import { reportToPost } from "../lib/reports-to-posts";
-import { TOPICS } from "../lib/taxonomy";
 import { UI } from "../lib/i18n";
 
 const ui = UI.zh;
 const reports = await getPublishedReports();
 const posts = reports.map(reportToPost);
-
-const essayCount = posts.length;
-const topicCount = new Set(posts.map((p) => p.topic).filter(Boolean)).size;
-const latest = posts.reduce((a, p) => (p.date > a ? p.date : a), "");
 ---
 
 <BaseLayout altHref="/en/">
   <section class="hero hero--compact">
     <div>
-      <p class="hero__kicker">{ui.hero.kickerSuffix}</p>
       <h1 class="hero__title">{ui.hero.title}</h1>
       <p class="hero__sub">{ui.hero.tagline}</p>
-    </div>
-    <div class="hero__meta">
-      <span><strong>{essayCount}</strong> {ui.hero.posts}</span>
-      <span>{ui.hero.topics(topicCount, TOPICS.length)}</span>
-      <span>{ui.hero.updated} {latest}</span>
     </div>
   </section>
 
