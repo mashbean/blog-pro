@@ -7,6 +7,7 @@ import Iris from "../components/Iris.astro";
 import Footer from "../components/Footer.astro";
 import ScrollReveal from "../components/ScrollReveal.astro";
 import SearchPalette from "../components/SearchPalette.astro";
+import { UI, type Locale } from "../lib/i18n";
 import "../styles/global.css";
 
 interface Props {
@@ -19,23 +20,29 @@ interface Props {
   bareChrome?: boolean;
   /** Hide the global mesh background on pages that want a clean canvas. */
   noMesh?: boolean;
+  locale?: Locale;
+  /** 語言切換要落到對方語言的哪一頁；預設對方首頁。 */
+  altHref?: string;
 }
 
-const { title, fullTitle, description, ogImage, noindex, bareChrome = false, noMesh = false } = Astro.props;
+const {
+  title, fullTitle, description, ogImage, noindex,
+  bareChrome = false, noMesh = false, locale = "zh", altHref,
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="zh-TW">
+<html lang={UI[locale].htmlLang}>
   <head>
     <BaseHead title={title} fullTitle={fullTitle} description={description} ogImage={ogImage} noindex={noindex} />
   </head>
   <body>
     {!noMesh && <Mesh />}
     <Guides />
-    {!bareChrome && <Masthead />}
+    {!bareChrome && <Masthead locale={locale} altHref={altHref} />}
     <slot />
     <Footer />
-    <SearchPalette />
+    <SearchPalette locale={locale} />
     <Iris />
     <ScrollReveal />
   </body>

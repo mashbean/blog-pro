@@ -107,6 +107,28 @@
 }
 .cmdk__topic:hover { border-color: var(--color-ink); background: var(--color-canvas) }
 
+.cmdk__tags { padding-bottom: var(--space-2) }
+.cmdk__tag {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+  text-decoration: none;
+  padding: 3px 4px;
+  transition: color var(--dur-fast, 160ms) var(--ease-standard, ease);
+}
+.cmdk__tag::before { content: "#"; opacity: 0.5 }
+.cmdk__tag:hover { color: var(--color-ink); text-decoration: underline; text-underline-offset: 3px }
+.cmdk__tag span {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-ink-subtle);
+  font-variant-numeric: tabular-nums;
+}
+.cmdk__tag--all { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--color-ink-subtle) }
+.cmdk__tag--all::before { content: none }
+
 .cmdk__recent { list-style: none; margin: 0; padding: 0 0 var(--space-4) }
 .cmdk__recentlink {
   display: flex;

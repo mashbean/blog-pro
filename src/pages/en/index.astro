@@ -1,12 +1,14 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import HomeApp from "../components/islands/HomeApp.tsx";
-import { getPublishedReports } from "../utils/reports";
-import { reportToPost } from "../lib/reports-to-posts";
-import { TOPICS } from "../lib/taxonomy";
-import { UI } from "../lib/i18n";
+// 英文版首頁：站架英文、文章照列（絕大多數是中文，少數 EN 篇目
+// 自帶 lang: en 標記）。詳見 src/lib/i18n.ts 開頭的取捨說明。
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HomeApp from "../../components/islands/HomeApp.tsx";
+import { getPublishedReports } from "../../utils/reports";
+import { reportToPost } from "../../lib/reports-to-posts";
+import { TOPICS } from "../../lib/taxonomy";
+import { UI } from "../../lib/i18n";
 
-const ui = UI.zh;
+const ui = UI.en;
 const reports = await getPublishedReports();
 const posts = reports.map(reportToPost);
 
@@ -15,7 +17,12 @@ const topicCount = new Set(posts.map((p) => p.topic).filter(Boolean)).size;
 const latest = posts.reduce((a, p) => (p.date > a ? p.date : a), "");
 ---
 
-<BaseLayout altHref="/en/">
+<BaseLayout
+  locale="en"
+  altHref="/"
+  fullTitle="Open Questions — asked by mashbean"
+  description={ui.hero.tagline}
+>
   <section class="hero hero--compact">
     <div>
       <p class="hero__kicker">{ui.hero.kickerSuffix}</p>
@@ -29,7 +36,7 @@ const latest = posts.reduce((a, p) => (p.date > a ? p.date : a), "");
     </div>
   </section>
 
-  <HomeApp client:only="react" posts={posts} locale="zh" />
+  <HomeApp client:only="react" posts={posts} locale="en" />
 </BaseLayout>
 
 <style>
@@ -43,7 +50,6 @@ const latest = posts.reduce((a, p) => (p.date > a ? p.date : a), "");
     margin: var(--space-3) 0 0;
     text-wrap: balance;
   }
-  /* 首頁的主角改成下面那條檢索列了，標題區不再吃掉整個首屏 */
   .hero--compact {
     margin-bottom: var(--space-5);
   }

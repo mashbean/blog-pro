@@ -1,0 +1,117 @@
+---
+// 英文版小說目次：選集本身是中文，這頁只給英文站架一個誠實的入口。
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getFictionInReadingOrder } from "../../../utils/fiction";
+import { readingTime } from "../../../utils/reading-time";
+
+const stories = await getFictionInReadingOrder();
+const series = stories[0]?.data.series ?? "普通人";
+const framedBy = stories[0]?.data.framedBy ?? "豆泥";
+
+const entries = stories.map((s) => ({
+  num: String(s.data.seriesOrder).padStart(2, "0"),
+  href: `/fiction/${s.id}/`,
+  readTime: readingTime(s.body ?? ""),
+  ...s.data,
+}));
+---
+
+<BaseLayout
+  locale="en"
+  altHref="/fiction/"
+  fullTitle={`${series} (Fiction) | Open Questions`}
+  description={`${series}: a five-story collection. Framed by ${framedBy}, written by AI. In Chinese.`}
+>
+  <section class="encover">
+    <p class="encover__kicker">Fiction · Collection</p>
+    <h1 class="encover__title">{series}</h1>
+    <p class="encover__note">
+      A five-story collection about ordinary people inside institutions.
+      Framed by {framedBy}, written by AI — currently available in Chinese only.
+    </p>
+  </section>
+
+  <section class="enlist">
+    <ol>
+      {entries.map((e) => (
+        <li>
+          <a href={e.href}>
+            <span class="enlist__num">{e.num}</span>
+            <span class="enlist__title">{e.title}</span>
+            <span class="enlist__meta">{e.readTime}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </section>
+</BaseLayout>
+
+<style>
+  .encover {
+    width: var(--browse-w, 80%);
+    margin: 0 auto var(--space-6);
+  }
+  .encover__kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-ink-muted);
+    margin: 0 0 var(--space-3);
+  }
+  .encover__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-3xl);
+    line-height: var(--leading-tight);
+    margin: 0;
+  }
+  .encover__note {
+    margin: var(--space-3) 0 0;
+    max-width: 52ch;
+    color: var(--color-ink-muted);
+    line-height: var(--leading-relaxed);
+  }
+  .enlist {
+    width: var(--browse-w, 80%);
+    margin: 0 auto var(--space-9);
+  }
+  .enlist ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--color-rule);
+  }
+  .enlist a {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr auto;
+    gap: var(--space-4);
+    align-items: baseline;
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-rule);
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+  .enlist a:hover .enlist__title {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .enlist__num {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-subtle);
+    font-variant-numeric: tabular-nums;
+  }
+  .enlist__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-md);
+    line-height: var(--leading-snug);
+  }
+  .enlist__meta {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-ink-subtle);
+    white-space: nowrap;
+  }
+</style>

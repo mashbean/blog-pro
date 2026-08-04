@@ -1,40 +1,47 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { MAIN_SITE_URL } from "../site.config";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { MAIN_SITE_URL } from "../../site.config";
 ---
 
-<BaseLayout title="關於本站" altHref="/en/about/">
+<BaseLayout
+  locale="en"
+  altHref="/about/"
+  fullTitle="About | Open Questions"
+  description="An AI-powered research site: mashbean asks, AI investigates and writes."
+>
   <article class="about">
     <p class="about__kicker">Colophon</p>
-    <h1 class="about__title">關於本站</h1>
+    <h1 class="about__title">About this site</h1>
 
     <div class="about__body report-prose">
       <p>
-        <strong>豆泥關心的議題</strong>是一個由 AI 驅動的研究報告平台。
-        這裡的每一篇報告都源自一個簡單的流程：豆泥提出問題，AI 顧問深入研究並撰寫分析報告。
+        <strong>Open Questions</strong> is an AI-powered research site.
+        Every report starts from the same loop: mashbean (豆泥) poses a question,
+        and an AI research pipeline investigates and writes the analysis.
       </p>
 
-      <h2>運作方式</h2>
+      <h2>How it works</h2>
 
       <p>
-        所有報告由 AI 研究 pipeline 生成，經過多階段的研究、草稿、挑戰與改寫流程，
-        確保內容的深度與準確性。每篇報告都標註了使用的 AI 模型與生成資訊，
-        保持完全的透明度。
+        Reports are generated through a multi-stage pipeline — research, drafting,
+        adversarial challenge, and rewriting. Each report is labeled with the AI
+        model and generation details, for full transparency.
       </p>
 
-      <h2>與主站的關係</h2>
+      <h2>Relationship to the main site</h2>
 
       <p>
-        本站是 <a href={MAIN_SITE_URL}>mashbean.net</a> 的延伸。
-        主站收錄豆泥的個人文章與創作，本站則專門收錄 AI 生成的研究報告，
-        兩者在內容性質上有明確的區分。
+        This site is an extension of <a href={MAIN_SITE_URL}>mashbean.net</a>.
+        The main site collects mashbean's own writing; this one collects
+        AI-generated research. Most essays here are written in Chinese —
+        the few English ones carry an EN badge in the index.
       </p>
 
-      <h2>設計系統</h2>
+      <h2>Design system</h2>
 
       <p>
-        本站的版面規格（字級、間距、色彩、元件）整理成一份可瀏覽的
-        <a href="/design-system/">設計系統文件</a>，供日後迭代與其他專案取用。
+        The site's visual spec (type scale, spacing, color, components) is
+        documented in a browsable <a href="/design-system/">design system</a>.
       </p>
     </div>
   </article>

@@ -2,23 +2,93 @@
 // 全站搜尋面板（⌘K / Ctrl+K / 按 /）。
 // 刻意用原生 TS 而不是 React island——這東西掛在 BaseLayout 上，
 // 每頁都要載，沒必要為了一個搜尋框把 React runtime 推到文章頁去。
-import { TOPICS } from "../lib/taxonomy";
+//
+// 首頁的主題／標籤常駐 chips 退場後，這裡就是「不知道要找什麼」的
+// 主入口：空狀態列出主題、常用標籤、最近發表三層。
+import { TOPICS, sortTags } from "../lib/taxonomy";
+import { getPublishedReports } from "../utils/reports";
 import { withBase } from "../utils/paths";
+import type { Locale } from "../lib/i18n";
+
+interface Props {
+  locale?: Locale;
+}
+const { locale = "zh" } = Astro.props as Props;
 
 const topics = TOPICS.map((t) => ({
   id: t.id,
   label: t.label,
   href: withBase(`/topics/${t.id}/`),
 }));
+
+// 常用標籤（出現次數前 12）——build time 算好，palette 開起來就有
+const reports = await getPublishedReports();
+const tagCounts = new Map<string, number>();
+for (const r of reports) {
+  for (const t of r.data.tags ?? []) tagCounts.set(t, (tagCounts.get(t) ?? 0) + 1);
+}
+const topTags = sortTags(
+  [...tagCounts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 12)
+    .map(([t]) => t),
+);
+
+const S = {
+  zh: {
+    dialogLabel: "搜尋文章",
+    placeholder: "搜尋標題、標籤、內文……",
+    close: "關閉搜尋",
+    byTopic: "依主題瀏覽",
+    byTag: "常用標籤",
+    allTags: "全部標籤 →",
+    recent: "最近發表",
+    kSelect: "選擇",
+    kOpen: "開啟",
+    kClose: "關閉",
+    ftLoading: "全文索引載入中……",
+    ftReady: "已含全文",
+    ftFailed: "全文索引載入失敗，僅搜尋標題與標籤",
+    loadFailed: "搜尋索引載入失敗，請重新整理頁面。",
+    minutes: "分鐘",
+  },
+  en: {
+    dialogLabel: "Search essays",
+    placeholder: "Search titles, tags, full text…",
+    close: "Close search",
+    byTopic: "Browse by topic",
+    byTag: "Common tags",
+    allTags: "All tags →",
+    recent: "Recent",
+    kSelect: "select",
+    kOpen: "open",
+    kClose: "close",
+    ftLoading: "Loading full-text index…",
+    ftReady: "Full text included",
+    ftFailed: "Full-text index failed to load; searching titles and tags only",
+    loadFailed: "Search index failed to load. Please refresh the page.",
+    minutes: "min",
+  },
+}[locale];
+
+// script 端要用的 runtime 字串（不能吃 frontmatter 變數，走 data attribute）
+const runtimeStrings = {
+  locale,
+  ftLoading: S.ftLoading,
+  ftReady: S.ftReady,
+  ftFailed: S.ftFailed,
+  loadFailed: S.loadFailed,
+  minutes: S.minutes,
+};
 ---
 
-<div class="cmdk" data-state="closed" hidden>
+<div class="cmdk" data-state="closed" data-strings={JSON.stringify(runtimeStrings)} hidden>
   <div class="cmdk__scrim" data-cmdk-close></div>
   <div
     class="cmdk__panel"
     role="dialog"
     aria-modal="true"
-    aria-label="搜尋文章"
+    aria-label={S.dialogLabel}
   >
     <div class="cmdk__inputrow">
       <svg class="cmdk__icon" viewBox="0 0 20 20" aria-hidden="true">
@@ -28,7 +98,7 @@ const topics = TOPICS.map((t) => ({
       <input
         class="cmdk__input"
         type="search"
-        placeholder="搜尋標題、標籤、內文……"
+        placeholder={S.placeholder}
         autocomplete="off"
         autocorrect="off"
         spellcheck="false"
@@ -36,18 +106,25 @@ const topics = TOPICS.map((t) => ({
         aria-expanded="true"
         role="combobox"
       />
-      <button class="cmdk__esc" type="button" data-cmdk-close aria-label="關閉搜尋">esc</button>
+      <button class="cmdk__esc" type="button" data-cmdk-close aria-label={S.close}>esc</button>
     </div>
 
     <div class="cmdk__body">
       <div class="cmdk__empty" data-cmdk-empty>
-        <p class="cmdk__hint">依主題瀏覽</p>
+        <p class="cmdk__hint">{S.byTopic}</p>
         <div class="cmdk__topics">
           {topics.map((t) => (
             <a class="cmdk__topic" href={t.href}>{t.label}</a>
           ))}
         </div>
-        <p class="cmdk__hint">最近發表</p>
+        <p class="cmdk__hint">{S.byTag}</p>
+        <div class="cmdk__topics cmdk__tags">
+          {topTags.map((t) => (
+            <a class="cmdk__tag" href={withBase(`/tags/${encodeURIComponent(t)}/`)}>{t}<span>{tagCounts.get(t)}</span></a>
+          ))}
+          <a class="cmdk__tag cmdk__tag--all" href={withBase("/tags/")}>{S.allTags}</a>
+        </div>
+        <p class="cmdk__hint">{S.recent}</p>
         <ul class="cmdk__recent" data-cmdk-recent></ul>
       </div>
       <ul class="cmdk__results" id="cmdk-results" role="listbox" data-cmdk-results hidden></ul>
@@ -55,9 +132,9 @@ const topics = TOPICS.map((t) => ({
     </div>
 
     <div class="cmdk__footer">
-      <span><kbd>↑</kbd><kbd>↓</kbd> 選擇</span>
-      <span><kbd>↵</kbd> 開啟</span>
-      <span><kbd>esc</kbd> 關閉</span>
+      <span><kbd>↑</kbd><kbd>↓</kbd> {S.kSelect}</span>
+      <span><kbd>↵</kbd> {S.kOpen}</span>
+      <span><kbd>esc</kbd> {S.kClose}</span>
       <span class="cmdk__ft" data-cmdk-ftstate></span>
     </div>
   </div>
@@ -80,6 +157,16 @@ const topics = TOPICS.map((t) => ({
 
   const root = document.querySelector<HTMLElement>(".cmdk");
   if (root) {
+    // 介面語言（zh/en）與 runtime 字串由 frontmatter 經 data attribute 傳入
+    const RS = JSON.parse(root.dataset.strings ?? "{}") as {
+      locale?: string;
+      ftLoading?: string;
+      ftReady?: string;
+      ftFailed?: string;
+      loadFailed?: string;
+      minutes?: string;
+    };
+    const isEn = RS.locale === "en";
     const input = root.querySelector<HTMLInputElement>(".cmdk__input")!;
     const resultsEl = root.querySelector<HTMLUListElement>("[data-cmdk-results]")!;
     const emptyEl = root.querySelector<HTMLElement>("[data-cmdk-empty]")!;
@@ -114,16 +201,16 @@ const topics = TOPICS.map((t) => ({
     function loadBodies(): Promise<string[]> {
       if (bodies.length) return Promise.resolve(bodies);
       if (!bodiesPromise) {
-        ftStateEl.textContent = "全文索引載入中……";
+        ftStateEl.textContent = RS.ftLoading ?? "全文索引載入中……";
         bodiesPromise = fetch(url("search-fulltext.json"))
           .then((r) => r.json())
           .then((b: string[]) => {
             bodies = b;
-            ftStateEl.textContent = "已含全文";
+            ftStateEl.textContent = RS.ftReady ?? "已含全文";
             return b;
           })
           .catch(() => {
-            ftStateEl.textContent = "全文索引載入失敗，僅搜尋標題與標籤";
+            ftStateEl.textContent = RS.ftFailed ?? "全文索引載入失敗，僅搜尋標題與標籤";
             bodiesPromise = null;
             return [];
           });
@@ -184,7 +271,7 @@ const topics = TOPICS.map((t) => ({
 
         const meta = document.createElement("span");
         meta.className = "cmdk__resultmeta";
-        const bits = [hit.doc.dt, topicLabel(hit.doc.tp), `${hit.doc.m} 分鐘`];
+        const bits = [hit.doc.dt, topicLabel(hit.doc.tp), `${hit.doc.m} ${RS.minutes ?? "分鐘"}`];
         if (hit.doc.l === "en") bits.push("EN");
         meta.textContent = bits.join(" · ");
 
@@ -242,8 +329,12 @@ const topics = TOPICS.map((t) => ({
         resultsEl.hidden = true;
         noResultEl.hidden = false;
         noResultEl.textContent = bodies.length
-          ? `找不到「${q}」。試試更短的關鍵字，或用主題瀏覽。`
-          : `目前的標題與標籤裡找不到「${q}」，全文索引還在載入。`;
+          ? isEn
+            ? `Nothing found for “${q}”. Try a shorter keyword, or browse by topic.`
+            : `找不到「${q}」。試試更短的關鍵字，或用主題瀏覽。`
+          : isEn
+            ? `No title or tag matches “${q}” yet; the full-text index is still loading.`
+            : `目前的標題與標籤裡找不到「${q}」，全文索引還在載入。`;
         resultsEl.replaceChildren();
         return;
       }
@@ -277,7 +368,7 @@ const topics = TOPICS.map((t) => ({
         .then(() => run())
         .catch(() => {
           noResultEl.hidden = false;
-          noResultEl.textContent = "搜尋索引載入失敗，請重新整理頁面。";
+          noResultEl.textContent = RS.loadFailed ?? "搜尋索引載入失敗，請重新整理頁面。";
         });
     }
 

@@ -138,9 +138,14 @@ export function sortTags(tags: string[]): string[] {
 export const SERIES = {
   "civic-proof": {
     label: "公民證明 Civic Proof",
+    labelEn: "Civic Proof",
     blurb:
       "一套把「證明自己是公民」從國家發證翻轉成公民自證的長篇論證，" +
       "從概念區辨、法理支柱、工程比較一路走到規範下界與台灣案例。",
+    blurbEn:
+      "A long-form argument for flipping citizen verification from state-issued " +
+      "credentials to citizen-held proofs — from conceptual distinctions and legal " +
+      "pillars to engineering comparisons and Taiwan case studies.",
     /** 系列入口（第 0′ 版），列表固定排最前面。 */
     entry: "2026-05-17-civic-proof-foundations",
     /** 系列專站；有專站的系列在首頁只留一張卡片外連過去。 */
@@ -148,14 +153,56 @@ export const SERIES = {
   },
   演講講稿: {
     label: "演講講稿",
+    labelEn: "Talks",
     blurb: "現場講稿整理。",
+    blurbEn: "Edited talk transcripts.",
     entry: undefined as string | undefined,
   },
 } as const;
 
 export type SeriesId = keyof typeof SERIES;
 
-export function seriesMeta(id: string | undefined) {
+export interface SeriesMeta {
+  label: string;
+  labelEn?: string;
+  blurb: string;
+  blurbEn?: string;
+  entry?: string;
+  site?: string;
+}
+
+// ── 專題 ─────────────────────────────────────────────────────────
+// 長出自己網站（或自己入口）的研究線。nav 的「專題」導流到這裡。
+export interface Special {
+  id: string;
+  title: string;
+  titleEn: string;
+  blurb: string;
+  blurbEn: string;
+  /** 外部專站；沒有的話用 href 走站內。 */
+  url?: string;
+  href?: string;
+  /** 對應的 series id，用來算篇數。 */
+  series?: string;
+}
+
+export const SPECIALS: Special[] = [
+  {
+    id: "civic-proof",
+    title: "公民證明 Civic Proof",
+    titleEn: "Civic Proof",
+    blurb:
+      "把「證明自己是公民」從國家發證翻轉成公民自證。24 篇論證、" +
+      "論證地圖與台灣案例，整個專題已獨立成站。",
+    blurbEn:
+      "Flipping citizen verification from state-issued credentials to citizen-held proofs. " +
+      "24 essays, an argument map, and Taiwan case studies — now a standalone site.",
+    url: "https://civic-proof.mashbean.net",
+    series: "civic-proof",
+  },
+];
+
+export function seriesMeta(id: string | undefined): SeriesMeta | undefined {
   if (!id) return undefined;
-  return (SERIES as Record<string, { label: string; blurb: string; entry?: string; site?: string }>)[id];
+  return (SERIES as Record<string, SeriesMeta>)[id];
 }

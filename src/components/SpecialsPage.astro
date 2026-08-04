@@ -1,0 +1,150 @@
+---
+// 專題導流頁：長成獨立網站（或獨立入口）的研究線都掛在這裡。
+// nav 的「專題」指到這一頁；原本 nav 上的 MAP 併入公民證明專站。
+import { SPECIALS } from "../lib/taxonomy";
+import { getPublishedReports } from "../utils/reports";
+import type { Locale } from "../lib/i18n";
+
+interface Props {
+  locale?: Locale;
+}
+const { locale = "zh" } = Astro.props as Props;
+
+const reports = await getPublishedReports();
+const seriesCounts = new Map<string, number>();
+for (const r of reports) {
+  const s = r.data.series;
+  if (s) seriesCounts.set(s, (seriesCounts.get(s) ?? 0) + 1);
+}
+
+const S = {
+  zh: {
+    kicker: "Specials",
+    title: "專題",
+    sub: "有些問題問著問著就長成自己的網站。這裡是各研究專題的入口。",
+    visit: "前往專站 →",
+    open: "進入專題 →",
+    essays: (n: number) => `${n} 篇`,
+  },
+  en: {
+    kicker: "Specials",
+    title: "Specials",
+    sub: "Some questions grow into sites of their own. This is the doorway to each research special.",
+    visit: "Visit the site →",
+    open: "Open →",
+    essays: (n: number) => `${n} essays`,
+  },
+}[locale];
+---
+
+<section class="specialshero">
+  <p class="specialshero__kicker">{S.kicker}</p>
+  <h1 class="specialshero__title">{S.title}</h1>
+  <p class="specialshero__sub">{S.sub}</p>
+</section>
+
+<section class="specialslist">
+  {SPECIALS.map((sp) => {
+    const n = sp.series ? seriesCounts.get(sp.series) ?? 0 : 0;
+    const href = sp.url ?? sp.href ?? "#";
+    const external = !!sp.url;
+    return (
+      <a
+        class="specialcard"
+        href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener" : undefined}
+      >
+        <p class="specialcard__kicker">
+          {external ? new URL(sp.url!).hostname : ""}
+          {n > 0 && <span>{S.essays(n)}</span>}
+        </p>
+        <h2 class="specialcard__title">{locale === "en" ? sp.titleEn : sp.title}</h2>
+        <p class="specialcard__blurb">{locale === "en" ? sp.blurbEn : sp.blurb}</p>
+        <span class="specialcard__cta">{external ? S.visit : S.open}</span>
+      </a>
+    );
+  })}
+</section>
+
+<style>
+  .specialshero {
+    width: var(--browse-w);
+    margin: 0 auto var(--space-7);
+  }
+  .specialshero__kicker {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-ink-muted);
+    margin: 0 0 var(--space-3);
+  }
+  .specialshero__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-3xl);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    margin: 0;
+  }
+  .specialshero__sub {
+    margin: var(--space-3) 0 0;
+    max-width: 52ch;
+    color: var(--color-ink-muted);
+    line-height: var(--leading-relaxed);
+  }
+
+  .specialslist {
+    width: var(--browse-w);
+    margin: 0 auto var(--space-9);
+    display: grid;
+    gap: var(--space-5);
+  }
+  /* 與首頁系列卡同語言：粗頂線、透明底 */
+  .specialcard {
+    display: block;
+    border-top: 2px solid var(--color-ink);
+    padding: var(--space-4) 0 var(--space-5);
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+  .specialcard__kicker {
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-ink-muted);
+    display: flex;
+    gap: var(--space-3);
+  }
+  .specialcard__kicker span { color: var(--color-ink-subtle) }
+  .specialcard__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--text-xl);
+    letter-spacing: var(--tracking-tight);
+    margin: 0;
+  }
+  .specialcard__blurb {
+    margin: var(--space-2) 0 var(--space-4);
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-ink-muted);
+    max-width: 60ch;
+  }
+  .specialcard__cta {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-ink);
+    border-bottom: 1px solid var(--color-ink);
+    padding-bottom: 2px;
+  }
+  .specialcard:hover .specialcard__cta {
+    background: var(--color-ink);
+    color: var(--color-canvas);
+  }
+</style>

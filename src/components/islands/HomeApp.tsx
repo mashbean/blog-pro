@@ -9,8 +9,11 @@ import type { Post } from "../../lib/reports-to-posts";
 import { themeFor, themeForMono, hashSeed, mulberry } from "../../lib/theme-generator";
 import type { Theme } from "../../lib/theme-generator";
 import { irisNavigate, useIrisReset } from "../../lib/iris";
-import { TOPICS, topicLabel, sortTags, seriesMeta } from "../../lib/taxonomy";
+import { topicLabel, sortTags, seriesMeta } from "../../lib/taxonomy";
+import { UI, type Locale } from "../../lib/i18n";
 import PatternArt from "./PatternArt";
+
+type HomeUI = (typeof UI)["zh"]["home"];
 
 type View = "index" | "cards" | "scatter";
 type Sort = "new" | "old" | "long" | "short";
@@ -121,7 +124,7 @@ function sortPosts(posts: Post[], sort: Sort): Post[] {
 // ── 控制列 ───────────────────────────────────────────────────────
 
 function Controls({
-  filters, onFilters, view, onView, sort, onSort, shown, total, onShuffle,
+  filters, onFilters, view, onView, sort, onSort, shown, total, onShuffle, ui,
 }: {
   filters: Filters;
   onFilters: (f: Filters) => void;
@@ -132,6 +135,7 @@ function Controls({
   shown: number;
   total: number;
   onShuffle: () => void;
+  ui: HomeUI;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -147,14 +151,14 @@ function Controls({
             ref={inputRef}
             type="search"
             value={filters.q}
-            placeholder="篩選標題與標籤……"
-            aria-label="篩選文章"
+            placeholder={ui.searchPlaceholder}
+            aria-label={ui.searchAria}
             onChange={(e) => onFilters({ ...filters, q: e.target.value })}
           />
           {filters.q && (
             <button
               className="controls__clearq"
-              aria-label="清除篩選字串"
+              aria-label={ui.clearAria}
               onClick={() => {
                 onFilters({ ...filters, q: "" });
                 inputRef.current?.focus();
@@ -166,7 +170,7 @@ function Controls({
         </div>
 
         <button className="controls__full" data-search-open type="button">
-          全文搜尋 <kbd>⌘K</kbd>
+          {ui.fulltext} <kbd>⌘K</kbd>
         </button>
 
         <div className="controls__spacer" />
@@ -174,20 +178,20 @@ function Controls({
         <select
           className="controls__select"
           value={sort}
-          aria-label="排序方式"
+          aria-label={ui.sortAria}
           onChange={(e) => onSort(e.target.value as Sort)}
         >
-          <option value="new">新到舊</option>
-          <option value="old">舊到新</option>
-          <option value="long">最長篇</option>
-          <option value="short">最短篇</option>
+          <option value="new">{ui.sortNew}</option>
+          <option value="old">{ui.sortOld}</option>
+          <option value="long">{ui.sortLong}</option>
+          <option value="short">{ui.sortShort}</option>
         </select>
 
-        <div className="viewswitch" role="group" aria-label="檢視方式">
+        <div className="viewswitch" role="group" aria-label={ui.viewAria}>
           {([
-            ["index", "索引"],
-            ["cards", "卡片"],
-            ["scatter", "散落"],
+            ["index", ui.viewIndex],
+            ["cards", ui.viewCards],
+            ["scatter", ui.viewScatter],
           ] as [View, string][]).map(([v, label]) => (
             <button
               key={v}
@@ -203,12 +207,12 @@ function Controls({
 
       <div className="controls__count">
         {shown === total ? (
-          <>全部 <strong>{total}</strong> 篇</>
+          <>{ui.all(total)}</>
         ) : (
           <>
-            篩出 <strong>{shown}</strong> / {total} 篇
+            {ui.filtered(shown, total)}
             <button className="controls__reset" onClick={() => onFilters(EMPTY)}>
-              清除條件
+              {ui.clear}
             </button>
           </>
         )}
@@ -217,129 +221,23 @@ function Controls({
   );
 }
 
-function TopicChips({
-  posts, filters, onFilters,
-}: {
-  posts: Post[];
-  filters: Filters;
-  onFilters: (f: Filters) => void;
-}) {
-  // 計數要排除 topic 自己，否則選中之後其他主題全變 0，看不出還能跳去哪
-  const pool = applyFilters(posts, filters, "topic");
-  const counts = new Map<string, number>();
-  for (const p of pool) counts.set(p.topic, (counts.get(p.topic) ?? 0) + 1);
-
-  return (
-    <div className="facets">
-      <span className="facets__label">主題</span>
-      <div className="facets__chips">
-        {TOPICS.map((t) => {
-          const n = counts.get(t.id) ?? 0;
-          const on = filters.topic === t.id;
-          return (
-            <button
-              key={t.id}
-              type="button"
-              className="chip chip--topic"
-              data-topic={t.id}
-              aria-pressed={on}
-              disabled={n === 0 && !on}
-              title={t.blurb}
-              onClick={() => onFilters({ ...filters, topic: on ? null : t.id })}
-            >
-              {t.label}
-              <span className="chip__n">{n}</span>
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-function TagChips({
-  posts, filters, onFilters,
-}: {
-  posts: Post[];
-  filters: Filters;
-  onFilters: (f: Filters) => void;
-}) {
-  const [expanded, setExpanded] = useState(false);
-  const pool = applyFilters(posts, filters, "tags");
-
-  const counts = new Map<string, number>();
-  for (const p of pool) for (const t of p.tags) counts.set(t, (counts.get(t) ?? 0) + 1);
-  for (const t of filters.tags) if (!counts.has(t)) counts.set(t, 0);
-
-  const all = sortTags([...counts.keys()]);
-  const LIMIT = 14;
-  // 已選的一定要看得到，不能被收合藏起來
-  const visible = expanded
-    ? all
-    : all
-        .slice()
-        .sort((a, b) => (counts.get(b) ?? 0) - (counts.get(a) ?? 0))
-        .slice(0, LIMIT)
-        .concat(filters.tags.filter((t) => !all.slice(0, LIMIT).includes(t)));
-  const ordered = sortTags([...new Set(visible)]);
-
-  if (!all.length) return null;
-
-  return (
-    <div className="facets">
-      <span className="facets__label">標籤</span>
-      <div className="facets__chips">
-        {ordered.map((t) => {
-          const on = filters.tags.includes(t);
-          const n = counts.get(t) ?? 0;
-          return (
-            <button
-              key={t}
-              type="button"
-              className="chip"
-              aria-pressed={on}
-              disabled={n === 0 && !on}
-              onClick={() =>
-                onFilters({
-                  ...filters,
-                  tags: on ? filters.tags.filter((x) => x !== t) : [...filters.tags, t],
-                })
-              }
-            >
-              {t}
-              <span className="chip__n">{n}</span>
-            </button>
-          );
-        })}
-        {all.length > ordered.length && !expanded && (
-          <button className="chip chip--more" onClick={() => setExpanded(true)}>
-            還有 {all.length - ordered.length} 個 ↓
-          </button>
-        )}
-        {expanded && (
-          <button className="chip chip--more" onClick={() => setExpanded(false)}>
-            收合 ↑
-          </button>
-        )}
-      </div>
-    </div>
-  );
-}
-
 // ── 密集索引 ─────────────────────────────────────────────────────
+// （主題／標籤的常駐 chips 已退場：主題入口在「主題搜尋」頁與 ⌘K 面板，
+//   這裡只留列內標籤與網址參數兩條路徑進入篩選狀態。）
 
 function IndexView({
-  posts, filters, onFilters,
+  posts, filters, onFilters, ui,
 }: {
   posts: Post[];
   filters: Filters;
   onFilters: (f: Filters) => void;
+  ui: HomeUI;
 }) {
   if (!posts.length) {
     return (
       <div className="indexlist__empty">
-        <p>這組條件下沒有文章。</p>
-        <button className="pill" onClick={() => onFilters(EMPTY)}>清除所有條件</button>
+        <p>{ui.emptyMsg}</p>
+        <button className="pill" onClick={() => onFilters(EMPTY)}>{ui.emptyClear}</button>
       </div>
     );
   }
@@ -355,7 +253,7 @@ function IndexView({
               <span className="indexrow__topic" data-topic={post.topic}>
                 {topicLabel(post.topic)}
               </span>
-              <span className="indexrow__mins">{post.readMinutes} 分鐘</span>
+              <span className="indexrow__mins">{ui.minutes(post.readMinutes)}</span>
               {post.lang === "en" && <span className="indexrow__lang">EN</span>}
             </span>
           </a>
@@ -400,10 +298,12 @@ function IndexView({
 // ── 系列 ─────────────────────────────────────────────────────────
 
 function SeriesRail({
-  posts, onFilters,
+  posts, onFilters, ui, locale,
 }: {
   posts: Post[];
   onFilters: (f: Filters) => void;
+  ui: HomeUI;
+  locale: Locale;
 }) {
   const groups = new Map<string, Post[]>();
   for (const p of posts) {
@@ -420,15 +320,17 @@ function SeriesRail({
     <section className="serieszone">
       {big.map(([id, list]) => {
         const meta = seriesMeta(id);
+        const label = (locale === "en" ? meta?.labelEn : meta?.label) ?? meta?.label ?? id;
+        const blurb = (locale === "en" ? meta?.blurbEn : meta?.blurb) ?? meta?.blurb;
         return (
           <div key={id} className="seriesblock">
             <p className="seriesblock__kicker">
-              Series <span className="seriesblock__n">{list.length} 篇</span>
+              {ui.series} <span className="seriesblock__n">{ui.seriesCount(list.length)}</span>
             </p>
             <div className="seriesblock__body">
               <div>
-                <h2 className="seriesblock__title">{meta?.label ?? id}</h2>
-                {meta?.blurb && <p className="seriesblock__blurb">{meta.blurb}</p>}
+                <h2 className="seriesblock__title">{label}</h2>
+                {blurb && <p className="seriesblock__blurb">{blurb}</p>}
               </div>
               <div className="seriesblock__actions">
                 {meta?.site ? (
@@ -438,14 +340,14 @@ function SeriesRail({
                     target="_blank"
                     rel="noopener"
                   >
-                    前往系列專站 →
+                    {ui.goSite}
                   </a>
                 ) : (
                   <button
                     className="pill"
                     onClick={() => onFilters({ ...EMPTY, series: id })}
                   >
-                    只看這個系列
+                    {ui.onlySeries}
                   </button>
                 )}
               </div>
@@ -677,11 +579,14 @@ function GridView({
 export default function HomeApp({
   posts,
   palette = "rainbow",
+  locale = "zh",
 }: {
   posts: Post[];
   palette?: Palette;
+  locale?: Locale;
 }) {
   useIrisReset();
+  const ui = UI[locale].home;
 
   const themes = useMemo(() => {
     const map: Record<string, Theme> = {};
@@ -751,15 +656,14 @@ export default function HomeApp({
           shown={filtered.length}
           total={posts.length}
           onShuffle={() => { setFlippedId(null); setShuffleKey((k) => k + 1); }}
+          ui={ui}
         />
-        <TopicChips posts={posts} filters={filters} onFilters={setFilters} />
-        <TagChips posts={posts} filters={filters} onFilters={setFilters} />
       </div>
 
-      {showSeries && <SeriesRail posts={posts} onFilters={setFilters} />}
+      {showSeries && <SeriesRail posts={posts} onFilters={setFilters} ui={ui} locale={locale} />}
 
       {view === "index" ? (
-        <IndexView posts={sorted} filters={filters} onFilters={setFilters} />
+        <IndexView posts={sorted} filters={filters} onFilters={setFilters} ui={ui} />
       ) : view === "cards" ? (
         <GridView
           posts={sorted}

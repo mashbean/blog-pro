@@ -172,24 +172,8 @@
 .controls__reset:hover { color: var(--color-ink); border-color: var(--color-ink) }
 
 /* ============================================================
-   面向 chips
+   chips（主題搜尋頁、標籤頁、⌘K 面板共用；首頁常駐 chips 已退場）
    ============================================================ */
-
-.facets {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-3);
-  margin-top: var(--space-3);
-}
-.facets__label {
-  flex: none;
-  width: 2.5rem;
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-ink-subtle);
-  letter-spacing: var(--tracking-wide);
-}
-.facets__chips { display: flex; flex-wrap: wrap; gap: var(--space-2) }
 
 .chip {
   display: inline-flex;
@@ -423,8 +407,6 @@
 
 @media (max-width: 680px) {
   .browse { position: static; backdrop-filter: none }
-  .facets { flex-direction: column; align-items: stretch; gap: var(--space-2) }
-  .facets__label { width: auto }
   .indexrow__main { grid-template-columns: 1fr; gap: var(--space-1) }
   .indexrow__meta { gap: var(--space-2) }
   .indexrow__desc,

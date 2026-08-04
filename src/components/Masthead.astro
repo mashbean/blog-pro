@@ -1,47 +1,45 @@
 ---
 import { SITE_TITLE, MAIN_SITE_URL } from "../site.config";
+import { UI, type Locale } from "../lib/i18n";
 
 export interface Props {
   /** Override the brand line; defaults to SITE_TITLE. */
   brand?: string;
-  /** Provide navigation links. */
-  nav?: { href: string; label: string }[];
+  locale?: Locale;
+  /** 語言切換要落到對方語言的哪一頁；預設對方首頁。 */
+  altHref?: string;
 }
 
-const {
-  brand = SITE_TITLE,
-  nav = [
-    { href: "/", label: "Essays" },
-    { href: "/topics/", label: "Topics" },
-    { href: "/fiction/", label: "Fiction" },
-    { href: "/civic-proof-map/", label: "Map" },
-    { href: "/about/", label: "About" },
-    { href: "/design-system/", label: "DS" },
-  ],
-} = Astro.props as Props;
+const { brand: brandProp, locale = "zh", altHref } = Astro.props as Props;
+const ui = UI[locale];
+const brand = brandProp ?? (locale === "zh" ? SITE_TITLE : ui.brand);
+const switchHref = altHref ?? ui.langSwitch.href;
 ---
 
 <header class="masthead">
-  <a href="/" class="masthead__brand">{brand}<span>.</span></a>
+  <a href={locale === "en" ? "/en/" : "/"} class="masthead__brand">{brand}<span>.</span></a>
   <div class="masthead__right">
     <nav class="masthead__nav">
-      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      {ui.nav.map((item) => <a href={item.href}>{item.label}</a>)}
     </nav>
-    <button class="searchbtn" type="button" data-search-open aria-label="搜尋文章">
+    <button class="searchbtn" type="button" data-search-open aria-label={ui.search}>
       <svg viewBox="0 0 20 20" aria-hidden="true">
         <circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
         <path d="M13.5 13.5 L17.5 17.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
       </svg>
-      <span class="searchbtn__label">搜尋</span>
+      <span class="searchbtn__label">{ui.search}</span>
       <kbd>⌘K</kbd>
     </button>
+    <a class="masthead__lang" href={switchHref} title={ui.langSwitch.title}>
+      {ui.langSwitch.label}
+    </a>
     <a
       class="masthead__cta"
       href={MAIN_SITE_URL}
       target="_blank"
       rel="noopener"
     >
-      ← 回到豆泥部落格
+      {ui.backToMain}
     </a>
   </div>
 </header>
@@ -53,6 +51,20 @@ const {
     align-items: baseline;
     gap: var(--space-5);
     flex-wrap: wrap;
+  }
+  .masthead__lang {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-rule-strong);
+    padding-bottom: 1px;
+  }
+  .masthead__lang:hover {
+    color: var(--color-ink);
+    border-color: var(--color-ink);
   }
   .masthead__cta {
     font-family: var(--font-mono);
