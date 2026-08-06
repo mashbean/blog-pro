@@ -54,3 +54,8 @@ jobs:
       - id: deployment
         name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
+        # 站台長到 36MB / 159 頁之後，Pages 端的 deployment_in_progress
+        # 會超過 action 預設的 10 分鐘上限（2026-08-06 連三次逾時，
+        # build 每次都 success，卡的都是部署階段）。放寬到 30 分鐘。
+        with:
+          timeout: 1800000
