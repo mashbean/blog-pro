@@ -53,9 +53,11 @@ jobs:
     steps:
       - id: deployment
         name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
         # 站台長到 36MB / 159 頁之後，Pages 端的 deployment_in_progress
-        # 會超過 action 預設的 10 分鐘上限（2026-08-06 連三次逾時，
-        # build 每次都 success，卡的都是部署階段）。放寬到 30 分鐘。
-        with:
-          timeout: 1800000
+        # 常常超過這個 action 的 10 分鐘等待上限，於是 deploy job 標紅、
+        # 但部署其實在它放棄之後才完成（2026-08-06 連四次如此，build
+        # 全部 success，live URL 最後也都正常）。
+        # timeout 這個 input 調不動——傳超過 600000 會被 action 夾回
+        # 600000 並印 warning，所以先不要再試著加大它。
+        # deploy 標紅時的正確處置是直接驗 live URL，不要盲目重跑。
+        uses: actions/deploy-pages@v4
