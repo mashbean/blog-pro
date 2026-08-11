@@ -158,6 +158,19 @@ export const SERIES = {
     blurbEn: "Edited talk transcripts.",
     entry: undefined as string | undefined,
   },
+  "dns-rpz": {
+    label: "DNS RPZ",
+    labelEn: "DNS RPZ",
+    blurb:
+      "台灣每半年有三萬八千餘個網域被停止解析，其中 99.95% 出自行政處分。" +
+      "從制度盤點走到用機關自己公開的資料做實證檢查。",
+    blurbEn:
+      "Taiwan suspends DNS resolution for over 38,000 domains every six months, " +
+      "99.95% of them by administrative disposition rather than court order. " +
+      "From institutional mapping to empirical audit using the agencies' own open data.",
+    /** 系列入口（第 1 篇，制度全貌）。 */
+    entry: "2026-08-06-taiwan-dns-rpz-governance",
+  },
 } as const;
 
 export type SeriesId = keyof typeof SERIES;
@@ -199,6 +212,23 @@ export const SPECIALS: Special[] = [
       "24 essays, an argument map, and Taiwan case studies — now a standalone site.",
     url: "https://civic-proof.mashbean.net",
     series: "civic-proof",
+  },
+  {
+    id: "dns-rpz",
+    title: "DNS RPZ：台灣的網域停止解析機制",
+    titleEn: "DNS RPZ: Taiwan's Domain Blocking Regime",
+    blurb:
+      "台灣每半年有三萬八千餘個網域被停止解析，處分相對人是電信業者，" +
+      "而真正被封的網域持有人不在任何一段程序裡。這條研究線從制度盤點" +
+      "走到用機關自己公開的資料做實證檢查，資料集與分析腳本全部公開。",
+    blurbEn:
+      "Taiwan suspends DNS resolution for over 38,000 domains every six months. " +
+      "The disposition names the ISP as its addressee, while the domain holder who " +
+      "bears the cost is party to no part of the procedure. This line of work runs from " +
+      "institutional mapping to an empirical audit built entirely on the agencies' own " +
+      "open data, with datasets and analysis scripts published.",
+    href: "/?series=dns-rpz",
+    series: "dns-rpz",
   },
 ];
 

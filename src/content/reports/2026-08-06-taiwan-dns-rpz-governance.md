@@ -6,6 +6,8 @@ tags: ["網路治理", "平台治理", "內容審核與安全", "法律與救濟
 keywords: ["DNS RPZ", "網域封鎖", "TWNIC", "詐欺犯罪危害防制條例", "行政執行法", "網路治理", "言論自由", "透明度報告", "打詐"]
 pubDate: 2026-08-06
 category: "數位治理"
+series: "dns-rpz"
+seriesOrder: 1
 aiModel: "Claude Opus 5"
 aiPrompt: "以 rpz.twnic.tw 治理頁與透明度報告為起點，做一份台灣 DNS RPZ 的詳盡政策研究：法源、爭議、治理演進史、現行 SOP、利害關係人狀態、國際同類機制比較，以及可做的資料分析與由此推導的政策建議。論述明確、介紹性明確，不要太多辯證。"
 aiPipelineStage: "final"

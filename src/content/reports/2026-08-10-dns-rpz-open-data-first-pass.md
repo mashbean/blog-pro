@@ -6,6 +6,8 @@ tags: ["網路治理", "平台治理", "內容審核與安全", "法律與救濟
 keywords: ["DNS RPZ", "網域封鎖", "TWNIC", "警政署", "開放資料", "過度封鎖", "漏斗圖", "Public Suffix List", "Tranco", "Wayback Machine", "詐欺犯罪危害防制條例"]
 pubDate: 2026-08-10
 category: "數位治理"
+series: "dns-rpz"
+seriesOrder: 2
 aiModel: "Claude Opus 5"
 aiPrompt: "對警政署公開的 69,370 筆停止解析網域清單做第一輪實證分析：計數單位對帳、子網域展開、以 Public Suffix List 與 Tranco 建立不依賴申訴的過度封鎖指標、以 Wayback 存檔複核、以漏斗圖檢定恢復率欄位的監測力。"
 aiPipelineStage: "final"
