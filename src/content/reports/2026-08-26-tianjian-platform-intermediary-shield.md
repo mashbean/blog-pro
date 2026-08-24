@@ -3,7 +3,7 @@ title: "平台中介者如何成為保護獨立記者的屏障——在田間學
 description: "2026 年 8 月 26 日「在田間學」線上活動講稿書面版。從平台服務業者的視角，看發表者從查資料到收款會留下哪些數位足跡、可連結性為何比單一紀錄更接近實際風險，以及隱私金流三代演化如何把問題從技術轉為治理。"
 topic: platform-media
 tags: ["隱私", "平台治理", "內容審核與安全", "媒體與新聞"]
-keywords: ["privacy", "digital-safety", "journalism", "platform-governance", "privacy-money", "matters"]
+keywords: ["privacy", "digital-safety", "journalism", "platform-governance", "privacy-money", "osint", "proportionate-security", "matters"]
 pubDate: 2026-08-26
 category: "數位治理"
 series: "演講講稿"
@@ -16,7 +16,13 @@ humanReviewed: true
 
 > 這份講稿書面版由 AI 協作完成研究整理與初稿，我提供演講架構、論證方向、風格要求與最後校對，文中較高風險的引用與推論經過額外查核。
 
-這篇是 2026 年 8 月 26 日「在田間學」線上活動的講稿書面版。田間專門報導全球華文媒體議題，螢幕另一端坐的多是獨立記者與自媒體經營者，所以我決定講一個平常很少有機會講的視角。市面上的數位安全指南，幾乎都站在使用者那一側，教你裝這個、開那個。但系統實際記錄了什麼，最清楚的莫過於平台自己。我在 Matters 做平台治理，每天面對的就是這些紀錄，於是這場演講從一個告解式的問題開始——我，看得到你的什麼？
+這篇是 2026 年 8 月 26 日「在田間學」線上活動的講稿書面版。田間專門報導全球華文媒體議題，螢幕另一端坐的多是獨立記者與自媒體經營者，所以我決定講一個平常很少有機會講的視角。市面上的數位安全指南，幾乎都站在使用者那一側，教你裝這個、開那個。但系統實際記錄了什麼，最清楚的莫過於平台自己。我曾在 Matters 負責平台治理，每天面對的就是這些紀錄，於是這場演講從一個告解式的問題開始——我，看得到你的什麼？
+
+## 做一名灰人
+
+在進入旅程地圖之前，我想先說明這場演講採用的安全姿態。我把它叫作「做一名灰人」（Grey Man）。戰士不需要全副武裝。安全措施要和風險相稱，做得到、維持得久，也不讓焦慮吃掉工作與生活。這就是比例原則的安全（proportionate security）。
+
+穿上一襲灰衣，擁抱灰衣龐克精神。不出眾，姿態仍然昂揚。這場演講不追求裝滿工具箱。我們只處理最容易把身分接回去，而且現在還來得及處理的線索。
 
 ## 一張旅程地圖，三種角色
 
@@ -68,6 +74,16 @@ Matters 目前的做法，包括把文章送進 IPFS 分散保存、提供洋蔥
 
 許多人一想到資安就從挑工具開始，我會建議把順序倒過來，先想清楚對手是誰。EFF 的「Your Security Plan」把這件事整理成五個問題。我要保護什麼？要防範誰？被拿到的後果多嚴重？發生的可能性多高？我願意付出多少代價來防<sup>8</sup>？五問的重點在第二問。同網路的人、雇主、平台、國家級對手，看得到的東西完全不同，VPN、Tor、HTTPS 也各自只保護一段。工具名稱不等於保護範圍。
 
+### 把 OSINT 反過來用
+
+回答完五問，可以借用公開來源調查（OSINT）的做法，從手上已有的線索開始查。OSINT 平常拿公開資料追蹤人物與事件。我們把同一套流程對準自己，先看陌生人拼得出什麼，再處理後果最嚴重的連結。Bellingcat 的工具箱也是按地圖、影像、社群與封存等任務分類，工具會改版、收費與失效，流程比工具名稱更值得記住<sup>24</sup>。
+
+第一個情境是一張窗邊工作照。照片沒有門牌，原始檔仍可能帶著座標、時間與機型。ExifTool 可以讀出這些欄位<sup>25</sup>。Google Lens 會找相似圖片、招牌與畫面中的物件<sup>26</sup>，再把道路形狀、店家和建築配置放進地圖或 OpenStreetMap 核對。陰影也可能協助縮小方向與時段。發布前另存一份公開副本，清除中繼資料，裁掉窗景與反光，再把完成的副本拿去反搜。證據原檔另外加密保存，不動它。
+
+第二個情境是一個化名帳號。假設它沿用了日常使用的 username。WhatsMyName 會檢查同一名稱是否出現在數百個公開個人頁<sup>27</sup>，Wayback Machine 可能補回刪掉的自介與舊信箱，Lens 可能找到沿用的頭像。PimEyes 這類臉部搜尋工具侵入性很高，本場只建議搜尋自己的臉，或搜尋已明確同意的當事人<sup>28</sup>。查完之後，換掉重複的名稱、頭像與聯絡方式，並檢查封存頁面還留著什麼。
+
+AI 可以幫忙擾動句長、慣用字與段落節奏，也可以生成不含本人與真實地點的抽象頭像或背景。先拿掉只有少數人知道的事件細節，再處理表層風格。敏感原稿優先交給本機工具，公開前逐句核對事實。作者混淆研究顯示，這些方法能降低部分文體訊號，也會留下可偵測的痕跡，無法當作匿名保證<sup>29</sup>。藏樹於林的前提，是先看見哪一棵樹最顯眼。
+
 具體的行動，撿重點講。
 
 今天就處理的。替平台帳號設專用密碼，交給密碼管理器；註冊信箱要特別顧好，多因素驗證開起來，因為帳號一出事，復原流程全部回到信箱；化名的名稱、頭像、自介與公開錢包，全部另備一套<sup>9</sup>。
@@ -114,7 +130,7 @@ Matters 目前的做法，包括把文章送進 IPFS 分散保存、提供洋蔥
 
 回到獨立記者的處境，我的建議收斂成四條。第一，先盤點再收款。整段付款流程會經過哪些服務商，平台、支付業者、銀行、公開鏈各看得到什麼，寫下來再決定能不能接受。第二，錢包分離。敏感工作別沿用日常公開錢包，地址重用是幣流分析最愛的線索。第三，記住分散跟匿名是兩回事。第四，高風險收款先找人談。隱私金流工具在各地的法律風險落差極大，同一個協定，在 A 國是合規工具、在 B 國可能構成刑事風險，Tornado Cash 開發者的遭遇就是活生生的例子。收款之前，找懂在地法律與安全的人一起判斷，別自己硬撐。
 
-還得補一句醜話。我做平台治理，我學的是技術與制度，這一段講的是技術現況與治理爭議，它是理解問題的地圖，算不上法律建議。涉及具體司法管轄區的合規判斷，請務必諮詢執業律師。
+還得補一句醜話。我做過平台治理，我學的是技術與制度，這一段講的是技術現況與治理爭議，它是理解問題的地圖，算不上法律建議。涉及具體司法管轄區的合規判斷，請務必諮詢執業律師。
 
 ## 回過頭來看
 
@@ -149,3 +165,9 @@ Matters 目前的做法，包括把文章送進 IPFS 分散保存、提供洋蔥
 21. DL News (2025-02-14). *Crypto privacy software refuses money stolen in $9.5m hack*. https://www.dlnews.com/articles/defi/crypto-privacy-software-refuses-money-stolen-in-95m-hack/
 22. CCN (2025-04). *zkLend Hacker Falls Prey to Phishing Scam, Loses Stolen ETH*. https://www.ccn.com/news/crypto/zklend-hacker-prey-phishing-scam-lose-stolen-eth/
 23. DL News (2025-06). *DeFi protocol zkLend shuts down four months after $9m hack*. https://www.dlnews.com/articles/defi/defi-protocol-zklend-shuts-down-four-months-after-9m-hack/
+24. Bellingcat (2024-09-24). *Find the Right Open Source Research Tools With Bellingcat's New Online Investigations Toolkit*. https://www.bellingcat.com/resources/2024/09/24/bellingcat-online-investigations-toolkit/
+25. ExifTool. *GPS Tags*. https://exiftool.org/TagNames/GPS.html
+26. Google Search Help. *Search with an image on Google*. https://support.google.com/websearch/answer/1325808
+27. WebBreacher. *WhatsMyName*. https://github.com/WebBreacher/WhatsMyName
+28. PimEyes. *About Us*（本場僅建議搜尋自己或取得同意的當事人）. https://pimeyes.com/en/about-us
+29. Fisher, J. et al. (2024). *StyleRemix: Interpretable Authorship Obfuscation via Distillation and Perturbation of Style Elements*. EMNLP 2024. https://aclanthology.org/2024.emnlp-main.241/；限制另見 Mahmood, A. et al. (2020). *A Girl Has A Name: Detecting Authorship Obfuscation*. ACL 2020. https://aclanthology.org/2020.acl-main.203/
