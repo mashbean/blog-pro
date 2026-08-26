@@ -57,6 +57,6 @@ Parti 那份功能清單的最後一章寫到 **Facing the Ocean（FTO）**—�
 
 權五鉉他們把十年做過的東西整理成一份文件，《Digital Democracy 100 — 數位民主的 100 個功能》，韓英雙語、CC BY 4.0 授權。原本想記 100 個，整理完發現做出來的比 100 個還多，最後是 **155 項**，分 11 個領域，標好哪些已實作、哪些在做、哪些是未來方向。
 
-我把它翻成了台灣正體中文，專有名詞對照韓文原版。全文放在這篇：[Parti 數位民主的 100 個功能（正體中文全文）](/reports/2026-08-26-parti-digital-democracy-100-zh/)。如果想用清單的方式瀏覽——有側欄、有狀態標籤、可以一項一項跳——我另外做了一個[互動版本](https://claude.ai/code/artifact/e89b0bf3-f2e4-4a35-a04e-52848dc5c6b6)。
+我把它翻成了台灣正體中文，專有名詞對照韓文原版，做成一個可以一項一項瀏覽的[互動全文頁](/parti-digital-democracy-100/)——章節可收合、每項標好實作狀態、頂部有領域導覽。
 
 原文與原始碼在 Parti 的 [GitHub 專案](https://github.com/parti-coop/digital-democracy-100)與線上版 [100-democracy.parti.coop](https://100-democracy.parti.coop)。本文裡的組織近況數字（26 名全職、18 萬月訪、500 個組織用 Mixon 等），來自權五鉉提供的資料，部分為約值。

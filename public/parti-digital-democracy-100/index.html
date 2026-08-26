@@ -1,0 +1,2185 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="韓國社會合作社 Parti（빠띠）十年做過的 155 項數位民主功能與計畫，台灣正體中文互動全文譯本，CC BY 4.0。">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://pro.mashbean.net/parti-digital-democracy-100/">
+<title>Parti 數位民主的 100 個功能（正體中文互動版）</title>
+<style>:root{color-scheme:light dark}html,body{margin:0}</style>
+</head>
+<body>
+<style>
+  :root {
+    color-scheme: light dark;
+
+    --ground: #E7EAF0;
+    --panel: #F3F5F8;
+    --panel-2: #EAEDF3;
+    --edge: #C9D0DC;
+    --edge-soft: #DBE0E9;
+    --text: #17202F;
+    --text-dim: #4E5A6E;
+    --text-faint: #7A8698;
+    --teal: #1F6F6C;
+    --teal-soft: rgba(31, 111, 108, 0.10);
+    --sand: #8A6410;
+    --sand-soft: rgba(160, 122, 32, 0.12);
+    --slate: #5F6C82;
+    --slate-soft: rgba(95, 108, 130, 0.10);
+    --star: #1F3050;
+    --rule: rgba(23, 32, 47, 0.10);
+
+    --serif: "Songti TC", "Noto Serif TC", "Source Han Serif TC", "PMingLiU", Georgia, serif;
+    --sans: "PingFang TC", "Noto Sans TC", "Source Han Sans TC", "Microsoft JhengHei", -apple-system, system-ui, sans-serif;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0B1220;
+      --panel: #121B2C;
+      --panel-2: #0F1727;
+      --edge: #24314A;
+      --edge-soft: #1B2537;
+      --text: #E4E9F2;
+      --text-dim: #A6B2C6;
+      --text-faint: #74829A;
+      --teal: #63C7BF;
+      --teal-soft: rgba(99, 199, 191, 0.12);
+      --sand: #D9AE55;
+      --sand-soft: rgba(217, 174, 85, 0.12);
+      --slate: #8E9CB4;
+      --slate-soft: rgba(142, 156, 180, 0.12);
+      --star: #C7D6F0;
+      --rule: rgba(228, 233, 242, 0.12);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #0B1220;
+    --panel: #121B2C;
+    --panel-2: #0F1727;
+    --edge: #24314A;
+    --edge-soft: #1B2537;
+    --text: #E4E9F2;
+    --text-dim: #A6B2C6;
+    --text-faint: #74829A;
+    --teal: #63C7BF;
+    --teal-soft: rgba(99, 199, 191, 0.12);
+    --sand: #D9AE55;
+    --sand-soft: rgba(217, 174, 85, 0.12);
+    --slate: #8E9CB4;
+    --slate-soft: rgba(142, 156, 180, 0.12);
+    --star: #C7D6F0;
+    --rule: rgba(228, 233, 242, 0.12);
+  }
+
+  :root[data-theme="light"] {
+    --ground: #E7EAF0;
+    --panel: #F3F5F8;
+    --panel-2: #EAEDF3;
+    --edge: #C9D0DC;
+    --edge-soft: #DBE0E9;
+    --text: #17202F;
+    --text-dim: #4E5A6E;
+    --text-faint: #7A8698;
+    --teal: #1F6F6C;
+    --teal-soft: rgba(31, 111, 108, 0.10);
+    --sand: #8A6410;
+    --sand-soft: rgba(160, 122, 32, 0.12);
+    --slate: #5F6C82;
+    --slate-soft: rgba(95, 108, 130, 0.10);
+    --star: #1F3050;
+    --rule: rgba(23, 32, 47, 0.10);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+  a:focus-visible, .rail a:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ── 刊頭 ───────────────────────────────── */
+  .masthead {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--edge);
+    background: var(--panel);
+  }
+  #sky {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .masthead__inner {
+    position: relative;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 4vw, 3rem) clamp(2.5rem, 5vw, 4rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .masthead h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(2.2rem, 6vw, 3.9rem);
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .masthead h1 em {
+    font-style: normal;
+    color: var(--teal);
+  }
+  .lede {
+    max-width: 42em;
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 1.02rem;
+  }
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 2.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--rule);
+  }
+  .stat { display: flex; flex-direction: column; gap: 0.1rem; padding-top: 0.9rem; }
+  .stat b {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .stat span {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: var(--text-faint);
+  }
+  .stat--done b { color: var(--teal); }
+  .stat--wip b { color: var(--sand); }
+  .stat--future b { color: var(--slate); }
+
+  /* ── 組織脈絡 ───────────────────────────── */
+  .context {
+    border-bottom: 1px solid var(--edge);
+    background: var(--panel-2);
+  }
+  .context__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 5vw, 3.5rem) clamp(1.25rem, 4vw, 3rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: clamp(1.75rem, 4vw, 3.5rem);
+    align-items: start;
+  }
+  @media (max-width: 780px) {
+    .context__inner { grid-template-columns: minmax(0, 1fr); }
+  }
+  .context__label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin: 0 0 0.9rem;
+  }
+  .context h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 3vw, 1.7rem);
+    font-weight: 600;
+    margin: 0 0 1rem;
+    line-height: 1.4;
+    text-wrap: balance;
+  }
+  .context p { margin: 0.8rem 0; color: var(--text-dim); font-size: 0.96rem; }
+  .context p a { color: var(--teal); text-decoration: none; border-bottom: 1px solid transparent; }
+  .context p a:hover { border-bottom-color: currentColor; }
+  .lineage {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 0.55rem;
+    margin: 1.2rem 0 0;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.82rem;
+  }
+  .lineage__node {
+    font-family: var(--mono);
+    color: var(--text-dim);
+    background: var(--teal-soft);
+    border: 1px solid var(--edge-soft);
+    border-radius: 2px;
+    padding: 0.2rem 0.55rem;
+    line-height: 1.5;
+  }
+  .lineage__node b { color: var(--teal); font-weight: 600; }
+  .lineage__arrow { color: var(--text-faint); font-family: var(--mono); }
+
+  .figures { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--edge-soft); border: 1px solid var(--edge-soft); border-radius: 3px; overflow: hidden; }
+  .figure { background: var(--panel); padding: 1rem 1.1rem; display: flex; flex-direction: column; gap: 0.15rem; }
+  .figure b {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--teal);
+  }
+  .figure b small { font-size: 0.9rem; color: var(--text-dim); font-weight: 500; }
+  .figure span { font-size: 0.78rem; color: var(--text-faint); line-height: 1.5; }
+  .figure em { font-style: normal; display: block; font-size: 0.72rem; color: var(--text-faint); opacity: 0.85; margin-top: 0.15rem; }
+
+  /* ── 版面 ───────────────────────────────── */
+  /* 單欄版面（不用 sticky 側欄、不用兩欄 grid）——宿主 iframe 對 sticky/多欄的重繪
+     不穩，會把側欄疊到內文上。改成單欄＋頂部章節導覽，最穩。 */
+  .shell {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 3rem) 5rem;
+    display: block;
+  }
+  .rail { padding-top: 2.5rem; }
+  .rail h2 {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin: 0 0 0.75rem;
+    font-weight: 500;
+  }
+  .rail ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .rail a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    padding: 0.32rem 0.7rem;
+    text-decoration: none;
+    border: 1px solid var(--edge-soft);
+    border-radius: 3px;
+    background: var(--panel);
+    line-height: 1.5;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .rail a:hover { border-color: var(--teal); }
+  .rail a:hover .rail__t { color: var(--teal); }
+  .rail__no {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .rail__t { font-size: 0.9rem; color: var(--text-dim); transition: color 0.15s ease; }
+  .rail__c {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+    padding-left: 0.15rem;
+  }
+
+  /* ── 章 ─────────────────────────────────── */
+  .doc { min-width: 0; padding-top: 2.75rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .chapter { scroll-margin-top: 1rem; display: block; border-bottom: 1px solid var(--edge-soft); }
+  .chapter[open] { padding-bottom: 2.5rem; }
+  summary.chapter__head {
+    display: grid;
+    grid-template-columns: 3.5rem minmax(0, 1fr) 1.5rem;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem 0 1.1rem;
+    border-bottom: 2px solid var(--text);
+    cursor: pointer;
+    list-style: none;
+  }
+  summary.chapter__head::-webkit-details-marker { display: none; }
+  summary.chapter__head:hover .chapter__title { color: var(--teal); }
+  summary.chapter__head:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 2px; }
+  .chapter__heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.35rem 0.9rem; min-width: 0; }
+  .chapter__idx {
+    font-family: var(--mono);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--teal);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.3;
+  }
+  .chapter__title {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 3.2vw, 1.9rem);
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.3;
+    text-wrap: balance;
+    transition: color 0.15s ease;
+  }
+  .chapter__emoji { font-size: 0.8em; opacity: 0.75; }
+  .chapter__count {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+  .chapter__chev {
+    font-size: 1.1rem;
+    color: var(--text-faint);
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+  .chapter[open] .chapter__chev { transform: rotate(180deg); }
+  .chapter__body { display: flex; flex-direction: column; gap: 1.75rem; padding-top: 1.75rem; }
+  .chapter__intro { margin: 0; color: var(--text-dim); max-width: 62ch; }
+  @media (prefers-reduced-motion: reduce) { .chapter__chev { transition: none; } }
+
+  .group { margin-top: 1rem; max-width: 66ch; }
+  .group__title {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--text-faint);
+    margin: 0 0 0.4rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--edge-soft);
+  }
+  .group p { margin: 0.65rem 0; color: var(--text-dim); font-size: 0.95rem; }
+  .group ul { margin: 0.5rem 0; padding-left: 1.1rem; color: var(--text-dim); font-size: 0.95rem; }
+  .group li { margin: 0.3rem 0; }
+
+  /* ── 項目 ───────────────────────────────── */
+  .item {
+    display: grid;
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-top: 0.35rem;
+  }
+  .item__no {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.42rem;
+    text-align: right;
+    padding-right: 0.35rem;
+  }
+  .item__body { min-width: 0; max-width: 62ch; }
+  .item h3 {
+    font-family: var(--sans);
+    font-size: 1.06rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.55;
+    text-wrap: balance;
+  }
+  .item p { margin: 0.45rem 0 0; color: var(--text-dim); }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.45rem; }
+  .chip {
+    font-family: var(--mono);
+    font-size: 0.69rem;
+    letter-spacing: 0.06em;
+    padding: 0.12rem 0.5rem;
+    border-radius: 2px;
+    border: 1px solid currentColor;
+    line-height: 1.6;
+  }
+  .chip--done { color: var(--teal); background: var(--teal-soft); }
+  .chip--wip { color: var(--sand); background: var(--sand-soft); }
+  .chip--future { color: var(--slate); background: var(--slate-soft); border-style: dashed; }
+  .chip--orig { color: var(--sand); background: transparent; border-style: none; padding-left: 0; }
+  .chip--orig::before { content: "★ "; }
+  .srcs { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; margin-top: 0.5rem; }
+  .src {
+    font-size: 0.8rem;
+    color: var(--teal);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .src:hover { border-bottom-color: currentColor; }
+
+  /* ── 頁尾 ───────────────────────────────── */
+  .colophon {
+    border-top: 1px solid var(--edge);
+    background: var(--panel);
+  }
+  .colophon__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 2.5rem clamp(1.25rem, 4vw, 3rem) 3.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    color: var(--text-dim);
+    font-size: 0.88rem;
+  }
+  .colophon a { color: var(--teal); text-decoration: none; border-bottom: 1px solid transparent; }
+  .colophon a:hover { border-bottom-color: currentColor; }
+  .colophon strong { color: var(--text); font-weight: 600; }
+</style>
+
+<header class="masthead">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="masthead__inner">
+    <p class="eyebrow">사회적협동조합 빠띠 · Parti Cooperative</p>
+    <h1>數位民主的<em>一百個</em>功能</h1>
+    <p class="lede">
+      韓國社會合作社 Parti（빠띠）十年來做出來的公民廣場清單——投票、公共論壇、倡議、事實查核、
+      治理、公民科技，到 AI 時代的難題。原本想記 100 個，整理完發現做出來的比 100 個還多。
+      本頁為台灣正體中文譯本，譯自官方英文版，專有名詞對照韓文原版。
+    </p>
+    <div class="stats">
+      <div class="stat"><b>155</b><span>項功能與計畫</span></div>
+      <div class="stat"><b>11</b><span>個領域</span></div>
+      <div class="stat stat--done"><b>124</b><span>已實作</span></div>
+      <div class="stat stat--wip"><b>3</b><span>進行中</span></div>
+      <div class="stat stat--future"><b>28</b><span>未來方向</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="context">
+  <div class="context__inner">
+    <div>
+      <p class="context__label">Parti 是誰</p>
+      <h2>從一個百萬人的討論廣場，到一間養得起民主運動者的合作社</h2>
+      <p>Parti 理事長權五鉉，早年做的是 <strong>Daum 아고라（Agora）</strong>——日活破百萬的線上討論平台，韓國 2000 年代網路公共討論的中心。把那樣的廣場重新蓋回來，是他至今最大的願望。</p>
+      <p>如今 Parti 是一間<strong>民主運動者的社會合作社</strong>，約 26 名全職夥伴，同時經營數位平台、公民倡議、公民對話、事實查核與公民科技。平台每月約 18 萬人造訪，由韓國各地公民團體與議題社群實際使用。銀河投票（Galaxy Voting）是他們自研的功能，大規模審議與一對一對話都靠它。</p>
+      <p>政府開始回頭找他們設計並營運自己的參與平台，於是有了 <a href="https://demosx.org" target="_blank" rel="noopener">DemosX</a>——2017 年首爾市政府合作（權五鉉主導規劃）長出來、再開源釋出，如今中央與地方政府都在用。但開源帶來搭便車問題，小團體又缺技術能力導入；他們因此轉做 SaaS，演化成 <a href="https://mixon.io" target="_blank" rel="noopener">Parti Mixon</a>，提供組織數位轉型所需的一切，約 500 個組織在用。</p>
+      <div class="lineage" aria-label="組織演化">
+        <span class="lineage__node">Daum Agora<br><b>百萬／日</b></span>
+        <span class="lineage__arrow">→</span>
+        <span class="lineage__node">Parti 合作社<br><b>26 全職</b></span>
+        <span class="lineage__arrow">→</span>
+        <span class="lineage__node">DemosX 開源<br><b>2017–</b></span>
+        <span class="lineage__arrow">→</span>
+        <span class="lineage__node">Mixon SaaS<br><b>500 組織</b></span>
+      </div>
+    </div>
+    <div>
+      <p class="context__label">幾個數字</p>
+      <div class="figures">
+        <div class="figure"><b>~18<small> 萬</small></b><span>平台每月造訪</span></div>
+        <div class="figure"><b>26</b><span>全職夥伴</span></div>
+        <div class="figure"><b>1,133</b><span>定期支持社員<em>Partizen．共同持有者</em></span></div>
+        <div class="figure"><b>~500</b><span>組織使用 Mixon</span></div>
+        <div class="figure"><b>200<small>+</small></b><span>場公共論壇營運經驗</span></div>
+        <div class="figure"><b>1,500<small>+</small></b><span>協作過的夥伴組織</span></div>
+      </div>
+      <p style="font-size:0.8rem; color:var(--text-faint); margin-top:0.9rem;">數字來源：權五鉉提供的組織近況，以及本清單第 5、7、8、10 章。造訪數與 Mixon 組織數為約值。</p>
+    </div>
+  </div>
+</section>
+
+<div class="shell">
+  <nav class="rail" aria-label="章節">
+    <h2>11 個領域</h2>
+    <ul>
+      <li><a href="#ch01"><span class="rail__no">01</span><span class="rail__t">投票模組</span><span class="rail__c">12</span></a></li>
+<li><a href="#ch02"><span class="rail__no">02</span><span class="rail__t">公共論壇與討論</span><span class="rail__c">16</span></a></li>
+<li><a href="#ch03"><span class="rail__no">03</span><span class="rail__t">公民倡議行動</span><span class="rail__c">12</span></a></li>
+<li><a href="#ch04"><span class="rail__no">04</span><span class="rail__t">事實查核</span><span class="rail__c">11</span></a></li>
+<li><a href="#ch05"><span class="rail__no">05</span><span class="rail__t">治理與公民議會</span><span class="rail__c">20</span></a></li>
+<li><a href="#ch06"><span class="rail__no">06</span><span class="rail__t">公民科技</span><span class="rail__c">14</span></a></li>
+<li><a href="#ch07"><span class="rail__no">07</span><span class="rail__t">平台建置工具與組織基礎設施</span><span class="rail__c">13</span></a></li>
+<li><a href="#ch08"><span class="rail__no">08</span><span class="rail__t">參與誘因與會員制</span><span class="rail__c">12</span></a></li>
+<li><a href="#ch09"><span class="rail__no">09</span><span class="rail__t">教育與能力培養</span><span class="rail__c">15</span></a></li>
+<li><a href="#ch10"><span class="rail__no">10</span><span class="rail__t">公民參與擴大與連帶</span><span class="rail__c">10</span></a></li>
+<li><a href="#ch11"><span class="rail__no">11</span><span class="rail__t">AI 與未來技術</span><span class="rail__c">20</span></a></li>
+    </ul>
+  </nav>
+  <main class="doc">
+    <details class="chapter" id="ch01" open>
+  <summary class="chapter__head">
+    <div class="chapter__idx">01</div>
+    <div class="chapter__heading">
+      <h2 class="chapter__title">投票模組 <span class="chapter__emoji">🗳️</span></h2>
+      <p class="chapter__count">12 項</p>
+    </div>
+    <span class="chapter__chev" aria-hidden="true">▾</span>
+  </summary>
+  <div class="chapter__body">
+    <p class="chapter__intro">各種讓公民一起做決定的投票形式。投票在這裡不是一次定生死的決定；Parti 的投票模組把意見在對話與資訊中移動的過程畫出來，公民隨時可以改變心意，整個群體也看得見自己正在怎麼想。</p>
+    <article class="item">
+  <div class="item__no">1</div>
+  <div class="item__body">
+    <h3>贊成反對投票</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>最基本的投票形式，在贊成與反對之間二選一。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">2</div>
+  <div class="item__body">
+    <h3>選擇題投票</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>問卷形式的單選或複選。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">3</div>
+  <div class="item__body">
+    <h3>計分投票</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>參與者把分數分配給多個選項，表達偏好強度並排出優先順序。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">4</div>
+  <div class="item__body">
+    <h3>銀河投票（Galaxy Vote）</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>Parti 自行研發的投票形式，把公民的意見分布畫成一片星團。它問的不只是贊成或反對，而是攤開意見的地形；星星對話與「韓國的對話」的審議配對，都從這裡開始。近期已把結合機器學習與 LLM 的 AI 分析接進運作，從答題結果推斷參與者屬於哪個意見群體。（第 11 章 AI 也會談到。）</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">5</div>
+  <div class="item__body">
+    <h3>對戰投票（Battle Voting）</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>兩個對立主張擺在一起，參與者即時選邊。投票過程中，意見往哪邊倒、又怎麼移動，全場都看得到。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">6</div>
+  <div class="item__body">
+    <h3>即時改票</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>多數投票系統把一票當成一次性的決定，Parti 的討論型投票不是這樣。對話進行、新資訊進來，公民隨時可以改變自己的選擇，整個場子一起看著集體意見怎麼移動。這是 Parti 審議民主做法的核心。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">7</div>
+  <div class="item__body">
+    <h3>確認型投票</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>用於最終決議：要按下確認鍵，票才算數。會議、大會、幹部選舉這類必須把結果封存的場合會用到。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">8</div>
+  <div class="item__body">
+    <h3>匿名（不記名）投票</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>完全匿名，連工作人員與發起人都看不到個別結果。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">9</div>
+  <div class="item__body">
+    <h3>電子連署</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>替決議與請願蒐集具法律效力的簽名，包含說明文撰寫與連署檔案下載。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">10</div>
+  <div class="item__body">
+    <h3>大規模電子投票</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>支撐一萬人以上的線上投票穩定運作。用於參與式預算、公民大會與大型公民議會。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">11</div>
+  <div class="item__body">
+    <h3>平方投票（Quadratic Voting）</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>加權投票的一種：對同一選項多投一票，成本以平方成長。這讓多數人的微弱偏好與少數人的強烈偏好之間出現平衡。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">12</div>
+  <div class="item__body">
+    <h3>委任投票（流動式民主）</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>公民可以自己投票，也可以把票委任給對某個議題更熟的人。委任能依議題不同、隨時收回，直接民主與代議民主之間的界線因此保持彈性。它和第 6 項即時改票同源——決策不會停在單一次選擇上。</p>
+    
+  </div>
+</article>
+  </div>
+</details>
+<details class="chapter" id="ch02">
+  <summary class="chapter__head">
+    <div class="chapter__idx">02</div>
+    <div class="chapter__heading">
+      <h2 class="chapter__title">公共論壇與討論 <span class="chapter__emoji">💬</span></h2>
+      <p class="chapter__count">16 項</p>
+    </div>
+    <span class="chapter__chev" aria-hidden="true">▾</span>
+  </summary>
+  <div class="chapter__body">
+    <p class="chapter__intro">各種讓公民一起討論、交換意見的方式。Parti 做的不只是數位工具，也包括讓這些工具發揮到最大的活動形式與操作方法論——這些都是十年實作磨出來的。</p>
+    <div class="group"><h2 class="group__title">平台功能</h2><p>Parti 各平台上日常使用的討論工具。</p></div>
+<article class="item">
+  <div class="item__no">1</div>
+  <div class="item__body">
+    <h3>議題頻道</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>依主題或議題分開的頻道，成員在裡面交換看法，依自己關心的領域自主討論。</p>
+    <div class="srcs"><a class="src" href="https://campaigns.do" target="_blank" rel="noopener">到 Campaigns.do 看看 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">2</div>
+  <div class="item__body">
+    <h3>提案看板</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>最基本的公共論壇：任何人都可以貼提案，其他人用表情回應與留言參與。</p>
+    <div class="srcs"><a class="src" href="https://epforest.kr/1/proposal/list" target="_blank" rel="noopener">範例：e-Forest 公民平台 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">3</div>
+  <div class="item__body">
+    <h3>新聞留言</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>直接在新聞報導下留言，把報導轉成討論。公民從被動看新聞，變成主動詮釋與對話。</p>
+    <div class="srcs"><a class="src" href="https://campaigns.do/articles" target="_blank" rel="noopener">Campaigns.do 上的新聞 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">4</div>
+  <div class="item__body">
+    <h3>協作維基文件</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>任何成員都能編輯的共筆文件。公民一起累積共享的知識與資源。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">5</div>
+  <div class="item__body">
+    <h3>即時意見視覺化</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>投票與討論狀態即時顯示在螢幕上，所有人一起看著對話往哪裡走，意見的移動當場就看得見。</p>
+    <div class="srcs"><a class="src" href="https://townhall.kr" target="_blank" rel="noopener">Parti Townhall ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">6</div>
+  <div class="item__body">
+    <h3>即時反應（打氣）</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>即時把掌聲與加油送給發言者，活動當下的氣氛會被撐起來。數位廣場因此多了一點人味。</p>
+    <div class="srcs"><a class="src" href="https://townhall.kr/introduction" target="_blank" rel="noopener">Parti Townhall 介紹 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">7</div>
+  <div class="item__body">
+    <h3>即時提問與建議</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>活動進行中蒐集公民的提問與建議，把講座、演講、聚會變成雙向的交流。</p>
+    <div class="srcs"><a class="src" href="https://townhall.kr/introduction" target="_blank" rel="noopener">Parti Townhall 介紹 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">8</div>
+  <div class="item__body">
+    <h3>AI 內容審核</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>Parti 的 Campaigns 平台依服務條款與社群守則處理仇恨言論與違規內容，由 AI 自動偵測貼文，向作者建議修改或通知營運者。這是安全討論空間的底層條件，公民才敢放心交換意見。任何判斷的最終責任仍在人身上，公民也可以要求更正結果。（第 11 章 AI 與未來技術有詳述。）</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">活動形式與方法論</h2><p>Parti 過去十年開發並操作過的公共論壇與對話計畫。</p></div>
+<article class="item">
+  <div class="item__no">9</div>
+  <div class="item__body">
+    <h3>星星對話（Star Talk，별별대화）</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>Parti 獨有的審議計畫：依銀河投票的作答資料，把意見差距最大的兩位公民配成一組，進行一對一或小組對話，並追蹤對話前後的意見變化。近期已導入結合機器學習與 LLM 的 AI 配對，從作答資料找出合適的對話對象。最具代表性的實作是與《韓民族日報》共同營運的「韓國的對話」。</p>
+    <div class="srcs"><a class="src" href="https://talks.campaigns.do/goals/parti-talks" target="_blank" rel="noopener">韓國的對話 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">10</div>
+  <div class="item__body">
+    <h3>政策對戰</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>兩個對立的政策主張正面對決，參與者即時選邊、也隨時可以改變支持對象。流程包含專家簡報、分組討論、公民陪審團投票與替代方案提出，意見往哪邊流動所有人都看得到。</p>
+    <div class="srcs"><a class="src" href="https://medium.com/parti-xyz-developers/%EB%B9%A0%EB%9D%A0-%ED%83%80%EC%9A%B4%ED%99%80-x-%EC%A0%95%EC%B1%85%EB%B0%B0%ED%8B%80-%EC%9E%AC%EB%AF%B8%EC%9E%88%EA%B3%A0-%EB%AF%BC%EC%A3%BC%EC%A0%81%EC%9D%B8-%EA%B3%B5%EB%A1%A0%EC%9E%A5-%EB%A7%8C%EB%93%A4%EA%B8%B0-b25ccaae9cc7" target="_blank" rel="noopener">關於政策對戰 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">11</div>
+  <div class="item__body">
+    <h3>點子市集</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>提案、展示、票選一次完成的活動形式，用來蒐集並養大公民的創意。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">12</div>
+  <div class="item__body">
+    <h3>腦力激盪工具包</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>把小組討論接到集體投票的結構化對話計畫，讓零散的想法收斂成群體決定。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">13</div>
+  <div class="item__body">
+    <h3>公開論壇．線上公民對話</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>每兩週一次的固定線上對話計畫。公民可以把參與公共討論當成日常的一部分。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">14</div>
+  <div class="item__body">
+    <h3>議題聚會</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>以議題專家為核心的小組對話聚會，用會員制的方式運作，讓特定主題談得更深。</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">未來方向</h2><p>Parti 想在下個十年做出來的東西。</p></div>
+<article class="item">
+  <div class="item__no">15</div>
+  <div class="item__body">
+    <h3>論證結構化辯論</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>把證據、來源、反論以層級結構掛在主張底下的模組，鼓勵「講理由的辯論」。從交換意見往前走一步，變成邏輯可被檢驗的辯論環境。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">16</div>
+  <div class="item__body">
+    <h3>AI 討論摘要</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>自動摘出長討論裡的主要論點、共識處與爭點，分享給參與者，讓參與成本不會隨討論量一起膨脹。（與第 11 章「可信任的審議摘要報告」屬於同一組審議輔助功能。）</p>
+    
+  </div>
+</article>
+  </div>
+</details>
+<details class="chapter" id="ch03">
+  <summary class="chapter__head">
+    <div class="chapter__idx">03</div>
+    <div class="chapter__heading">
+      <h2 class="chapter__title">公民倡議行動 <span class="chapter__emoji">📣</span></h2>
+      <p class="chapter__count">12 項</p>
+    </div>
+    <span class="chapter__chev" aria-hidden="true">▾</span>
+  </summary>
+  <div class="chapter__body">
+    <p class="chapter__intro">各種讓公民說出關切、對社會議題採取集體行動的方式。除了連署與請願，Campaigns.do 還發展出貼合韓國公民文化的倡議形式，並經營教育與顧問計畫，讓公民自己長成倡議者。</p>
+    <div class="group"><h2 class="group__title">平台功能</h2><p>Campaigns.do 提供的倡議形式，讓任何公民都能輕鬆發起行動。</p></div>
+<article class="item">
+  <div class="item__no">1</div>
+  <div class="item__body">
+    <h3>連署行動</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>最基本的形式：蒐集公民連署，送交決策者或機關。不必登入也能參與。</p>
+    <div class="srcs"><a class="src" href="https://campaigns.do/campaigns?type=signing" target="_blank" rel="noopener">範例：搶救雪嶽山行動 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">2</div>
+  <div class="item__body">
+    <h3>請願／倡議行動</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>要求特定企業、政府或機關改變作為的行動形式，把公民的聲音整理成具體訴求。</p>
+    <div class="srcs"><a class="src" href="https://campaigns.do/campaigns" target="_blank" rel="noopener">Campaigns.do 請願 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">3</div>
+  <div class="item__body">
+    <h3>意見蒐集行動</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>公民寫下自己的意見、經驗與故事，而不只是簽個名。具體的公民聲音直接進入政策制定過程。</p>
+    <div class="srcs"><a class="src" href="https://campaigns.do/campaigns" target="_blank" rel="noopener">Campaigns.do 上的意見蒐集 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">4</div>
+  <div class="item__body">
+    <h3>照片行動</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>Parti 的招牌形式：公民上傳自己的參與照片，一張一張累積成集體行動的證據。韓國的「認證照」文化就這樣被搬進數位廣場。</p>
+    <div class="srcs"><a class="src" href="https://campaigns.do/campaigns/258" target="_blank" rel="noopener">範例：參與連帶 1000 萬步挑戰 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">5</div>
+  <div class="item__body">
+    <h3>地圖行動</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>公民把自己社區觀察到的問題標記在共用地圖上。散在各地的觀察，在同一張圖上匯集起來。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">6</div>
+  <div class="item__body">
+    <h3>悼念行動</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>一起記住並悼念社會災難罹難者的行動形式。公民的悼詞、獻花與紀錄聚在同一個廣場。韓國集體哀悼的傳統在這裡有了數位形式。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">7</div>
+  <div class="item__body">
+    <h3>行動進度通報</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>以電子郵件自動把行動進度與結果寄給參與者。參與過一次的公民，可以一路跟到最後。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">8</div>
+  <div class="item__body">
+    <h3>依關注配對行動</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>依公民訂閱的議題、追蹤的倡議者與相似行動，自動把人與行動配起來。公民自然遇到與自己價值相合的行動，參與過一個之後就接到下一個。</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">活動形式與方法論</h2><p>Parti 陪人一起把倡議做起來的教育與顧問計畫。</p></div>
+<article class="item">
+  <div class="item__no">9</div>
+  <div class="item__body">
+    <h3>倡議顧問（Camseolting）</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>Parti 提供給剛要開始做倡議的公民與團體的顧問服務，從數位倡議的規劃、營運，一路帶到新聞稿與捐款人串接。</p>
+    <div class="srcs"><a class="src" href="https://campaigns.do/stories/752" target="_blank" rel="noopener">關於 Camseolting ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">10</div>
+  <div class="item__body">
+    <h3>倡議者嘉年華</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>Parti 定期舉辦的節慶，把倡議、事實查核、新聞、對話與工作坊放在同一個場子裡，讓任何公民都有機會成為倡議者。</p>
+    <div class="srcs"><a class="src" href="https://campaigns.do/stories/752" target="_blank" rel="noopener">2024 倡議者嘉年華 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">11</div>
+  <div class="item__body">
+    <h3>倡議者人生遊戲</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>Parti 自己發展的工作坊方法論，把跑一場倡議的過程做成遊戲。參與者走過一輪模擬的倡議，親身體會倡議者在做什麼。</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">未來方向</h2><p>讓行動的影響力更看得見、公民參與更深入的方向。</p></div>
+<article class="item">
+  <div class="item__no">12</div>
+  <div class="item__body">
+    <h3>倡議影響力自動評估</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>自動追蹤並視覺化倡議帶來的政策改變、媒體曝光與社會影響，讓行動結束之後，影響力仍然看得見。</p>
+    
+  </div>
+</article>
+  </div>
+</details>
+<details class="chapter" id="ch04">
+  <summary class="chapter__head">
+    <div class="chapter__idx">04</div>
+    <div class="chapter__heading">
+      <h2 class="chapter__title">事實查核 <span class="chapter__emoji">✅</span></h2>
+      <p class="chapter__count">11 項</p>
+    </div>
+    <span class="chapter__chev" aria-hidden="true">▾</span>
+  </summary>
+  <div class="chapter__body">
+    <p class="chapter__intro">不實訊息時代的公民查核。Parti 建立了韓國第一個有公民參與的群眾外包查核平台，並經營一個讓公民自己成為查核者的社群，一起把事實蓋起來。除了事後查證，Parti 也在發展追蹤不實訊息流通路徑的前置應對。另有一個查核聊天機器人，在公共對話進行時比對已查證過的事實。（第 11 章 AI 有談到。）</p>
+    <div class="group"><h2 class="group__title">平台功能</h2><p>Campaigns.do 上讓公民書寫與閱讀查核報告的工具。</p></div>
+<article class="item">
+  <div class="item__no">1</div>
+  <div class="item__body">
+    <h3>查核撰寫格式</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>Campaigns.do 上的查核專用撰寫格式，讓作者更容易把判定與證據寫得清楚。</p>
+    <div class="srcs"><a class="src" href="https://campaigns.do/discussions?template=fact_check" target="_blank" rel="noopener">Campaigns.do 事實查核 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">2</div>
+  <div class="item__body">
+    <h3>查核閱讀介面</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>為讀者設計的顯示格式，一眼看懂查核內容。判定（真／假／待查）直接標在最前面，證據與來源就在旁邊。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">3</div>
+  <div class="item__body">
+    <h3>查核搜尋與典藏</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>過往查核報告的可搜尋典藏庫，公民可以回頭查已經查證過的主題。</p>
+    <div class="srcs"><a class="src" href="https://campaigns.do/discussions?template=fact_check" target="_blank" rel="noopener">Campaigns.do 查核典藏 ↗</a></div>
+  </div>
+</article>
+<div class="group"><h2 class="group__title">社群與方法論</h2><p>公民親自擔任查核者的社群，以及背後的教育與營運。</p></div>
+<article class="item">
+  <div class="item__no">4</div>
+  <div class="item__body">
+    <h3>K.F.C. 公民查核者社群</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>Korean Fact-Checkers Community。Parti 經營的社群，公民自己就是查核者，一起學、一起查、一起長。在韓國，這是把查核從專家機構模式推向公民參與模式的先行案例。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">5</div>
+  <div class="item__body">
+    <h3>公民查核教育與訓練</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>Parti 開設的教育與訓練計畫，把公民培養成查核者。課程有系統地涵蓋資訊驗證方法、來源查證技巧與查核報告撰寫。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">6</div>
+  <div class="item__body">
+    <h3>FactCheck.net（已結束的計畫）</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>韓國第一個群眾外包查核平台，2021–2023 年營運，Parti 擔任共同主席。它建立了記者、專家與公民協作查核的模式，對韓國查核生態系的成形有決定性的貢獻。</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">串連與國際</h2><p>與國內外查核生態系的協作。</p></div>
+<article class="item">
+  <div class="item__no">7</div>
+  <div class="item__body">
+    <h3>IFCN 全球查核基金（Build Support）</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>2024 年，Parti 獲選國際事實查核聯盟（IFCN）全球查核基金的「Build Support」計畫。韓國的公民查核模式因此獲得國際肯認。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">8</div>
+  <div class="item__body">
+    <h3>媒體與新聞業協作</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>與新聞編輯室、媒體機構的共同查核專案。公民的查證能量加上新聞業的調查能力，成為一種協作模式。</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">未來方向</h2><p>不實訊息時代的下一個難題。</p></div>
+<article class="item">
+  <div class="item__no">9</div>
+  <div class="item__body">
+    <h3>不實訊息路徑追蹤與預警</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>追蹤不實訊息如何被製造、走過哪些路徑、在不同社群間如何變形的系統。從事後查證往前推，事先辨識傳播路徑並對公民示警。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">10</div>
+  <div class="item__body">
+    <h3>AI 輔助查核</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>協助查核者完成查證工作的 AI 工具。AI 自動化證據搜尋、來源驗證與相似案例推薦，減輕公民查核者的負擔。方向是 AI 協助公民做判定，不是 AI 做判定。（第 11 章 AI 與未來技術也會談到。）</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">11</div>
+  <div class="item__body">
+    <h3>查核影響力追蹤</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>自動追蹤並視覺化查核的效果——查證過的資訊傳得多廣、原本的不實訊息是否因此減少擴散——讓查核的作用被看見。</p>
+    
+  </div>
+</article>
+  </div>
+</details>
+<details class="chapter" id="ch05">
+  <summary class="chapter__head">
+    <div class="chapter__idx">05</div>
+    <div class="chapter__heading">
+      <h2 class="chapter__title">治理與公民議會 <span class="chapter__emoji">🏛️</span></h2>
+      <p class="chapter__count">20 項</p>
+    </div>
+    <span class="chapter__chev" aria-hidden="true">▾</span>
+  </summary>
+  <div class="chapter__body">
+    <p class="chapter__intro">從公民提案，經過審議，一路走到實際政策的完整流程。Parti 做的不只是一個收提案的窗口，而是一套多層次的公民協作平台模式：公民提案 → 審議 → 公民議會．投票 → 政策。這套模式以開源平台 DemosX 釋出，任何人都能蓋自己的廣場；目前也已進展到用 AI 輔助大規模意見分析，讓公民自己找出議題。</p>
+    <div class="group"><h2 class="group__title">平台功能</h2><p>DemosX 提供給公民協作平台的核心功能。</p></div>
+<article class="item">
+  <div class="item__no">1</div>
+  <div class="item__body">
+    <h3>公民提案系統</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>任何公民都能就日常生活與社區裡看到的問題提出政策提案。支援匿名或具名投稿、附加檔案，以及相似提案自動串連。</p>
+    <div class="srcs"><a class="src" href="https://demosx.org" target="_blank" rel="noopener">DemosX 公民協作平台 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">2</div>
+  <div class="item__body">
+    <h3>審議流程</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>提案不是丟去多數決就算數，而是走一套結構化流程：公民討論、專家意見、機關回應。「議題策展 → 初步審查 → 前置討論 → 專家論壇 → 公開對話論壇 → 後續討論 → 公民小組評估 → 熟成論壇 → 政策」這條多層路徑是 DemosX 的核心，由 Parti 十年營運經驗打磨出來。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">3</div>
+  <div class="item__body">
+    <h3>AI 大規模意見分析</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>從數千到數萬則公民意見中，由 AI 自動分類、摘要並抽出類別樣態。這超出多數決能做的事，讓公民自己找出議題——治理進入新的階段。AI 的分析結果還要經過專家審視、公民小組審議與投票驗證，才會成為確定的議題，進入實質的社會對話。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">4</div>
+  <div class="item__body">
+    <h3>公民議會與公民小組</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>讓抽籤或招募產生的公民代表進行深度政策審議的工具，支援隨機抽籤、小組工作坊、共識聲明撰寫與結果公布。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">5</div>
+  <div class="item__body">
+    <h3>公民投票與政策決定</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>讓公民對審議過的提案直接投票決定。搭配 Parti Townhall 的大規模投票能力，用於參與式預算、公民大會與政策決議。</p>
+    <div class="srcs"><a class="src" href="https://townhall.kr" target="_blank" rel="noopener">Parti Townhall ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">6</div>
+  <div class="item__body">
+    <h3>政策執行追蹤</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>公民可以一路跟著提案走到政策。審查．檢視．決議．執行各階段以視覺化方式列出，進度與機關回應都是公開的。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">7</div>
+  <div class="item__body">
+    <h3>營運指南與檢核表系統</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>採用公民協作平台的機關可以照著一步步走的營運指南與檢核表。這是 Parti 特有的資產，濃縮了 200 場以上公共論壇的營運經驗，從各階段目標設定到營運原則與實務檢核一應俱全。</p>
+    <div class="srcs"><a class="src" href="https://demosx.org" target="_blank" rel="noopener">DemosX 指南 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">8</div>
+  <div class="item__body">
+    <h3>開源承諾</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>DemosX 由 Parti 自行研發，但以開源釋出——任何人都能用它蓋自己的廣場。程式碼與 200 場以上公共論壇的營運指南都公開，機關不必從零開始，可以直接拿一套驗證過的模式來改。公民的廣場屬於公民，這個信念就寫在公開的程式碼與分享出去的 know-how 裡。</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">治理實作案例</h2><p>韓國境內以 DemosX 營運的公民協作平台。</p></div>
+<article class="item">
+  <div class="item__no">9</div>
+  <div class="item__body">
+    <h3>民主首爾／想像大路首爾</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>首爾市政府的公民協作平台。Parti 在 2017–2019 年主導規劃與營運，把它做成一個一千萬首爾市民可以直接提案並決定政策的模式，獲得 2019 年 iF 設計獎（服務設計）。2022 年 12 月更名為「想像大路首爾」，持續營運中。</p>
+    <div class="srcs"><a class="src" href="https://idea.seoul.go.kr" target="_blank" rel="noopener">想像大路首爾 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">10</div>
+  <div class="item__body">
+    <h3>光化門 1 街／政策對話論壇</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>行政安全部的跨政府公民參與平台。Parti 自 2021 年起營運公開對話論壇，後來發展成政策對話論壇——一個跨部會的廣場，公民與政府一起審議變動快速的社會議題。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">11</div>
+  <div class="item__body">
+    <h3>國民統合平台</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>總統直屬國民統合委員會的公民參與平台。透過「走進現場的國民對話」蒐集到 4,215 則以上公民提案，整理為六大領域（政治．意識形態、兩極化、地區、世代、性別、社會弱勢）。以 AI 分析找出議題，再經專家審視、公民小組審議與投票驗證，才進入實質社會對話。這是 Parti 多層次公民協作平台模式最完整的一次實作。</p>
+    <div class="srcs"><a class="src" href="https://cohesion.or.kr" target="_blank" rel="noopener">國民統合平台 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">12</div>
+  <div class="item__body">
+    <h3>千萬串連</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>一個線上廣場，公民在這裡一起想像尹錫悅被罷免之後要蓋什麼樣的世界。大約三個月間蒐集 788 則公民意見，以 AI 分析分成九個領域。結果進入社會改革特別委員會 11 個分組的政策發展，也影響了政黨的政綱與政策。這是 Parti 的 AI 大規模意見分析被用在公民社會找議題的案例。</p>
+    <div class="srcs"><a class="src" href="https://talk.bisang1203.net/pages/10million-connections-report2" target="_blank" rel="noopener">千萬串連報告 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">13</div>
+  <div class="item__body">
+    <h3>氣候公民議會</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>為修訂《碳中和法》與回應氣候危機而辦的公民議會與公共審議計畫。公民直接提出議題並展開對話，讓公民的聲音進入立法與政策決定。</p>
+    <div class="srcs"><a class="src" href="https://talks.campaigns.do/goals/climate-public-deliberation" target="_blank" rel="noopener">氣候公民議會 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">14</div>
+  <div class="item__body">
+    <h3>AI 民主公民對話</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>一個由公民自己提問、自己談的公共論壇，主題是 AI 時代的民主。透過「在 AI 時代重新追問民主」系列講座與公民提問蒐集，公民一起審議 AI 對他們該有什麼意義。（第 11 章 AI 與未來技術也會談到。）</p>
+    <div class="srcs"><a class="src" href="https://talks.campaigns.do/goals/aidemocracy" target="_blank" rel="noopener">AI 民主公民提問 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">15</div>
+  <div class="item__body">
+    <h3>AI 民主公民實驗室</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>公民與勞工動手玩 AI、生出點子的場地。透過「給勞工與職場的 AI 點子松」，公民直接實驗：AI 進到職場與日常之後，他們可以怎麼使用它、又怎麼改造它。真正意義上的公民議會則放在第 11 章當作未來方向。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">16</div>
+  <div class="item__body">
+    <h3>韓國的對話（《韓民族日報》× Parti）</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>《韓民族日報》與 Parti 共同營運的社會衝突化解對話計畫，用 Parti 的銀河投票與星星對話方法論，把意見差距最大的公民配對，進行一對一深度對話。對話前後的意見變化以資料形式被追蹤下來。</p>
+    <div class="srcs"><a class="src" href="https://talks.campaigns.do/goals/parti-talks" target="_blank" rel="noopener">韓國的對話 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">17</div>
+  <div class="item__body">
+    <h3>首爾教育溝通廣場</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>首爾市教育廳的公民協作平台。學生、家長、教師與市民都能在這裡對首爾的教育政策提出意見與構想。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">18</div>
+  <div class="item__body">
+    <h3>各地公民協作平台</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>與地方政府及地區社群合作營運的平台。例如「我在釜山」（社會問題解決平台）、恩平區「參與之森」（線上政策平台）、韓國 YWCA「醫療公共討論平台」、京畿道村里政策平台，以及密陽、全州、春川、完州等地以 DemosX 為基礎的平台。</p>
+    <div class="srcs"><a class="src" href="https://demosx.org/pages/demosx-works" target="_blank" rel="noopener">DemosX 專案實績 ↗</a></div>
+  </div>
+</article>
+<div class="group"><h2 class="group__title">未來方向</h2><p>公民治理的下一步。</p></div>
+<article class="item">
+  <div class="item__no">19</div>
+  <div class="item__body">
+    <h3>進階 AI 意見分類與整合</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>把現有的 AI 分析工具再往前推：不只找議題，還要自動辨識並畫出公民之間的共識點與分歧點，讓公民立刻看到自己的意見落在整場對話的哪個位置。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">20</div>
+  <div class="item__body">
+    <h3>區塊鏈驗證的公民決策</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>把大規模公民決策的結果上鏈驗證與存證。結合身分驗證、居住確認與防竄改，確保公民決定的政策被可靠地保護住。</p>
+    
+  </div>
+</article>
+  </div>
+</details>
+<details class="chapter" id="ch06">
+  <summary class="chapter__head">
+    <div class="chapter__idx">06</div>
+    <div class="chapter__heading">
+      <h2 class="chapter__title">公民科技 <span class="chapter__emoji">🛠️</span></h2>
+      <p class="chapter__count">14 項</p>
+    </div>
+    <span class="chapter__chev" aria-hidden="true">▾</span>
+  </summary>
+  <div class="chapter__body">
+    <p class="chapter__intro">公民用自己的專業解決社會問題的技術。Parti 把公民做資料、做工具、寫程式的各種行動，統合在「公民科技」這個概念底下。資料只是其中一種形式；資料之上還有分析、視覺化、公民專案與公民黑客行動，一起運作成一個生態系。</p>
+    <div class="group"><h2 class="group__title">平台功能</h2><p>公民建立自己的資料、工具與技術資產的地方。</p></div>
+<article class="item">
+  <div class="item__no">1</div>
+  <div class="item__body">
+    <h3>Parti 公民科技平台</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>Parti 的公民科技平台，公民在這裡建資料集、發起專案、分享分析結果。資料集、專案、故事、提案與聚會全部串在同一處。</p>
+    <div class="srcs"><a class="src" href="https://data.campaigns.do" target="_blank" rel="noopener">Parti 公民科技 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">2</div>
+  <div class="item__body">
+    <h3>公民資料集策展與典藏</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>公民自建資料集的典藏庫，經過策展並免費開放。例如韓國慰安婦少女像紀錄、照顧勞動統計、大法院全院合議判決、2023 年氣候危機民意調查、6411 號公車首班乘客分析——全都是公民自己做出來的資料集。</p>
+    <div class="srcs"><a class="src" href="https://data.campaigns.do/datasets" target="_blank" rel="noopener">Parti 資料集 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">3</div>
+  <div class="item__body">
+    <h3>公民資料視覺化與分析工具</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>讓公民把自己的資料畫出來、分析出來的工具。介面刻意做得好上手，不會寫程式的公民也能挖出有意義的東西。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">4</div>
+  <div class="item__body">
+    <h3>Parti 公民政策資料庫</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>把 Parti 十年來 200 場以上公共論壇與公民倡議累積的政策提案，有系統地整理成資料庫。Parti 的營運經驗本身，就這樣變成了數位公共財。</p>
+    <div class="srcs"><a class="src" href="https://data.campaigns.do/datasets/EzqHyg" target="_blank" rel="noopener">Parti 公民政策 DB ↗</a></div>
+  </div>
+</article>
+<div class="group"><h2 class="group__title">活動形式與方法論</h2><p>公民打造公民科技的各種計畫。</p></div>
+<article class="item">
+  <div class="item__no">5</div>
+  <div class="item__body">
+    <h3>公民資料實驗室．公民黑客實驗室</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>Parti 的實驗室計畫，公民親手建資料集、做分析、解社會問題。在不同地區、對不同參與者辦過——大邱公民資料實驗室、光州青年「我也是資料行動者」等等——這些實驗室是公民長成公民黑客的主要路徑。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">6</div>
+  <div class="item__body">
+    <h3>公民黑客專案育成</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>與 Code for Korea 網絡共同營運的專案育成。公民用自己的專業找出社會問題，再自己動手做出解方，整段路都有支援。</p>
+    <div class="srcs"><a class="src" href="https://codefor.kr" target="_blank" rel="noopener">Code for Korea ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">7</div>
+  <div class="item__body">
+    <h3>公民資料教育與工作坊</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>培養公民處理資料、視覺化資料、讀出資料社會意義的能力。Parti 與各機關、各地區合作辦理。</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">代表性專案</h2><p>公民科技造成的真實改變。</p></div>
+<article class="item">
+  <div class="item__no">8</div>
+  <div class="item__body">
+    <h3>COVID-19 口罩地圖．個人安心號碼</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>2020 年疫情應對期間，Code for Korea 網絡在國際上最被看見的公民科技案例。由 Parti 理事長權五鉉在 Code for Korea 網絡內提案並主導，用政府的公費口罩供給資料做出面向公民的應用，並提出兼顧隱私與公共利益的「個人安心號碼」模式。獲韓國科學技術情報通信部部長獎。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">9</div>
+  <div class="item__body">
+    <h3>安心醫院．安心 i</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>韓國最早的公民黑客專案之一，2012 年在 Code Namu（程式碼樹）社群啟動。公民可以直接查安全醫院資訊的工具，由 Parti 理事長權五鉉主導，後來在 Code for Korea 網絡裡演化成「安心 i」。它被記錄為韓國公民科技運動的起點之一。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">10</div>
+  <div class="item__body">
+    <h3>和公民一起做的都市林資料</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>Parti、春川社會創新中心與春川市政府共同建立的都市林資料專案。公民親自觀察與測量自己社區的都市林，用自己做出來的資料影響市政。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">11</div>
+  <div class="item__body">
+    <h3>日常觀察者——我們社區的手推車</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>與春川社會創新中心合作的公民觀察資料專案。公民觀察自己社區裡的手推車使用者，用這些資料把原本看不見的都市勞動現實推到眼前。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">12</div>
+  <div class="item__body">
+    <h3>各式各樣的公民資料集</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>Parti 的公民科技平台上有大量公民自建的資料集——韓國慰安婦少女像紀錄、照顧勞動統計、6411 號公車首班乘客分析、大法院全院合議判決、2023 年氣候危機民調、2030 世代女性在彈劾集會現場的訪談等等。每一份資料集都是一個公民黑客專案的成果。</p>
+    <div class="srcs"><a class="src" href="https://data.campaigns.do/datasets" target="_blank" rel="noopener">Parti 公民資料集 ↗</a></div>
+  </div>
+</article>
+<div class="group"><h2 class="group__title">未來方向</h2><p>公民科技的下一步。</p></div>
+<article class="item">
+  <div class="item__no">13</div>
+  <div class="item__body">
+    <h3>公民資料信託</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>由公民自己持有與營運自身資料的信託架構。大型科技公司靠公民資料賺走鉅額利潤的年代，這個模式把主權還給公民，讓他們一起決定資料怎麼被使用。Parti 的公民資料平台與合作社體質在這裡交會，長出它獨有的做法。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">14</div>
+  <div class="item__body">
+    <h3>給 AI 訓練用的韓語公益資料集</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>AI 訓練資料的所有權與來源愈來愈重要，因此把公民建立的韓語公益資料整理、釋出，供 AI 訓練使用。Parti 的公民政策 DB、公共論壇紀錄與公民資料集是現成的基礎。</p>
+    
+  </div>
+</article>
+  </div>
+</details>
+<details class="chapter" id="ch07">
+  <summary class="chapter__head">
+    <div class="chapter__idx">07</div>
+    <div class="chapter__heading">
+      <h2 class="chapter__title">平台建置工具與組織基礎設施 <span class="chapter__emoji">🏗️</span></h2>
+      <p class="chapter__count">13 項</p>
+    </div>
+    <span class="chapter__chev" aria-hidden="true">▾</span>
+  </summary>
+  <div class="chapter__body">
+    <p class="chapter__intro">Parti 自己經營的廣場，以及幫別的組織蓋自己廣場的建置工具。Parti 與姊妹事業 UFOfactory 沒有把基礎設施關起來，而是分享給無數非營利組織、合作社與公民團體。結果是一個數位公民廣場的生態系，在 Parti 內外一起長。</p>
+    <div class="group"><h2 class="group__title">Parti 自己的營運基礎設施</h2><p>撐起 Parti 直接提供給公民的那些廣場的共用基礎。</p></div>
+<article class="item">
+  <div class="item__no">1</div>
+  <div class="item__body">
+    <h3>整合式站台建置器</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>Parti 直接營運的四個站台——Campaigns、公民對話、公民科技、CitizenPass——共用同一組帳號與整合營運基礎。公民註冊一次就能用 Parti 所有的廣場，Parti 也能在站台之間製造綜效。（DemosX 與 Townhall 是另外的系統。）</p>
+    <div class="srcs"><a class="src" href="https://campaigns.do" target="_blank" rel="noopener">Parti Campaigns ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">2</div>
+  <div class="item__body">
+    <h3>會員與帳號管理系統</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>支援註冊、資料管理、權限設定與團體／組織歸屬的會員系統，區分個人會員與組織會員、一般會員與管理者。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">3</div>
+  <div class="item__body">
+    <h3>整合捐款系統</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>把倡議支持、組織支持、定期捐款與單次捐款放在同一個平台處理。設計上讓公民參與一場行動之後，能自然接到支持。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">4</div>
+  <div class="item__body">
+    <h3>電子郵件與電子報寄送</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>自動通知參與者行動進度，也讓組織對會員寄電子報。它延續了 UFOfactory 時期切分出去的 Stibee——韓國非營利部門最主要的郵件平台——的精神。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">5</div>
+  <div class="item__body">
+    <h3>資料下載與統計</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>投票結果、討論資料、會員名單等等，可下載為 CSV、Excel 與 PDF。營運者能自由分析與運用自己廣場的資料。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">6</div>
+  <div class="item__body">
+    <h3>權限管理系統</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>針對組織、群組、發起人、一般會員等不同角色，管理細分的權限。多個組織與聚會可以共存在同一個平台上，各自保有自主性。</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">給其他組織的建置工具</h2><p>Parti 與 UFOfactory 把自家基礎設施以開源與平台形式開放出來，讓別的組織也能蓋自己的廣場。</p></div>
+<article class="item">
+  <div class="item__no">7</div>
+  <div class="item__body">
+    <h3>UFOfactory——公益技術開發</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">UFOfactory 計畫</span></div>
+    <p>UFOfactory 是 Parti 的姊妹事業，直接開發公益技術、解決方案與服務。自 2013 年起，它研究並開發非營利組織、合作社與公民團體需要的數位工具，並以育成模式把驗證過的方案切分出去或移轉出去。適當技術方案 Mixon 也是由 UFOfactory 開發與營運。Parti 承接民主領域的公民廣場，UFOfactory 承接公益技術開發，兩個姊妹事業一起把公益技術生態系養大。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">8</div>
+  <div class="item__body">
+    <h3>Mixon</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">UFOfactory 計畫</span></div>
+    <p>UFOfactory 營運的適當技術方案，讓非營利組織、合作社與社區團體直接蓋自己的廣場。它提供倡議網站、社群平台、資料蒐集工具等等，從規劃到營運整合在一起。洞內坊內公益維基（京畿道公益活動支援中心）、數位起步支援計畫（首爾社會福利共同募金會）、與男性一起的女性主義、Domini 村論壇、21% Club 都跑在 Mixon 上。</p>
+    <div class="srcs"><a class="src" href="https://mixon.io" target="_blank" rel="noopener">Mixon ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">9</div>
+  <div class="item__body">
+    <h3>DemosX 開源平台</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>Parti 自行開發的公民．政府協作平台 DemosX 以開源釋出，任何政府、地方自治團體或機關都能蓋自己的公民協作平台。200 場以上公共論壇的營運經驗連同營運指南一起公開，任何人都可以拿一套驗證過的模式再往前發展，而不是從零開始。（第 5 章治理有更詳細的說明。）</p>
+    <div class="srcs"><a class="src" href="https://demosx.org" target="_blank" rel="noopener">DemosX ↗</a></div>
+  </div>
+</article>
+<div class="group"><h2 class="group__title">活動形式與方法論</h2><p>Parti 與 UFOfactory 怎麼陪其他組織一起蓋數位基礎設施。</p></div>
+<article class="item">
+  <div class="item__no">10</div>
+  <div class="item__body">
+    <h3>非營利數位轉型顧問</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>與非營利組織、合作社、公民團體一起設計並操作數位轉型的顧問服務。從規劃到營運整合起來，把現場真正需要的技術交出去。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">11</div>
+  <div class="item__body">
+    <h3>1,200 個以上非營利組織的數位基礎建置經驗</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">UFOfactory 計畫</span></div>
+    <p>UFOfactory 自 2013 年起累積的經驗：與 1,200 個以上非營利組織、合作社與公民團體一起建置數位基礎設施（2017 年統計）。這是韓國非營利部門裡最廣的數位轉型夥伴資產，也成了 Mixon 與 Parti 整合基礎設施的底子。</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">未來方向</h2><p>Parti 基礎設施的下一步。</p></div>
+<article class="item">
+  <div class="item__no">12</div>
+  <div class="item__body">
+    <h3>整合 API 基礎設施</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>一套開放 API，讓 Parti 所有的廣場與工具都能自由接上外部系統——別的組織可以在自己的系統裡用 Parti 的公民資料、倡議與投票功能。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">13</div>
+  <div class="item__body">
+    <h3>整合公民會員系統</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>把 Parti 內外與其他組織的會員資格整合管理，讓同時屬於多個組織的公民，有一個連貫的公民經驗。</p>
+    
+  </div>
+</article>
+  </div>
+</details>
+<details class="chapter" id="ch08">
+  <summary class="chapter__head">
+    <div class="chapter__idx">08</div>
+    <div class="chapter__heading">
+      <h2 class="chapter__title">參與誘因與會員制 <span class="chapter__emoji">🎖️</span></h2>
+      <p class="chapter__count">12 項</p>
+    </div>
+    <span class="chapter__chev" aria-hidden="true">▾</span>
+  </summary>
+  <div class="chapter__body">
+    <p class="chapter__intro">Parti 希望公民在這些廣場找到的不是來一次就走的地方，而是待得下來、一起長大的地方。公民會員因此是 Parti 最重要的資產之一：1,133 位每月定期支持的 Partizen、他們自主發起的 187 個聚會與 18 個專案，還有把公民活動軌跡畫出來的 20 多種徽章與公民點數系統——這些東西讓 Parti 的廣場活著。</p>
+    <div class="group"><h2 class="group__title">平台功能</h2><p>讓公民以會員身分留下來、行動起來的工具。</p></div>
+<article class="item">
+  <div class="item__no">1</div>
+  <div class="item__body">
+    <h3>CitizenPass 公民通行證</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>Parti 的數位公民會員資格。成為 Partizen（定期支持者）就會拿到 CitizenPass，通往 Parti 所有廣場裡的串連、協作與成長機會。已有 1,133 位會員一起做出 187 個聚會與 18 個專案。</p>
+    <div class="srcs"><a class="src" href="https://pass.campaigns.do" target="_blank" rel="noopener">Parti CitizenPass ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">2</div>
+  <div class="item__body">
+    <h3>Partizen 支持者會員</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>Partizen 是定期捐款支持 Parti 的公民。Parti 是由公民社員共同持有與治理的社會合作社，所以 Partizen 不只是支持者，而是這些廣場的共同所有人。以支持的形式，讓 Parti 的數位公民廣場真的變成公民自己的。</p>
+    <div class="srcs"><a class="src" href="https://campaigns.do/users/sign_up" target="_blank" rel="noopener">成為 Partizen ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">3</div>
+  <div class="item__body">
+    <h3>會員自主聚會系統</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>CitizenPass 會員自主發起的各種聚會。不是 Parti 指定的聚會，而是會員自己提出、自己跑的 187 個聚會，題目與形式都很雜。</p>
+    <div class="srcs"><a class="src" href="https://pass.campaigns.do/boards/get-together" target="_blank" rel="noopener">Parti 聚會 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">4</div>
+  <div class="item__body">
+    <h3>會員協作專案育成</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>Parti 陪會員把共同專案養大的育成機制。目前已有 18 個專案在跑，成為公民的點子流向真實社會改變的通道。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">5</div>
+  <div class="item__body">
+    <h3>會員工具包與資源共享</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>Parti 提供給會員發展自身行動的工具與資源包：倡議操作工具、聚會引導指南、數位公民能力工具，全部集中在一處。</p>
+    <div class="srcs"><a class="src" href="https://pass.campaigns.do/pages/toolkit" target="_blank" rel="noopener">Parti 工具包 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">6</div>
+  <div class="item__body">
+    <h3>會員故事典藏</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>記錄並分享會員故事的典藏。在 Parti 廣場長出來的公民故事，回頭成為其他公民的動力，形成一個正向循環。</p>
+    <div class="srcs"><a class="src" href="https://pass.campaigns.do/boards/story" target="_blank" rel="noopener">會員故事 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">7</div>
+  <div class="item__body">
+    <h3>活動徽章系統</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>發給參與倡議、捐款、悼念、資料工作與民主活動的公民的徽章系統。目前有 20 多種活躍徽章，形式多樣——序位徽章（例如「第 10,000 位記憶守護者」）、活動量徽章（「參與 10 次以上」「參與 100 次以上」）、年度支持者徽章、特定行動參與徽章——把公民的活動軌跡具體畫出來。收到的徽章可以掛在個人檔案或分享到社群媒體，公民的數位公民身分因此自然浮現。外部組織（參與連帶、Hansalim、搶救國家公園市民行動等）也能發自己的徽章，Parti 的廣場成了公民活動認可的共用基礎設施。</p>
+    <div class="srcs"><a class="src" href="https://campaigns.do/badges" target="_blank" rel="noopener">Parti 徽章 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">8</div>
+  <div class="item__body">
+    <h3>公民點數</h3>
+    <div class="chips"><span class="chip chip--wip">進行中</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>把公民在 Parti 廣場的各種行動——投票、討論、參與倡議、事實查核、貢獻資料——累積成公民點數，並用在各種地方。這不是為了遊戲化，而是一種新的公民基礎設施：讓公民的行動被看見、被認可。</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">活動形式與方法論</h2><p>會員聚在一起、一起長大的計畫。</p></div>
+<article class="item">
+  <div class="item__no">9</div>
+  <div class="item__body">
+    <h3>Partizen 定期聚會</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>Partizen 的線下與線上定期聚會。一起鋪出公民成長的路徑：從單純的會員到公民行動者，從公民行動者到倡議者。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">10</div>
+  <div class="item__body">
+    <h3>倡議者人生遊戲</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>Parti 的工作坊方法論，把跑一場倡議的過程做成遊戲讓會員體驗。參與者走過一輪模擬倡議，親身體會倡議者的角色。（第 3 章公民倡議行動有詳述。）</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">未來方向</h2><p>公民會員制的下一步演化。</p></div>
+<article class="item">
+  <div class="item__no">11</div>
+  <div class="item__body">
+    <h3>公民會員互通</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>把 Parti 的會員資格與其他合作社、公民團體、平台的會員資格接起來，讓同時屬於多個組織的公民有一個連貫的公民經驗。一個橫跨 Parti 內外的公民會員生態系。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">12</div>
+  <div class="item__body">
+    <h3>公民代幣經濟．DAO 實驗</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>實驗一種結構：公民自己決定廣場上各種行動的獎勵與治理方式。公民點數與徽章系統再往前發展，這件事才有可能。</p>
+    
+  </div>
+</article>
+  </div>
+</details>
+<details class="chapter" id="ch09">
+  <summary class="chapter__head">
+    <div class="chapter__idx">09</div>
+    <div class="chapter__heading">
+      <h2 class="chapter__title">教育與能力培養 <span class="chapter__emoji">🎓</span></h2>
+      <p class="chapter__count">15 項</p>
+    </div>
+    <span class="chapter__chev" aria-hidden="true">▾</span>
+  </summary>
+  <div class="chapter__body">
+    <p class="chapter__intro">數位公民廣場不會只靠工具長大。要公民知道怎麼用工具、能一起想像未來、也能自己動手做，廣場才活得起來。十年來，Parti 一直在辦教育與能力培養計畫，把公民養成倡議者、查核者、資料行動者與公民黑客。</p>
+    <div class="group"><h2 class="group__title">教育計畫</h2><p>公民有系統地累積數位公民能力的課程。</p></div>
+<article class="item">
+  <div class="item__no">1</div>
+  <div class="item__body">
+    <h3>Parti 倡議者學校</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>培養公民規劃與執行數位倡議的能力，涵蓋倡議者需要的整段流程：行動設計、訊息撰寫、數位工具運用、參與者組織。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">2</div>
+  <div class="item__body">
+    <h3>公民查核者教育</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>把公民養成能自己查證資訊的查核者。分基礎課（查核簡史、日常查核、實作演練）與進階課，線上線下並行。2023 到 2025 年間培養出 300 位以上公民查核者。</p>
+    <div class="srcs"><a class="src" href="https://pass.campaigns.do/goals/factcheck" target="_blank" rel="noopener">K.F.C. 公民查核者 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">3</div>
+  <div class="item__body">
+    <h3>資料公民工作坊</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>培養公民處理資料、視覺化資料、讀出資料社會意義的能力。在不同地區、對不同參與者辦過——大邱公民資料實驗室、光州青年「我也是資料行動者」等等。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">4</div>
+  <div class="item__body">
+    <h3>公務員與機關參與培訓</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>給營運公民協作平台的公務員與機關人員的培訓，涵蓋參與式治理原則、公共論壇操作與數位工具運用。課程底子是 Parti 200 場以上公共論壇的經驗。</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">審議與共識方法論</h2><p>公民一起想像未來、一起找出議題的工作坊方法論。</p></div>
+<article class="item">
+  <div class="item__no">5</div>
+  <div class="item__body">
+    <h3>情境工作坊</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>一種參與式審議工作坊：公民檢視並批評專家事先寫好的幾個未來情境（通常 3–4 個），發展出自己的願景，最後對行動方案達成共識。Parti 把這套 1990 年代丹麥技術委員會的方法論，放進韓國公民廣場的脈絡裡操作。專家寫的情境只是起點，重點是公民有權批評它、也有權畫自己的未來。適合需要長期視野的題目：氣候危機、AI 時代、城市的未來。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">6</div>
+  <div class="item__body">
+    <h3>公民提案工作坊</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>公民在給定的主題底下，自己界定問題、自己寫提案。主題事先設定，但什麼算問題、要提什麼案，完全由公民決定。工作坊產出的提案會直接接進 DemosX 的數位公民提案系統，繼續往審議與政策階段走。</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">實作型計畫</h2><p>公民聚在一起動手做、動手試的體驗計畫。</p></div>
+<article class="item">
+  <div class="item__no">7</div>
+  <div class="item__body">
+    <h3>黑客松</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>公民用自己的專業做出社會問題解方的公民黑客活動。由 Parti 公民資料實驗室規劃與操作，把開發者、設計師、企劃與行動者聚在一起，做出真的能動的東西。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">8</div>
+  <div class="item__body">
+    <h3>點子松</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>給定主題與具體問題之後，公民、專家與行動者在密集的時間內一起做出新解方。不只是發想，成果要以能動的形式展示與示範。主題貼著時事，例如「給勞工與職場的 AI 點子松」。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">9</div>
+  <div class="item__body">
+    <h3>資料松</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>「資料」加「黑客松」：在限定時間內蒐集與分析特定主題的資料，找出解決問題的路。Parti 在「用資料改變世界」專案下辦公開資料松，也有每月一次的「本月資料松」。氣候危機監測、國會法案資料、青年不平等、性別資料等各種公民主導的資料專案，都是在資料松裡生出來的。</p>
+    <div class="srcs"><a class="src" href="https://datatrust.me" target="_blank" rel="noopener">Parti 資料信託 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">10</div>
+  <div class="item__body">
+    <h3>查核松</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>公民協作查證資訊的活動。它是 Parti 事實查核中心的核心行動之一，和查核教育、查核專案一起構成公民查核生態系，目前仍積極運作。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">11</div>
+  <div class="item__body">
+    <h3>Parti 民主營</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>一個綜合教育計畫，公民在同一個場子裡學會 Parti 的各種民主行動——投票、討論、倡議、查核、資料。可以廣泛體驗並取得作為數位公民所需的能力。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">12</div>
+  <div class="item__body">
+    <h3>倡議者人生遊戲</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>Parti 的工作坊方法論，把跑一場倡議的過程做成遊戲來學。參與者走過一輪模擬倡議，親身體會倡議者的角色。（第 3 章與第 8 章也有提到。）</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">協作寫指南</h2><p>Parti 與公民、行動者一起針對特定主題寫出指南，再散佈到社會。</p></div>
+<article class="item">
+  <div class="item__no">13</div>
+  <div class="item__body">
+    <h3>公民社會生成式 AI 指南</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>一個協助公民社會團體想清楚、也塑造自己怎麼使用生成式 AI 工具的指南專案。由進步網絡中心（Jinbonet）、數位權利研究所與 Parti 共同主辦，透過行動者工作坊蒐集現場經驗與疑慮，協作出公民社會的生成式 AI 政策模型。</p>
+    <div class="srcs"><a class="src" href="https://talks.campaigns.do/posts/Yyt0RjK" target="_blank" rel="noopener">行動者 AI 工作坊 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">14</div>
+  <div class="item__body">
+    <h3>公共論壇 DEI 指南</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>公民一起寫的指南，用來強化公共論壇裡的多元、公平與共融（DEI）。先用資料松把公共論壇的多元性資料挖出來，再由議題聚會與公民對話蒐集討論，最後整理成 DEI 指南散佈到社會。某些群體被過度代表、少數聲音被聽不見的結構，由公民自己動手修。</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">未來方向</h2><p>公民教育的下一步。</p></div>
+<article class="item">
+  <div class="item__no">15</div>
+  <div class="item__body">
+    <h3>AI 時代的公民能力教育架構</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>在 AI 已深入日常與民主的年代，一套有系統的教育架構，培養公民批判地理解 AI、自主地使用 AI，並參與 AI 的治理。Parti 既有的教育計畫會朝這個方向整合與演化。</p>
+    
+  </div>
+</article>
+  </div>
+</details>
+<details class="chapter" id="ch10">
+  <summary class="chapter__head">
+    <div class="chapter__idx">10</div>
+    <div class="chapter__heading">
+      <h2 class="chapter__title">公民參與擴大與連帶 <span class="chapter__emoji">🤝</span></h2>
+      <p class="chapter__count">10 項</p>
+    </div>
+    <span class="chapter__chev" aria-hidden="true">▾</span>
+  </summary>
+  <div class="chapter__body">
+    <p class="chapter__intro">廣場不是 Parti 一家蓋起來的。數位民主不會因為一個組織的工具就完成，它長在公民行動者的串連、組織之間的協作，以及跨越國界的連帶上。十年來，Parti 串起各個領域的行動者，和 1,500 個以上的組織協作，並與亞洲的夥伴建立連帶。</p>
+    <div class="group"><h2 class="group__title">行動者網絡</h2><p>Parti 自己養出來的公民行動者網絡。活躍在不同領域的公民，在這裡交換彼此的經驗與刺激。</p></div>
+<article class="item">
+  <div class="item__no">1</div>
+  <div class="item__body">
+    <h3>公共論壇行動者網絡</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>串連規劃與操作公共論壇的行動者。他們分享自己辦過或參與過的論壇，交換操作上的難處與 know-how，一起學。原本各自散著做的公共論壇行動者，在這裡看見彼此。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">2</div>
+  <div class="item__body">
+    <h3>社群行動者網絡</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>串連各種在蓋更好世界的社群行動者。對組織與經營社群有興趣的人在這裡碰面，交換經驗與靈感。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">3</div>
+  <div class="item__body">
+    <h3>倡議者社群</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>在 Parti 廣場跑倡議的公民倡議者社群。公民不再只是自己一個人喊，而是織出一張互相支援、一起行動的網。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">4</div>
+  <div class="item__body">
+    <h3>K.F.C. 韓國查核者社群</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>自己動手查證資訊的查核者社群。這是 Parti 一手養起來的公民查核者網絡，一起學、一起查，把韓國的公民查核文化做出來。（第 4 章事實查核有詳述。）</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">公民社會與社會團結經濟協作</h2><p>Parti 在組織層次上建立的協作。它與公民社會、社會團結經濟的夥伴一起把廣場撐大。</p></div>
+<article class="item">
+  <div class="item__no">5</div>
+  <div class="item__body">
+    <h3>與 1,500 個以上夥伴組織的共同行動</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>十年來，Parti 與 1,500 個以上的公民團體、公益組織與合作社協作，一起做倡議、公共論壇、事實查核與資料專案。它不是一個組織的平台，而是整個韓國公民社會都在用的廣場。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">6</div>
+  <div class="item__body">
+    <h3>地方組織數位行動支援</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>為了不讓首爾以外的公民團體在數位轉型裡掉隊，Parti 支援地方組織的數位行動，協助在地團體蓋起並經營自己的廣場。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">7</div>
+  <div class="item__body">
+    <h3>共同倡議與共同企劃</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>Parti 與各種組織、新聞編輯室、機關一起做的共同倡議與企劃：與 University Alli、Gongik Journal 合辦的政策對戰，與 Sisageongeon、Pressian 合辦的政策對戰，與《韓民族日報》合作的「韓國的對話」，以及和氣候、勞動、性別團體合辦的公共論壇。廣場一直是以協作的形式長大的。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">8</div>
+  <div class="item__body">
+    <h3>數位社會團結經濟（SSE）聯盟</h3>
+    <div class="chips"><span class="chip chip--wip">進行中</span></div>
+    <p>一個把非營利組織、合作社與公民團體的夥伴聚起來的聯盟，目標是讓數位技術與資料以社會團結經濟共同持有、共同治理的方式被建立與營運，而不是被大型科技公司壟斷。這是 Parti 心目中民主技術生態系的夥伴網絡，正在成形中。</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">亞洲連帶</h2><p>Parti 跨過國界，串連亞洲各地數位民主夥伴的工作。</p></div>
+<article class="item">
+  <div class="item__no">9</div>
+  <div class="item__body">
+    <h3>Facing the Ocean（FTO）</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>東亞公民黑客網絡，韓國、台灣、日本與鄰近國家的公民黑客以「面對同一片海」之名聚在一起，由台灣 g0v、日本 Code for Japan 與韓國 Code for Korea 共同主辦。Parti 是早期發起 FTO 的組織之一，韓國這邊現在由 Code for Korea 接手。2024 年在日本、2025 年在台灣之後，FTO 2026 將再度在韓國舉行。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">10</div>
+  <div class="item__body">
+    <h3>亞洲數位民主行動者網絡</h3>
+    <div class="chips"><span class="chip chip--wip">進行中</span></div>
+    <p>不只是公民黑客的技術聚會，而是串連亞洲各國建設數位民主的行動者。Parti 正在建立這個連帶空間，讓一國之內長出來的公民廣場經驗跨過國界，彼此養大。</p>
+    
+  </div>
+</article>
+  </div>
+</details>
+<details class="chapter" id="ch11">
+  <summary class="chapter__head">
+    <div class="chapter__idx">11</div>
+    <div class="chapter__heading">
+      <h2 class="chapter__title">AI 與未來技術 <span class="chapter__emoji">🤖</span></h2>
+      <p class="chapter__count">20 項</p>
+    </div>
+    <span class="chapter__chev" aria-hidden="true">▾</span>
+  </summary>
+  <div class="chapter__body">
+    <p class="chapter__intro">AI 是數位民主最大的難題，也是最大的可能。Parti 既不拒斥 AI，也不照單全收。控制技術的權力必須屬於公民，而不是企業或國家——依這個原則，Parti 要讓數位廣場在 AI 時代仍然握在公民手上。這一章記錄 Parti 怎麼看 AI、現在在做什麼、接下來必須做出什麼。</p>
+    <div class="group"><h2 class="group__title">Parti 怎麼看 AI——負責任 AI 的三個原則</h2><p>介入民主決策的 AI，份量和一般技術工具不同。Parti 每做一個 AI 功能，都會拿下面三個原則去衡量它的價值。這一章後面每一個功能，都建立在這個基礎上被評估。</p><p><strong>一、可解釋性</strong>——介入民主決策的 AI，必須比任何其他領域的 AI 更能被解釋。公民不只要看得懂結果，還要看得懂這個結果是怎麼來的，對決策系統的信任才站得住。</p><p><strong>二、公民參與的共識</strong>——AI 演算法被塑造出來的那個過程，本身就要納入盡可能廣泛的公民，並且通過社會共識。要用哪一種 AI、依什麼原則使用，是公民要一起決定的問題，不是工程師或營運者自己說了算。</p><p><strong>三、喊停的權利</strong>——AI 系統必須透明公開，隨時可以被檢視與修改；任何人都能對它提出質疑；必要時，公民必須有權讓它停下來。</p><p>這三個原則是 Parti 把 AI 當成民主問題而非效率問題的理由，也定下了 Parti 為 AI 時代蓋數位廣場的方向。</p></div>
+<div class="group"><h2 class="group__title">AI 治理與公民參與</h2><p>讓公民一起決定 AI 怎麼被使用的工作。</p></div>
+<article class="item">
+  <div class="item__no">1</div>
+  <div class="item__body">
+    <h3>AI 民主公民對話</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>一個由公民自己提問、自己談的公共論壇，主題是 AI 時代的民主。透過「在 AI 時代重新追問所有人的民主」系列講座與公民提問蒐集，公民一起審議 AI 對他們該有什麼意義。這是通往第 20 項——由抽籤產生的公民小組進行審議的完整公民議會——的起點。（第 5 章治理也有談到。）</p>
+    <div class="srcs"><a class="src" href="https://talks.campaigns.do/goals/aidemocracy" target="_blank" rel="noopener">AI 民主公民提問 ↗</a></div>
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">2</div>
+  <div class="item__body">
+    <h3>AI 民主公民實驗室</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>公民與勞工動手玩 AI、生出點子的場地。透過「給勞工與職場的 AI 點子松」，公民直接實驗：AI 進到職場與日常之後，他們可以怎麼使用它、又怎麼改造它。（第 5 章治理也有談到。）</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">3</div>
+  <div class="item__body">
+    <h3>把公民的聲音帶進國家 AI 政策</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>Parti 透過國家人工智慧戰略委員會 AI 民主分組的工作，把公民觀點帶進 AI 政策制定。它在政策場合主張：控制 AI 的權力必須屬於公民，而要做到這件事，就需要數位公共論壇。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">4</div>
+  <div class="item__body">
+    <h3>AI 議題發掘公共論壇</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>公民自己把 AI 進入職場與日常後浮現的問題端出來討論的論壇。在「勞工與職場的 AI」這類貼近當下的題目上，公民對 AI 的擔憂與期待被轉成議題。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">5</div>
+  <div class="item__body">
+    <h3>AI 一對一深度對話模式</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>把 AI 接進「讓意見差距最大的兩位公民深度對談」這個模式的嘗試。在星星對話與「韓國的對話」磨出來的一對一方法論之上，用 AI 設計一套數位對話模式，讓更多公民不受時間與空間限制地參與。在統一部的「AI 平台社會對話」計畫中，Parti 是唯一的公民協作平台組織，主導這套模式的設計。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">6</div>
+  <div class="item__body">
+    <h3>AI 公共審議模式</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>把 AI 接進公共審議——許多公民一起審議一個社會議題——的模式。在公共論壇與公民議會累積的審議方法論之上，用 AI 設計一套能容納大規模參與與意見分析的數位審議模式。這是對「社會對話 2.0」的嘗試：既有的社會對話，規模一直被時間與空間卡住。</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">為民主服務的 AI——意見輔助與審議輔助</h2><p>Parti 把 AI 當成公民廣場的工具時，功能分成兩支。</p><ul><li><strong>意見輔助系統</strong>——幫個別公民發展自己的意見，並把它說得更清楚。</li><li><strong>審議輔助系統</strong>——幫大量公民理解彼此的觀點，並把討論一步步推進。</li></ul><p>看起來零散的 AI 功能，放進這兩支底下就清楚了。無論哪一支，AI 都待在協助公民判斷的位置，不取代判斷。</p><p><strong>意見輔助系統</strong>——幫個別公民發展並表達自己意見的功能。</p><p><strong>審議輔助系統</strong>——幫大量公民理解彼此觀點、把討論推進的功能。</p></div>
+<article class="item">
+  <div class="item__no">7</div>
+  <div class="item__body">
+    <h3>相似意見比對與意見深化提示</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>公民送出意見時，系統拿它跟已蒐集的意見比對，顯示相似與相異觀點的摘要與趨勢，並據此提示公民把意見再往前推一步。非同步參與的公民，也能完整掌握彼此在想什麼，把自己的意見打磨得更清楚。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">8</div>
+  <div class="item__body">
+    <h3>提案的白話摘要與視覺化</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>把辯論起點的提案，做成逐段摘要與更白話的版本，並用文字生成圖像的 AI 產出一張承接提案意旨的圖，幫助理解。不管背景知識差多少，每個人都能從同一條起跑線進入辯論。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">9</div>
+  <div class="item__body">
+    <h3>Chorus——AI 大規模公民意見分析</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span><span class="chip chip--orig">Parti 原創</span></div>
+    <p>用 AI 對數千到數萬則公民意見做分類、摘要與類別樣態抽取，讓公民自己找出議題。它現在以 <strong>Chorus</strong> 的形式運作：一個五階段、人在迴圈中（human-in-the-loop）的議題發掘平台，把自動化 AI 分類（NLP、主題模型、文件嵌入）與人類引導者的質性介入結合起來——演算法把意見分群，人類引導者依脈絡校正，結果再回到廣場供繼續討論與學習。最終議題由公民與引導者確認，不會只由演算法決定。代表性案例包括國民統合委員會的「全民國民統合」——4,215 則以上公民提案被整理成 6 個領域，以及「千萬串連」——788 則公民意見被整理成 9 個領域，分析結果都回饋進專家審視、公民小組審議與政策發展。方向是 AI 協助公民審議，不是 AI 做判定。（第 5 章治理有詳述；這項功能的界線與限制見第 18 項。）</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">10</div>
+  <div class="item__body">
+    <h3>可信任的審議摘要報告</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>把公民在辯論、投票、倡議裡表達出來的審議，整理成公開報告，同時尊重多數意見的趨勢與少數意見。過程會用 AI，但一定要有人工審閱，摘要才可信。第 9 項的意見分析結果已經在編成報告，接下來的任務是把它推進到任何人都能驗證的形式。（與第 2 章「AI 討論摘要」屬於同一組審議輔助功能。）</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">11</div>
+  <div class="item__body">
+    <h3>AI 內容審核——偵測仇恨言論與違反守則的內容</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>Parti 的 Campaigns 平台依服務條款與社群守則處理仇恨言論與違規內容，並已有一層 AI 自動偵測貼文，向作者建議修改或通知營運者。這是 AI 協助大規模對話維持安全的案例。任何判斷的最終責任仍在人身上，公民也可以要求更正結果。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">12</div>
+  <div class="item__body">
+    <h3>事實查核聊天機器人——錯誤訊息偵測與查證</h3>
+    <div class="chips"><span class="chip chip--done">已實作</span></div>
+    <p>在公共對話進行時查核主張的聊天機器人，依據的是已經查證並存下來的事實。它讓公民在錯誤訊息擴散之前，先握有自己的判斷依據。下一步是延伸到書寫當下就標出可疑的錯誤訊息，同時附上可信來源，並與第 14 項的不實訊息事後追蹤與查證串起來。（第 4 章事實查核也有談到。）</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">13</div>
+  <div class="item__body">
+    <h3>AI 輔助查核</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>讓 AI 協助公民查核者完成查證工作的工具。AI 自動化證據搜尋、來源驗證與相似案例推薦，減輕公民的負擔。方向是 AI 協助公民做出判定的過程，不是 AI 判斷真假。（第 4 章事實查核也有談到。）</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">未來方向</h2><p>AI 時代 Parti 必須做出來的東西。</p></div>
+<article class="item">
+  <div class="item__no">14</div>
+  <div class="item__body">
+    <h3>不實訊息路徑追蹤與預警</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>追蹤不實訊息如何被製造、沿著哪些路徑擴散的系統，從事後查證往前推，事先對公民示警。AI 生成的不實訊息愈多，這件事就愈重要。（第 4 章事實查核也有談到。）</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">15</div>
+  <div class="item__body">
+    <h3>公民持有的公益 AI</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>不是大型科技公司持有的 AI，而是公民社會共同建立與持有的公益 AI。訓練資料的來源與所有權透明，治理過程有公民參與。這是 Parti 心目中的民主技術在 AI 領域的實現形式。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">16</div>
+  <div class="item__body">
+    <h3>給 AI 訓練用的韓語公益資料集</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>AI 訓練資料的所有權與來源愈來愈重要，因此把公民建立的韓語公益資料整理、釋出，供 AI 訓練使用。Parti 的公民政策 DB、公共論壇紀錄與公民資料集是現成的基礎。（第 6 章公民科技也有談到。）</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">17</div>
+  <div class="item__body">
+    <h3>AI 時代的公民能力教育架構</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>一套有系統的教育架構，培養公民批判地理解 AI、自主地使用 AI，並參與 AI 的治理。Parti 既有的教育計畫會朝這個方向整合與演化。（第 9 章教育也有談到。）</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">18</div>
+  <div class="item__body">
+    <h3>守住公民的位置——AI 模擬與意見分析的界線</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>用 AI 模擬公民意見的合成人格技術，以及用 AI 分析大規模意見資料、讀出公民慾望的技術，都在快速進展。兩者都很強大，也帶著同一個風險：AI 的輸出可能取代公民自己說話、一起審議的那個位置。Parti 一邊積極使用 AI 意見分析（第 9 項），一邊把這件事當成自己的任務——確保這種分析停在協助審議、而不是取代審議的位置。AI 讀出來的「民意」，永遠取代不了公民聚在一起蓋出來的共識；和公民一起守住這條界線，是 AI 時代數位廣場的核心任務。</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">19</div>
+  <div class="item__body">
+    <h3>公民資料信託</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>由公民自己持有與營運自身資料的信託架構。在 AI 靠公民資料學習、創造龐大價值的年代，這個模式把資料主權還給公民，讓他們一起決定。（第 6 章公民科技也有談到。）</p>
+    
+  </div>
+</article>
+<article class="item">
+  <div class="item__no">20</div>
+  <div class="item__body">
+    <h3>AI 民主公民議會</h3>
+    <div class="chips"><span class="chip chip--future">未來方向</span></div>
+    <p>真正意義上的公民議會——由抽籤產生的公民小組深度審議 AI 治理議題，產出建議書。任務是把 Parti 在氣候公民議會等場合建立的抽籤審議方法論延伸到 AI 領域，基礎則是第 1 項（公民對話）與第 2 項（公民實驗室）累積下來的提問與經驗。負責任 AI 三原則裡的「公民參與的共識」，在這裡最直接地被實現。</p>
+    
+  </div>
+</article>
+<div class="group"><h2 class="group__title">結語</h2><p>這份文件記錄了 Parti 過去十年做出來的數位民主功能與計畫。我們原本想的是 100 個，整理的過程中卻發現，做出來的比 100 個還多。</p><p>這些工具與計畫都來自同一個信念：數位公共廣場應該屬於公民。而它們不只是「為民主服務的技術」——它們建立在民主的技術之上，由公民自己持有、自己治理。</p><p>到了 AI 時代，這個信念不變。數位世界由誰治理、怎麼治理——Parti 相信公民必須有能力回答這個問題，並且正在和公民一起把答案蓋出來。</p></div>
+  </div>
+</details>
+  </main>
+</div>
+
+<footer class="colophon">
+  <div class="colophon__inner">
+    <p><strong>導讀</strong>　台灣脈絡與 Parti 十年，見〈<a href="/reports/2026-08-26-parti-korea-decade/">把百萬人的廣場重新蓋回來：韓國 Parti 的十年</a>〉。本頁為 <a href="https://pro.mashbean.net/">pro.mashbean.net</a> 的互動全文譯本。</p>
+    <p><strong>來源</strong>　Parti Cooperative，《Digital Democracy 100 — 100 Features of Parti's Digital Democracy, A Decade in Review》。原文（韓／英）見
+      <a href="https://100-democracy.parti.coop" target="_blank" rel="noopener">100-democracy.parti.coop</a> 與
+      <a href="https://github.com/parti-coop/digital-democracy-100" target="_blank" rel="noopener">GitHub 專案</a>。組織近況由 Parti 理事長權五鉉提供。</p>
+    <p><strong>授權</strong>　原文以 CC BY 4.0 釋出；本譯本沿用同一授權，署名 Parti Cooperative。</p>
+    <p><strong>譯註</strong>　「銀河投票」（은하투표 / Galaxy Voting）、「星星對話」（별별대화 / Star Talk）為 Parti 自行研發的功能，程式碼未開源；本文件本身是開放的。</p>
+  </div>
+</footer>
+
+<script>
+  // 刊頭星圖：呼應「銀河投票」把意見分布畫成星團的作法。三個星團，靜態繪製。
+  (function () {
+    var canvas = document.getElementById('sky');
+    if (!canvas || !canvas.getContext) return;
+    var ctx = canvas.getContext('2d');
+
+    function draw() {
+      var rect = canvas.getBoundingClientRect();
+      if (rect.width < 1 || rect.height < 1) return;
+      var dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+      canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, rect.width, rect.height);
+
+      var ink = getComputedStyle(document.documentElement).getPropertyValue('--star').trim() || '#888';
+      var clusters = [
+        { x: 0.80, y: 0.30, n: 34, r: 0.16 },
+        { x: 0.62, y: 0.72, n: 22, r: 0.12 },
+        { x: 0.93, y: 0.78, n: 16, r: 0.09 }
+      ];
+      var seed = 7;
+      function rand() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+
+      clusters.forEach(function (c) {
+        var cx = c.x * rect.width, cy = c.y * rect.height, rad = c.r * rect.width;
+        for (var i = 0; i < c.n; i++) {
+          var a = rand() * Math.PI * 2;
+          var d = Math.pow(rand(), 0.6) * rad;
+          var x = cx + Math.cos(a) * d;
+          var y = cy + Math.sin(a) * d * 0.72;
+          var size = 0.6 + rand() * 1.7;
+          ctx.globalAlpha = 0.18 + (1 - d / rad) * 0.42;
+          ctx.fillStyle = ink;
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
+      ctx.globalAlpha = 1;
+    }
+
+    draw();
+    var t;
+    window.addEventListener('resize', function () {
+      clearTimeout(t);
+      t = setTimeout(draw, 150);
+    });
+    if (window.matchMedia) {
+      var mq = window.matchMedia('(prefers-color-scheme: dark)');
+      if (mq.addEventListener) mq.addEventListener('change', draw);
+    }
+    new MutationObserver(draw).observe(document.documentElement, {
+      attributes: true, attributeFilter: ['data-theme']
+    });
+  })();
+
+  // 章節為可收合的 <details>（收合時高度為 0，讓整頁在初次載入時夠短、正常 paint）。
+  // 點側欄連結時，把對應章節展開再捲過去。
+  (function () {
+    function openTarget(id) {
+      var el = id && document.querySelector(id);
+      if (el && el.tagName === 'DETAILS') { el.open = true; }
+    }
+    document.querySelectorAll('.rail a').forEach(function (a) {
+      a.addEventListener('click', function () { openTarget(a.getAttribute('href')); });
+    });
+    window.addEventListener('hashchange', function () { openTarget(location.hash); });
+    if (location.hash) { openTarget(location.hash); }
+  })();
+</script>
+
+</body>
+</html>
