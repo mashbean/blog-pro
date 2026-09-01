@@ -158,6 +158,17 @@ export const SERIES = {
     blurbEn: "Edited talk transcripts.",
     entry: undefined as string | undefined,
   },
+  "ready-digital-government": {
+    label: "有備而來，理想的政府數位身分與資料 App 開發報告",
+    labelEn: "Ready for It: Government Identity and Data App Reports",
+    blurb:
+      "從有備而來的真機開發出發，逐一檢查理想的政府數位身分、資料皮夾與公共服務，" +
+      "把政策倡議寫成可測試、可採購、也可追究責任的系統需求。",
+    blurbEn:
+      "Hands-on iPhone prototypes for better government identity, data wallets, and public services — " +
+      "turning policy proposals into testable, procurable, and accountable system requirements.",
+    entry: "2026-09-01-natural-person-certificate-official-documents",
+  },
   "dns-rpz": {
     label: "DNS RPZ",
     labelEn: "DNS RPZ",
@@ -212,6 +223,20 @@ export const SPECIALS: Special[] = [
       "24 essays, an argument map, and Taiwan case studies — now a standalone site.",
     url: "https://civic-proof.mashbean.net",
     series: "civic-proof",
+  },
+  {
+    id: "ready-digital-government",
+    title: "有備而來，理想的政府數位身分與資料 App 開發報告",
+    titleEn: "Ready for It: Government Identity and Data App Reports",
+    blurb:
+      "我把政策提案真的做進 iPhone，再從每一次成功與失敗回頭追問法規、資安、" +
+      "無障礙、公共採購和政府該承擔的共同基礎設施。第一篇從自然人憑證與電子公文開始。",
+    blurbEn:
+      "I build public-service proposals into a real iPhone app, then use every success and failure " +
+      "to examine law, security, accessibility, procurement, and shared public infrastructure. " +
+      "The first report starts with citizen certificates and official digital mail.",
+    href: "/?series=ready-digital-government",
+    series: "ready-digital-government",
   },
   {
     id: "dns-rpz",
