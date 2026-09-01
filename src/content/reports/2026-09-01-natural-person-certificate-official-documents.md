@@ -31,9 +31,12 @@ _這是「有備而來，理想的政府數位身分與資料 App 開發報告�
 
 然後我也更確定一件事。簽章成功，只跨過了整條路上的一小段。
 
-![有備而來首頁與 MyData 資料保險箱](/images/reports/natural-person-official-documents/ready-home-vault.png)
-
-_圖一。有備而來原有的國民身分證、政府皮夾卡片與 MyData 資料保險箱。電子公文被安排在資料保險箱之下，讓「收到」接到「長期保管與再次使用」。這是開發版畫面。_
+<figure class="phone-shot">
+  <a class="phone-shot__image" href="/images/reports/natural-person-official-documents/ready-home-vault.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖：有備而來首頁與 MyData 資料保險箱">
+    <img src="/images/reports/natural-person-official-documents/ready-home-vault.png" alt="有備而來首頁與 MyData 資料保險箱" width="1206" height="2622" loading="lazy" />
+  </a>
+  <figcaption><em>圖一。有備而來原有的國民身分證、政府皮夾卡片與 MyData 資料保險箱。電子公文被安排在資料保險箱之下，讓「收到」接到「長期保管與再次使用」。這是開發版畫面。</em></figcaption>
+</figure>
 
 ## 台灣其實已經開始做了
 
@@ -83,9 +86,12 @@ _圖一。有備而來原有的國民身分證、政府皮夾卡片與 MyData �
 
 我先把公文接收站放在 MyData 資料保險箱下方，獨立成一個區塊。第一個畫面只回答兩個問題：目前有沒有正式啟用，以及本機保存了幾份文件。
 
-![有備而來個人公文接收站入口](/images/reports/natural-person-official-documents/official-document-inbox.png)
-
-_圖二。個人公文接收站已保存一份合成測試套件，畫面同時顯示「尚未啟用正式收文」。這個限制不能藏在說明頁。_
+<figure class="phone-shot">
+  <a class="phone-shot__image" href="/images/reports/natural-person-official-documents/official-document-inbox.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖：有備而來個人公文接收站入口">
+    <img src="/images/reports/natural-person-official-documents/official-document-inbox.png" alt="有備而來個人公文接收站入口" width="1206" height="2622" loading="lazy" />
+  </a>
+  <figcaption><em>圖二。個人公文接收站已保存一份合成測試套件，畫面同時顯示「尚未啟用正式收文」。這個限制不能藏在說明頁。</em></figcaption>
+</figure>
 
 接著我做了四段可以分別失敗的流程。
 
@@ -94,9 +100,12 @@ _圖二。個人公文接收站已保存一份合成測試套件，畫面同時�
 3. **交換套件**。沙盒載入合成的 EN／DI／ESW 套件，驗證來源簽章、對指定裝置解密、保存密文與明文。所有欄位都刻意使用合成資料。
 4. **收文確認**。開啟文件和送出確認是兩個事件。確認內容需綁定文件摘要、時間、收件地址和裝置證據，避免只留一個容易誤解的「已讀」。
 
-![有備而來電子公文測試控制與邊界](/images/reports/natural-person-official-documents/official-document-sandbox.png)
-
-_圖三。行動自然人憑證、實體自然人憑證、G2C sandbox 和合成套件各自獨立。畫面直接寫明 sandbox 地址不可路由、沒有法律效果；正式收文仍需檔案管理局 G2C 與機關送達規則。_
+<figure class="phone-shot">
+  <a class="phone-shot__image" href="/images/reports/natural-person-official-documents/official-document-sandbox.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖：有備而來電子公文測試控制與邊界">
+    <img src="/images/reports/natural-person-official-documents/official-document-sandbox.png" alt="有備而來電子公文測試控制與邊界" width="1206" height="2622" loading="lazy" />
+  </a>
+  <figcaption><em>圖三。行動自然人憑證、實體自然人憑證、G2C sandbox 和合成套件各自獨立。畫面直接寫明 sandbox 地址不可路由、沒有法律效果；正式收文仍需檔案管理局 G2C 與機關送達規則。</em></figcaption>
+</figure>
 
 目前完成的是一條可重複的產品與密碼學測試路徑。尚未完成的包括正式 G2C 收件地址、主管機關測試憑證、真實機關來源簽章、正式 ESW 解密規格、收文確認回送、跨機關互通、送達時點、紙本 fallback、爭議處理、壓力測試和營運稽核。
 
