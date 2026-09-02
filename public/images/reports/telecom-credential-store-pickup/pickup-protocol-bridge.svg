@@ -15,7 +15,7 @@
   </defs>
 
   <rect width="1200" height="690" rx="38" fill="#0d0d12"/>
-  <text x="64" y="72" fill="#f6f5fb" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="36" font-weight="700">不是一個協定，而是一座橋</text>
+  <text x="64" y="72" fill="#f6f5fb" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="36" font-weight="700">OpenID4VP 與離線 QR 的分層架構</text>
   <text x="64" y="112" fill="#aaa7b5" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="21">身分呈現走 OpenID4VP；門市端再離線解密 QR、驗 TOTP 與 HMAC</text>
 
   <g filter="url(#shadow)">

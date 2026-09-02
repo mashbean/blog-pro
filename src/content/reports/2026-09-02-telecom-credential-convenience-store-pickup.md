@@ -1,9 +1,9 @@
 ---
 title: "用「有備而來」完整重現數位皮夾超商取貨"
-description: "我把台灣大哥大門號電子卡接進有備而來，實際產生統一超商取貨 QR 並領到包裹。這篇拆解 OID4VP、官方驗證模組與既有 POS 之間的橋接，以及它離 OID4VP 1.0 還有多遠。"
+description: "以真機、正式門市 POS 與官方規格檢驗電信憑證超商取貨流程，分析 OpenID4VP、離線 QR、iOS 實作與政策互通性。"
 topic: digital-identity
 tags: ["數位皮夾", "可驗證憑證", "信任根與信任清單", "隱私", "使用者經驗", "開源", "台灣"]
-keywords: ["有備而來", "數位憑證皮夾", "門號電子卡", "台灣大哥大", "統一超商", "超商取貨", "OID4VP", "SD-JWT VC", "QR Code", "POS", "選擇性揭露", "did:key"]
+keywords: ["有備而來", "數位憑證皮夾", "門號電子卡", "台灣大哥大", "統一超商", "超商取貨", "OpenID4VP", "SD-JWT VC", "QR Code", "POS", "選擇性揭露", "did:key"]
 pubDate: 2026-09-02
 draft: false
 lang: "zh-TW"
@@ -19,144 +19,163 @@ seriesOrder: 2
 slug: "2026-09-02-telecom-credential-convenience-store-pickup"
 ---
 
-_這是「有備而來，理想的政府數位身分與資料 App 開發報告」第二篇。OpenAI GPT-5.6 協助我整理真機開發紀錄、數位發展部公開程式碼、OpenID4VP 1.0 Final 與國外案例，最後以我本人在超商完成取貨的結果校正。附圖保留發卡者的 `did:key` 與公開信任紀錄；姓名、手機末五碼、憑證序號都已裁掉或遮蔽，真正可掃的 QR 也不會公開。_
+_這是「有備而來，理想的政府數位身分與資料 App 開發報告」第二篇。分析材料包括 iPhone 真機操作、正式門市 POS 驗收、數位發展部公開程式碼與 QR 驗證規格、OpenID4VP 1.0 Final，以及國外官方案例。公開截圖保留發卡者的 `did:key` 與信任紀錄，姓名、手機末五碼、憑證序號和可掃描 QR 均已遮蔽。_
 
-> **更正（2026 年 9 月 3 日）：** 初版把取貨 QR 說成「不透明的服務端核銷 token」，也推論 QR 不該含姓名或電話。這是錯的。數位發展部其實已公開 QR 驗證規格與離線驗證範例；本文已依文件重寫機制分析及流程圖，並保留這段更正紀錄。
+2026 年 9 月 2 日，我以有備而來匯入台灣大哥大的門號電子卡，完成「統一超商包裹取貨」的憑證呈現，取得取貨 QR，並由正式門市 POS 掃描交付包裹。
 
-我真的用有備而來領到包裹了。
-
-流程不複雜：把台灣大哥大的門號電子卡領進有備而來，選「統一超商包裹取貨」，確認要提供姓名和手機末五碼，拿到一張畫面倒數五分鐘的 QR，再交給門市掃描。正式 POS 接受，包裹交付。
-
-對我來說，最有意思的不是手機終於畫出 QR，而是那台不受我控制、也不知道我在開發什麼的門市機器真的收了它。這才是 App 之外的驗收。
+這項結果建立了一條端到端互通證據。App 能讀取卡片、API 回傳成功或畫面顯示 QR，都屬於中間狀態。正式 POS 接受 QR 並完成交付，才證明第三方皮夾產生的流程能進入既有物流系統。
 
 <figure class="phone-shot">
-  <a class="phone-shot__image" href="/images/reports/telecom-credential-store-pickup/telecom-card-detail.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖：有備而來裡的台灣大哥大門號電子卡">
+  <a class="phone-shot__image" href="/images/reports/telecom-credential-store-pickup/telecom-card-detail.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，有備而來裡的台灣大哥大門號電子卡">
     <img src="/images/reports/telecom-credential-store-pickup/telecom-card-detail.png" alt="有備而來顯示台灣大哥大門號電子卡的卡片種類、發卡者 did:key 與效期" width="1170" height="2532" loading="lazy" />
   </a>
-  <figcaption><em>圖一。實際領進有備而來的門號電子卡。畫面上的 `did:key` 是發卡者公開識別碼，不是持卡人的姓名或手機號碼，因此保留。</em></figcaption>
+  <figcaption><em>圖一。實際匯入有備而來的門號電子卡。畫面保留發卡者公開的 `did:key`，持卡人的姓名與手機號碼沒有出現在公開圖檔。</em></figcaption>
 </figure>
 
-這個成功也把原本的疑問放得更大：手機已經驗證過憑證，為什麼還要再顯示一張 QR？這張 QR 究竟是不是 OpenID4VP（也常被寫成 OIDC4VP）？
+## 測試結論與適用範圍
 
-## 先把「成功」的範圍說清楚
+本次測試涵蓋四個層級。
 
-這次確實走完了幾個彼此可以分開失敗的關卡：第三方皮夾讀到電信卡、找到官方取貨服務、核對 API 與鏈上信任紀錄、讓我看見並同意揭露欄位、送出 holder key 簽名的 VP、取得會倒數的服務端 QR，最後由門市完成核銷。
+| 層級 | 驗證內容 | 結果 |
+| --- | --- | --- |
+| 憑證層 | 有備而來能讀取台灣大哥大門號電子卡與 holder key | 通過 |
+| 信任層 | 取貨服務同時出現在官方 API 目錄與 Arbitrum 信任紀錄 | 通過 |
+| 協定層 | App 完成 OpenID4VP 呈現、姓名與手機末五碼揭露、交易簽章與 QR 取得 | 通過 |
+| 營運層 | 正式門市 POS 接受 QR 並交付包裹 | 通過一次 |
 
-但這不是全台相容性認證。我只測了一張台灣大哥大門號電子卡、一個統一超商取貨情境和一次成功交付。過期碼、截圖重播、離線門市、取消交易、同一包裹重複兌換，以及其他電信商和超商，都還沒在這次實測裡得到答案。成功是真的，能外推到哪裡也要老實。
+測試樣本限於一張台灣大哥大門號電子卡、一個統一超商取貨情境與一次成功交付。過期 QR、截圖重播、門市斷網、取消交易、重複取貨、其他電信商及其他超商尚未納入。這些情境需要獨立測試，無法從單次成功結果外推。
 
-## 我怎麼摸到 QR 背後那條線
+## 協定追查與 iOS 實作
 
-我沒有從破解 QR 開始，更沒有嘗試偽造條碼。比較可靠的做法，是先看官方 App 的行為，再沿著公開資料和實際網路流程往裡走。
-
-官方畫面先讓人選憑證和欄位，按下「產生條碼」之後才出現五分鐘 QR。光是這個先後順序，就知道「提供身分資料」和「讓門市核銷」是兩件事。
-
-接著是數位發展部前端的[公開 VP 服務目錄](https://frontend.wallet.gov.tw/api/moda/dwapp/offline/vpList?name=&page=0&size=100)。我在 2026 年 9 月 2 日查到 `22555003_711pickup`，名稱正是「統一超商包裹取貨」，旁邊還有獨立的 verifier module URL。有備而來不是把一個猜來的網址寫死，而是先找到服務，再把模組主機和官方信任紀錄對起來。
+數位發展部前端提供[公開 VP 服務目錄](https://frontend.wallet.gov.tw/api/moda/dwapp/offline/vpList?name=&page=0&size=100)。2026 年 9 月 2 日的查詢結果包含 `22555003_711pickup`，名稱為「統一超商包裹取貨」，並提供獨立的 verifier module URL。有備而來先從目錄發現服務，再核對模組主機、官方信任清單與鏈上紀錄。
 
 <figure class="phone-shot">
-  <a class="phone-shot__image" href="/images/reports/telecom-credential-store-pickup/pickup-trust-evidence.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖：統一超商包裹取貨服務的 API 與 Arbitrum 信任核對">
+  <a class="phone-shot__image" href="/images/reports/telecom-credential-store-pickup/pickup-trust-evidence.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，統一超商包裹取貨服務的 API 與 Arbitrum 信任核對">
     <img src="/images/reports/telecom-credential-store-pickup/pickup-trust-evidence.png" alt="有備而來在提供資料前顯示統一超商服務已通過官方 API 與 Arbitrum 信任核對" width="1170" height="1050" loading="lazy" />
   </a>
-  <figcaption><em>圖二。App 在送資料前先核對官方 API 與 Arbitrum 紀錄。這張公開版截到個人欄位出現之前，留下服務名稱、區塊與交易紀錄。</em></figcaption>
+  <figcaption><em>圖二。App 在傳送身分資料前核對官方 API 與 Arbitrum 紀錄。公開圖檔只保留服務名稱、區塊與交易紀錄。</em></figcaption>
 </figure>
 
-數位發展部的[數位憑證皮夾原始碼](https://github.com/moda-gov-tw/TWDIW-official-app)則補上架構線索：holder App、OpenID4VP handler、verifier API 和 VP 驗證元件是分開的。把畫面、目錄、原始碼和黑箱測試疊在一起，完整流程才慢慢浮出來：
+數位發展部公開的[數位憑證皮夾原始碼](https://github.com/moda-gov-tw/TWDIW-official-app)顯示 holder App、OpenID4VP handler、verifier API 與 VP 驗證元件採分層設計。有備而來依照這個邊界實作七個步驟。
 
-1. App 從官方目錄找到取貨情境與 verifier module。
-2. App 向模組建立一次性交易，拿到 `transactionId` 和 authorization deep link。
-3. App 依 deep link 取得簽名的 OpenID4VP request，核對 `nonce`、`state`、回傳主機與要求欄位。
-4. 我同意後，門號電子卡選擇性揭露姓名與手機末五碼，VP 回到 verifier。
-5. VP 通過後，App 再用同一張卡的 holder key 對 `transactionId` 簽一個 JWT，向原模組請求取貨 QR。
-6. 模組回傳 `data:image/png;base64,…` 和 `totptimeout=300`；App 顯示原圖。
-7. 門市端掃出 QR 裡的 `t`、`d`、`h`、`k`，以本地金鑰解密 `d`，再驗 TOTP 與 HMAC；密碼學查驗通過後，才進入交付包裹的業務流程。
+1. 從官方目錄取得取貨情境與 verifier module。
+2. 向模組建立交易，取得 `transactionId` 與 authorization deep link。
+3. 依 deep link 取得簽名的 OpenID4VP request，核對 `nonce`、`state`、request host、response host 與要求欄位。
+4. 由使用者確認揭露姓名與手機末五碼，再以門號電子卡建立 VP。
+5. 將 VP 送回 verifier，保留這次呈現使用的 holder key 與交易收據。
+6. 以同一把 holder key 對 `transactionId` 簽署 ES256 JWT，向原 verifier module 請求 QR。
+7. 驗證回應為 PNG、檔案大小不超過 5 MB、服務端效期為正數，再顯示原始圖檔。
 
-所以有備而來沒有自己「算」一張超商條碼。它拿到官方模組產生的 PNG，原樣顯示；真正的協定資料藏在 QR 裡。依數位發展部公開的[QR Code 驗證規格](https://github.com/moda-gov-tw/TWDIW-official-app/blob/main/Docs/QR%20Code%20%E9%A9%97%E8%AD%89%E8%A6%8F%E6%A0%BC%E8%AA%AA%E6%98%8E%E6%96%87%E4%BB%B6.md)，這不是等後台查詢的隨機 token，而是一包可離線驗證的加密資料。相容性實作放在有備而來的[公開 PR #56](https://github.com/bonds-tw/backupTW-iOS/pull/56)；CI 通過證明程式沒有壞，這次門市取貨才證明外面的系統真的接受它。
+iOS client 在主機、請求與回應三層採 fail-closed。request URI 與 response URI 必須回到目錄指定的同一個主機，`definitionID` 必須符合取貨情境，揭露欄位必須包含 `name` 與 `phonel5`。任何一項不一致，流程立即停止。QR 重新產生時再次呼叫官方模組，有備而來不會把姓名或手機末五碼自行編碼成另一張 QR。相關實作與測試可見[公開 PR #56](https://github.com/bonds-tw/backupTW-iOS/pull/56)。
+
+倒數計時採用服務端回傳的 `totptimeout` 與 QR 產生時間計算絕對期限。畫面每秒依目前時間重算剩餘秒數，從 Face ID、背景執行或捲動返回後仍能得到正確結果。這項設計修正了計時器在 view 尚未進入 window 時啟動，導致 `04:59` 停住的生命週期錯誤。
 
 <figure class="phone-shot">
-  <a class="phone-shot__image" href="/images/reports/telecom-credential-store-pickup/pickup-qr-redacted.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖：已遮蔽且畫面倒數五分鐘的統一超商取貨 QR">
-    <img src="/images/reports/telecom-credential-store-pickup/pickup-qr-redacted.png" alt="有備而來顯示畫面倒數五分鐘的統一超商取貨 QR；可掃區塊已以不透明遮罩完整覆蓋" width="1170" height="2532" loading="lazy" />
+  <a class="phone-shot__image" href="/images/reports/telecom-credential-store-pickup/pickup-qr-redacted.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，已遮蔽且畫面倒數五分鐘的統一超商取貨 QR">
+    <img src="/images/reports/telecom-credential-store-pickup/pickup-qr-redacted.png" alt="有備而來顯示畫面倒數五分鐘的統一超商取貨 QR，可掃區塊已以不透明遮罩完整覆蓋" width="1170" height="2532" loading="lazy" />
   </a>
-  <figcaption><em>圖三。這張 QR 是官方驗證模組回傳的短效 PNG，畫面上的倒數會真的走。公開版用不透明遮罩蓋掉整個可掃區域；即使原碼已過期，裡面仍可能是姓名、電話等欄位的密文，不拿來當裝飾公開。</em></figcaption>
+  <figcaption><em>圖三。官方模組回傳的 QR 與五分鐘 UI 倒數。公開版完整遮蔽可掃區域，因為失效後的 QR 仍可能保存個人欄位密文與協定資訊。</em></figcaption>
 </figure>
+
+## 離線 QR 的安全模型
+
+數位發展部的[QR Code 驗證規格](https://github.com/moda-gov-tw/TWDIW-official-app/blob/main/Docs/QR%20Code%20%E9%A9%97%E8%AD%89%E8%A6%8F%E6%A0%BC%E8%AA%AA%E6%98%8E%E6%96%87%E4%BB%B6.md)已定義 QR 外層資料。
+
+| 欄位 | 內容 | 驗證用途 |
+| --- | --- | --- |
+| `t` | 交易類型 | 區分超商取貨等應用情境 |
+| `d` | Base64 編碼的加密資料 | 承載 TOTP 與情境需要的揭露欄位 |
+| `h` | 解密後整份明文的 HMAC | 檢查資料完整性與共享金鑰持有狀態 |
+| `k` | 金鑰識別碼 | 選擇對應的驗證金鑰 |
+
+門市 POS 或相鄰的安全模組持有 `privateKey`、`totpKey` 與 `hmacKey`。驗證端以 X25519／ECDH 衍生金鑰，用 ChaCha20-Poly1305 解密 `d`，再檢查 TOTP 與 HMAC。官方[離線驗證範例](https://github.com/moda-gov-tw/TWDIW-official-app/blob/main/SampleCode/VerifyQRCodeController.java)明確要求三把金鑰留在 POS 設定、環境變數或安全模組，密碼學驗證可在沒有網路的環境完成。
+
+解密資料可以包含姓名與電話。官方範例要求不得把解密明文寫入 log，且格式只強制 `totp` 欄位，其餘內容由應用情境定義。本次取貨要求姓名與手機末五碼，安全控制應涵蓋收件端加密、欄位最小化、POS 金鑰保護、明文記錄禁令與資料留存期限。
 
 <figure>
-  <a href="/images/reports/telecom-credential-store-pickup/pickup-protocol-bridge.svg" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸流程圖：有備而來超商取貨的三層協定">
+  <a href="/images/reports/telecom-credential-store-pickup/pickup-protocol-bridge.svg" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸流程圖，有備而來超商取貨的分層協定">
     <img src="/images/reports/telecom-credential-store-pickup/pickup-protocol-bridge.svg" alt="有備而來先以 OpenID4VP 向官方驗證模組呈現電信憑證，再由門市端解密 QR 並驗證 TOTP 與 HMAC" width="1200" height="690" loading="lazy" />
   </a>
-  <figcaption><em>圖四。OpenID4VP 處理「這張卡和這次呈現能不能相信」；加密 QR 把已同意揭露的資料帶到門市端，讓 POS 或安全模組離線查驗。它們接在一起，卻不是同一個協定。</em></figcaption>
+  <figcaption><em>圖四。OpenID4VP 驗證憑證呈現與 holder binding。加密 QR 將同意揭露的資料帶到門市端，由 POS 或安全模組完成離線查驗。</em></figcaption>
 </figure>
 
-## 手機已經驗證成功，為什麼還要 QR
+目前仍有一項時間語意未被公開文件完整說明。有備而來收到 `totptimeout=300`，畫面據此倒數五分鐘；官方 QR 規格記載 TOTP 有效 60 秒，並容許前後 30 秒的時鐘誤差。現有 App 在五分鐘內不會自動輪替 QR，只有使用者按下重新產生時才向模組取得新圖。
 
-手機上的「驗證成功」只代表前一段 verifier 接受了這次憑證呈現。資料接著怎麼送到門市端、門市怎麼在自己的環境裡重驗，OpenID4VP 沒有規定。這張 QR 就是台灣實作補上的第二段載具。
+本次成功掃描發生在 QR 產生後不久，因此無法判定門市實際採用 60 秒或 300 秒週期。TOTP 也只提供時間新鮮度，掃描後失效與防止重複交付仍需業務系統處理。這項落差應列入正式 profile 與互通測試，避免 UI 顯示可用時，內層 TOTP 已被驗證端拒絕。
 
-[OpenID4VP 1.0 Final](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html)規範 verifier 怎麼要求憑證、wallet 怎麼取得同意、VP 怎麼送回去，以及 verifier 怎麼驗證。`direct_post` 成功時，規格走到 HTTP 200 JSON 回應就停了。它不替統一超商定義包裹查詢、門市條碼格式或「已領取」狀態。
+## 雙階段驗證架構
 
-官方 QR 規格把外層 JSON 寫得很清楚：`t` 是交易類型，`d` 是 Base64 編碼的加密資料，`h` 是解密後明文的 HMAC，`k` 是金鑰識別碼。門市端或它旁邊的驗證模組持有 `privateKey`、`totpKey` 與 `hmacKey`，以 X25519／ECDH 衍生金鑰、用 ChaCha20-Poly1305 解密 `d`，再檢查 TOTP 和整份明文的 HMAC。官方[離線驗證範例](https://github.com/moda-gov-tw/TWDIW-official-app/blob/main/SampleCode/VerifyQRCodeController.java)甚至直接寫明：這個檢查可以在離線環境完成，三把金鑰在正式部署時應留在 POS 或安全模組，不要送上網路。
+[OpenID4VP 1.0 Final](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html)處理 verifier 的憑證請求、wallet 同意、選擇性揭露、VP 回傳與驗證。`direct_post` 完成後，規格不再處理包裹查詢、門市設備、QR 格式或交付狀態。
 
-這也推翻了我初版文章裡最離譜的判斷：QR 的設計不是「不要放姓名電話」，而是**允許把必要欄位放進明文，再把整包資料加密給指定的驗證端**。官方範例特別提醒，解密結果可能包含姓名與電話，絕對不能寫進 log；格式上只有 `totp` 是必填，其餘欄位由 wallet 情境決定。這次取貨要求的正是姓名與手機末五碼，隱私保護靠的是收件端加密、最少揭露與解密後不留存，不是靠 QR 裡完全沒有個資。
+台灣的取貨服務在 OpenID4VP 後加入離線 QR。前段 verifier 驗證 SD-JWT VC、holder binding 與信任來源；後段把情境需要的欄位加密給門市驗證端。POS 不需要實作完整的 SD-JWT VC、OpenID4VP 或政府信任清單，仍需具備 QR 解密、TOTP 與 HMAC 驗證能力。
 
-所以答案是：手機掃 iPad 後立刻顯示成功，是 OpenID4VP 那一段完成了；後面的 QR 則把同意揭露的資料換成門市驗證端能解密、能離線檢查的新封裝。門市不必重新理解 SD-JWT VC、holder binding 或整份信任清單，但也不只是一支「笨掃描器」——POS 或其安全模組仍要做解密、TOTP 與 HMAC 驗證。至於驗完之後是否再連包裹後台、如何標記已領取，是另一層業務流程，QR 密碼規格沒有替超商作答。
+業務核銷位於第三個層次。QR 密碼學驗證通過後，門市仍要查找包裹、確認交付資格並防止重複領取。公開 QR 規格沒有定義這些物流狀態，也無法證明實際 POS 在密碼學驗證後是否連回後台。
 
-這裡還有一個真正需要釐清的落差。有備而來收到的 API 欄位是 `totptimeout=300`，畫面因此倒數五分鐘；官方 QR 規格卻寫 TOTP 有效 60 秒，另容許前後 30 秒時鐘誤差。TOTP 只證明資料夠新鮮，**不等於掃過一次就自動作廢**。目前沒有足夠證據把五分鐘 UI、60 秒 TOTP 和「一次性取貨」硬說成同一件事。這應該列為 profile 文件與互通測試的必答題：五分鐘內是否輪替內層 QR、不同門市使用哪個 TOTP 週期，以及重複交付由哪一層擋下。
+## 架構選擇的政策推論
 
-## 它離 OpenID4VP 1.0 到底多遠
+離線驗證是公開規格明確支持的設計目標。既有門市設備的相容需求與責任配置，則是依公開介面、程式碼及實測結果形成的工程與政策推論，並非官方決策紀錄。
 
-很難用一個百分比回答，因為三層的距離不同。
+第一項推論涉及營運韌性。POS 在本地完成解密、TOTP 與 HMAC，可降低網路中斷對身分查驗的影響。包裹查詢與交付狀態仍可能需要後台，密碼學查驗至少保留離線能力。
 
-| 層次 | 這次看到的做法 | 與 1.0 Final 的關係 |
+第二項推論涉及系統改造範圍。把 SD-JWT VC、holder binding 與信任清單留在 verifier module，可避免所有門市設備同步導入完整數位身分堆疊。POS 只需加入 QR 解密與完整性驗證，既有掃描及交付流程可繼續使用。
+
+第三項推論涉及公共基礎設施治理。技術複雜度從 POS 移到 verifier module 與金鑰發放體系後，互通性會依賴服務目錄、profile、測試向量及金鑰政策。這些規則若只存在官方 App 與特定供應商實作中，第三方 wallet 與不同 POS 廠商仍會面臨制度性進入成本。
+
+## 與 OpenID4VP 1.0 的相容性
+
+| 層次 | 本次觀察 | 與 1.0 Final 的關係 |
 | --- | --- | --- |
-| 身分呈現核心 | request by reference、簽名 request、`nonce`／`state`、選擇性揭露、holder binding、`direct_post` | 明確屬於 OpenID4VP 家族，核心觀念很接近 |
-| 請求與回應格式 | `presentation_definition`、`presentation_submission`、裸的 `did:key` client ID | 還是 Final 之前常見的方言；Final 以 `dcql_query` 為核心，DID verifier 也有 `decentralized_identifier:` client-id prefix |
-| 取貨與離線查驗 | 建立交易、第二個 JWT、PNG 內的 `t`／`d`／`h`／`k`、X25519 解密、TOTP、HMAC | 不在 OpenID4VP 範圍內，是台灣服務自己加的 QR 驗證 profile |
+| 身分呈現核心 | request by reference、簽名 request、`nonce`／`state`、選擇性揭露、holder binding、`direct_post` | 採用 OpenID4VP 的核心模型 |
+| 請求與回應格式 | `presentation_definition`、`presentation_submission`、裸 `did:key` client ID | 保留 Final 前常見格式；Final 採 `dcql_query`，DID verifier 使用 `decentralized_identifier` 前綴 |
+| 取貨與離線查驗 | 建立交易、第二個 JWT、PNG 內的 `t`／`d`／`h`／`k`、X25519 解密、TOTP、HMAC | 位於 OpenID4VP 規格範圍之外，屬於 TWDIW 應用 profile |
 
-OpenID Foundation 在 2025 年 7 月核准[OpenID4VP 1.0 Final](https://openid.net/openid-for-verifiable-presentations-1-0-final-specification-approved/)。這次服務仍可看見 DIF Presentation Exchange 的 `presentation_definition`／`presentation_submission`，以及裸 `did:key`。它能和官方 App、有備而來互通，也完成了真實取貨；但一個只照 1.0 Final 寫的新 wallet，不會自己猜出這些舊欄位，更不會知道後半段 QR API。
+OpenID Foundation 在 2025 年 7 月核准[OpenID4VP 1.0 Final](https://openid.net/openid-for-verifiable-presentations-1_0-final-specification-approved/)。本次服務仍使用 DIF Presentation Exchange 的 `presentation_definition` 與 `presentation_submission`，client ID 也保留裸 `did:key`。官方 App 與有備而來可以互通，依照 1.0 Final 開發的新 wallet 則需要額外實作這組既有格式與後段 QR API。
 
-我的判斷是：只看身分呈現，它是 OpenID4VP Final 前一代的可互通實作；看完整取貨旅程，後半段還有一整套台灣自訂協定。真正的問題不是「合不合格」，而是這套台灣 profile 有沒有公開、版本化，讓下一個 wallet 不必重新考古。
+完整取貨流程可描述為 OpenID4VP 相容呈現，加上 TWDIW 離線 QR profile 與超商業務核銷。把整段流程統稱為 OIDC4VP 會掩蓋後兩層的自訂介面，也不利於第三方 wallet 評估實作成本。
 
-## 我猜它為什麼被做成這樣
+## 軟體開發實務
 
-這一節是依公開介面和實測作的推論，不是官方內部設計文件。
+工程實務可整理為五項要求。
 
-最現實的理由仍是既有 POS，但官方規格透露了更具體的設計目標：**門市端即使斷網，也能驗這包資料。** 掃描器、包裹後台和店員流程都已經在運作；在中間放一個把數位憑證結果轉成加密 QR 的模組，再把解密金鑰放進 POS 的安全區，比要求每台收銀機都實作 OpenID4VP、SD-JWT VC 與政府信任清單容易得多。
+- **服務發現與信任驗證要分開。** 服務出現在目錄只證明它可被發現。App 還需核對 verifier host、信任清單、鏈上紀錄、definition ID 與 response URI。
+- **外部 API 應視為不可信輸入。** QR 回應需檢查狀態碼、資料結構、PNG magic bytes、大小與正效期。issuer 名稱、憑證名稱與揭露值也不能直接當成 App chrome。
+- **倒數必須依絕對期限重算。** 每秒遞減一個記憶體計數器容易受背景執行、Face ID 與 run loop 影響。以 `generatedAt + lifetime` 計算期限，才能在畫面恢復時維持正確狀態。
+- **協定資料不應進入診斷紀錄。** 自動測試與效能量測可以保存階段、時間、錯誤類型與 build 資訊，QR、transaction ID、姓名、電話及解密明文均應排除。
+- **正式 POS 屬於發布門檻。** 單元測試、CI、API 200 與 App 成功出圖都不能替代門市驗收。螢幕亮度、掃描距離、網路狀態、逾時、重新產生與人工備援也需要測試。
 
-這樣確實把責任切開，但不是把資料完全擋在門市之外。前段 verifier 負責判斷憑證和 holder binding；後段 POS 驗證模組解密 QR，取得姓名、手機末五碼等情境需要的欄位，再用 TOTP 和 HMAC 確認時效與完整性。好處是門市不用看懂原始憑證，也不用連回網路做密碼學查驗；代價是 POS 端必須妥善保管三把驗證金鑰，而且解密後的個資不能落入 log。
+目前的單元測試覆蓋服務目錄解析、交易回應、憑證序號、PNG 與效期解析、絕對期限倒數、錯誤圖檔及服務拒絕。後續測試矩陣應增加 60 秒與 300 秒邊界、重播、錯誤金鑰、時鐘偏移、離線 POS、重複領取與跨超商實作。效能紀錄則應拆分服務發現、request 取得、VP 建立、`direct_post`、QR 取得與首幀顯示，並使用 monotonic clock 自動記錄。
 
-還有一個時序問題：不少系統在 OpenID4VP Final 之前就開始做，沿用 Presentation Exchange 並不奇怪。若最初只要求官方 App 與既有門市系統能跑，自訂 deep link、catalogue、第二段 API 和離線 QR profile 都很自然。等到第三方 wallet 真正接進來，原本散落在官方 App 與範例程式裡的默契才變成互通成本。
+## 政策與採購建議
 
-## 別的國家有沒有類似做法
+取貨流程已具備公開原始碼、QR 規格與真實服務，跨實作成本仍集中在分散文件、未定義的時間語意與缺少正式驗證套件。政策與採購可優先處理六項工作。
 
-我沒有找到另一個國家公開出完全相同的「電信憑證做完 OpenID4VP，再換超商取貨 QR」。不過，先驗身分、再換營運系統認得的通行物，並不是台灣獨有。
+1. **發布完整的 TWDIW 取貨 profile。** 將服務目錄、deep link、OpenID4VP 版本、欄位名稱、holder-key JWT、QR schema、錯誤碼與版本政策放在同一份可引用規格。
+2. **說明 60 秒與 300 秒的關係。** 文件需定義 QR 是否輪替、驗證端採用的 TOTP 週期、時鐘誤差、過期畫面與重新產生條件。
+3. **區分密碼學新鮮度與業務防重播。** TOTP、掃描次數、包裹交付狀態與重複領取控制應分別定義，並提供可稽核的狀態轉換。
+4. **提供無個資 sandbox 與 conformance suite。** 測試資料需涵蓋正確與錯誤金鑰、過期、時鐘偏移、欄位缺漏、HMAC 錯誤、離線操作及第三方 wallet。
+5. **建立 POS 金鑰治理。** 規範金鑰產生、發放、輪替、撤銷、HSM 或安全模組、門市設備遺失與供應鏈事件處理。
+6. **把正式門市與無障礙納入驗收。** 驗收需包含多家設備、不同亮度與字級、VoiceOver、裝置沒電、網路中斷、人工核對與客服處理。
 
-| 國家／服務 | 實際做法 | 和這次取貨的距離 |
+OpenID4VP 遷移也需要公開時程。Presentation Exchange 與裸 `did:key` 仍在正式服務中運作，短期內可以維持相容層；新版本應逐步支援 DCQL、Final client-id scheme 與明確的 capability negotiation，降低第三方 wallet 依賴官方 App 行為考古。
+
+## 國際案例
+
+其他國家沒有公開完全相同的「電信憑證完成 OpenID4VP 後轉為超商取貨 QR」流程。相近案例集中在短效 QR、便利商店公共服務，以及身分驗證後銜接營運憑證。
+
+| 國家／服務 | 實際做法 | 與本次取貨的關聯 |
 | --- | --- | --- |
-| [韓國行動身分證](https://www.mobileid.go.kr/mip/hps/svcIntrcn/svcIntrcnUser.do) | 在便利商店、酒吧等場所顯示「我的 QR」供驗證端掃描；官方說明 QR 約 30 秒重設，只提供必要欄位 | 最接近「手機短效 QR＋便利商店」，但 QR 本身就在做身分／年齡查驗，不是 VP 後再發取貨碼 |
-| [日本 My Number 超商交付](https://lg-waps.go.jp/01-00.html) | 用 My Number 卡或載有手機電子證明書的手機，在超商多功能機驗證後取得住民票等證明 | 同樣把數位身分接到超商基礎設施，主要介面卻是機台、NFC 與電子證明書 |
-| [IATA One ID](https://www.iata.org/en/programs/passenger/one-id/) | 旅客先從 wallet 提供護照、簽證等數位憑證，航空公司驗完後再進入 check-in 與 boarding-pass 流程 | 結構很像：先證明身分與資格，再拿營運系統認得的通行憑證 |
-| [Apple Verify with Wallet](https://developer.apple.com/wallet/get-started-with-verify-with-wallet/index.html) | 美國部分州的駕照／ID 與日本 My Number 可在 App 內選擇性提供，由服務端解密驗證 | Apple 管「驗身分」這一段；驗完後的票券、訂單或門票，仍由服務自己定義 |
-| [歐盟 EUDI 年齡驗證](https://ec.europa.eu/digital-building-blocks/sites/spaces/EUDIGITALIDENTITYWALLET/pages/930450954/The%2BAge%2BVerification%2BManual) | 以 OpenID4VP 或 Digital Credentials API 呈現年齡證明，只揭露服務需要的結果 | 標準化呈現與信任；呈現成功後能買什麼、看什麼，仍屬業務層 |
+| [韓國行動身分證](https://www.mobileid.go.kr/mip/hps/svcIntrcn/svcIntrcnUser.do) | 在便利商店、酒吧等場所顯示「我的 QR」供驗證端掃描，官方說明 QR 約 30 秒重設，只提供必要欄位 | 同樣採手機短效 QR 與便利商店驗證；QR 直接承擔身分或年齡查驗 |
+| [日本 My Number 超商交付](https://lg-waps.go.jp/01-00.html) | 使用 My Number 卡或載有手機電子證明書的手機，在超商多功能機取得住民票等證明 | 將數位身分接入超商基礎設施，主要介面為機台、NFC 與電子證明書 |
+| [IATA One ID](https://www.iata.org/en/programs/passenger/one-id/) | 旅客從 wallet 提供護照、簽證等數位憑證，航空公司驗證後銜接 check-in 與 boarding pass | 身分與資格驗證完成後，由營運系統發行通行憑證 |
+| [Apple Verify with Wallet](https://developer.apple.com/wallet/get-started-with-verify-with-wallet/index.html) | 美國部分州的駕照／ID 與日本 My Number 可在 App 內選擇性提供，由服務端解密驗證 | Apple 定義身分呈現介面，後續票券、訂單與門票仍由服務設計 |
+| [歐盟 EUDI 年齡驗證](https://ec.europa.eu/digital-building-blocks/sites/spaces/EUDIGITALIDENTITYWALLET/pages/930450954/The%2BAge%2BVerification%2BManual) | 以 OpenID4VP 或 Digital Credentials API 呈現年齡證明，只揭露服務需要的結果 | 標準化呈現與信任，購買或存取權限留在業務層 |
 
-這些例子讓邊界變得很清楚：數位身分標準通常把人送到服務門口，不會替服務定義門票。台灣比較特別的地方，是在 OpenID4VP 之後又加了一個可離線解密的 QR 呈現層；它的 discovery、金鑰布署、欄位 profile 和生命週期，仍深深綁在單一生態系。
+台灣案例的特色在於 OpenID4VP 後增加可離線解密的 QR 呈現層。這個做法支援既有門市設備與斷網驗證，也把金鑰治理、欄位 profile、時間同步及防重播責任帶進 POS 環境。國際案例可提供介面與治理參考，無法直接取代這套 profile 的公開與驗證工作。
 
-## 最後一公里比卡面重要
+## 結論
 
-這次實測讓我改變了一點看法。互通性不一定是讓所有舊設備立刻看懂最新標準；有時候先做一座邊界清楚的橋，反而能讓人今天就完成一件生活裡的事。
+本次實測確認第三方皮夾可以使用台灣大哥大的門號電子卡，經官方信任目錄與 OpenID4VP 流程取得加密 QR，最後由統一超商正式 POS 完成交付。這條路徑已跨越 App、政府 API、發卡者金鑰、鏈上信任紀錄、官方 verifier module 與門市設備。
 
-電信憑證把原本口頭報末五碼、拿證件給店員看的動作，改成手機上一次看得見的同意。verifier 再把需要的欄位封進只能由門市驗證端解開的 QR。這比把數位身分證卡面做得很漂亮更接近基礎設施，因為它真的跨進既有物流網。
+協定架構包含三個責任邊界。OpenID4VP 驗證憑證呈現，TWDIW 離線 QR 將必要欄位加密給門市端，超商系統處理包裹交付與重複領取控制。任何互通性評估都應分別驗證這三層。
 
-但橋也可能變成新的關卡。如果只有官方 App 知道 VP 通過後去哪裡換 QR，wallet 的可攜性還是會在最後一公尺消失。好消息是 QR 格式和離線驗證演算法已經公開，不是完全不透明；缺的則是端到端 profile：API 回應的五分鐘如何對上規格的 60 秒、金鑰怎麼輪替、不同門市怎麼佈署、哪些欄位允許進入明文，以及重複取貨究竟由 POS 還是後台阻擋。若服務目錄、信任清單、鏈上紀錄與 verifier module 又沒有共同版本，畫面上的綠勾勾很容易把真正失敗的層次藏起來。
-
-我希望下一步不是拆掉這座橋，而是把它畫成公開道路。至少要有一份把現有 QR 規格、取貨 API 與欄位定義串起來的 TWDIW 取貨 profile，再補無個資 sandbox、test vector、錯誤碼、60／300 秒的明確語意、業務層防重複交付規則和第三方 wallet conformance suite；也要寫出從 Presentation Exchange／裸 `did:key` 遷移到 OpenID4VP 1.0 Final DCQL 與 client-id prefix 的時間表。
-
-另一件不能漏掉的事，是把正式 POS 核銷列進驗收。API 200、App 成功出圖、實驗室掃描器讀得到，都不等於門市會交付包裹。螢幕太暗、手機沒電、網路斷線或 VoiceOver 操作不順時，也仍需要人工核對和無障礙的退路。
-
-## 這張 QR 不是數位身分證
-
-它是可信身分流程產生的一包加密取貨資料。
-
-前半段在問：這張電信憑證是真的嗎、手機上的人握有對應私鑰嗎、他同意提供哪些欄位？這是可驗證憑證與 OpenID4VP 的工作。
-
-後半段把同意揭露的欄位加密給門市端，讓它離線檢查資料是否新鮮、完整；至於統一超商願不願意為這筆交易交付包裹，才是服務端和 POS 的業務工作。
-
-有備而來守的是中間那條線：只向官方目錄與信任紀錄一致的模組送資料，用卡片自己的 holder key 綁住兩次必要動作，最後原樣顯示模組回傳的加密 QR。門市端再以自己的金鑰解密，而不是拿 QR 回伺服器問「這個 token 是不是真的」。
-
-我拿手機去超商，包裹真的領到了。這件小事把政府 API、電信憑證、鏈上信任紀錄、iPhone 金鑰和既有 POS 接在同一條路上。現在最值得做的，是讓下一個皮夾不用再把這條路猜一次。
+下一階段的技術重點包括 60 秒與 300 秒時間語意、POS 金鑰生命週期、重播與重複交付、跨電信商及跨超商測試。政策重點則是把已存在的程式碼與分散規格整理成可版本化、可測試、可由第三方實作的公共 profile。正式門市的成功交付證明這條路徑具有實用價值，公開互通規格將決定它能否成為可持續的數位公共基礎設施。
