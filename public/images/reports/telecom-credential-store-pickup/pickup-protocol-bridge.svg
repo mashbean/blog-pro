@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 690" role="img" aria-labelledby="title desc">
   <title id="title">有備而來超商取貨的三層協定</title>
-  <desc id="desc">手機皮夾先用 OID4VP 向官方驗證模組提出電信憑證，再由服務自訂 API 發出五分鐘 QR，最後交給超商既有 POS 掃描。</desc>
+  <desc id="desc">手機皮夾先用 OpenID4VP 向官方驗證模組提出電信憑證，再由服務產生包含 t、d、h、k 的加密 QR，最後由門市驗證端離線解密並檢查 TOTP 與 HMAC。</desc>
   <defs>
     <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#8c83ff"/>
@@ -16,7 +16,7 @@
 
   <rect width="1200" height="690" rx="38" fill="#0d0d12"/>
   <text x="64" y="72" fill="#f6f5fb" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="36" font-weight="700">不是一個協定，而是一座橋</text>
-  <text x="64" y="112" fill="#aaa7b5" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="21">身分證明走 OID4VP；取貨權利仍要轉成既有超商掃描器認得的短效憑證</text>
+  <text x="64" y="112" fill="#aaa7b5" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="21">身分呈現走 OpenID4VP；門市端再離線解密 QR、驗 TOTP 與 HMAC</text>
 
   <g filter="url(#shadow)">
     <rect x="64" y="168" width="290" height="288" rx="30" fill="#1b1a22" stroke="#383542"/>
@@ -36,32 +36,32 @@
     <path d="M494 221l9 9 18-20" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
     <text x="547" y="214" fill="#f6f5fb" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="27" font-weight="700">官方驗證模組</text>
     <text x="547" y="245" fill="#aaa7b5" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="19">查驗 VP 與交易</text>
-    <text x="485" y="304" fill="#d7d4e2" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="21">服務端產生</text>
-    <text x="485" y="340" fill="#f6f5fb" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="28" font-weight="650">五分鐘 QR PNG</text>
-    <text x="485" y="392" fill="#aaa7b5" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="18">不是 App 自行編碼</text>
-    <text x="485" y="421" fill="#aaa7b5" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="16">transaction-bound · expires · server-issued</text>
+    <text x="485" y="304" fill="#d7d4e2" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="21">封裝並加密</text>
+    <text x="485" y="340" fill="#f6f5fb" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="28" font-weight="650">t · d · h · k</text>
+    <text x="485" y="392" fill="#aaa7b5" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="18">d 是揭露欄位的密文</text>
+    <text x="485" y="421" fill="#aaa7b5" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="15">X25519 · ChaCha20-Poly1305</text>
   </g>
 
   <g filter="url(#shadow)">
     <rect x="846" y="168" width="290" height="288" rx="30" fill="#1b1a22" stroke="#383542"/>
     <circle cx="898" cy="221" r="28" fill="#d88a32"/>
     <path d="M885 209h5v24h-5zm10 0h3v24h-3zm8 0h7v24h-7z" fill="#fff"/>
-    <text x="938" y="214" fill="#f6f5fb" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="27" font-weight="700">超商 POS</text>
-    <text x="938" y="245" fill="#aaa7b5" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="19">既有掃描設備</text>
-    <text x="876" y="304" fill="#d7d4e2" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="21">辨識的是</text>
-    <text x="876" y="340" fill="#f6f5fb" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="28" font-weight="650">取貨授權，不是 VP</text>
-    <text x="876" y="392" fill="#aaa7b5" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="18">成功後才交付包裹</text>
-    <text x="876" y="421" fill="#aaa7b5" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="16">scan · redeem · release</text>
+    <text x="938" y="214" fill="#f6f5fb" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="27" font-weight="700">門市驗證端</text>
+    <text x="938" y="245" fill="#aaa7b5" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="19">POS／安全模組</text>
+    <text x="876" y="304" fill="#d7d4e2" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="21">解密並驗證</text>
+    <text x="876" y="340" fill="#f6f5fb" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="28" font-weight="650">TOTP ＋ HMAC</text>
+    <text x="876" y="392" fill="#aaa7b5" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="18">取得情境需要的欄位</text>
+    <text x="876" y="421" fill="#aaa7b5" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="16">decrypt · verify · release</text>
   </g>
 
   <path d="M366 300h75" stroke="#a7a3bd" stroke-width="4" marker-end="url(#arrow)"/>
   <path d="M757 300h75" stroke="#a7a3bd" stroke-width="4" marker-end="url(#arrow)"/>
 
   <rect x="79" y="516" width="655" height="108" rx="24" fill="#171620" stroke="#5f56e8"/>
-  <text x="109" y="555" fill="#a9a2ff" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="20" font-weight="700">OID4VP 相容層</text>
+  <text x="109" y="555" fill="#a9a2ff" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="20" font-weight="700">OpenID4VP 相容層</text>
   <text x="109" y="590" fill="#d7d4e2" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="20">請求、同意、選擇性揭露、holder binding、direct_post</text>
 
   <rect x="757" y="516" width="364" height="108" rx="24" fill="#171620" stroke="#d88a32"/>
   <text x="787" y="555" fill="#ffbb70" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="20" font-weight="700">服務自訂層</text>
-  <text x="787" y="590" fill="#d7d4e2" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="20">交易 JWT、QR 圖檔、POS 兌換語意</text>
+  <text x="787" y="590" fill="#d7d4e2" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif" font-size="20">交易 JWT、加密 QR、離線驗證</text>
 </svg>
