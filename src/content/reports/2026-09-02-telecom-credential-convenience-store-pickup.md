@@ -26,10 +26,17 @@ _這是「有備而來，理想的政府數位身分與資料 App 開發報告�
 這項結果建立了一條端到端互通證據。App 能讀取卡片、API 回傳成功或畫面顯示 QR，都屬於中間狀態。正式 POS 接受 QR 並完成交付，才證明第三方皮夾產生的流程能進入既有物流系統。
 
 <figure class="phone-shot">
+  <a class="phone-shot__image" href="/images/reports/telecom-credential-store-pickup/wallet-credential-overview.webp" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，有備而來首頁的國民身分證與政府皮夾卡片">
+    <img src="/images/reports/telecom-credential-store-pickup/wallet-credential-overview.webp" alt="有備而來首頁同時顯示自簽國民身分證、駕照電子卡、台灣大哥大門號電子卡與 MyData 資料" width="1170" height="2532" loading="lazy" />
+  </a>
+  <figcaption><em>圖一。有備而來的證件首頁。自簽國民身分證、政府皮夾卡片與 MyData 資料共存在同一個皮夾。本次取貨使用其中的台灣大哥大門號電子卡。</em></figcaption>
+</figure>
+
+<figure class="phone-shot">
   <a class="phone-shot__image" href="/images/reports/telecom-credential-store-pickup/telecom-card-detail.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，有備而來裡的台灣大哥大門號電子卡">
     <img src="/images/reports/telecom-credential-store-pickup/telecom-card-detail.png" alt="有備而來顯示台灣大哥大門號電子卡的卡片種類、發卡者 did:key 與效期" width="1170" height="2532" loading="lazy" />
   </a>
-  <figcaption><em>圖一。實際匯入有備而來的門號電子卡。畫面保留發卡者公開的 `did:key`，持卡人的姓名與手機號碼沒有出現在公開圖檔。</em></figcaption>
+  <figcaption><em>圖二。實際匯入有備而來的門號電子卡。畫面保留發卡者公開的 `did:key`，持卡人的姓名與手機號碼沒有出現在公開圖檔。</em></figcaption>
 </figure>
 
 ## 測試結論與適用範圍
@@ -53,7 +60,7 @@ _這是「有備而來，理想的政府數位身分與資料 App 開發報告�
   <a class="phone-shot__image" href="/images/reports/telecom-credential-store-pickup/pickup-trust-evidence.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，統一超商包裹取貨服務的 API 與 Arbitrum 信任核對">
     <img src="/images/reports/telecom-credential-store-pickup/pickup-trust-evidence.png" alt="有備而來在提供資料前顯示統一超商服務已通過官方 API 與 Arbitrum 信任核對" width="1170" height="1050" loading="lazy" />
   </a>
-  <figcaption><em>圖二。App 在傳送身分資料前核對官方 API 與 Arbitrum 紀錄。公開圖檔只保留服務名稱、區塊與交易紀錄。</em></figcaption>
+  <figcaption><em>圖三。App 在傳送身分資料前核對官方 API 與 Arbitrum 紀錄。公開圖檔只保留服務名稱、區塊與交易紀錄。</em></figcaption>
 </figure>
 
 數位發展部公開的[數位憑證皮夾原始碼](https://github.com/moda-gov-tw/TWDIW-official-app)顯示 holder App、OpenID4VP handler、verifier API 與 VP 驗證元件採分層設計。有備而來依照這個邊界實作七個步驟。
@@ -74,7 +81,7 @@ iOS client 在主機、請求與回應三層採 fail-closed。request URI 與 re
   <a class="phone-shot__image" href="/images/reports/telecom-credential-store-pickup/pickup-qr-redacted.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，已遮蔽且畫面倒數五分鐘的統一超商取貨 QR">
     <img src="/images/reports/telecom-credential-store-pickup/pickup-qr-redacted.png" alt="有備而來顯示畫面倒數五分鐘的統一超商取貨 QR，可掃區塊已以不透明遮罩完整覆蓋" width="1170" height="2532" loading="lazy" />
   </a>
-  <figcaption><em>圖三。官方模組回傳的 QR 與五分鐘 UI 倒數。公開版完整遮蔽可掃區域，因為失效後的 QR 仍可能保存個人欄位密文與協定資訊。</em></figcaption>
+  <figcaption><em>圖四。官方模組回傳的 QR 與五分鐘 UI 倒數。公開版完整遮蔽可掃區域，因為失效後的 QR 仍可能保存個人欄位密文與協定資訊。</em></figcaption>
 </figure>
 
 ## 離線 QR 的安全模型
@@ -96,7 +103,7 @@ iOS client 在主機、請求與回應三層採 fail-closed。request URI 與 re
   <a href="/images/reports/telecom-credential-store-pickup/pickup-protocol-bridge.svg" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸流程圖，有備而來超商取貨的分層協定">
     <img src="/images/reports/telecom-credential-store-pickup/pickup-protocol-bridge.svg" alt="有備而來先以 OpenID4VP 向官方驗證模組呈現電信憑證，再由門市端解密 QR 並驗證 TOTP 與 HMAC" width="1200" height="690" loading="lazy" />
   </a>
-  <figcaption><em>圖四。OpenID4VP 驗證憑證呈現與 holder binding。加密 QR 將同意揭露的資料帶到門市端，由 POS 或安全模組完成離線查驗。</em></figcaption>
+  <figcaption><em>圖五。OpenID4VP 驗證憑證呈現與 holder binding。加密 QR 將同意揭露的資料帶到門市端，由 POS 或安全模組完成離線查驗。</em></figcaption>
 </figure>
 
 目前仍有一項時間語意未被公開文件完整說明。有備而來收到 `totptimeout=300`，畫面據此倒數五分鐘；官方 QR 規格記載 TOTP 有效 60 秒，並容許前後 30 秒的時鐘誤差。現有 App 在五分鐘內不會自動輪替 QR，只有使用者按下重新產生時才向模組取得新圖。
