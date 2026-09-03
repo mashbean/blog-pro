@@ -104,6 +104,7 @@ MyData 自發證件則遇到另一類錯誤。Presentation holder 與 credential
 - presentation、credential、揭露值與最後結果只存在單次 Worker 執行記憶體，不寫入 Durable Object、KV、D1、R2、application log 或 analytics。
 - 結果不提供輪詢網址。查驗頁先建立同源 WebSocket，再以第一個 message 提交 256-bit `resultKey`。這把 capability 不放在 QR、URL 或 signed request。
 - 結果送達已授權的 WebSocket 後，session 呼叫 `deleteAll()`。未完成的 session 最長十分鐘，由 alarm 清除。
+- 查驗端畫面提供立即清除，並在結果顯示兩分鐘後自動從 DOM 移除。結果送達時也會解除 WebSocket handlers 與前端 socket reference，縮短 capability 在瀏覽器記憶體中的生命週期。
 - `VerifierIdentity` 是另一個 Durable Object。它只保存這次部署的 P-256 私鑰與穩定 `did:key`，不接觸持卡人 presentation。任意更換 namespace 會換發 verifier 身分，因此示範站部署保留既有 namespace。
 
 Cloudflare 的[文件](https://developers.cloudflare.com/durable-objects/best-practices/rules-of-durable-objects/)指出，`deleteAll()` 才是清空 Durable Object storage 的完整操作；2026 年 2 月 24 日以後的 compatibility date 也會一併刪除 alarm。兩份 Wrangler 設定關閉 observability、invocation logs 與 traces，程式沒有第三方 script、字型或 analytics。
@@ -119,6 +120,8 @@ Cloudflare 的[文件](https://developers.cloudflare.com/durable-objects/best-pr
 其餘防護包括 512 KB presentation body 上限、8 KB 建立查驗上限、JOSE algorithm allowlist、`Cache-Control: no-store`、同源 Content Security Policy、HSTS、COOP、`no-referrer`、`nosniff`，以及狀態清單 URL 的 SSRF 防護。外部 URL 必須是公共 HTTPS hostname，拒絕帳密、literal IP、localhost、redirect、逾時與過大回應。
 
 尚存風險沒有藏進附錄。任何人都可以呼叫建立 session API，正式高流量部署需要另加 WAF 或 rate limiting。官方 DID API 無法連線時，政府卡採 fail closed；狀態清單無法確認時回傳 `unknown`。WebSocket 在結果送出當下若斷線，伺服器不會為了方便重取而保存資料，使用者必須重做一次查驗。這是隱私與可用性的明確取捨。
+
+端點畫面仍屬資料暴露面。姓名與末五碼在查驗端顯示的兩分鐘內，可能被旁人看到、截圖或被瀏覽器擴充功能讀取。自動清除只能縮短暴露時間，無法取代櫃台操作規範、受管裝置與瀏覽器擴充功能政策。
 
 這份檢查是 repository scope 的安全 review，不是第三方滲透測試、個資影響評估或正式法遵認證。部署者仍要處理營運帳號、Cloudflare 權限、網域、事件應變、當事人權利窗口與法定保存要求。
 
