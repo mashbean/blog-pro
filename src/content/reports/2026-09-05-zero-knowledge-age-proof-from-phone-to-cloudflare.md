@@ -1,5 +1,5 @@
 ---
-title: "只回答「已滿 18 歲」：把零知識年齡證明從手機做到 Cloudflare"
+title: "讓數位皮夾實現零知識證明，同時免費部署服務到 Cloudflare"
 description: "以有備而來與 OpenAC 電路做出不揭露生日的年齡證明，從 Mac 驗證、Cloudflare 容器部署到 Prepare 快取，記錄實測秒數、費用、與 SD-JWT-VC 的隱私權衡及政策建議。"
 topic: digital-identity
 tags: ["數位皮夾", "可驗證憑證", "年齡驗證", "假名與匿名", "密碼學", "隱私", "開源", "台灣"]
@@ -41,9 +41,9 @@ _這是「有備而來，理想的政府數位身分與資料 App 開發報告�
 
 劣勢也要先講。手機要花幾秒算證明，第一次更久。驗證端跑不進一般的無伺服器函式，要一個能載入四百多 MB 驗證金鑰的程式。證明本身 155 KB，是一般出示的二十倍。電路只認特定形狀的欄位，卡片沒有生日欄就做不了年齡證明。工具鏈還年輕，論文是 2025 到 2026 年的東西。最後，它不是魔法：證明的可信度仍然來自誰簽了那張卡。自己簽的生日做出來的年齡證明，隱藏的是自己填的日期，不會因此變成政府背書。
 
-<figure>
-  <a href="/images/reports/zero-knowledge-age-proof/wallet-use-zk.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，有備而來使用分頁的零知識證明區">
-    <img src="/images/reports/zero-knowledge-age-proof/wallet-use-zk.png" alt="有備而來使用分頁，零知識證明區有建立隱私年齡證明與查驗隱私年齡證明兩列" width="780" height="1688" loading="lazy" />
+<figure class="phone-shot">
+  <a class="phone-shot__image" href="/images/reports/zero-knowledge-age-proof/wallet-use-zk.jpg" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，有備而來使用分頁的零知識證明區">
+    <img src="/images/reports/zero-knowledge-age-proof/wallet-use-zk.jpg" alt="有備而來使用分頁，零知識證明區有建立隱私年齡證明與查驗隱私年齡證明兩列" width="900" height="1947" loading="lazy" />
   </a>
   <figcaption><em>圖一。有備而來「使用」分頁的零知識證明區。這次把舊的 MOICA 持有證明從選單移除，只留年齡述詞證明的建立與查驗兩列，避免兩種零知識證明並列造成混淆。</em></figcaption>
 </figure>
@@ -83,23 +83,23 @@ _這是「有備而來，理想的政府數位身分與資料 App 開發報告�
 
 <figure>
   <a href="/images/reports/zero-knowledge-age-proof/zkp-builder.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，建立零知識年齡查驗的頁面">
-    <img src="/images/reports/zero-knowledge-age-proof/zkp-builder.png" alt="建立一筆零知識年齡查驗的頁面，選擇證明來源、年齡門檻與目的，列出述詞與個資告知" width="1600" height="1475" loading="lazy" />
+    <img src="/images/reports/zero-knowledge-age-proof/zkp-builder.png" alt="建立一筆零知識年齡查驗的頁面，選擇證明來源、年齡門檻與目的，列出述詞與個資告知" width="1259" height="1161" loading="lazy" />
   </a>
   <figcaption><em>圖二。查驗方只決定「至少幾歲」。頁面在 QR 出現前就寫明皮夾會回傳什麼、不會回傳什麼，並附個資告知；截止日以臺北時間往前推 N 年。</em></figcaption>
 </figure>
 
 QR 裡是一段短 JSON：一個 32 位元組的 nonce、截止日、來源、最低年齡、用途，以及證明要送回的網址。網址只接受允許清單上的 HTTPS 站台，手機在解碼時檢查一次，開連線前再檢查一次。陌生人印一張 QR，不能把證明導去別的地方。
 
-<figure>
-  <a href="/images/reports/zero-knowledge-age-proof/wallet-consent.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，手機上的同意畫面">
-    <img src="/images/reports/zero-knowledge-age-proof/wallet-consent.png" alt="有備而來的同意畫面，寫明查驗方想確認是否已滿 18 歲、目的、來源，生日與卡片不離開手機，完成的證明會送到 verifier.mashbean.net" width="780" height="1688" loading="lazy" />
+<figure class="phone-shot">
+  <a class="phone-shot__image" href="/images/reports/zero-knowledge-age-proof/wallet-consent.jpg" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，手機上的同意畫面">
+    <img src="/images/reports/zero-knowledge-age-proof/wallet-consent.jpg" alt="有備而來的同意畫面，寫明查驗方想確認是否已滿 18 歲、目的、來源，生日與卡片不離開手機，完成的證明會送到 verifier.mashbean.net" width="900" height="1947" loading="lazy" />
   </a>
   <figcaption><em>圖三。同意畫面把四件事說完：對方問什麼、為了什麼、用哪張卡、證明會送去哪裡。這是和面對面藍牙流程唯一的差別，所以特別多一句。</em></figcaption>
 </figure>
 
-<figure>
-  <a href="/images/reports/zero-knowledge-age-proof/wallet-result.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，手機上的驗證結果">
-    <img src="/images/reports/zero-knowledge-age-proof/wallet-result.png" alt="有備而來顯示網站已驗證這個證明至少 18 歲，建立證明 2,189 加 467 毫秒，網站驗證 157 毫秒，往返 814 毫秒" width="780" height="1688" loading="lazy" />
+<figure class="phone-shot">
+  <a class="phone-shot__image" href="/images/reports/zero-knowledge-age-proof/wallet-result.jpg" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，手機上的驗證結果">
+    <img src="/images/reports/zero-knowledge-age-proof/wallet-result.jpg" alt="有備而來顯示網站已驗證這個證明至少 18 歲，建立證明 2,189 加 467 毫秒，網站驗證 157 毫秒，往返 814 毫秒" width="900" height="1947" loading="lazy" />
   </a>
   <figcaption><em>圖四。手機端收到網站的判定與秒數。這一筆是 Prepare 快取命中的結果，建證只花 2.7 秒。</em></figcaption>
 </figure>
@@ -159,7 +159,7 @@ App 端從掃碼到收到判定的全程：SD-JWT-VC 出示自發證件 0.22 秒
 
 <figure>
   <a href="/images/reports/zero-knowledge-age-proof/zkp-compare-sdjwt.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，查驗網站的 SD-JWT-VC 與零知識證明並排比較">
-    <img src="/images/reports/zero-knowledge-age-proof/zkp-compare-sdjwt.png" alt="查驗網站的比較表，SD-JWT-VC 出示各段 0 ms，零知識年齡證明皮夾建證 12,159 ms、驗證 1,885 ms、Worker 全程 4,156 ms" width="1600" height="840" loading="lazy" />
+    <img src="/images/reports/zero-knowledge-age-proof/zkp-compare-sdjwt.png" alt="查驗網站的比較表，SD-JWT-VC 出示各段 0 ms，零知識年齡證明皮夾建證 12,159 ms、驗證 1,885 ms、Worker 全程 4,156 ms" width="1259" height="661" loading="lazy" />
   </a>
   <figcaption><em>圖五。查驗網站把同一個瀏覽器分頁內最近一次的兩種流程並排。這一筆零知識是第一次建證（無快取）且驗證在 Mac 上，數字只存在瀏覽器的 sessionStorage，不含任何欄位值。</em></figcaption>
 </figure>
@@ -175,14 +175,14 @@ App 端從掃碼到收到判定的全程：SD-JWT-VC 出示自發證件 0.22 秒
 
 <figure>
   <a href="/images/reports/zero-knowledge-age-proof/zkp-result-container-cold.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，容器冷啟動時的驗證結果">
-    <img src="/images/reports/zero-knowledge-age-proof/zkp-result-container-cold.png" alt="查驗網站顯示已證明持有人至少 18 歲，後端驗證 24,473 ms，Worker 全程 25,108 ms" width="1177" height="1600" loading="lazy" />
+    <img src="/images/reports/zero-knowledge-age-proof/zkp-result-container-cold.png" alt="查驗網站顯示已證明持有人至少 18 歲，後端驗證 24,473 ms，Worker 全程 25,108 ms" width="1259" height="1710" loading="lazy" />
   </a>
   <figcaption><em>圖七。切換到容器後的第一份真證明。判定正確，但後端驗證 24.5 秒，是容器剛醒加上 1/4 vCPU 的結果。</em></figcaption>
 </figure>
 
 <figure>
   <a href="/images/reports/zero-knowledge-age-proof/zkp-result-container-warm.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，容器暖機後的驗證結果">
-    <img src="/images/reports/zero-knowledge-age-proof/zkp-result-container-warm.png" alt="查驗網站顯示已證明持有人至少 18 歲，後端驗證 4,973 ms，Worker 全程 5,833 ms" width="1293" height="1600" loading="lazy" />
+    <img src="/images/reports/zero-knowledge-age-proof/zkp-result-container-warm.png" alt="查驗網站顯示已證明持有人至少 18 歲，後端驗證 4,973 ms，Worker 全程 5,833 ms" width="1259" height="1557" loading="lazy" />
   </a>
   <figcaption><em>圖八。緊接著的第二份。驗證降到 5 秒，這是 basic 規格的穩態。記憶體不是瓶頸，vCPU 才是。</em></figcaption>
 </figure>
@@ -234,9 +234,9 @@ zkID 論文與 README 提供 iPhone 17 的數字。這裡把三者放一起。
 
 ## 誠實邊界
 
-<figure>
-  <a href="/images/reports/zero-knowledge-age-proof/wallet-home.png" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，有備而來首頁的三種卡片">
-    <img src="/images/reports/zero-knowledge-age-proof/wallet-home.png" alt="有備而來首頁，國民身分證卡面欄位已遮罩，政府皮夾卡片有駕照電子卡與門號電子卡，下方是 MyData 資料保險箱" width="780" height="1688" loading="lazy" />
+<figure class="phone-shot">
+  <a class="phone-shot__image" href="/images/reports/zero-knowledge-age-proof/wallet-home.jpg" target="_blank" rel="noopener noreferrer" aria-label="開啟原尺寸截圖，有備而來首頁的三種卡片">
+    <img src="/images/reports/zero-knowledge-age-proof/wallet-home.jpg" alt="有備而來首頁，國民身分證卡面欄位已遮罩，政府皮夾卡片有駕照電子卡與門號電子卡，下方是 MyData 資料保險箱" width="900" height="1947" loading="lazy" />
   </a>
   <figcaption><em>圖九。皮夾裡的三種來源。這次只有國民身分證（MyData 自發）能做年齡證明：駕照電子卡與門號電子卡都沒有揭露出生日期，電路無從證明。</em></figcaption>
 </figure>
