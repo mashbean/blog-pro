@@ -159,7 +159,7 @@ export const SERIES = {
     entry: undefined as string | undefined,
   },
   "ready-digital-government": {
-    label: "有備而來，理想的政府數位身分與資料 App 開發報告",
+    label: "有備而來：理想的數位皮夾開發報告",
     labelEn: "Ready for It: Government Identity and Data App Reports",
     blurb:
       "從有備而來的真機開發出發，逐一檢查理想的政府數位身分、資料皮夾與公共服務，" +
@@ -226,7 +226,7 @@ export const SPECIALS: Special[] = [
   },
   {
     id: "ready-digital-government",
-    title: "有備而來，理想的政府數位身分與資料 App 開發報告",
+    title: "有備而來：理想的數位皮夾開發報告",
     titleEn: "Ready for It: Government Identity and Data App Reports",
     blurb:
       "我把政策提案真的做進 iPhone，再從每一次成功與失敗回頭追問法規、資安、" +
