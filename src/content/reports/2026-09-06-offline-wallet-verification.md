@@ -170,7 +170,7 @@ SD-JWT 對照路徑交出姓名 disclosure、發卡者簽署內容及持有人�
   <a class="phone-shot__image" href="/images/reports/offline-wallet-verification/general-verification-limits.jpg" target="_blank" rel="noopener noreferrer" aria-label="開啟大圖，一般證件查驗的期限與撤銷提示">
     <img src="/images/reports/offline-wallet-verification/general-verification-limits.jpg" alt="一般證件查驗結果顯示持有人用手機金鑰簽署本次挑戰，並提示本機撤銷名單已超過三天、欄位由持有人簽署，以及證件未記載有效期限" width="900" height="1948" loading="lazy" />
   </a>
-  <figcaption><em>圖七。一般證件查驗結果，攝於中午 12 點 9 分。畫面列出本機撤銷資料已過期等限制。這張截圖缺少可配對的測試紀錄，顯示的 1.02 秒未納入四組姓名查驗比較。</em></figcaption>
+  <figcaption><em>圖七。一般證件查驗結果，攝於中午 12 點 9 分。畫面提示本機撤銷名單已超過三天。這張截圖缺少可配對的測試紀錄，顯示的 1.02 秒未納入四組姓名查驗比較。</em></figcaption>
 </figure>
 
 <figure class="phone-shot">
