@@ -1,0 +1,9 @@
+matrixCell,role,recordedAt,credentialKind,flow,succeeded,transport,deviceModel,osVersion,appVersion,appBuild,endToEndMilliseconds,preparationMilliseconds,proofPrepareMilliseconds,proofShowMilliseconds,proofPrepareWasCached,transportMilliseconds,verificationMilliseconds,payloadBytes
+N1,holder,2026-09-06T03:22:41Z,governmentWallet,disclosedNamePresentation,True,bluetooth,"iPhone14,7",Version 27.0 (Build 24A5430a),1.0,1,1326,64,,,,1262,,3044
+N2,holder,2026-09-06T03:23:03Z,selfIssued,disclosedNamePresentation,True,bluetooth,"iPhone14,7",Version 27.0 (Build 24A5430a),1.0,1,1287,58,,,,1228,,1977
+N3,holder,2026-09-06T03:23:15Z,governmentWallet,privateNameProof,False,local,"iPhone14,7",Version 27.0 (Build 24A5430a),1.0,1,1687,,,,,,,
+N4,holder,2026-09-06T03:23:45Z,selfIssued,privateNameProof,True,bluetooth,"iPhone14,7",Version 27.0 (Build 24A5430a),1.0,1,21894,8928,8298,630,False,7522,,213199
+N3,holder,2026-09-06T03:24:00Z,governmentWallet,privateNameProof,False,local,"iPhone14,7",Version 27.0 (Build 24A5430a),1.0,1,1644,,,,,,,
+N1,verifier,2026-09-06T03:22:41Z,governmentWallet,disclosedNamePresentation,True,bluetooth,"iPad16,1",Version 27.0 (Build 24A5430a),1.0,1,13400,,,,,13380,20,3044
+N2,verifier,2026-09-06T03:23:03Z,selfIssued,disclosedNamePresentation,True,bluetooth,"iPad16,1",Version 27.0 (Build 24A5430a),1.0,1,7845,,,,,7830,15,1977
+N4,verifier,2026-09-06T03:23:47Z,selfIssued,privateNameProof,True,bluetooth,"iPad16,1",Version 27.0 (Build 24A5430a),1.0,1,27493,8928,8298,630,False,25299,1691,213199
