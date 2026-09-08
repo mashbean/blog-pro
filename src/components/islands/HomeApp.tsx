@@ -305,42 +305,63 @@ function SeriesLandingBlock({
       </header>
 
       <p className="serieslanding__companions-lead">{landing.companionsLead}</p>
-      <ol className="serieslanding__grid">
-        {landing.companions.map((c) => {
-          const report = bySlug.get(c.reportSlug);
-          return (
-            <li key={c.reportSlug} className="companioncard">
-              <a
-                className="companioncard__thumb"
-                href={c.href}
-                target="_blank"
-                rel="noopener"
-                aria-label={`mashbean.net 開發手記：${c.title}`}
-              >
-                <img src={c.thumb} alt={c.thumbAlt} loading="lazy" decoding="async" />
-              </a>
-              <div className="companioncard__body">
-                {report && (
-                  <a className="companioncard__report" href={report.href}>
-                    <span className="companioncard__n">
-                      實測報告{report.seriesOrder ? ` #${report.seriesOrder}` : ""}
-                    </span>
-                    <span className="companioncard__report-title">{report.title}</span>
-                  </a>
-                )}
+      <div className="pairhead" aria-hidden="true">
+        <span className="pairhead__label pairhead__label--hand">我的手寫手記 · mashbean.net</span>
+        <span className="pairhead__spacer" />
+        <span className="pairhead__label pairhead__label--report">AI 實測報告 · 本站</span>
+      </div>
+      <ol className="pairlist">
+        {[...landing.companions]
+          .sort((a, b) => {
+            const oa = bySlug.get(a.reportSlug)?.seriesOrder ?? 99;
+            const ob = bySlug.get(b.reportSlug)?.seriesOrder ?? 99;
+            return oa - ob;
+          })
+          .map((c) => {
+            const report = bySlug.get(c.reportSlug);
+            return (
+              <li key={c.reportSlug} className="pairrow">
+                {/* 左：手寫手記（外連 mashbean.net） */}
                 <a
-                  className="companioncard__devlog"
+                  className="pairside pairside--hand"
                   href={c.href}
                   target="_blank"
                   rel="noopener"
                 >
-                  <span className="companioncard__devlog-kicker">mashbean.net 開發手記</span>
-                  <span className="companioncard__devlog-title">{c.title} →</span>
+                  <span className="pairside__thumb">
+                    <img src={c.thumb} alt={c.thumbAlt} loading="lazy" decoding="async" />
+                  </span>
+                  <span className="pairside__text">
+                    <span className="pairside__kicker">手寫手記 · mashbean.net</span>
+                    <span className="pairside__title">{c.title}</span>
+                  </span>
                 </a>
-              </div>
-            </li>
-          );
-        })}
+
+                {/* 中：這是同一主題的兩種寫法 */}
+                <span className="pairrow__link" aria-hidden="true">
+                  <span className="pairrow__n">
+                    {report?.seriesOrder ? `#${report.seriesOrder}` : ""}
+                  </span>
+                  <span className="pairrow__arrow">↔</span>
+                </span>
+
+                {/* 右：AI 實測報告（站內） */}
+                {report ? (
+                  <a className="pairside pairside--report" href={report.href}>
+                    <span className="pairside__thumb">
+                      <img src={c.thumb} alt="" loading="lazy" decoding="async" />
+                    </span>
+                    <span className="pairside__text">
+                      <span className="pairside__kicker">AI 實測報告 · 本站</span>
+                      <span className="pairside__title">{report.title}</span>
+                    </span>
+                  </a>
+                ) : (
+                  <span className="pairside pairside--report pairside--missing" />
+                )}
+              </li>
+            );
+          })}
       </ol>
     </section>
   );
@@ -645,18 +666,16 @@ export default function HomeApp({
     return map;
   }, [posts, palette]);
 
-  const [filters, setFilters] = useState<Filters>(EMPTY);
+  // client:only，島掛載時就直接讀網址；同步初始化才不會先閃一下完整首頁
+  // 再跳成系列配對頁。
+  const [filters, setFilters] = useState<Filters>(() =>
+    typeof window === "undefined" ? EMPTY : readFilters()
+  );
   // 預設散落牆——首頁先給氛圍，要查找的人切「索引」或走 ⌘K／主題頁
   const [view, setView] = useState<View>("scatter");
   const [sort, setSort] = useState<Sort>("new");
   const [shuffleKey, setShuffleKey] = useState(0);
   const [flippedId, setFlippedId] = useState<string | null>(null);
-
-  // 從網址帶入初始條件（client:only，所以只會跑在瀏覽器）
-  useEffect(() => {
-    const initial = readFilters();
-    if (filtersActive(initial)) setFilters(initial);
-  }, []);
 
   useEffect(() => { writeFilters(filters); }, [filters]);
 
@@ -694,15 +713,23 @@ export default function HomeApp({
   }, [flippedId]);
 
   const showSeries = view === "index" && !filtersActive(filters);
-  // ?series=<id> 對到有落地資料的系列時，清單上方補一段落地頁。
+  // ?series=<id> 對到有落地資料的系列時，整頁換成「手記 ↔ 報告」配對清單，
+  // 不再出現散落／卡片／索引那套瀏覽器。
   const landingId = filters.series && seriesLanding(filters.series) ? filters.series : null;
+
+  // 配對頁時把首頁那顆「難題」大標藏起來，讓系列標題當這頁的主角。
+  useEffect(() => {
+    const hero = document.querySelector<HTMLElement>(".hero");
+    if (hero) hero.hidden = !!landingId;
+    return () => { if (hero) hero.hidden = false; };
+  }, [landingId]);
+
+  if (landingId) {
+    return <SeriesLandingBlock seriesId={landingId} posts={posts} locale={locale} />;
+  }
 
   return (
     <>
-      {landingId && (
-        <SeriesLandingBlock seriesId={landingId} posts={posts} locale={locale} />
-      )}
-
       <div className="browse">
         <Controls
           filters={filters}
