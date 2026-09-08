@@ -18,6 +18,8 @@ import { relatedTo, seriesNeighbours } from "../lib/related";
 import { topicOf, seriesMeta, sortTags } from "../lib/taxonomy";
 import { withBase } from "../utils/paths";
 import { getCollection } from "astro:content";
+import { UI, type Locale } from "../lib/i18n";
+import { getTranslationMap, enReportPath, zhReportPath } from "../utils/translations";
 import "../styles/global.css";
 
 interface Props {
@@ -33,6 +35,10 @@ interface Props {
   aiPrompt?: string;
   aiGeneratedDate?: Date;
   humanReviewed?: boolean;
+  /** zh 是中文原文頁，en 是譯本頁；id 兩邊相同。 */
+  locale?: Locale;
+  translatedBy?: string;
+  translatedDate?: Date;
 }
 
 const {
@@ -48,10 +54,69 @@ const {
   aiPrompt,
   aiGeneratedDate,
   humanReviewed,
+  locale = "zh",
+  translatedBy,
+  translatedDate,
 } = Astro.props;
 
+const isEn = locale === "en";
+const ui = UI[locale];
 const kicker = tags[0] ?? "Essay";
-const readTime = readingTime(body);
+const readTime = readingTime(body, locale);
+
+// 中英互切：譯本存在才有切換鈕。譯本頁一定有中文原文可切回去。
+const translations = await getTranslationMap();
+const hasTranslation = translations.has(id);
+const zhHref = withBase(zhReportPath(id));
+const enHref = withBase(enReportPath(id));
+const altHref = isEn ? zhHref : hasTranslation ? enHref : undefined;
+const showLangToggle = isEn || hasTranslation;
+
+// 系列前後篇：在譯本頁上，鄰篇有譯本就連到譯本，沒有就連回中文。
+const reportHref = (rid: string) =>
+  withBase(isEn && translations.has(rid) ? enReportPath(rid) : zhReportPath(rid));
+const reportTitle = (r: { id: string; data: { title: string } }) =>
+  isEn ? translations.get(r.id)?.data.title ?? r.data.title : r.data.title;
+
+const L = isEn
+  ? {
+      back: "← All essays",
+      seriesNth: (n: number) => `Part ${n}`,
+      seriesTotal: (n: number) => `${n} parts`,
+      updated: "Updated",
+      argmap: "Argument map",
+      argmapSub: "Core thesis, pillars, causal chain, and boundary conditions, visualised",
+      seriesNav: "Series navigation",
+      seriesLine: (label: string, pos: number, total: number) => `${label} · ${pos} of ${total} by publication order`,
+      prev: "← Previous",
+      next: "Next →",
+      related: "Related essays",
+      minutes: (n: number) => `${n} min`,
+      translationNote: translatedBy
+        ? `English translation by ${translatedBy}. The Chinese original is authoritative.`
+        : "English translation. The Chinese original is authoritative.",
+      toggleZh: "中文原文",
+      toggleEn: "English",
+      toggleTitle: "Read the Chinese original",
+    }
+  : {
+      back: "← All essays",
+      seriesNth: (n: number) => `第 ${n} 篇`,
+      seriesTotal: (n: number) => `共 ${n} 篇`,
+      updated: "更新於",
+      argmap: "論證地圖",
+      argmapSub: "核心命題、支撐論點、因果鏈、邊界條件視覺化",
+      seriesNav: "系列導覽",
+      seriesLine: (label: string, pos: number, total: number) => `${label} · 依發表順序第 ${pos} / ${total} 篇`,
+      prev: "← 前一篇",
+      next: "下一篇 →",
+      related: "相關文章",
+      minutes: (n: number) => `${n} 分鐘`,
+      translationNote: "",
+      toggleZh: "中文",
+      toggleEn: "English",
+      toggleTitle: "Read this report in English",
+    };
 const ogImage = `og/${id}.png`;
 
 // 此篇文章是否有對應的論證地圖（argmap）？
@@ -71,18 +136,32 @@ const orderedTags = sortTags(tags);
 ---
 
 <!doctype html>
-<html lang="zh-TW">
+<html lang={ui.htmlLang}>
   <head>
     <BaseHead title={title} description={description} ogImage={ogImage} />
+    {showLangToggle && (
+      <>
+        <link rel="alternate" hreflang="zh-TW" href={new URL(zhHref, Astro.site).href} />
+        <link rel="alternate" hreflang="en" href={new URL(enHref, Astro.site).href} />
+        <link rel="alternate" hreflang="x-default" href={new URL(zhHref, Astro.site).href} />
+      </>
+    )}
   </head>
   <body>
     <Mesh />
     <Guides />
     <ReadingProgress />
-    <Masthead />
+    <Masthead locale={locale} altHref={altHref} />
 
     <article class="article">
-      <a href="/" class="article__back">← All essays</a>
+      <a href={isEn ? "/en/" : "/"} class="article__back">{L.back}</a>
+
+      {showLangToggle && (
+        <div class="langtoggle" role="group" aria-label="Language / 語言">
+          <a class:list={["langtoggle__opt", { "is-active": !isEn }]} href={zhHref} aria-current={!isEn ? "page" : undefined} hreflang="zh-TW" lang="zh-TW">{L.toggleZh}</a>
+          <a class:list={["langtoggle__opt", { "is-active": isEn }]} href={enHref} aria-current={isEn ? "page" : undefined} hreflang="en" lang="en">{L.toggleEn}</a>
+        </div>
+      )}
 
       <p class="article__kicker">
         {topic ? (
@@ -92,9 +171,9 @@ const orderedTags = sortTags(tags);
         ) : kicker}
         {seriesInfo && series && series.total > 1 && (
           <span class="article__seriesbadge">
-            {seriesInfo.label}
+            {isEn ? seriesInfo.labelEn ?? seriesInfo.label : seriesInfo.label}
             {/* 顯示作者自己的篇號，沒標號的就不編——不拿發表位次冒充篇號 */}
-            <em>{self?.data.seriesOrder ? `第 ${self.data.seriesOrder} 篇` : `共 ${series.total} 篇`}</em>
+            <em>{self?.data.seriesOrder ? L.seriesNth(self.data.seriesOrder) : L.seriesTotal(series.total)}</em>
           </span>
         )}
       </p>
@@ -105,8 +184,8 @@ const orderedTags = sortTags(tags);
         <span>
           <strong>{aiModel ?? "AI Research Pipeline"}</strong>
         </span>
-        <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
-        {updatedDate && <span>· 更新於 {formatDate(updatedDate)}</span>}
+        <time datetime={pubDate.toISOString()}>{formatDate(pubDate, locale)}</time>
+        {updatedDate && <span>· {L.updated} {formatDate(updatedDate, locale)}</span>}
         <span>{readTime}</span>
         <span style="margin-left:auto">#{id.split("/").pop()}</span>
       </div>
@@ -128,12 +207,20 @@ const orderedTags = sortTags(tags);
         humanReviewed={humanReviewed}
       />
 
+      {isEn && (
+        <p class="article__translation">
+          {L.translationNote}
+          {translatedDate && <span> · {formatDate(translatedDate, locale)}</span>}
+          {" "}<a href={zhHref} hreflang="zh-TW">{L.toggleZh} →</a>
+        </p>
+      )}
+
       {argmapHref && (
         <a class="article__argmap-link" href={argmapHref}>
           <span class="article__argmap-icon">◇</span>
           <span class="article__argmap-text">
-            <strong>論證地圖</strong>
-            <em>核心命題、支撐論點、因果鏈、邊界條件視覺化</em>
+            <strong>{L.argmap}</strong>
+            <em>{L.argmapSub}</em>
           </span>
           <span class="article__argmap-arrow">→</span>
         </a>
@@ -149,21 +236,21 @@ const orderedTags = sortTags(tags);
     </article>
 
     {series && (series.prev || series.next) && (
-      <nav class="seriesnav" aria-label="系列導覽">
+      <nav class="seriesnav" aria-label={L.seriesNav}>
         <p class="seriesnav__label">
-          {seriesInfo?.label ?? "系列"} · 依發表順序第 {series.position} / {series.total} 篇
+          {L.seriesLine((isEn ? seriesInfo?.labelEn : undefined) ?? seriesInfo?.label ?? (isEn ? "Series" : "系列"), series.position, series.total)}
         </p>
         <div class="seriesnav__pair">
           {series.prev ? (
-            <a class="seriesnav__item" href={withBase(`/reports/${series.prev.id}/`)}>
-              <span class="seriesnav__dir">← 前一篇</span>
-              <span class="seriesnav__t">{series.prev.data.title}</span>
+            <a class="seriesnav__item" href={reportHref(series.prev.id)}>
+              <span class="seriesnav__dir">{L.prev}</span>
+              <span class="seriesnav__t">{reportTitle(series.prev)}</span>
             </a>
           ) : <span />}
           {series.next ? (
-            <a class="seriesnav__item seriesnav__item--next" href={withBase(`/reports/${series.next.id}/`)}>
-              <span class="seriesnav__dir">下一篇 →</span>
-              <span class="seriesnav__t">{series.next.data.title}</span>
+            <a class="seriesnav__item seriesnav__item--next" href={reportHref(series.next.id)}>
+              <span class="seriesnav__dir">{L.next}</span>
+              <span class="seriesnav__t">{reportTitle(series.next)}</span>
             </a>
           ) : <span />}
         </div>
@@ -173,19 +260,19 @@ const orderedTags = sortTags(tags);
     {related.length > 0 && (
       <section class="related">
         <div class="related__head">
-          <span class="related__label">相關文章</span>
+          <span class="related__label">{L.related}</span>
         </div>
         <ul class="related__list">
           {related.map(({ report: r, reason }) => (
             <li>
-              <a class="related__row" href={withBase(`/reports/${r.id}/`)}>
+              <a class="related__row" href={reportHref(r.id)}>
                 <time class="related__date" datetime={r.data.pubDate.toISOString()}>
                   {r.data.pubDate.toISOString().slice(0, 10)}
                 </time>
-                <span class="related__t">{r.data.title}</span>
+                <span class="related__t">{reportTitle(r)}</span>
                 <span class="related__why">{reason}</span>
                 <span class="related__mins">
-                  {estimateReadingMinutes((r.body ?? "").toString())} 分鐘
+                  {L.minutes(estimateReadingMinutes((r.body ?? "").toString()))}
                 </span>
               </a>
             </li>
@@ -201,6 +288,41 @@ const orderedTags = sortTags(tags);
     <CitationTooltip />
 
     <style>
+      /* ---- 中英一鍵切換 ---- */
+      .langtoggle {
+        display: inline-flex;
+        margin: 0 0 var(--space-4);
+        border: 1px solid var(--color-rule-strong);
+        border-radius: var(--radius-pill);
+        overflow: hidden;
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        letter-spacing: var(--tracking-wide);
+      }
+      .langtoggle__opt {
+        padding: 4px 12px;
+        color: var(--color-ink-muted);
+        text-decoration: none;
+        transition: all var(--dur-fast) var(--ease-standard);
+      }
+      .langtoggle__opt + .langtoggle__opt { border-left: 1px solid var(--color-rule-strong); }
+      .langtoggle__opt:hover { color: var(--color-ink); }
+      .langtoggle__opt.is-active {
+        background: var(--color-ink);
+        color: var(--color-canvas);
+        pointer-events: none;
+      }
+      .article__translation {
+        font-family: var(--font-mono);
+        font-size: var(--text-xs);
+        color: var(--color-ink-muted);
+        margin: 0 0 var(--space-6);
+        padding: var(--space-3) var(--space-4);
+        border-left: 3px solid var(--color-rule-strong);
+        background: var(--color-surface);
+      }
+      .article__translation a { color: var(--color-ink); }
+
       .article__kicker {
         display: flex;
         align-items: center;

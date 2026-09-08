@@ -39,6 +39,21 @@ const reports = defineCollection({
   schema: reportSchema,
 });
 
+// ── English translations of reports ────────────────────────────
+// 一篇中文報告可以有一份英文譯本，檔名與原文 id 相同，放在
+// src/content/reports-en/。刻意獨立成 collection，不混進 reports：
+// 首頁與 RSS 仍以中文原文為一篇，譯本只在 /en/reports/<id>/ 出現，
+// 兩邊文章頁互相掛一鍵切換。中文版永遠是權威版本。
+const reportsEn = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/reports-en" }),
+  schema: reportSchema.extend({
+    /** 對應的中文原文 id（等於檔名）。 */
+    translationOf: z.string(),
+    translatedBy: z.string().optional(),
+    translatedDate: z.coerce.date().optional(),
+  }),
+});
+
 // ── Fiction ────────────────────────────────────────────────────
 // 小說區塊。與 reports 刻意分開：報告要被掃讀（aiPrompt、論證地圖、
 // 標籤），小說只要被讀。頁面上不解釋框架，只在頁尾署名。
@@ -214,4 +229,4 @@ const argmaps = defineCollection({
   schema: argmapSchema,
 });
 
-export const collections = { reports, fiction, argmaps };
+export const collections = { reports, reportsEn, fiction, argmaps };

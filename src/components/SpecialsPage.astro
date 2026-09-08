@@ -46,7 +46,8 @@ const S = {
 <section class="specialslist">
   {SPECIALS.map((sp) => {
     const n = sp.series ? seriesCounts.get(sp.series) ?? 0 : 0;
-    const href = sp.url ?? sp.href ?? "#";
+    // 站內系列連結在英文站要掛 /en 前綴，外部專站不動。
+    const href = sp.url ?? (sp.href ? (locale === "en" ? `/en${sp.href}` : sp.href) : "#");
     const external = !!sp.url;
     return (
       <a

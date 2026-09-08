@@ -1,0 +1,39 @@
+---
+// 英文譯本文章頁。id 與中文原文相同，所以 /en/reports/<id>/ 與
+// /reports/<id>/ 一鍵互切；中文版是權威版本，譯本頁面會標明。
+import { getCollection, render } from "astro:content";
+import ReportLayout from "../../../layouts/ReportLayout.astro";
+
+export async function getStaticPaths() {
+  const translations = await getCollection("reportsEn");
+  return translations
+    .filter((t) => !t.data.draft)
+    .map((t) => ({
+      params: { slug: t.id },
+      props: { translation: t },
+    }));
+}
+
+const { translation } = Astro.props;
+const { Content, headings } = await render(translation);
+---
+
+<ReportLayout
+  id={translation.data.translationOf}
+  locale="en"
+  title={translation.data.title}
+  description={translation.data.description}
+  pubDate={translation.data.pubDate}
+  updatedDate={translation.data.updatedDate}
+  tags={translation.data.tags}
+  headings={headings}
+  body={translation.body ?? ""}
+  aiModel={translation.data.aiModel}
+  aiPrompt={translation.data.aiPrompt}
+  aiGeneratedDate={translation.data.aiGeneratedDate}
+  humanReviewed={translation.data.humanReviewed}
+  translatedBy={translation.data.translatedBy}
+  translatedDate={translation.data.translatedDate}
+>
+  <Content />
+</ReportLayout>
