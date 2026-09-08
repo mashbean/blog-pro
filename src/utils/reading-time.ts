@@ -8,6 +8,7 @@ export function estimateReadingMinutes(text: string): number {
   return Math.max(1, Math.ceil(cjk / 500 + latin / 250));
 }
 
-export function readingTime(text: string): string {
-  return `${estimateReadingMinutes(text)} 分鐘`;
+export function readingTime(text: string, locale: "zh" | "en" = "zh"): string {
+  const n = estimateReadingMinutes(text);
+  return locale === "en" ? `${n} min` : `${n} 分鐘`;
 }

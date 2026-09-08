@@ -6,10 +6,25 @@ import HomeApp from "../../components/islands/HomeApp.tsx";
 import { getPublishedReports } from "../../utils/reports";
 import { reportToPost } from "../../lib/reports-to-posts";
 import { UI } from "../../lib/i18n";
+import { getTranslationMap, enReportPath } from "../../utils/translations";
 
 const ui = UI.en;
 const reports = await getPublishedReports();
-const posts = reports.map(reportToPost);
+// 有英文譯本的篇目，在英文站列表直接連到譯本並顯示英文標題；
+// 沒有譯本的照列中文原文（見 src/lib/i18n.ts 的取捨）。
+const translations = await getTranslationMap();
+const posts = reports.map((r) => {
+  const post = reportToPost(r);
+  const t = translations.get(r.id);
+  if (!t) return post;
+  return {
+    ...post,
+    title: t.data.title,
+    quote: t.data.description,
+    href: enReportPath(r.id),
+    lang: "en",
+  };
+});
 ---
 
 <BaseLayout
