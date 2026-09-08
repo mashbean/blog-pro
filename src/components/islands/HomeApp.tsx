@@ -10,6 +10,7 @@ import { themeFor, themeForMono, hashSeed, mulberry } from "../../lib/theme-gene
 import type { Theme } from "../../lib/theme-generator";
 import { irisNavigate, useIrisReset } from "../../lib/iris";
 import { topicLabel, sortTags, seriesMeta } from "../../lib/taxonomy";
+import { seriesLanding } from "../../lib/series-landing";
 import { UI, type Locale } from "../../lib/i18n";
 import PatternArt from "./PatternArt";
 
@@ -258,6 +259,90 @@ function IndexView({
         </li>
       ))}
     </ol>
+  );
+}
+
+// ── 系列落地頁 ───────────────────────────────────────────────────
+// ?series=<id> 若對到有備而來這類需要真正落地頁的系列，就在清單上方
+// 補一段：標題、專案／原始碼連結，以及每篇實測報告對應的 mashbean.net
+// 開發手記。資料在 lib/series-landing.ts，標題與簡介沿用 seriesMeta。
+
+function SeriesLandingBlock({
+  seriesId, posts, locale,
+}: {
+  seriesId: string;
+  posts: Post[];
+  locale: Locale;
+}) {
+  const landing = seriesLanding(seriesId);
+  const meta = seriesMeta(seriesId);
+  if (!landing || !meta) return null;
+
+  const label = (locale === "en" ? meta.labelEn : meta.label) ?? meta.label;
+  const blurb = (locale === "en" ? meta.blurbEn : meta.blurb) ?? meta.blurb;
+  const bySlug = new Map(posts.map((p) => [p.id, p]));
+
+  return (
+    <section className="serieslanding" aria-label={label}>
+      <header className="serieslanding__head">
+        <p className="serieslanding__kicker">專題 · Special</p>
+        <h2 className="serieslanding__title">{label}</h2>
+        {blurb && <p className="serieslanding__blurb">{blurb}</p>}
+        <div className="serieslanding__links">
+          {landing.links.map((l) => (
+            <a
+              key={l.href}
+              className="serieslanding__link"
+              href={l.href}
+              target="_blank"
+              rel="noopener"
+            >
+              <span className="serieslanding__link-label">{l.label}</span>
+              {l.note && <span className="serieslanding__link-note">{l.note}</span>}
+            </a>
+          ))}
+        </div>
+      </header>
+
+      <p className="serieslanding__companions-lead">{landing.companionsLead}</p>
+      <ol className="serieslanding__grid">
+        {landing.companions.map((c) => {
+          const report = bySlug.get(c.reportSlug);
+          return (
+            <li key={c.reportSlug} className="companioncard">
+              <a
+                className="companioncard__thumb"
+                href={c.href}
+                target="_blank"
+                rel="noopener"
+                aria-label={`mashbean.net 開發手記：${c.title}`}
+              >
+                <img src={c.thumb} alt={c.thumbAlt} loading="lazy" decoding="async" />
+              </a>
+              <div className="companioncard__body">
+                {report && (
+                  <a className="companioncard__report" href={report.href}>
+                    <span className="companioncard__n">
+                      實測報告{report.seriesOrder ? ` #${report.seriesOrder}` : ""}
+                    </span>
+                    <span className="companioncard__report-title">{report.title}</span>
+                  </a>
+                )}
+                <a
+                  className="companioncard__devlog"
+                  href={c.href}
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <span className="companioncard__devlog-kicker">mashbean.net 開發手記</span>
+                  <span className="companioncard__devlog-title">{c.title} →</span>
+                </a>
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+    </section>
   );
 }
 
@@ -609,9 +694,15 @@ export default function HomeApp({
   }, [flippedId]);
 
   const showSeries = view === "index" && !filtersActive(filters);
+  // ?series=<id> 對到有落地資料的系列時，清單上方補一段落地頁。
+  const landingId = filters.series && seriesLanding(filters.series) ? filters.series : null;
 
   return (
     <>
+      {landingId && (
+        <SeriesLandingBlock seriesId={landingId} posts={posts} locale={locale} />
+      )}
+
       <div className="browse">
         <Controls
           filters={filters}
