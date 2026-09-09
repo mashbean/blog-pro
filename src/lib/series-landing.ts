@@ -146,6 +146,15 @@ export const SERIES_LANDING: Record<string, SeriesLanding> = {
         // 發卡端報告；手記之後補，這列先只有報告側。
         reportSlug: "2026-09-09-one-click-twdiw-vc-issuer-lite",
       },
+      {
+        reportSlug: "2026-09-10-twdiw-ecosystem-monitor",
+        hand: {
+          title: "完成監測儀表板，意外發現官方羊羊卡、薯條卡？XD",
+          titleEn: "I Built a Monitoring Dashboard (and Found Official Sheep & Fries Cards) XD",
+          href: `${MB}/2026/0910-1a1ova/`,
+          hrefEn: `${MB}/2026/0910-1a1ova/?lang=en`,
+        },
+      },
     ],
   },
 };
