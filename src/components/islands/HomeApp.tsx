@@ -278,14 +278,34 @@ function SeriesLandingBlock({
   const meta = seriesMeta(seriesId);
   if (!landing || !meta) return null;
 
-  const label = (locale === "en" ? meta.labelEn : meta.label) ?? meta.label;
-  const blurb = (locale === "en" ? meta.blurbEn : meta.blurb) ?? meta.blurb;
+  const en = locale === "en";
+  const label = (en ? meta.labelEn : meta.label) ?? meta.label;
+  const blurb = (en ? meta.blurbEn : meta.blurb) ?? meta.blurb;
   const bySlug = new Map(posts.map((p) => [p.id, p]));
+
+  const t = en
+    ? {
+        kicker: "Special",
+        headHand: "My dev-logs · mashbean.net",
+        headReport: "AI field reports · here",
+        handKicker: "Dev-log · mashbean.net",
+        reportKicker: "AI field report · here",
+        pending: "Dev-log coming later — read the report",
+      }
+    : {
+        kicker: "專題 · Special",
+        headHand: "我的手寫手記 · mashbean.net",
+        headReport: "AI 實測報告 · 本站",
+        handKicker: "手寫手記 · mashbean.net",
+        reportKicker: "AI 實測報告 · 本站",
+        pending: "開發手記待補 —— 先看報告",
+      };
+  const lead = en ? landing.companionsLeadEn : landing.companionsLead;
 
   return (
     <section className="serieslanding" aria-label={label}>
       <header className="serieslanding__head">
-        <p className="serieslanding__kicker">專題 · Special</p>
+        <p className="serieslanding__kicker">{t.kicker}</p>
         <h2 className="serieslanding__title">{label}</h2>
         {blurb && <p className="serieslanding__blurb">{blurb}</p>}
         <div className="serieslanding__links">
@@ -298,17 +318,17 @@ function SeriesLandingBlock({
               rel="noopener"
             >
               <span className="serieslanding__link-label">{l.label}</span>
-              {l.note && <span className="serieslanding__link-note">{l.note}</span>}
+              <span className="serieslanding__link-note">{en ? l.noteEn : l.note}</span>
             </a>
           ))}
         </div>
       </header>
 
-      <p className="serieslanding__companions-lead">{landing.companionsLead}</p>
+      <p className="serieslanding__companions-lead">{lead}</p>
       <div className="pairhead" aria-hidden="true">
-        <span className="pairhead__label pairhead__label--hand">我的手寫手記 · mashbean.net</span>
+        <span className="pairhead__label pairhead__label--hand">{t.headHand}</span>
         <span className="pairhead__spacer" />
-        <span className="pairhead__label pairhead__label--report">AI 實測報告 · 本站</span>
+        <span className="pairhead__label pairhead__label--report">{t.headReport}</span>
       </div>
       <ol className="pairlist">
         {[...landing.companions]
@@ -319,25 +339,30 @@ function SeriesLandingBlock({
           })
           .map((c) => {
             const report = bySlug.get(c.reportSlug);
+            const hand = c.hand;
+            const handTitle = hand ? (en ? hand.titleEn : hand.title) : "";
+            const handHref = hand ? (en ? hand.hrefEn : hand.href) : "";
             return (
               <li key={c.reportSlug} className="pairrow">
-                {/* 左：手寫手記（外連 mashbean.net） */}
-                <a
-                  className="pairside pairside--hand"
-                  href={c.href}
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <span className="pairside__thumb">
-                    <img src={c.thumb} alt={c.thumbAlt} loading="lazy" decoding="async" />
+                {/* 左：手寫手記（外連 mashbean.net），沒有時放待補提示 */}
+                {hand ? (
+                  <a
+                    className="pairside pairside--hand"
+                    href={handHref}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <span className="pairside__kicker">{t.handKicker}</span>
+                    <span className="pairside__title">{handTitle}</span>
+                  </a>
+                ) : (
+                  <span className="pairside pairside--hand pairside--pending">
+                    <span className="pairside__kicker">{t.handKicker}</span>
+                    <span className="pairside__pending">{t.pending}</span>
                   </span>
-                  <span className="pairside__text">
-                    <span className="pairside__kicker">手寫手記 · mashbean.net</span>
-                    <span className="pairside__title">{c.title}</span>
-                  </span>
-                </a>
+                )}
 
-                {/* 中：這是同一主題的兩種寫法 */}
+                {/* 中：同一主題的兩種寫法 */}
                 <span className="pairrow__link" aria-hidden="true">
                   <span className="pairrow__n">
                     {report?.seriesOrder ? `#${report.seriesOrder}` : ""}
@@ -348,13 +373,8 @@ function SeriesLandingBlock({
                 {/* 右：AI 實測報告（站內） */}
                 {report ? (
                   <a className="pairside pairside--report" href={report.href}>
-                    <span className="pairside__thumb">
-                      <img src={c.thumb} alt="" loading="lazy" decoding="async" />
-                    </span>
-                    <span className="pairside__text">
-                      <span className="pairside__kicker">AI 實測報告 · 本站</span>
-                      <span className="pairside__title">{report.title}</span>
-                    </span>
+                    <span className="pairside__kicker">{t.reportKicker}</span>
+                    <span className="pairside__title">{report.title}</span>
                   </a>
                 ) : (
                   <span className="pairside pairside--report pairside--missing" />
