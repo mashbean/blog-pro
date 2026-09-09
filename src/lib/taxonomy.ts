@@ -160,7 +160,7 @@ export const SERIES = {
   },
   "ready-digital-government": {
     label: "有備而來：理想的數位皮夾開發報告",
-    labelEn: "Ready for It: Government Identity and Data App Reports",
+    labelEn: "Bonds (有備而來): Development Reports on an Ideal Digital Wallet",
     blurb:
       "從有備而來的真機開發出發，逐一檢查理想的政府數位身分、資料皮夾與公共服務，" +
       "把政策倡議寫成可測試、可採購、也可追究責任的系統需求。",
@@ -227,7 +227,7 @@ export const SPECIALS: Special[] = [
   {
     id: "ready-digital-government",
     title: "有備而來：理想的數位皮夾開發報告",
-    titleEn: "Ready for It: Government Identity and Data App Reports",
+    titleEn: "Bonds (有備而來): Development Reports on an Ideal Digital Wallet",
     blurb:
       "我把政策提案真的做進 iPhone，再從每一次成功與失敗回頭追問法規、資安、" +
       "無障礙、公共採購和政府該承擔的共同基礎設施。第一篇從自然人憑證與電子公文開始。",

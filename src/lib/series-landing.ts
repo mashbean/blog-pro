@@ -11,9 +11,17 @@
 
 export interface SeriesLink {
   label: string;
+  /** 英文版顯示名（沒有時沿用 label）。 */
+  labelEn?: string;
   href: string;
   note: string;
   noteEn: string;
+}
+
+export interface SeriesHero {
+  src: string;
+  alt: string;
+  altEn: string;
 }
 
 /** 一篇 mashbean.net 上的手寫手記；報告可能還沒有對應手記（hand 省略）。 */
@@ -32,6 +40,7 @@ export interface SeriesCompanion {
 }
 
 export interface SeriesLanding {
+  hero?: SeriesHero;
   links: SeriesLink[];
   companionsLead: string;
   companionsLeadEn: string;
@@ -42,9 +51,15 @@ const MB = "https://mashbean.net/blog";
 
 export const SERIES_LANDING: Record<string, SeriesLanding> = {
   "ready-digital-government": {
+    hero: {
+      src: "/images/series/bonds-hero.jpg",
+      alt: "有備而來（Bonds）主視覺：暗夜森林裡，動物們各自捧著一罐發光的螢火，頭頂串著燈——斷網時仍然有光。",
+      altEn: "Bonds key art: in a dark forest, animals each hold a jar of glowing fireflies under a string of lights — there is still light when the network is down.",
+    },
     links: [
       {
         label: "有備而來 bonds.tw",
+        labelEn: "Bonds bonds.tw",
         href: "https://bonds.tw/",
         note: "專案網站",
         noteEn: "Project site",

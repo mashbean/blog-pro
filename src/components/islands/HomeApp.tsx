@@ -304,6 +304,16 @@ function SeriesLandingBlock({
 
   return (
     <section className="serieslanding" aria-label={label}>
+      {landing.hero && (
+        <figure className="serieslanding__hero">
+          <img
+            src={landing.hero.src}
+            alt={en ? landing.hero.altEn : landing.hero.alt}
+            loading="eager"
+            decoding="async"
+          />
+        </figure>
+      )}
       <header className="serieslanding__head">
         <p className="serieslanding__kicker">{t.kicker}</p>
         <h2 className="serieslanding__title">{label}</h2>
@@ -317,7 +327,7 @@ function SeriesLandingBlock({
               target="_blank"
               rel="noopener"
             >
-              <span className="serieslanding__link-label">{l.label}</span>
+              <span className="serieslanding__link-label">{en ? (l.labelEn ?? l.label) : l.label}</span>
               <span className="serieslanding__link-note">{en ? l.noteEn : l.note}</span>
             </a>
           ))}
