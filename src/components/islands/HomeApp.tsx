@@ -696,13 +696,12 @@ export default function HomeApp({
     return map;
   }, [posts, palette]);
 
-  // client:only，島掛載時就直接讀網址；同步初始化才不會先閃一下完整首頁
-  // 再跳成系列配對頁。
+  // 島在伺服器端先輸出可連結的文章索引；掛載後再從網址同步篩選狀態。
   const [filters, setFilters] = useState<Filters>(() =>
     typeof window === "undefined" ? EMPTY : readFilters()
   );
-  // 預設散落牆——首頁先給氛圍，要查找的人切「索引」或走 ⌘K／主題頁
-  const [view, setView] = useState<View>("scatter");
+  // 預設索引讓第一份 HTML 就包含真正的文章連結；仍可切換卡片與散落牆。
+  const [view, setView] = useState<View>("index");
   const [sort, setSort] = useState<Sort>("new");
   const [shuffleKey, setShuffleKey] = useState(0);
   const [flippedId, setFlippedId] = useState<string | null>(null);

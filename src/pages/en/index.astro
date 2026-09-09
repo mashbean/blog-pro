@@ -40,7 +40,8 @@ const posts = reports.map((r) => {
     </div>
   </section>
 
-  <HomeApp client:only="react" posts={posts} locale="en" />
+  <!-- Keep article links in the initial HTML for non-JavaScript readers and agents. -->
+  <HomeApp client:load posts={posts} locale="en" />
 </BaseLayout>
 
 <style>

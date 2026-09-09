@@ -18,7 +18,12 @@ const posts = reports.map(reportToPost);
     </div>
   </section>
 
-  <HomeApp client:only="react" posts={posts} locale="zh" />
+  <!--
+    Render the article index in the initial document. This keeps every report
+    discoverable to readers and agents that do not execute JavaScript; React
+    then hydrates the filters and alternate visual views.
+  -->
+  <HomeApp client:load posts={posts} locale="zh" />
 </BaseLayout>
 
 <style>
