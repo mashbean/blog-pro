@@ -737,12 +737,25 @@ export default function HomeApp({
   // 不再出現散落／卡片／索引那套瀏覽器。
   const landingId = filters.series && seriesLanding(filters.series) ? filters.series : null;
 
-  // 配對頁時把首頁那顆「難題」大標藏起來，讓系列標題當這頁的主角。
+  // 配對頁時把首頁那顆「難題」大標藏起來，讓系列標題當這頁的主角；
+  // 同時把 masthead 的語言切換鈕改成保留 ?series=，否則按 EN／中文會掉回
+  // 沒有系列的首頁，等於這頁沒有對應語言版本。
   useEffect(() => {
     const hero = document.querySelector<HTMLElement>(".hero");
     if (hero) hero.hidden = !!landingId;
-    return () => { if (hero) hero.hidden = false; };
-  }, [landingId]);
+
+    const langLink = document.querySelector<HTMLAnchorElement>(".masthead__lang");
+    const originalLangHref = langLink?.getAttribute("href") ?? null;
+    if (langLink && landingId) {
+      const base = locale === "en" ? "/" : "/en/";
+      langLink.setAttribute("href", `${base}?series=${encodeURIComponent(landingId)}`);
+    }
+
+    return () => {
+      if (hero) hero.hidden = false;
+      if (langLink && originalLangHref !== null) langLink.setAttribute("href", originalLangHref);
+    };
+  }, [landingId, locale]);
 
   if (landingId) {
     return <SeriesLandingBlock seriesId={landingId} posts={posts} locale={locale} />;
