@@ -13,6 +13,7 @@ import { topicLabel, sortTags, seriesMeta } from "../../lib/taxonomy";
 import { seriesLanding } from "../../lib/series-landing";
 import { UI, type Locale } from "../../lib/i18n";
 import PatternArt from "./PatternArt";
+import WalletReadingMap from "./WalletReadingMap";
 
 type HomeUI = (typeof UI)["zh"]["home"];
 
@@ -303,7 +304,7 @@ function SeriesLandingBlock({
   const lead = en ? landing.companionsLeadEn : landing.companionsLead;
 
   return (
-    <section className="serieslanding" aria-label={label}>
+    <section className={`serieslanding${seriesId === "ready-digital-government" ? " serieslanding--wallet" : ""}`} aria-label={label}>
       {landing.hero && (
         <figure className="serieslanding__hero">
           <img
@@ -316,7 +317,7 @@ function SeriesLandingBlock({
       )}
       <header className="serieslanding__head">
         <p className="serieslanding__kicker">{t.kicker}</p>
-        <h2 className="serieslanding__title">{label}</h2>
+        <h1 className="serieslanding__title">{label}</h1>
         {blurb && <p className="serieslanding__blurb">{blurb}</p>}
         <div className="serieslanding__links">
           {landing.links.map((l) => (
@@ -334,6 +335,9 @@ function SeriesLandingBlock({
         </div>
       </header>
 
+      {seriesId === "ready-digital-government" ? (
+        <WalletReadingMap posts={posts} companions={landing.companions} locale={locale} />
+      ) : <>
       <p className="serieslanding__companions-lead">{lead}</p>
       <div className="pairhead" aria-hidden="true">
         <span className="pairhead__label pairhead__label--hand">{t.headHand}</span>
@@ -393,6 +397,7 @@ function SeriesLandingBlock({
             );
           })}
       </ol>
+      </>}
     </section>
   );
 }
