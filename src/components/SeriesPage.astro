@@ -21,7 +21,7 @@ const posts = (await getPublishedReports()).filter(r => r.data.series === id).ma
 }).sort((a,b) => (a.seriesOrder ?? 999) - (b.seriesOrder ?? 999));
 ---
 <BaseLayout title={title} description={description} locale={locale}
-  ogImage={`/og/series/${locale}-${id}.png`}
+  ogImage={`/og/series/en-${id}.png`}
   altHref={`${en ? "" : "/en"}/series/${encodeURIComponent(id)}/`}>
   {seriesLanding(id) ? <SeriesLandingBlock seriesId={id} posts={posts} locale={locale} /> :
     <main class="serieslanding">
