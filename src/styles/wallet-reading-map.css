@@ -135,13 +135,38 @@ body:has(.serieslanding--wallet) > .guide {
 }
 .walletmap__article {
   min-width: 0;
-  border-top: 1px solid var(--color-rule);
+  display: grid;
+  gap: 10px;
 }
 .walletmap__entry {
   display: block;
-  padding: 13px 0 9px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--color-rule-strong);
+  border-radius: 8px;
+  background: var(--color-surface);
+  box-shadow: 0 1px 3px color-mix(in oklch, var(--color-ink) 6%, transparent);
   text-decoration: none;
   color: var(--color-ink);
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+.walletmap__entry:hover,
+.walletmap__entry:focus-visible {
+  border-color: var(--role-color, var(--map-blue));
+  background: color-mix(
+    in oklch,
+    var(--role-color, var(--map-blue)) 5%,
+    var(--color-surface)
+  );
+  box-shadow: 0 3px 10px color-mix(in oklch, var(--color-ink) 10%, transparent);
+}
+.walletmap__entry:focus-visible {
+  outline: 2px solid var(--role-color, var(--map-blue));
+  outline-offset: 3px;
 }
 .walletmap__meta {
   display: flex;
@@ -155,7 +180,8 @@ body:has(.serieslanding--wallet) > .guide {
   font: 600 16px/1.65 var(--font-sans);
   text-wrap: pretty;
 }
-.walletmap__entry:hover .walletmap__entry-title {
+.walletmap__entry:hover .walletmap__entry-title,
+.walletmap__entry:focus-visible .walletmap__entry-title {
   color: var(--role-color, var(--map-blue));
   text-decoration: underline;
   text-underline-offset: 4px;

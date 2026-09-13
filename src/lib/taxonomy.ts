@@ -162,11 +162,11 @@ export const SERIES = {
     label: "有備而來：理想的數位皮夾開發報告",
     labelEn: "Bonds (有備而來): Development Reports on an Ideal Digital Wallet",
     blurb:
-      "從有備而來的真機開發出發，逐一檢查理想的政府數位身分、資料皮夾與公共服務，" +
-      "把政策倡議寫成可測試、可採購、也可追究責任的系統需求。",
+      "透過台灣政府服務——數位憑證皮夾（TW-DIW）、行動自然人憑證（TwFiDO）、個人資料交換服務 MyData——進行開發實驗，目標是打造理想且實際可運行的數位皮夾服務",
     blurbEn:
-      "Hands-on iPhone prototypes for better government identity, data wallets, and public services — " +
-      "turning policy proposals into testable, procurable, and accountable system requirements.",
+      "Development experiments using Taiwan’s government services — the Digital Credential Wallet (TW-DIW), " +
+      "the Mobile Citizen Digital Certificate (TwFiDO), and the MyData personal data exchange service — " +
+      "with the goal of building an ideal digital wallet service that works in practice.",
     entry: "2026-09-01-natural-person-certificate-official-documents",
   },
   "dns-rpz": {
