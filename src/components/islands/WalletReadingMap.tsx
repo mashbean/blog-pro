@@ -22,11 +22,7 @@ const articles = {
 
 const copy = {
   zh: {
-    kicker: "DID / VC · 閱讀地圖",
-    title: "一張憑證，走過哪些地方？",
-    intro:
-      "沿著發行、持有與驗證的流程閱讀，看看每一篇開發記錄補上了哪一塊。點文章標題閱讀 AI 實測報告，也可以接著看我的手寫手記。",
-    count: "篇報告",
+    label: "數位憑證流程圖",
     flow: "憑證與出示流程",
     trustLine: "信任與狀態資料的關係",
     issue: "簽發憑證",
@@ -79,11 +75,7 @@ const copy = {
     more: "後續文章",
   },
   en: {
-    kicker: "DID / VC · READING MAP",
-    title: "Where does a credential go?",
-    intro:
-      "Follow issuance, holding, and verification to see which part each development story explores. Article titles open AI field reports; the accompanying links lead to my handwritten dev-logs.",
-    count: "reports",
+    label: "Digital credential flow",
     flow: "Credential and presentation flow",
     trustLine: "Trust and status relationships",
     issue: "Issue a VC",
@@ -210,24 +202,31 @@ export default function WalletReadingMap({
     const hand = hands.get(slug);
     return (
       <article className="walletmap__article" key={slug}>
-        <a className="walletmap__report" href={post.href}>
+        <a className="walletmap__entry walletmap__report" href={post.href}>
           <span className="walletmap__meta">
             <span>
               #{String(post.seriesOrder ?? "").padStart(2, "0")} · {t.report}
             </span>
             <span aria-hidden="true">↗</span>
           </span>
-          <h5>{post.title}</h5>
+          <h4 className="walletmap__entry-title">{post.title}</h4>
         </a>
         {hand && (
           <a
-            className="walletmap__hand"
+            className="walletmap__entry walletmap__hand"
             href={en ? hand.hrefEn : hand.href}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span>{t.hand} ↗</span>
-            <span>{en ? hand.titleEn : hand.title}</span>
+            <span className="walletmap__meta">
+              <span>
+                #{String(post.seriesOrder ?? "").padStart(2, "0")} · {t.hand}
+              </span>
+              <span aria-hidden="true">↗</span>
+            </span>
+            <h4 className="walletmap__entry-title">
+              {en ? hand.titleEn : hand.title}
+            </h4>
           </a>
         )}
       </article>
@@ -247,10 +246,10 @@ export default function WalletReadingMap({
           </span>
           <div>
             <p className="walletmap__eyebrow">{c.en}</p>
-            <h3 id={`wallet-${id}`}>{c.title}</h3>
+            <h2 id={`wallet-${id}`}>{c.title}</h2>
           </div>
         </header>
-        <h4 className="walletmap__question">{c.question}</h4>
+        <h3 className="walletmap__question">{c.question}</h3>
         <p className="walletmap__description">{c.desc}</p>
         <div className="walletmap__articles">{articles[id].map(article)}</div>
         <p className="walletmap__note">{c.note}</p>
@@ -259,27 +258,17 @@ export default function WalletReadingMap({
   }
 
   return (
-    <section className="walletmap" aria-labelledby="walletmap-title">
-      <header className="walletmap__head">
-        <p className="walletmap__eyebrow">
-          {t.kicker}
-          <span>
-            {reports.length} {t.count}
-          </span>
-        </p>
-        <h2 id="walletmap-title">{t.title}</h2>
-        <p>{t.intro}</p>
-        <div className="walletmap__legend">
-          <span>
-            <i />
-            {t.flow}
-          </span>
-          <span>
-            <i className="walletmap__dash" />
-            {t.trustLine}
-          </span>
-        </div>
-      </header>
+    <section className="walletmap" aria-label={t.label}>
+      <div className="walletmap__legend">
+        <span>
+          <i />
+          {t.flow}
+        </span>
+        <span>
+          <i className="walletmap__dash" />
+          {t.trustLine}
+        </span>
+      </div>
       <div className="walletmap__diagram">
         {role("issuer")}
         <div className="walletmap__flow walletmap__flow--issue">
@@ -326,10 +315,10 @@ export default function WalletReadingMap({
             </span>
             <div>
               <p className="walletmap__eyebrow">{t.trust.en}</p>
-              <h3 id="wallet-trust">{t.trust.title}</h3>
+              <h2 id="wallet-trust">{t.trust.title}</h2>
             </div>
           </header>
-          <h4 className="walletmap__question">{t.trust.question}</h4>
+          <h3 className="walletmap__question">{t.trust.question}</h3>
           <p className="walletmap__description">{t.trust.desc}</p>
           {articles.trust.map(article)}
           <p className="walletmap__note">{t.trust.note}</p>
@@ -340,8 +329,8 @@ export default function WalletReadingMap({
           aria-labelledby="wallet-presentation"
         >
           <p className="walletmap__eyebrow">{t.presentation.en}</p>
-          <h3 id="wallet-presentation">{t.presentation.title}</h3>
-          <h4 className="walletmap__question">{t.presentation.question}</h4>
+          <h2 id="wallet-presentation">{t.presentation.title}</h2>
+          <h3 className="walletmap__question">{t.presentation.question}</h3>
           <p className="walletmap__description">{t.presentation.desc}</p>
           <div className="walletmap__proofs">
             {articles.presentation.map((slug, index) => (
@@ -357,7 +346,7 @@ export default function WalletReadingMap({
       </div>
       {unplaced.length > 0 && (
         <section className="walletmap__unplaced">
-          <h3>{t.more}</h3>
+          <h2>{t.more}</h2>
           {unplaced.map((post) => article(post.id))}
         </section>
       )}
