@@ -228,13 +228,13 @@ function IndexView({
           <p className="indexrow__desc">{post.quote}</p>
           <div className="indexrow__tags">
             {post.series && (
-              <button
+              <a
                 className="indexrow__tag indexrow__tag--series"
-                onClick={() => onFilters({ ...filters, series: post.series ?? null })}
+                href={`${ui === UI.en.home ? "/en" : ""}/series/${encodeURIComponent(post.series)}/`}
               >
                 {seriesMeta(post.series)?.label ?? post.series}
                 {post.seriesOrder ? ` #${post.seriesOrder}` : ""}
-              </button>
+              </a>
             )}
             {sortTags(post.tags).slice(0, 5).map((t) => (
               <button
