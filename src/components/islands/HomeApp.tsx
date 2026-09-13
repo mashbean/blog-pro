@@ -268,7 +268,7 @@ function IndexView({
 // 補一段：標題、專案／原始碼連結，以及每篇實測報告對應的 mashbean.net
 // 開發手記。資料在 lib/series-landing.ts，標題與簡介沿用 seriesMeta。
 
-function SeriesLandingBlock({
+export function SeriesLandingBlock({
   seriesId, posts, locale,
 }: {
   seriesId: string;
@@ -405,7 +405,7 @@ function SeriesLandingBlock({
 // ── 系列 ─────────────────────────────────────────────────────────
 
 function SeriesRail({
-  posts, onFilters, ui, locale,
+  posts, ui, locale,
 }: {
   posts: Post[];
   onFilters: (f: Filters) => void;
@@ -450,12 +450,12 @@ function SeriesRail({
                     {ui.goSite}
                   </a>
                 ) : (
-                  <button
+                  <a
                     className="pill"
-                    onClick={() => onFilters({ ...EMPTY, series: id })}
+                    href={`${locale === "en" ? "/en" : ""}/series/${encodeURIComponent(id)}/`}
                   >
                     {ui.onlySeries}
-                  </button>
+                  </a>
                 )}
               </div>
             </div>
@@ -714,6 +714,10 @@ export default function HomeApp({
   // 掛載後從網址帶入初始篩選（只在瀏覽器跑）。
   useEffect(() => {
     const initial = readFilters();
+    if (initial.series && seriesMeta(initial.series) && !initial.q && !initial.topic && !initial.tags.length && !initial.lang) {
+      window.location.replace(`${locale === "en" ? "/en" : ""}/series/${encodeURIComponent(initial.series)}/`);
+      return;
+    }
     if (filtersActive(initial)) setFilters(initial);
   }, []);
 

@@ -235,7 +235,7 @@ export const SPECIALS: Special[] = [
       "I build public-service proposals into a real iPhone app, then use every success and failure " +
       "to examine law, security, accessibility, procurement, and shared public infrastructure. " +
       "The first report starts with citizen certificates and official digital mail.",
-    href: "/?series=ready-digital-government",
+    href: "/series/ready-digital-government/",
     series: "ready-digital-government",
   },
   {
@@ -252,7 +252,7 @@ export const SPECIALS: Special[] = [
       "bears the cost is party to no part of the procedure. This line of work runs from " +
       "institutional mapping to an empirical audit built entirely on the agencies' own " +
       "open data, with datasets and analysis scripts published.",
-    href: "/?series=dns-rpz",
+    href: "/series/dns-rpz/",
     series: "dns-rpz",
   },
 ];

@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SeriesLandingBlock } from "./islands/HomeApp";
+import { seriesLanding } from "../lib/series-landing";
+import { seriesMeta } from "../lib/taxonomy";
+import { getPublishedReports } from "../utils/reports";
+import { reportToPost } from "../lib/reports-to-posts";
+import { getTranslationMap, enReportPath } from "../utils/translations";
+import type { Locale } from "../lib/i18n";
+interface Props { id: string; locale: Locale; }
+const { id, locale } = Astro.props;
+const en = locale === "en";
+const meta = seriesMeta(id)!;
+const title = (en ? meta.labelEn : meta.label) ?? meta.label;
+const description = (en ? meta.blurbEn : meta.blurb) ?? meta.blurb;
+const translations = en ? await getTranslationMap() : null;
+const posts = (await getPublishedReports()).filter(r => r.data.series === id).map(r => {
+  const post = reportToPost(r);
+  const t = translations?.get(r.id);
+  return t ? {...post, title: t.data.title, quote: t.data.description, href: enReportPath(r.id)} : post;
+}).sort((a,b) => (a.seriesOrder ?? 999) - (b.seriesOrder ?? 999));
+---
+<BaseLayout title={title} description={description} locale={locale}
+  ogImage={`/og/series/${locale}-${id}.png`}
+  altHref={`${en ? "" : "/en"}/series/${encodeURIComponent(id)}/`}>
+  {seriesLanding(id) ? <SeriesLandingBlock seriesId={id} posts={posts} locale={locale} /> :
+    <main class="serieslanding">
+      <header class="serieslanding__head">
+        <p class="serieslanding__kicker">{en ? "Special" : "專題"}</p>
+        <h1 class="serieslanding__title">{title}</h1>
+        <p class="serieslanding__blurb">{description}</p>
+        {meta.site && <a class="pill" href={meta.site}>{en ? "Visit project" : "前往專題網站"} ↗</a>}
+      </header>
+      <ol class="indexlist">{posts.map(post => <li class="indexrow">
+        <a class="indexrow__main" href={post.href}>
+          <time class="indexrow__date">{post.date}</time>
+          <span class="indexrow__title">{post.title}</span>
+        </a>
+        <p class="indexrow__desc">{post.quote}</p>
+      </li>)}</ol>
+    </main>}
+</BaseLayout>

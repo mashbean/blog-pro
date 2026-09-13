@@ -50,7 +50,7 @@ const rows = reports.map((r) => ({
         {row.series && (
           <a
             class="indexrow__tag indexrow__tag--series"
-            href={withBase(`/?series=${encodeURIComponent(row.series)}`)}
+            href={withBase(`/series/${encodeURIComponent(row.series)}/`)}
           >
             {seriesMeta(row.series)?.label ?? row.series}
             {row.seriesOrder ? ` #${row.seriesOrder}` : ""}

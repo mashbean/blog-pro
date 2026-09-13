@@ -1,0 +1,7 @@
+---
+import SeriesPage from "../../../components/SeriesPage.astro";
+import { SERIES } from "../../../lib/taxonomy";
+export function getStaticPaths() { return Object.keys(SERIES).map(id => ({params: {id}})); }
+const {id} = Astro.params;
+---
+<SeriesPage id={id!} locale="en" />
