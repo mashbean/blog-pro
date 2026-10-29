@@ -5,6 +5,7 @@ topic: organizations
 tags: ["公民科技", "開源", "非營利與基金會", "台灣"]
 keywords: ["open-source", "open-culture-foundation", "digital-rights", "civic-tech", "taiwan", "fiscal-sponsorship", "g0v"]
 pubDate: 2026-06-04
+draft: true
 category: "數位治理"
 lang: "zh-TW"
 aiModel: "Claude Opus 4.8"
