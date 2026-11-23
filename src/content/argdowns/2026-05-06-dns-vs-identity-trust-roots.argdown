@@ -2,7 +2,7 @@
 title: DNS 的不可複製：身分治理為什麼不能照搬域名模式
 subTitle: Historical Mismatch — Argument Map (v2)
 slug: 2026-05-06-dns-vs-identity-trust-roots
-author: research-article-pipeline argdown export
+author: mashbean + assisted with AI Agent
 model:
   removeTagsFromText: true
 ===

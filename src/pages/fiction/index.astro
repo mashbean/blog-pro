@@ -2,10 +2,10 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getFictionInReadingOrder } from "../../utils/fiction";
 import { readingTime } from "../../utils/reading-time";
+import { DEFAULT_AUTHOR } from "../../site.config";
 
 const stories = await getFictionInReadingOrder();
 const series = stories[0]?.data.series ?? "普通人";
-const framedBy = stories[0]?.data.framedBy ?? "豆泥";
 
 const entries = stories.map((s) => ({
   num: String(s.data.seriesOrder).padStart(2, "0"),
@@ -15,7 +15,7 @@ const entries = stories.map((s) => ({
 }));
 
 // 不上版面，只餵 <meta description> 與分享摘要。
-const description = `${series}：五篇小說。框架：${framedBy}。文字：AI。`;
+const description = `${series}：五篇小說。${DEFAULT_AUTHOR}。`;
 ---
 
 <BaseLayout title={`${series}｜小說`} description={description} altHref="/en/fiction/">
@@ -24,8 +24,7 @@ const description = `${series}：五篇小說。框架：${framedBy}。文字：
     <h1 class="cover__title">{series}</h1>
     <div class="cover__meta">
       <span><strong>{entries.length}</strong> 篇</span>
-      <span>框架：{framedBy}</span>
-      <span>文字：AI</span>
+      <span>{DEFAULT_AUTHOR}</span>
     </div>
   </section>
 

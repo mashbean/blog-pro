@@ -3,10 +3,10 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { getFictionInReadingOrder } from "../../../utils/fiction";
 import { readingTime } from "../../../utils/reading-time";
+import { DEFAULT_AUTHOR } from "../../../site.config";
 
 const stories = await getFictionInReadingOrder();
 const series = stories[0]?.data.series ?? "普通人";
-const framedBy = stories[0]?.data.framedBy ?? "豆泥";
 
 const entries = stories.map((s) => ({
   num: String(s.data.seriesOrder).padStart(2, "0"),
@@ -20,14 +20,14 @@ const entries = stories.map((s) => ({
   locale="en"
   altHref="/fiction/"
   fullTitle={`${series} (Fiction) | Open Questions`}
-  description={`${series}: a five-story collection. Framed by ${framedBy}, written by AI. In Chinese.`}
+  description={`${series}: a five-story collection. ${DEFAULT_AUTHOR}. In Chinese.`}
 >
   <section class="encover">
     <p class="encover__kicker">Fiction · Collection</p>
     <h1 class="encover__title">{series}</h1>
     <p class="encover__note">
       A five-story collection about ordinary people inside institutions.
-      Framed by {framedBy}, written by AI — currently available in Chinese only.
+      {DEFAULT_AUTHOR}. Currently available in Chinese only.
     </p>
   </section>
 

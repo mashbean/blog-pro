@@ -23,7 +23,7 @@ export const GET: APIRoute = async ({ props }) => {
     postScene({
       title: d.title,
       kicker: d.tags?.[0] ?? d.category ?? "Essay",
-      author: d.aiModel ?? DEFAULT_AUTHOR,
+      author: DEFAULT_AUTHOR,
       date: d.pubDate.toISOString().slice(0, 10),
     }),
   );

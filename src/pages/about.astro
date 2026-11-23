@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { MAIN_SITE_URL } from "../site.config";
+import { DEFAULT_AUTHOR, MAIN_SITE_URL } from "../site.config";
 ---
 
 <BaseLayout title="關於本站" altHref="/en/about/">
@@ -10,23 +10,22 @@ import { MAIN_SITE_URL } from "../site.config";
 
     <div class="about__body report-prose">
       <p>
-        <strong>豆泥關心的議題</strong>是一個由 AI 驅動的研究報告平台。
-        這裡的每一篇報告都源自一個簡單的流程：豆泥提出問題，AI 顧問深入研究並撰寫分析報告。
+        <strong>豆泥關心的議題</strong>是一個由豆泥提問、AI Agent 協助研究與寫作的平台。
+        本站內容統一署名為 <strong>{DEFAULT_AUTHOR}</strong>。
       </p>
 
       <h2>運作方式</h2>
 
       <p>
-        所有報告由 AI 研究 pipeline 生成，經過多階段的研究、草稿、挑戰與改寫流程，
-        確保內容的深度與準確性。每篇報告都標註了使用的 AI 模型與生成資訊，
-        保持完全的透明度。
+        報告透過 AI Agent 協助，經過多階段的研究、草稿、挑戰與改寫流程。
+        文章保留提問、生成日期與人工審閱狀態等資訊，供讀者了解製作過程。
       </p>
 
       <h2>與主站的關係</h2>
 
       <p>
         本站是 <a href={MAIN_SITE_URL}>mashbean.net</a> 的延伸。
-        主站收錄豆泥的個人文章與創作，本站則專門收錄 AI 生成的研究報告，
+        主站收錄豆泥的個人文章與創作，本站則專門收錄 AI Agent 協助完成的研究報告，
         兩者在內容性質上有明確的區分。
       </p>
 

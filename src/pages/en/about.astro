@@ -1,13 +1,13 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { MAIN_SITE_URL } from "../../site.config";
+import { DEFAULT_AUTHOR, MAIN_SITE_URL } from "../../site.config";
 ---
 
 <BaseLayout
   locale="en"
   altHref="/about/"
   fullTitle="About | Open Questions"
-  description="An AI-powered research site: mashbean asks, AI investigates and writes."
+  description="A research site where mashbean asks questions with AI Agent assistance in research and writing."
 >
   <article class="about">
     <p class="about__kicker">Colophon</p>
@@ -15,17 +15,17 @@ import { MAIN_SITE_URL } from "../../site.config";
 
     <div class="about__body report-prose">
       <p>
-        <strong>Open Questions</strong> is an AI-powered research site.
-        Every report starts from the same loop: mashbean (豆泥) poses a question,
-        and an AI research pipeline investigates and writes the analysis.
+        <strong>Open Questions</strong> is a research site where mashbean (豆泥)
+        asks questions with AI Agent assistance in research and writing.
+        All content uses the attribution <strong>{DEFAULT_AUTHOR}</strong>.
       </p>
 
       <h2>How it works</h2>
 
       <p>
-        Reports are generated through a multi-stage pipeline — research, drafting,
-        adversarial challenge, and rewriting. Each report is labeled with the AI
-        model and generation details, for full transparency.
+        Reports are developed with AI Agent assistance through research, drafting,
+        adversarial challenge, and rewriting. Articles retain details such as the
+        question, generation date, and human review status to explain the process.
       </p>
 
       <h2>Relationship to the main site</h2>
@@ -33,7 +33,7 @@ import { MAIN_SITE_URL } from "../../site.config";
       <p>
         This site is an extension of <a href={MAIN_SITE_URL}>mashbean.net</a>.
         The main site collects mashbean's own writing; this one collects
-        AI-generated research. Most essays here are written in Chinese —
+        research developed with AI Agent assistance. Most essays here are written in Chinese —
         the few English ones carry an EN badge in the index.
       </p>
 

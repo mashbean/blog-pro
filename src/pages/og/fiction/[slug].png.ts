@@ -1,8 +1,9 @@
 // Build-time per-story OG PNG. Mirrors ../[slug].png.ts but keyed on the
-// fiction collection: the meta line carries 主角 · 體制 instead of 模型 · 日期.
+// fiction collection: the meta line carries 主角 · 體制; attribution is in the footer.
 import type { APIRoute, GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 import { renderPng, postScene } from "../../../lib/og-png";
+import { DEFAULT_AUTHOR } from "../../../site.config";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const stories = await getCollection("fiction");
@@ -33,7 +34,7 @@ export const GET: APIRoute = async ({ props }) => {
       author: d.protagonist,
       date: d.institution,
       path: "fiction",
-      footRight: `${d.series}｜框架 ${d.framedBy}・文字 ${d.aiModel ?? "AI"}`,
+      footRight: DEFAULT_AUTHOR,
     }),
   );
 

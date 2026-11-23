@@ -1,5 +1,5 @@
 ---
-import { SITE_TITLE, SITE_SHORT, SITE_SUBTITLE, SITE_DESCRIPTION, SITE_LANG, DEFAULT_OG_IMAGE } from "../site.config";
+import { SITE_TITLE, SITE_SHORT, SITE_SUBTITLE, SITE_DESCRIPTION, SITE_LANG, DEFAULT_AUTHOR, DEFAULT_OG_IMAGE } from "../site.config";
 import { withBase } from "../utils/paths";
 
 interface Props {
@@ -39,6 +39,7 @@ const ogImageType = ogImage.endsWith(".svg")
 
 <title>{pageTitle}</title>
 <meta name="description" content={description} />
+<meta name="author" content={DEFAULT_AUTHOR} />
 <link rel="canonical" href={canonicalURL} />
 {noindex && <meta name="robots" content="noindex, nofollow" />}
 

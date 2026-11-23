@@ -6,5 +6,6 @@ export const SITE_DESCRIPTION = "許多問題還沒有正解，但是要有人�
 export const SITE_LANG = "zh-TW";
 export const SITE_TIMEZONE = "Asia/Taipei";
 export const MAIN_SITE_URL = "https://mashbean.net";
-export const DEFAULT_AUTHOR = "AI Research Pipeline";
+// Public attribution is shared across formats; aiModel records tool provenance only.
+export const DEFAULT_AUTHOR = "mashbean + assisted with AI Agent";
 export const DEFAULT_OG_IMAGE = "og/home.png";

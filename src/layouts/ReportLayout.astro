@@ -12,6 +12,7 @@ import ScrollReveal from "../components/ScrollReveal.astro";
 import CitationTooltip from "../components/CitationTooltip.astro";
 import SearchPalette from "../components/SearchPalette.astro";
 import { formatDate } from "../utils/date";
+import { DEFAULT_AUTHOR } from "../site.config";
 import { readingTime, estimateReadingMinutes } from "../utils/reading-time";
 import { getPublishedReports } from "../utils/reports";
 import { relatedTo, seriesNeighbours } from "../lib/related";
@@ -93,7 +94,7 @@ const L = isEn
       related: "Related essays",
       minutes: (n: number) => `${n} min`,
       translationNote: translatedBy
-        ? `English translation by ${translatedBy}. The Chinese original is authoritative.`
+        ? `English translation: ${DEFAULT_AUTHOR}. The Chinese original is authoritative.`
         : "English translation. The Chinese original is authoritative.",
       toggleZh: "中文原文",
       toggleEn: "English",
@@ -182,7 +183,7 @@ const orderedTags = sortTags(tags);
 
       <div class="article__meta">
         <span>
-          <strong>{aiModel ?? "AI Research Pipeline"}</strong>
+          <strong>{DEFAULT_AUTHOR}</strong>
         </span>
         <time datetime={pubDate.toISOString()}>{formatDate(pubDate, locale)}</time>
         {updatedDate && <span>· {L.updated} {formatDate(updatedDate, locale)}</span>}

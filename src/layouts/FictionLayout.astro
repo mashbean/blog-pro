@@ -9,6 +9,7 @@ import ReadingProgress from "../components/ReadingProgress.astro";
 import ScrollReveal from "../components/ScrollReveal.astro";
 import SearchPalette from "../components/SearchPalette.astro";
 import { readingTime } from "../utils/reading-time";
+import { DEFAULT_AUTHOR } from "../site.config";
 import { getSeriesNeighbours } from "../utils/fiction";
 import "../styles/global.css";
 
@@ -34,8 +35,6 @@ const {
   seriesOrder,
   protagonist,
   institution,
-  framedBy,
-  aiModel,
   body,
 } = Astro.props;
 
@@ -75,7 +74,7 @@ const { prev, next } = await getSeriesNeighbours(id);
         <slot />
       </div>
 
-      <p class="colophon">框架：{framedBy}。文字：{aiModel ?? "AI"}。</p>
+      <p class="colophon">{DEFAULT_AUTHOR}</p>
     </article>
 
     <nav class="seriesnav">

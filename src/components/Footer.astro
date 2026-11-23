@@ -1,5 +1,5 @@
 ---
-import { MAIN_SITE_URL } from "../site.config";
+import { DEFAULT_AUTHOR, MAIN_SITE_URL } from "../site.config";
 import type { Locale } from "../lib/i18n";
 
 interface Props {
@@ -14,7 +14,7 @@ const ccHref =
 ---
 
 <footer class="site-footer">
-  <span>AI-powered research — <a href={MAIN_SITE_URL} target="_blank" rel="noopener">mashbean.net</a></span>
+  <span><a href={MAIN_SITE_URL} target="_blank" rel="noopener">{DEFAULT_AUTHOR}</a></span>
   <span>
     &copy; {new Date().getFullYear()} ·
     <a href={ccHref} target="_blank" rel="noopener license">CC BY-NC 4.0</a>

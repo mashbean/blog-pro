@@ -7,7 +7,7 @@ import { estimateReadingMinutes } from "../utils/reading-time";
 
 export type Post = {
   id: string;       // slug
-  author: string;   // aiModel
+  author: string;   // public attribution
   date: string;     // YYYY-MM-DD
   readMinutes: number;
   title: string;
@@ -28,7 +28,7 @@ export function reportToPost(report: CollectionEntry<"reports">): Post {
 
   return {
     id: report.id,
-    author: data.aiModel ?? DEFAULT_AUTHOR,
+    author: DEFAULT_AUTHOR,
     date,
     readMinutes: estimateReadingMinutes(body),
     title: data.title,

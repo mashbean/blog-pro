@@ -1,5 +1,6 @@
 ---
 import { formatDate } from "../utils/date";
+import { DEFAULT_AUTHOR } from "../site.config";
 
 interface Props {
   aiModel?: string;
@@ -30,9 +31,7 @@ const hasAnyMeta = aiModel || aiPrompt || aiGeneratedDate;
       )}
     </summary>
     <div class="px-4 pb-3 pt-1 space-y-1.5 text-[var(--color-text-muted)]">
-      {aiModel && (
-        <p><span class="font-medium text-[var(--color-text)]">模型：</span>{aiModel}</p>
-      )}
+      <p><span class="font-medium text-[var(--color-text)]">作者：</span>{DEFAULT_AUTHOR}</p>
       {aiGeneratedDate && (
         <p><span class="font-medium text-[var(--color-text)]">生成日期：</span>{formatDate(aiGeneratedDate)}</p>
       )}
